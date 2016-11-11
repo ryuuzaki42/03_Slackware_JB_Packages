@@ -47,9 +47,10 @@ else
     cp opt/$progName-$version/share/applications/mendeleydesktop.desktop usr/share/applications/
     cp opt/$progName-$version/share/icons/hicolor/128x128/apps/mendeleydesktop.png usr/share/applications/
 
-    /sbin/makepkg -l n -c n ../$progName-$version-$ARCH-$tag.txz
+    folderDest=`cd ..; pwd`
+    /sbin/makepkg -l n -c n $folderDest/$progName-$version-$ARCH-$tag.txz
 
-    cd ..
+    cd ../
     rm -r $progName-$version-linux-$ARCH/
     rm $progName-$version-linux-$ARCH.tar.bz2
 fi

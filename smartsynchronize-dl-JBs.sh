@@ -39,7 +39,7 @@ Terminal=false
 StartupNotify=true
 Exec=\"/usr/share/$progName/bin/$progName.sh\" %u
 MimeType=x-scheme-handler/smartgit
-Icon=$progName" >  usr/share/applications/$progName.desktop
+Icon=$progName" > usr/share/applications/$progName.desktop
 
     mkdir -p usr/bin
     cd usr/bin

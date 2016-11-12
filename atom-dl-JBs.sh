@@ -20,7 +20,8 @@ else
     if [ "$ARCH" == "x86_64" ]; then # Only 64 bits, without 32 bits rpm in atom site
         wget -c $linkDl/$version/$progName.$ARCH.rpm
     else
-        echo -e "\nError: $ARCH not configured\n"
+        echo -e "\nError: ARCH $ARCH not configured\n"
+        exit 1
     fi
 
     mv $progName.$ARCH.rpm $progName-$version-$ARCH-$tag.rpm

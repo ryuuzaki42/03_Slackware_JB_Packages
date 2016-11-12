@@ -20,7 +20,8 @@ else
     if [ "$ARCH" == "x86_64" ] ||[ "$ARCH" == "i686" ] ; then
         wget -c "$linkDl/$progName-$version.$ARCH.rpm"
     else
-        echo -e "\nError: $ARCH not configured\n"
+        echo -e "\nError: ARCH $ARCH not configured\n"
+        exit 1
     fi
 
     rpm2txz $progName-$version.$ARCH.rpm

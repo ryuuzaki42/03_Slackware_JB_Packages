@@ -20,10 +20,11 @@ else
     if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i486" ]; then
         wget -c "$linkDl/$progName-$version-linux-$ARCH.tar.bz2"
     else
-        echo -e "\nError: $ARCH not configured\n"
+        echo -e "\nError: ARCH $ARCH not configured\n"
+        exit 1
     fi
 
-    rm -r $progName-$version-linux-$ARCH/ # delete old version compiled
+    rm -r $progName-$version-linux-$ARCH/ 2> /dev/null # delete old version compiled
 
     tar -xvf $progName-$version-linux-$ARCH.tar.bz2
 

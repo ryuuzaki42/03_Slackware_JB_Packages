@@ -5,13 +5,13 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="smartsynchronize"
-    version="3_4_7"
+    version="3_4_8"
     linkDl="http://www.syntevo.com/static/smart/download/smartsynchronize"
     tag=JB-1
 
     wget -c $linkDl/$progName-generic-$version.tar.gz
 
-    rm -r $progName
+    rm -r $progName 2> /dev/null
 
     tar -xvf $progName-generic-$version.tar.gz
 

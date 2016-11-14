@@ -6,8 +6,9 @@ if [ "$USER" != "root" ]; then
 else
     progName="wps-office"
     version="10.1.0.5672-1.a21"
-    linkDl="http://kdl.cc.ksosoft.com/wps-community/download/a21"
     tag=JB-2
+
+    linkDl="http://kdl.cc.ksosoft.com/wps-community/download/a21"
 
     if [ -z "$ARCH" ]; then
         case "$( uname -m )" in

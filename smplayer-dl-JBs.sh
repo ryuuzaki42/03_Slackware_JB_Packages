@@ -5,11 +5,11 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    PRGNAM="smplayer"
-    VERSION="16.11.0"
-    TAG="JB-1"
+    progName="smplayer"
+    version="16.11.0"
+    tag="JB-1"
 
-    link="http://downloads.sourceforge.net/smplayer"
+    linkDl="http://downloads.sourceforge.net/smplayer"
 
     if [ -z "$ARCH" ]; then
     case "$( uname -m )" in
@@ -19,9 +19,9 @@ else
     esac
     fi
 
-    CWD=$(pwd)
-    TMP=tmp_`date +%s`
-    PKG=$TMP/package-$PRGNAM
+    initialFolder=$(pwd)
+    tmpFolder=$initialFolder/tmpFolder_`date +%s`
+    progInstallFolder=$tmpFolder/$progName
 
     if [ "$ARCH" = "i486" ]; then
         SLKCFLAGS="-O2 -march=i486 -mtune=i686"
@@ -37,39 +37,39 @@ else
         LIBDIRSUFFIX=""
     fi
 
-    wget -c "$link/$PRGNAM-$VERSION.tar.bz2"
+    wget -c "$linkDl/$progName-$version.tar.bz2"
 
     set -e
 
-    rm -rf $PKG
-    mkdir -p $TMP $PKG
-    cd $TMP
-    rm -rf $PRGNAM-$VERSION
+    mkdir $tmpFolder
+    cd $tmpFolder
 
-    tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
-    cd $PRGNAM-$VERSION
+    tar xvf $initialFolder/$progName-$version.tar.bz2
+    cd $progName-$version
 
     chown -R root:root .
 
     sed -i "/^PREFIX/s/=.*$/=\/usr/;
-            /^DOC_PATH/s/\/.*$/\/doc\/$PRGNAM-$VERSION/;
+            /^DOC_PATH/s/\/.*$/\/doc\/$progName-$version/;
             s/share\/man/man/g;
             s/^QMAKE_OPTS=/QMAKE_OPTS+=/" Makefile
 
     QMAKE_OPTS="QMAKE_CXXFLAGS=\"$SLKCFLAGS\"" \
     make
-    make install DESTDIR=$PKG
+    make install DESTDIR=$progInstallFolder
 
-    find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+    find $progInstallFolder -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-    mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-    cp -a *.txt Changelog $PKG/usr/doc/$PRGNAM-$VERSION
+    mkdir -p $progInstallFolder/usr/doc/$progName-$version
+    cp -a *.txt Changelog $progInstallFolder/usr/doc/$progName-$version
 
-    cd $PKG
-    /sbin/makepkg -l y -c n $CMD/$PRGNAM-$VERSION-$ARCH-$TAG.tgz
+    rm $progInstallFolder/usr/share/applications/smplayer_enqueue.desktop
 
-    cd $CWD
-    rm -r $TMP
-    rm $PRGNAM-$VERSION.tar.bz2
+    cd $progInstallFolder
+    /sbin/makepkg -l y -c n $initialFolder/$progName-$version-$ARCH-$tag.tgz
+
+    cd $initialFolder
+    rm -r $tmpFolder
+    rm $progName-$version.tar.bz2
 fi

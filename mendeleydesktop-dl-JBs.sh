@@ -1,13 +1,16 @@
 #!/bin/sh
 # Slackware build script for mendeleydesktop
+# Edited from: https://slackbuilds.org/repository/14.2/academic/mendeleydesktop/
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName=mendeleydesktop
     version=1.17.2
-    linkDl="http://desktop-download.mendeley.com/download/linux"
     tag=JB-3
+
+    folderDest=`pwd`
+    linkDl="http://desktop-download.mendeley.com/download/linux"
 
     if [ -z "$ARCH" ]; then
         case "$( uname -m )" in
@@ -24,12 +27,11 @@ else
         exit 1
     fi
 
-    rm -r $progName-$version-linux-$ARCH/ 2> /dev/null # delete old version compiled
+    rm -r $progName-$version-linux-$ARCH/ 2> /dev/null
 
     tar -xvf $progName-$version-linux-$ARCH.tar.bz2
 
     cd $progName-$version-linux-$ARCH/
-
     mkdir $progName-$version
     mv INSTALL LICENSE README bin lib share $progName-$version/
 
@@ -37,18 +39,15 @@ else
     mv $progName-$version/ opt/
 
     mkdir -p usr/bin
-
     echo -e "#!/bin/bash\npython /opt/$progName-$version/bin/mendeleydesktop" > usr/bin/mendeleydesktop
     chmod +x usr/bin/mendeleydesktop
 
     mkdir -p usr/share/applications/
-
     sed -i 's/Icon=mendeleydesktop/Icon=\/usr\/share\/applications\/mendeleydesktop.png/g' opt/$progName-$version/share/applications/mendeleydesktop.desktop
 
     cp opt/$progName-$version/share/applications/mendeleydesktop.desktop usr/share/applications/
     cp opt/$progName-$version/share/icons/hicolor/128x128/apps/mendeleydesktop.png usr/share/applications/
 
-    folderDest=`cd ..; pwd`
     /sbin/makepkg -l n -c n $folderDest/$progName-$version-$ARCH-$tag.txz
 
     cd ../

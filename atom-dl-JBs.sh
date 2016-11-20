@@ -5,7 +5,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="atom"
-    version="v1.11.2"
+    version="1.12.4"
     linkDl="https://github.com/atom/atom/releases/download"
     tag=JB-2
 
@@ -18,7 +18,7 @@ else
     fi
 
     if [ "$ARCH" == "x86_64" ]; then # Only 64 bits, without 32 bits rpm in atom site
-        wget -c $linkDl/$version/$progName.$ARCH.rpm
+        wget -c $linkDl/v$version/$progName.$ARCH.rpm
     else
         echo -e "\nError: ARCH $ARCH not configured\n"
         exit 1

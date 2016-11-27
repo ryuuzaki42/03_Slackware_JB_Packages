@@ -5,9 +5,27 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="atom"
-    version="1.12.4"
     linkDl="https://github.com/atom/atom/releases/download"
     tag=JB-2
+
+    wget https://github.com/atom/atom/releases/latest -O latest
+    version=`cat latest | grep "Release.*[[:digit:]].*atom" | sed 's/[^0-9,.]*//g'`
+    rm latest
+
+    echo -e "\nLatest version: $version\n"
+    installedVersion=`ls /var/log/packages/atom-* | cut -d '-' -f2`
+    if [ "$installedVersion" != '' ]; then
+        if [ "$version" == "$installedVersion" ]; then
+            echo -e "\nVersion installed ($installedVersion) is equal to latest version ($version)"
+            echo -n "Want continue? (y)es - (n)o (hit enter to no): "
+            read continue
+
+            if [ "$continue" == 'n' ] || [ "$continue" == '' ]; then
+                echo -e "\nJust exiting\n"
+                exit 0
+            fi
+        fi
+    fi
 
     if [ -z "$ARCH" ]; then
         case "$( uname -m )" in

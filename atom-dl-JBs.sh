@@ -4,28 +4,30 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="atom"
-    linkDl="https://github.com/atom/atom/releases/download"
-    tag=JB-2
+    progName="atom" # last tested: 1.12.5
+    tag="JB-1"
 
-    wget https://github.com/atom/atom/releases/latest -O latest
-    version=`cat latest | grep "Release.*[[:digit:]].*atom" | sed 's/[^0-9,.]*//g'`
-    rm latest
+    linkGetVersion="https://github.com/atom/atom/releases/latest"
+    wget $linkGetVersion -O $progName-latest
 
-    echo -e "\nLatest version: $version\n"
-    installedVersion=`ls /var/log/packages/atom-* | cut -d '-' -f2`
+    version=`cat $progName-latest | grep "Release.*[[:digit:]].*atom" | sed 's/[^0-9,.]*//g'`
+    rm $progName-latest
+
+    installedVersion=`ls /var/log/packages/$progName* | cut -d '-' -f2`
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
-            echo -e "\nVersion installed ($installedVersion) is equal to latest version ($version)"
+            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
             echo -n "Want continue? (y)es - (n)o (hit enter to no): "
             read continue
 
-            if [ "$continue" == 'n' ] || [ "$continue" == '' ]; then
+            if [ "$continue" != 'y' ]; then
                 echo -e "\nJust exiting\n"
                 exit 0
             fi
         fi
     fi
+    linkDl="https://github.com/atom/atom/releases/download"
 
     if [ -z "$ARCH" ]; then
         case "$( uname -m )" in

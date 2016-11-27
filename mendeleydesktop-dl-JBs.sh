@@ -5,9 +5,29 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName=mendeleydesktop
-    version=1.17.2
-    tag=JB-3
+    progName="mendeleydesktop" # last tested: 1.17.3
+    tag="JB-1"
+
+    linkGetVersion="https://www.mendeley.com/release-notes/"
+    wget $linkGetVersion -O $progName-latest
+
+    version=`cat $progName-latest | grep "Release Notes for Mendeley Desktop" | head -n 1 | sed 's/[^0-9,.]*//g'`
+    rm $progName-latest
+
+    installedVersion=`ls /var/log/packages/$progName* | cut -d '-' -f2`
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    if [ "$installedVersion" != '' ]; then
+        if [ "$version" == "$installedVersion" ]; then
+            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
+            echo -n "Want continue? (y)es - (n)o (hit enter to no): "
+            read continue
+
+            if [ "$continue" != 'y' ]; then
+                echo -e "\nJust exiting\n"
+                exit 0
+            fi
+        fi
+    fi
 
     folderDest=`pwd`
     linkDl="http://desktop-download.mendeley.com/download/linux"

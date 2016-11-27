@@ -9,18 +9,39 @@ else
     read progBuild
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit"
-        version="8_0_3"
+        progName="smartgit" # last tested: 8_0_3
+        progNameTmp="SmartGit"
         partFile="-linux"
     elif [ "$progBuild" == '2' ]; then
-        progName="smartsynchronize"
-        version="3_4_8"
+        progName="smartsynchronize" # last tested: 3_4_8
+        progNameTmp="SmartSynchronize"
         partFile="-generic"
     else
         echo -e "\nError: The chosen program ($progBuild) is unknown\n"
         exit 1
     fi
 
+    linkGetVersion="http://www.syntevo.com/$progName/download"
+    wget $linkGetVersion -O $progName-latest
+
+    version=`cat $progName-latest | grep "Download $progNameTmp" | cut -d '<' -f3 | sed 's/[^0-9,.]*//g'`
+    version=`echo $version | tr '.' '_'`
+    rm $progName-latest
+
+    installedVersion=`ls /var/log/packages/$progName* | cut -d '-' -f2`
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    if [ "$installedVersion" != '' ]; then
+        if [ "$version" == "$installedVersion" ]; then
+            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
+            echo -n "Want continue? (y)es - (n)o (hit enter to no): "
+            read continue
+
+            if [ "$continue" != 'y' ]; then
+                echo -e "\nJust exiting\n"
+                exit 0
+            fi
+        fi
+    fi
     echo -e "\n\nWill build $progName, please wait\n\n"
 
     linkDl="http://www.syntevo.com/static/smart/download/$progName"

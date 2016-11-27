@@ -4,10 +4,29 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="opera-stable"
-    version="41.0.2353.69"
-    tag=JB-2
+    progName="opera-stable" # last tested: 41.0.2353.69
+    tag="JB-1"
 
+    linkGetVersion="http://www.opera.com/blogs/desktop/"
+    wget $linkGetVersion -O $progName-latest
+
+    version=`cat $progName-latest | grep "Opera.*Stable.*update" | head -n 1 | sed 's/[^0-9,.]*//g'`
+    rm $progName-latest
+
+    installedVersion=`ls /var/log/packages/$progName* | cut -d '_' -f2`
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    if [ "$installedVersion" != '' ]; then
+        if [ "$version" == "$installedVersion" ]; then
+            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
+            echo -n "Want continue? (y)es - (n)o (hit enter to no): "
+            read continue
+
+            if [ "$continue" != 'y' ]; then
+                echo -e "\nJust exiting\n"
+                exit 0
+            fi
+        fi
+    fi
     linkDl="http://download4.operacdn.com/pub/opera/desktop/$version/linux"
 
     if [ -z "$ARCH" ]; then

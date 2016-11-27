@@ -5,10 +5,29 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="smplayer"
-    version="16.11.0"
+    progName="smplayer" # last tested: 16.11.0
     tag="JB-1"
 
+    linkGetVersion="https://app.assembla.com/spaces/smplayer/subversion/source/HEAD/smplayer/trunk/OBS/Makefile?_format=raw"
+    wget $linkGetVersion -O $progName-latest
+
+    version=`cat $progName-latest | grep "VERSION" | head -n 1 | sed 's/[^0-9,.]*//g'`
+    rm $progName-latest
+
+    installedVersion=`ls /var/log/packages/$progName* | cut -d '-' -f2`
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    if [ "$installedVersion" != '' ]; then
+        if [ "$version" == "$installedVersion" ]; then
+            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
+            echo -n "Want continue? (y)es - (n)o (hit enter to no): "
+            read continue
+
+            if [ "$continue" != 'y' ]; then
+                echo -e "\nJust exiting\n"
+                exit 0
+            fi
+        fi
+    fi
     linkDl="http://downloads.sourceforge.net/smplayer"
 
     if [ -z "$ARCH" ]; then

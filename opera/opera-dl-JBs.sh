@@ -5,7 +5,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="opera-stable"
-    version="41.0.2353.56"
+    version="41.0.2353.69"
     tag=JB-2
 
     linkDl="http://download4.operacdn.com/pub/opera/desktop/$version/linux"

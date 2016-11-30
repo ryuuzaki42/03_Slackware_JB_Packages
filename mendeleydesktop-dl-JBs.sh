@@ -5,7 +5,7 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="mendeleydesktop" # last tested: 1.17.3
+    progName="mendeleydesktop" # last tested: 1.17.4
     tag="JB-1"
 
     linkGetVersion="https://www.mendeley.com/release-notes/"

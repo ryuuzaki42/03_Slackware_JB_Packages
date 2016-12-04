@@ -1,6 +1,6 @@
 #!/bin/sh
-# Slackware build script for SMPlayer ( without skins and themes)
-# Edited from: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
+# Slackware build script for SMPlayer (without skins and themes)
+# Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"

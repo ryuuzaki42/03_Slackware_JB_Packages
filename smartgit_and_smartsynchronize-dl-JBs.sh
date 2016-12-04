@@ -1,6 +1,6 @@
 #!/bin/bash
 # Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
-# Edited from: https://slackbuilds.org/repository/14.2/development/smartgit/
+# Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"

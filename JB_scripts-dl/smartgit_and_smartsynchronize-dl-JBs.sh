@@ -5,8 +5,11 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    echo -en "\nYou want build SmartGit or SmartSynchronize?\n1 to SmartGit or - 2 to SmartSynchronize: "
-    read progBuild
+    progBuild=$1
+    if [ $progBuild == '' ]; then
+        echo -en "\nYou want build SmartGit or SmartSynchronize?\n1 to SmartGit or - 2 to SmartSynchronize: "
+        read progBuild
+    fi
 
     if [ "$progBuild" == '1' ]; then
         progName="smartgit" # last tested: 8_0_3

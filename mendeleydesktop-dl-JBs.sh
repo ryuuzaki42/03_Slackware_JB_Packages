@@ -1,6 +1,6 @@
 #!/bin/sh
 # Slackware build script for mendeleydesktop
-# Edited from: https://slackbuilds.org/repository/14.2/academic/mendeleydesktop/
+# Based in: https://slackbuilds.org/repository/14.2/academic/mendeleydesktop/
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"

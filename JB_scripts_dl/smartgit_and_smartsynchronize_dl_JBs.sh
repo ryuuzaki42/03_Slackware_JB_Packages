@@ -16,7 +16,7 @@ else
         progNameTmp="SmartGit"
         partFile="-linux"
     elif [ "$progBuild" == '2' ]; then
-        progName="smartsynchronize" # last tested: 3_4_8
+        progName="smartsynchronize" # last tested: 3_4_9
         progNameTmp="SmartSynchronize"
         partFile="-generic"
     else

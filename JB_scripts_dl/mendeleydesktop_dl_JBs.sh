@@ -1,6 +1,6 @@
 #!/bin/sh
 # Slackware build script for mendeleydesktop
-# Based in: https://slackbuilds.org/repository/14.2/academic/mendeleydesktop/
+# Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/mendeleydesktop.SlackBuild
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
@@ -40,6 +40,18 @@ else
         esac
     fi
 
+    if [ "$ARCH" = "i486" ]; then
+        LIBDIRSUFFIX=""
+    elif [ "$ARCH" = "i586" ] || [ "$ARCH" = "i686" ]; then
+        ARCH="i486" # mendeleydesktop doesn't have i586/i686 pre-builds
+        LIBDIRSUFFIX=""
+    elif [ "$ARCH" = "x86_64" ]; then
+        LIBDIRSUFFIX="64"
+    else
+        SLKCFLAGS="-O2"
+        LIBDIRSUFFIX=""
+    fi
+
     if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i486" ]; then
         wget -c "$linkDl/$progName-$version-linux-$ARCH.tar.bz2"
     else
@@ -47,30 +59,46 @@ else
         exit 1
     fi
 
-    rm -r $progName-$version-linux-$ARCH/ 2> /dev/null
+    set -e
 
-    tar -xvf $progName-$version-linux-$ARCH.tar.bz2
+    folderSourceCode="$folderDest/$progName-$version-linux-$ARCH"
 
-    cd $progName-$version-linux-$ARCH/
-    mkdir $progName-$version
-    mv INSTALL LICENSE README bin lib share $progName-$version/
+    rm -rf $folderSourceCode $folderSourceCode-tmp
 
-    mkdir opt
-    mv $progName-$version/ opt/
+    tar xvf $folderDest/$progName-$version-linux-${ARCH}.tar.bz2
+    mv $progName-$version-linux-$ARCH $progName-$version-linux-$ARCH-tmp
 
-    mkdir -p usr/bin
-    echo -e "#!/bin/bash\npython /opt/$progName-$version/bin/mendeleydesktop" > usr/bin/mendeleydesktop
-    chmod +x usr/bin/mendeleydesktop
+    cd $progName-$version-linux-$ARCH-tmp
+    chown -R root:root .
+    find -L . \
+    \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+    -o -perm 511 \) -exec chmod 755 {} \; -o \
+    \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+    -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-    mkdir -p usr/share/applications/
-    sed -i 's/Icon=mendeleydesktop/Icon=\/usr\/share\/applications\/mendeleydesktop.png/g' opt/$progName-$version/share/applications/mendeleydesktop.desktop
+    # Remove the bundled qt since it should be present in the system already
+    rm -rf lib/qt bin/qt.conf lib/mendeleydesktop/plugins
 
-    cp opt/$progName-$version/share/applications/mendeleydesktop.desktop usr/share/applications/
-    cp opt/$progName-$version/share/icons/hicolor/128x128/apps/mendeleydesktop.png usr/share/applications/
+    [ $ARCH = 'x86_64' ] && mv lib lib$LIBDIRSUFFIX
 
-    /sbin/makepkg -l n -c n $folderDest/$progName-$version-$ARCH-$tag.txz
+    rm bin/mendeleydesktop
+    ln -s ../lib${LIBDIRSUFFIX}/mendeleydesktop/libexec/mendeleydesktop.$ARCH bin/mendeleydesktop
 
-    cd ../
-    rm -r $progName-$version-linux-$ARCH/
-    rm $progName-$version-linux-$ARCH.tar.bz2
+    # Some docs lay on the top folder, so install them first
+    mkdir -p $folderSourceCode/usr/doc
+    mv share/doc/mendeleydesktop $folderSourceCode/usr/doc/$progName-$version
+    mv LICENSE README $folderSourceCode/usr/doc/$progName-$version
+
+    rm INSTALL
+    rmdir share/doc
+
+    mv * $folderSourceCode/usr
+
+    find $folderSourceCode -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+    | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+    cd $folderSourceCode
+    /sbin/makepkg -l y -c n $folderDest/$progName-$version-$ARCH-$tag.txz
+
+    rm -rf $folderSourceCode $folderSourceCode-tmp $folderSourceCode.tar.bz2
 fi

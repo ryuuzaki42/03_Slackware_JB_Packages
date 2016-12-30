@@ -38,9 +38,9 @@ else
     esac
     fi
 
-    initialFolder=$(pwd)
-    tmpFolder=$initialFolder/tmpFolder_`date +%s`
-    progInstallFolder=$tmpFolder/$progName
+    initialFolder=`pwd`
+    progInstallFolder=$initialFolder/$progName-$version
+    tmpFolder=$progInstallFolder-tmp
 
     if [ "$ARCH" = "i486" ]; then
         SLKCFLAGS="-O2 -march=i486 -mtune=i686"
@@ -89,6 +89,5 @@ else
     /sbin/makepkg -l y -c n $initialFolder/$progName-$version-$ARCH-$tag.tgz
 
     cd $initialFolder
-    rm -r $tmpFolder
-    rm $progName-$version.tar.bz2
+    rm -r $tmpFolder $progName-$version $progName-$version.tar.bz2
 fi

@@ -19,7 +19,7 @@ installpkg opera*.txz
     ## or download form pkgs.org
     https://pkgs.org/search/codecs-ffmpeg
 
-    ## extract the *codecs-ffmpeg*.txz and copy the 
+    ## extract the *codecs-ffmpeg*.txz and copy
         ## backup
         mv /usr/lib64/opera/libffmpeg.so /usr/lib64/opera/libffmpeg.so2
 

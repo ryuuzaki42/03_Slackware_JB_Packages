@@ -14,7 +14,8 @@ installpkg opera*.txz
     ## or just install final_package/opera*_amd64_JB.txz (*for now, only 64 bits)
 
     ## form Slackbuilds
-    https://slackbuilds.org/repository/14.2/multimedia/vivaldi-codecs-ffmpeg-extra/
+    #https://slackbuilds.org/repository/14.2/multimedia/vivaldi-codecs-ffmpeg-extra/
+    https://slackbuilds.org/repository/14.2/multimedia/opera-ffmpeg-codecs/
 
     ## or download form pkgs.org
     https://pkgs.org/search/codecs-ffmpeg

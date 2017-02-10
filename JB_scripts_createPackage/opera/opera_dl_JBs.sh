@@ -8,7 +8,7 @@ else
     tag="JB-1"
 
     linkGetVersion="http://www.opera.com/blogs/desktop/"
-    version="42.0.2393.517"
+    version="43.0.2442.806"
 
     installedVersion=`ls /var/log/packages/$progName* | cut -d '_' -f2`
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"

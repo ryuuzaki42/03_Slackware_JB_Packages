@@ -5,7 +5,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="messengerfordesktop" # last tested: 2.0.4
-    tag="JB-1"
+    tag="JB"
 
     linkGetVersion="https://github.com/Aluxian/Messenger-for-Desktop/releases/"
     wget $linkGetVersion -O $progName-latest

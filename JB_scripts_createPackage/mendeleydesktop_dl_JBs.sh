@@ -6,7 +6,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="mendeleydesktop" # last tested: 1.17.7
-    tag="JB-1"
+    tag="JB"
 
     linkGetVersion="https://www.mendeley.com/release-notes/"
     wget $linkGetVersion -O $progName-latest

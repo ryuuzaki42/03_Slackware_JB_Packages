@@ -6,7 +6,7 @@ if [ "$USER" != "root" ]; then
 else
     progName="wps-office"
     version="10.1.0.5672-1.a21"
-    tag=JB-2
+    tag="JB"
 
     linkDl="http://kdl.cc.ksosoft.com/wps-community/download/a21"
 

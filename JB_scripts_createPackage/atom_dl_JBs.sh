@@ -5,7 +5,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="atom" # last tested: 1.14.2
-    tag="JB-1"
+    tag="JB"
 
     linkGetVersion="https://github.com/atom/atom/releases/latest"
     wget $linkGetVersion -O $progName-latest

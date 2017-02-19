@@ -6,7 +6,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="smplayer" # last tested: 17.2.0
-    tag="JB-1"
+    tag="JB"
 
     linkGetVersion="https://app.assembla.com/spaces/smplayer/subversion/source/HEAD/smplayer/trunk/OBS/Makefile?_format=raw"
     wget $linkGetVersion -O $progName-latest

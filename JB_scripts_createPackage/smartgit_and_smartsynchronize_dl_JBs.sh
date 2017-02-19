@@ -53,7 +53,7 @@ else
 
     linkDl="http://www.syntevo.com/static/smart/download/$progName"
     folderDest=`pwd`
-    tag=JB-1
+    tag="JB"
 
     wget -c $linkDl/$progName$partFile-$version.tar.gz
 

@@ -1,33 +1,25 @@
-## Opera to Slackwre ## 
+## Opera to Slackwre ##
 
-## Download:
-http://www.opera.com/download/get/?partner=www&opsys=Linux&package=RPM
+## Run the script
+./opera_dl_JBs.sh
 
-## Create the txz package
-rpm2txz opera*.rpm
+    ## Or
+    # Download:
+    http://www.opera.com/download/get/?partner=www&opsys=Linux&package=RPM
+
+    # Create the txz package
+    rpm2txz opera-stable*.rpm
 
 ## Install
-installpkg opera*.txz
+installpkg opera-stable*.txz
 
 ## Add the MSE & H.264 plugins
-    Compile the "vivaldi-codecs-ffmpeg-extra"
-    ## or just install final_package/opera*_amd64_JB.txz (*for now, only 64 bits)
-
-    ## form Slackbuilds
-    #https://slackbuilds.org/repository/14.2/multimedia/vivaldi-codecs-ffmpeg-extra/
+    Compile the "opera-ffmpeg-codecs" form Slackbuilds
     https://slackbuilds.org/repository/14.2/multimedia/opera-ffmpeg-codecs/
 
-    ## or download form pkgs.org
-    https://pkgs.org/search/codecs-ffmpeg
+    # For 64 bits install compiled package opera-ffmpeg-codecs-*-x86_64-1_SBo.tgz
 
-    ## extract the *codecs-ffmpeg*.txz and copy
-        ## backup
-        mv /usr/lib64/opera/libffmpeg.so /usr/lib64/opera/libffmpeg.so2
-
-        ## copy the new libffmpeg
-        mv libffmpeg.so /usr/lib64/opera/
-
-    ## For tests, go to:
-    https://html5test.com
+    # For tests, go to:
     https://www.youtube.com/html5
+    https://html5test.com
     http://www.quirksmode.org/html5/tests/video.html

@@ -8,7 +8,7 @@ else
     progName="git-lfs" # last tested: 2.0.1
     tag="JB"
 
-    linkGetVersion="https://github.com/git-lfs/git-lfs/releases/"
+    linkGetVersion="https://github.com/git-lfs/git-lfs/releases/latest"
     wget $linkGetVersion -O $progName-latest
 
     version=`cat $progName-latest | grep "/git-lfs/git-lfs/tree/v" | head -n 1 | cut -d "v" -f2 | cut -d "\"" -f1`

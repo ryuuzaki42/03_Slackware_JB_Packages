@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Slackware build script for mendeleydesktop
 # Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/mendeleydesktop.SlackBuild
 

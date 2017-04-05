@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Slackware build script for SMPlayer (without skins and themes)
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 

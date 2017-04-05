@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Slackware build script for git-lfs
 # Based in: https://slackbuilds.org/repository/14.2/development/git-lfs/
 

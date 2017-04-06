@@ -99,7 +99,7 @@ Icon=$progName" > usr/share/applications/$progName.desktop
     ln -s ../share/$progName/bin/$progName.sh $progName
     cd ../../
 
-    /sbin/makepkg -l y -c n $folderDest/$progName-$version-noArch-$tag.tgz
+    /sbin/makepkg -l y -c n $folderDest/$progName-$version-noArch-$tag.txz
 
     cd ../
     rm -r $progName

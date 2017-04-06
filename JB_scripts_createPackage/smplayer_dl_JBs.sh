@@ -90,7 +90,7 @@ else
     rm $progInstallFolder/usr/share/applications/smplayer_enqueue.desktop
 
     cd $progInstallFolder
-    /sbin/makepkg -l y -c n $initialFolder/$progName-$version-$ARCH-$tag.tgz
+    /sbin/makepkg -l y -c n $initialFolder/$progName-$version-$ARCH-$tag.txz
 
     cd $initialFolder
     rm -r $tmpFolder $progName-$version $progName-$version.tar.bz2

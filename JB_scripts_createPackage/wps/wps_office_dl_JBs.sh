@@ -25,9 +25,9 @@ else
         exit 1
     fi
 
-    rpm2txz $progName-$version.$ARCH.rpm
+    rpm2txz "${progName}-${version}.${ARCH}.rpm"
 
-    rm $progName-$version.$ARCH.rpm
+    rm "${progName}-${version}.${ARCH}.rpm"
 
-    mv $progName-$version.$ARCH.txz $progName-$version.$ARCH-$tag.txz
+    mv "${progName}-${version}.${ARCH}.txz" "${progName}-${version}.${ARCH}-${tag}.txz"
 fi

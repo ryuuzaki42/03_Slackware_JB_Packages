@@ -6,11 +6,9 @@ if [ "$USER" != "root" ]; then
 else
     progName="opera-stable"
     tag="JB"
-
-    linkGetVersion="http://www.opera.com/blogs/desktop/"
     version="44.0.2510.1159"
 
-    installedVersion=`ls /var/log/packages/$progName* | cut -d '_' -f2`
+    installedVersion=$(find /var/log/packages/$progName* | cut -d '_' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
@@ -19,7 +17,7 @@ else
 
             continue=$1
             if [ "$continue" == '' ]; then
-                read continue
+                read -r continue
             fi
 
             if [ "$continue" != 'y' ]; then
@@ -39,16 +37,16 @@ else
         esac
     fi
 
-    if [ "$ARCH" == "amd64" ] ||[ "$ARCH" == "i386" ] ; then
-        wget -c "$linkDl/"$progName"_"$version"_$ARCH.rpm"
+    if [ "$ARCH" == "amd64" ] || [ "$ARCH" == "i386" ] ; then
+        wget -c "$linkDl/${progName}_${version}_$ARCH.rpm"
     else
         echo -e "\nError: ARCH $ARCH not configured\n"
         exit 1
     fi
 
-    rpm2txz "$progName"_"$version"_$ARCH.rpm
+    rpm2txz "${progName}_${version}_${ARCH}.rpm"
 
-    rm "$progName"_"$version"_$ARCH.rpm
+    rm "${progName}_${version}_${ARCH}.rpm"
 
-    mv "$progName"_"$version"_$ARCH.txz "$progName"_"$version"_$ARCH-$tag.txz
+    mv "${progName}_${version}_${ARCH}.txz" "${progName}_${version}_${ARCH}-${tag}.txz"
 fi

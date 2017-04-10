@@ -16,7 +16,6 @@ else
     ./smplayer_dl_JBs.sh n
 
     #./opera/opera_dl_JBs.sh n
-    #./opera/cp_lib_opera_JBs.sh
 
     #./wps/wps_office_dl_JBs.sh
 

@@ -11,15 +11,15 @@ else
     linkDl="http://kdl.cc.ksosoft.com/wps-community/download/a21"
 
     if [ -z "$ARCH" ]; then
-        case "$( uname -m )" in
-            i?86) ARCH=i686 ;;
-            arm*) ARCH=arm ;;
-            *) ARCH=$( uname -m ) ;;
+        case "$(uname -m)" in
+            i?86) ARCH="i686" ;;
+            arm*) ARCH="arm" ;;
+            *) ARCH=$(uname -m) ;;
         esac
     fi
 
-    if [ "$ARCH" == "x86_64" ] ||[ "$ARCH" == "i686" ] ; then
-        wget -c "$linkDl/$progName-$version.$ARCH.rpm"
+    if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i686" ] ; then
+        wget -c "$linkDl/${progName}-${version}.${ARCH}.rpm"
     else
         echo -e "\nError: ARCH $ARCH not configured\n"
         exit 1

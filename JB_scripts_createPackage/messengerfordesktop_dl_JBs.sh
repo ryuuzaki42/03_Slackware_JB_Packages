@@ -8,10 +8,10 @@ else
     tag="JB"
 
     linkGetVersion="https://github.com/Aluxian/Messenger-for-Desktop/releases/"
-    wget $linkGetVersion -O $progName-latest
+    wget "$linkGetVersion" -O "${progName}-latest"
 
     version=$(cat $progName-latest | grep "Messenger-for-Desktop/releases/tag/v" | head -n 1 | cut -d'>' -f2 | sed 's/[^0-9,.]*//g')
-    rm $progName-latest
+    rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
@@ -20,7 +20,7 @@ else
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
             echo -n "Want continue? (y)es - (n)o (hit enter to no): "
 
-            continue=$1
+            continue="$1"
             if [ "$continue" == '' ]; then
                 read -r continue
             fi
@@ -34,10 +34,10 @@ else
     linkDl="https://github.com/Aluxian/Messenger-for-Desktop/releases/download"
 
     if [ -z "$ARCH" ]; then
-        case "$( uname -m )" in
-            i?86) ARCH=i386 ;;
-            arm*) ARCH=arm ;;
-            *) ARCH=$( uname -m ) ;;
+        case "$(uname -m)" in
+            i?86) ARCH="i386" ;;
+            arm*) ARCH="arm" ;;
+            *) ARCH=$(uname -m) ;;
         esac
     fi
 

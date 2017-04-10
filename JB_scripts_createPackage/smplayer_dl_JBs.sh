@@ -12,7 +12,7 @@ else
     wget "$linkGetVersion" -O "${progName}-latest"
 
     version=$(cat $progName-latest | grep "VERSION" | head -n 1 | sed 's/[^0-9,.]*//g')
-    rm "$progName-latest"
+    rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
@@ -21,7 +21,7 @@ else
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
             echo -n "Want continue? (y)es - (n)o (hit enter to no): "
 
-            continue=$1
+            continue="$1"
             if [ "$continue" == '' ]; then
                 read -r continue
             fi
@@ -32,19 +32,20 @@ else
             fi
         fi
     fi
+
     linkDl="http://downloads.sourceforge.net/smplayer"
 
     if [ -z "$ARCH" ]; then
-    case "$( uname -m )" in
-        i?86) ARCH=i486 ;;
-        arm*) ARCH=arm ;;
-        *) ARCH=$( uname -m ) ;;
-    esac
+        case "$(uname -m)" in
+            i?86) ARCH="i486" ;;
+            arm*) ARCH="arm" ;;
+            *) ARCH=$(uname -m) ;;
+        esac
     fi
 
     initialFolder=$(pwd)
-    progInstallFolder=$initialFolder/$progName-$version
-    tmpFolder=$progInstallFolder-tmp
+    progInstallFolder="$initialFolder/${progName}-$version"
+    tmpFolder="${progInstallFolder}-tmp"
 
     if [ "$ARCH" = "i486" ]; then
         SLKCFLAGS="-O2 -march=i486 -mtune=i686"

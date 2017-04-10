@@ -10,10 +10,10 @@ else
     linkGetVersion="https://github.com/Aluxian/Messenger-for-Desktop/releases/"
     wget $linkGetVersion -O $progName-latest
 
-    version=`cat $progName-latest | grep "Messenger-for-Desktop/releases/tag/v" | head -n 1 | cut -d'>' -f2 | sed 's/[^0-9,.]*//g'`
+    version=$(cat $progName-latest | grep "Messenger-for-Desktop/releases/tag/v" | head -n 1 | cut -d'>' -f2 | sed 's/[^0-9,.]*//g')
     rm $progName-latest
 
-    installedVersion=`ls /var/log/packages/$progName* | cut -d '-' -f2`
+    installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
@@ -22,7 +22,7 @@ else
 
             continue=$1
             if [ "$continue" == '' ]; then
-                read continue
+                read -r continue
             fi
 
             if [ "$continue" != 'y' ]; then
@@ -42,15 +42,15 @@ else
     fi
 
     if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i386" ]; then
-        wget -c $linkDl/v$version/$progName-$version-linux-$ARCH.rpm
+        wget -c "$linkDl/v$version/${progName}-${version}-linux-${ARCH}.rpm"
     else
         echo -e "\nError: ARCH $ARCH not configured\n"
         exit 1
     fi
 
-    mv $progName-$version-linux-$ARCH.rpm $progName-$version-$ARCH-$tag.rpm
+    mv "${progName}-${version}-linux-${ARCH}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
 
-    rpm2txz $progName-$version-$ARCH-$tag.rpm
+    rpm2txz "${progName}-${version}-${ARCH}-${tag}.rpm"
 
-    rm $progName-$version-$ARCH-$tag.rpm
+    rm "${progName}-${version}-${ARCH}-${tag}.rpm"
 fi

@@ -15,7 +15,7 @@ else
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
             echo -n "Want continue? (y)es - (n)o (hit enter to no): "
 
-            continue=$1
+            continue="$1"
             if [ "$continue" == '' ]; then
                 read -r continue
             fi
@@ -29,16 +29,16 @@ else
     linkDl="http://download4.operacdn.com/pub/opera/desktop/$version/linux"
 
     if [ -z "$ARCH" ]; then
-        case "$( uname -m )" in
-            i?86) ARCH=i386 ;;
-            arm*) ARCH=arm ;;
-            x86_64) ARCH=amd64 ;;
-            *) ARCH=$( uname -m ) ;;
+        case "$(uname -m)" in
+            i?86) ARCH="i386" ;;
+            arm*) ARCH="arm" ;;
+            x86_64) ARCH="amd64" ;;
+            *) ARCH=$(uname -m) ;;
         esac
     fi
 
     if [ "$ARCH" == "amd64" ] || [ "$ARCH" == "i386" ] ; then
-        wget -c "$linkDl/${progName}_${version}_$ARCH.rpm"
+        wget -c "$linkDl/${progName}_${version}_${ARCH}.rpm"
     else
         echo -e "\nError: ARCH $ARCH not configured\n"
         exit 1

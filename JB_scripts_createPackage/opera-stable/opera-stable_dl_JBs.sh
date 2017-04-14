@@ -5,7 +5,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="opera-stable"
-    version="44.0.2510.1159"
+    version="44.0.2510.1218"
     tag="JB"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '_' -f2)

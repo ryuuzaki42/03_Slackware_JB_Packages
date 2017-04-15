@@ -15,7 +15,7 @@ else
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
             echo -n "Want continue? (y)es - (n)o (hit enter to no): "
 
-            continue="$1"
+            continue=$1
             if [ "$continue" == '' ]; then
                 read -r continue
             fi

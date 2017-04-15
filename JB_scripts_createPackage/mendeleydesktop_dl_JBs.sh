@@ -21,7 +21,7 @@ else
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
             echo -n "Want continue? (y)es - (n)o (hit enter to no): "
 
-            continue="$1"
+            continue=$1
             if [ "$continue" == '' ]; then
                 read -r continue
             fi
@@ -45,14 +45,14 @@ else
     fi
 
     if [ "$ARCH" = "i486" ]; then
-        LIBDIRSUFFIX=""
+        LIBDIRSUFFIX=''
     elif [ "$ARCH" = "i586" ] || [ "$ARCH" = "i686" ]; then
         ARCH="i486" # mendeleydesktop doesn't have i586/i686 pre-builds
-        LIBDIRSUFFIX=""
+        LIBDIRSUFFIX=''
     elif [ "$ARCH" = "x86_64" ]; then
         LIBDIRSUFFIX="64"
     else
-        LIBDIRSUFFIX=""
+        LIBDIRSUFFIX=''
     fi
 
     if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i486" ]; then
@@ -63,7 +63,6 @@ else
     fi
 
     set -e
-
     folderSourceCode="$folderDest/${progName}-${version}-linux-$ARCH"
 
     rm -rf "$folderSourceCode" "$folderSourceCode-tmp"

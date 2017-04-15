@@ -29,7 +29,7 @@ else
 
     version=$(cat ${progName}-latest | grep "Download $progNameTmp" | cut -d '<' -f3 | sed 's/[^0-9,.]*//g')
     version=${version//./_}
-    rm $progName-latest
+    rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
@@ -38,7 +38,7 @@ else
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
             echo -n "Want continue? (y)es - (n)o (hit enter to no): "
 
-            continue="$2"
+            continue=$2
             if [ "$continue" == '' ]; then
                 read -r continue
             fi

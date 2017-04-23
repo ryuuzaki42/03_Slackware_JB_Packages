@@ -8,10 +8,10 @@ else
     tag="JB"
 
     linkGetVersion="https://github.com/atom/atom/releases/latest"
-    wget $linkGetVersion -O $progName-latest
+    wget "$linkGetVersion" -O "${progName}-latest"
 
     version=$(cat $progName-latest | grep "Release.*[[:digit:]].*" | sed 's/[^0-9,.]*//g')
-    rm $progName-latest
+    rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"

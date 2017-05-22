@@ -5,7 +5,7 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="git-lfs" # last tested: 2.1.0
+    progName="git-lfs" # last tested: 2.1.1
     tag="JB"
 
     linkGetVersion="https://github.com/git-lfs/git-lfs/releases/latest"

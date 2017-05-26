@@ -12,11 +12,11 @@ else
     fi
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit" # last tested: 17_0_4
+        progName="smartgit" # last tested: "17_0_4"
         progNameTmp="SmartGit"
         partFile="-linux"
     elif [ "$progBuild" == '2' ]; then
-        progName="smartsynchronize" # last tested: 3_4_10
+        progName="smartsynchronize" # last tested: "3_4_10"
         progNameTmp="SmartSynchronize"
         partFile="-generic"
     else

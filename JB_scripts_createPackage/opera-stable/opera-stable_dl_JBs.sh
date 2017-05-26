@@ -4,9 +4,14 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="opera-stable"
-    version="45.0.2552.812"
+    progName="opera-stable" # last tested: "45.0.2552.881"
     tag="JB"
+
+    linkGetVersion="http://download3.operacdn.com/pub/opera/desktop/"
+    wget "$linkGetVersion" -O "${progName}-latest"
+
+    version=$(cat $progName-latest | grep "href" | tail -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
+    rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '_' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"

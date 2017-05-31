@@ -7,11 +7,34 @@ else
     progName="opera-stable" # last tested: "45.0.2552.881"
     tag="JB"
 
-    linkGetVersion="http://download3.operacdn.com/pub/opera/desktop/"
-    wget "$linkGetVersion" -O "${progName}-latest"
+    linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"
 
-    version=$(cat $progName-latest | grep "href" | tail -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
-    rm "${progName}-latest"
+    tailNumber='1'
+    continue='0'
+    while [ "$continue" == '0' ]; do
+        wget "$linkGetVersion" -O "${progName}-latest"
+
+        version=$(cat ${progName}-latest | grep "href" | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
+        rm "${progName}-latest"
+
+        if [ "$version" == '' ]; then
+            echo -e "Not found any more version\nJust exiting"
+            exit 0
+        fi
+
+        echo -e "\n Version test: $version\n"
+        linkGetVersionLinux="http://ftp.opera.com/ftp/pub/opera/desktop/$version/"
+        wget "$linkGetVersionLinux" -O "${progName}-downloads"
+
+        if cat ${progName}-downloads | grep "href" | grep -q "linux"; then
+            continue='1'
+        else
+            echo "The version $version don't have Linux version yet"
+        fi
+        rm "${progName}-downloads"
+
+        ((tailNumber++))
+    done
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '_' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
@@ -31,7 +54,7 @@ else
             fi
         fi
     fi
-    linkDl="http://download4.operacdn.com/pub/opera/desktop/$version/linux"
+    linkDl="http://ftp.opera.com/ftp/pub/opera/desktop/$version/linux"
 
     if [ -z "$ARCH" ]; then
         case "$(uname -m)" in
@@ -42,7 +65,7 @@ else
         esac
     fi
 
-    if [ "$ARCH" == "amd64" ] || [ "$ARCH" == "i386" ] ; then
+    if [ "$ARCH" == "amd64" ] || [ "$ARCH" == "i386" ]; then
         wget -c "$linkDl/${progName}_${version}_${ARCH}.rpm"
     else
         echo -e "\nError: ARCH $ARCH not configured\n"

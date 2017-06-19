@@ -5,7 +5,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="wps-office"
-    version="10.1.0.5672-1.a21"
+    version="10.1.0.5707-1.a21"
     tag="JB"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3-4 | cut -d '.' -f1-5)

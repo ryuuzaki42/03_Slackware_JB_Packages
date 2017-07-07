@@ -4,7 +4,7 @@
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="opera-stable" # last tested: "46.0.2597.32"
+    progName="opera-stable" # last tested: "46.0.2597.39"
     tag="JB"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"
@@ -72,9 +72,9 @@ else
         exit 1
     fi
 
-    rpm2txz "${progName}_${version}_${ARCH}.rpm"
+    mv "${progName}_${version}_${ARCH}.rpm" "${progName}_${version}_${ARCH}-${tag}.rpm"
 
-    rm "${progName}_${version}_${ARCH}.rpm"
+    rpm2txz "${progName}_${version}_${ARCH}-${tag}.rpm"
 
-    mv "${progName}_${version}_${ARCH}.txz" "${progName}_${version}_${ARCH}-${tag}.txz"
+    rm "${progName}_${version}_${ARCH}-${tag}.rpm"
 fi

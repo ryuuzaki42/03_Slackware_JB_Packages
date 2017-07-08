@@ -31,7 +31,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="smplayer" # last tested: "17.7.0"
-    tag="JB"
+    tag="2_JB"
 
     linkGetVersion="https://app.assembla.com/spaces/smplayer/subversion/source/HEAD/smplayer/trunk/OBS/Makefile?_format=raw"
     wget "$linkGetVersion" -O "${progName}-latest"
@@ -109,6 +109,27 @@ else
     cp -a ./*.txt Changelog "$progInstallFolder/usr/doc/${progName}-$version"
 
     rm "$progInstallFolder/usr/share/applications/smplayer_enqueue.desktop"
+
+    mkdir "$progInstallFolder/install"
+    echo "# HOW TO EDIT THIS FILE:
+# The \"handy ruler\" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+        |-----handy-ruler------------------------------------------------------|
+smplayer: smplayer (GUI front-end to mplayer)
+smplayer:
+smplayer: SMPlayer intends to be a complete front-end for MPlayer, from
+smplayer: basic features like playing videos, DVDs, and VCDs to more
+smplayer: advanced features like support for MPlayer filters and more.
+smplayer:
+smplayer: Homepage: http://smplayer.sourceforge.net
+smplayer:
+smplayer:
+smplayer:
+smplayer:" > "$progInstallFolder/install/slack-desc" 
 
     cd "$progInstallFolder" || exit
     /sbin/makepkg -l y -c n "$initialFolder/${progName}-${version}-${ARCH}-${tag}.txz"

@@ -25,7 +25,7 @@
 #
 # Last update: 08/07/2017
 #
-echo "\n# Script to build a Slackware package of smplayer (without skins and themes) #\n"
+echo -e "\n# Script to build a Slackware package of smplayer (without skins and themes) #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
@@ -129,7 +129,7 @@ smplayer: Homepage: http://smplayer.sourceforge.net
 smplayer:
 smplayer:
 smplayer:
-smplayer:" > "$progInstallFolder/install/slack-desc" 
+smplayer:" > "$progInstallFolder/install/slack-desc"
 
     cd "$progInstallFolder" || exit
     /sbin/makepkg -l y -c n "$initialFolder/${progName}-${version}-${ARCH}-${tag}.txz"

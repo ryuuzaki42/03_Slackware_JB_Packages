@@ -25,7 +25,7 @@
 #
 # Last update: 08/07/2017
 #
-echo "\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\n"
+echo -e "\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"

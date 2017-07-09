@@ -30,7 +30,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="messengerfordesktop" # last tested: "2.0.9" - beta
-    tag="JB"
+    tag="2_JB"
 
     linkGetVersion="https://github.com/Aluxian/Messenger-for-Desktop/releases/"
     wget "$linkGetVersion" -O "${progName}-latest"
@@ -75,7 +75,7 @@ else
 
     mv "${progName}-${version}-linux-${ARCH}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
 
-    rpm2txz "${progName}-${version}-${ARCH}-${tag}.rpm"
+    rpm2txz -d -c -s -r "${progName}-${version}-${ARCH}-${tag}.rpm"
 
     rm "${progName}-${version}-${ARCH}-${tag}.rpm"
 fi

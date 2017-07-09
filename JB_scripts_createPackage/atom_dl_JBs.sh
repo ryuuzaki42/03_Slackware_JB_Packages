@@ -30,7 +30,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="atom" # last tested: "1.18.0"
-    tag="JB"
+    tag="2_JB"
 
     linkGetVersion="https://github.com/atom/atom/releases/latest"
     wget "$linkGetVersion" -O "${progName}-latest"
@@ -76,7 +76,7 @@ else
 
     mv "${progName}.${ARCH}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
 
-    rpm2txz "${progName}-${version}-${ARCH}-${tag}.rpm"
+    rpm2txz -d -c -s -r "${progName}-${version}-${ARCH}-${tag}.rpm"
 
     rm "${progName}-${version}-${ARCH}-${tag}.rpm"
 fi

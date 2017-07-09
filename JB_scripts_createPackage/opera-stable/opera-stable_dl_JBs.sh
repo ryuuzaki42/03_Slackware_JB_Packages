@@ -24,13 +24,13 @@
 #
 # Last update: 08/07/2017
 #
-echo "\n# Create a txz from opera-stable-version.rpm #\n"
+echo -e "\n# Create a txz from opera-stable-version.rpm #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="opera-stable" # last tested: "46.0.2597.39"
-    tag="JB"
+    tag="2_JB"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"
 
@@ -97,9 +97,9 @@ else
         exit 1
     fi
 
-    mv "${progName}_${version}_${ARCH}.rpm" "${progName}_${version}_${ARCH}-${tag}.rpm"
+    mv "${progName}_${version}_${ARCH}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
 
-    rpm2txz "${progName}_${version}_${ARCH}-${tag}.rpm"
+    rpm2txz -d -c -s -r "${progName}-${version}-${ARCH}-${tag}.rpm"
 
-    rm "${progName}_${version}_${ARCH}-${tag}.rpm"
+    rm "${progName}-${version}-${ARCH}-${tag}.rpm"
 fi

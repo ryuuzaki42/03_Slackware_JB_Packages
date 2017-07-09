@@ -30,7 +30,7 @@ echo "\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-ve
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progBuild="$1"
+    progBuild=$1
     if [ "$progBuild" == '' ]; then
         echo -en "\nYou want build SmartGit or SmartSynchronize?\n1 to SmartGit or - 2 to SmartSynchronize: "
         read -r progBuild
@@ -78,7 +78,7 @@ else
 
     linkDl="http://www.syntevo.com/static/smart/download/$progName"
     folderDest=$(pwd)
-    tag="JB"
+    tag="2_JB"
 
     wget -c "$linkDl/$progName${partFile}-${version}.tar.gz"
 
@@ -121,6 +121,37 @@ StartupNotify=true
 Exec=\"/usr/share/$progName/bin/$progName.sh\" %u
 MimeType=x-scheme-handler/$progName
 Icon=$progName" > "usr/share/applications/${progName}.desktop"
+
+    mkdir install
+    echo "# HOW TO EDIT THIS FILE:
+# The \"handy ruler\" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+" > install/slack-desc
+
+if [ "$progName" == "smartgit" ]; then
+    echo "        |-----handy-ruler------------------------------------------------------|
+$progName: $progName (Desktop Git Client)
+$progName:
+$progName: SmartGit is a commercial desktop git client that provides
+$progName: a free non-commercial use license. " >> install/slack-desc
+else
+echo "                |-----handy-ruler------------------------------------------------------|
+$progName: $progName (file and directory compare tool)
+$progName:
+$progName: SmartSynchronize is a commercial desktop directory compare tool
+$progName: that provides a free non-commercial use license. " >> install/slack-desc
+fi
+
+echo "$progName:
+$progName: Homepage: http://www.syntevo.com/$progName/
+$progName:
+$progName:
+$progName:
+$progName:
+$progName:" >> install/slack-desc
 
     mkdir -p usr/bin
     cd usr/bin || exit

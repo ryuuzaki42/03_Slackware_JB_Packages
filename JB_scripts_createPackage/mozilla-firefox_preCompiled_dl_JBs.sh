@@ -25,7 +25,7 @@
 # Last update: 08/07/2017
 #
 echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
-# last tested: "54.0.1"
+progName="mozilla-firefox" # last tested: "54.0.1"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
@@ -87,7 +87,7 @@ else
     tar -xvf "$fileName"
     rm "$fileName"
 
-    fileNameFinal="mozilla-firefox-$version-$archFinal"
+    fileNameFinal="${progName}-$version-$archFinal"
     mv firefox "$fileNameFinal"
 
     cd "$fileNameFinal" || exit

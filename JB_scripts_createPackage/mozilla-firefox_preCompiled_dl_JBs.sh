@@ -25,8 +25,7 @@
 # Last update: 08/07/2017
 #
 echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
-
-progName="mozilla-firefox" # last tested: "54.0.1"
+# last tested: "54.0.1"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
@@ -41,7 +40,7 @@ else
         archDL="Linux in"
         archFinal="i586"
     fi
-    tag="1_JB"
+    tag="2_JB"
     folderDest=$(pwd)
 
     echo -en "\nWhich language you want? (e.g. en-US, en-GB, pt-BR) (hit enter to insert en-GB): "
@@ -88,7 +87,7 @@ else
     tar -xvf "$fileName"
     rm "$fileName"
 
-    fileNameFinal="$progName-$version-$archFinal"
+    fileNameFinal="mozilla-firefox-$version-$archFinal"
     mv firefox "$fileNameFinal"
 
     cd "$fileNameFinal" || exit
@@ -117,17 +116,17 @@ else
 # leave one space after the ':'.
 
                |-----handy-ruler------------------------------------------------------|
-$progName: $progName (Mozilla Firefox Web browser)
-$progName:
-$progName: This project is a redesign of the Mozilla browser component written
-$progName: using the XUL user interface language.  Firefox empowers you to
-$progName: browse faster, more safely and more efficiently than with any other
-$progName: browser.
-$progName:
-$progName: Visit the Mozilla Firefox project online:
-$progName:   http://www.mozilla.org/projects/firefox/
-$progName:
-$progName:" > install/slack-desc
+mozilla-firefox: mozilla-firefox (Mozilla Firefox Web browser)
+mozilla-firefox:
+mozilla-firefox: This project is a redesign of the Mozilla browser component written
+mozilla-firefox: using the XUL user interface language.  Firefox empowers you to
+mozilla-firefox: browse faster, more safely and more efficiently than with any other
+mozilla-firefox: browser.
+mozilla-firefox:
+mozilla-firefox: Visit the Mozilla Firefox project online:
+mozilla-firefox:   http://www.mozilla.org/projects/firefox/
+mozilla-firefox:
+mozilla-firefox:" > install/slack-desc
 
     mkdir -p usr/share/applications/
     echo "[Desktop Entry]

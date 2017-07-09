@@ -25,7 +25,7 @@
 #
 # Last update: 08/07/2017
 #
-echo "\n# Script to build a Slackware package of git-lfs #\n"
+echo -e "\n# Script to build a Slackware package of git-lfs #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"

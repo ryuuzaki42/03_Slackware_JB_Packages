@@ -24,7 +24,7 @@
 #
 # Last update: 08/07/2017
 #
-echo "\n# Create a txz from messengerfordesktop-version.rpm #\n"
+echo -e "\n# Create a txz from messengerfordesktop-version.rpm #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"

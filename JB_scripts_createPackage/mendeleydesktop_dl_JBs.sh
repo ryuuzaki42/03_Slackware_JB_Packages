@@ -25,7 +25,7 @@
 #
 # Last update: 08/07/2017
 #
-echo "\n# Script to build a Slackware package of mendeleydesktop #\n"
+echo -e "\n# Script to build a Slackware package of mendeleydesktop #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"

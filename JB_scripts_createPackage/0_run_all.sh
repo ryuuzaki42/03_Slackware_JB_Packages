@@ -24,7 +24,7 @@
 #
 # Last update: 08/07/2017
 #
-echo "\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\n"
+echo -e "\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"

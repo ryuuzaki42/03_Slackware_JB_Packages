@@ -31,7 +31,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="mendeleydesktop" # last tested: "1.17.10"
-    tag="JB"
+    tag="2_JB"
 
     linkGetVersion="https://www.mendeley.com/release-notes/"
     wget "$linkGetVersion" -O "${progName}-latest"
@@ -123,6 +123,27 @@ else
 
     find "$folderSourceCode" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+    mkdir "$folderSourceCode/install"
+    echo "# HOW TO EDIT THIS FILE:
+# The \"handy ruler\" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+               |-----handy-ruler------------------------------------------------------|
+mendeleydesktop: mendeleydesktop (managing and sharing research papers tool)
+mendeleydesktop:
+mendeleydesktop: Mendeley is a software to organize, share, and discover
+mendeleydesktop: research papers.  Before you download and use this software,
+mendeleydesktop: make sure you agree with the terms and conditions located at:
+mendeleydesktop: http://www.mendeley.com/terms/
+mendeleydesktop:
+mendeleydesktop: Homepage: https://www.mendeley.com/
+mendeleydesktop:
+mendeleydesktop:
+mendeleydesktop:" > "$folderSourceCode/install/slack-desc"
 
     cd "$folderSourceCode" || exit
     /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-${ARCH}-${tag}.txz"

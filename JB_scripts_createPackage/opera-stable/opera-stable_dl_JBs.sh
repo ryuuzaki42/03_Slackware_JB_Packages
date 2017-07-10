@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from opera-stable-version.rpm
 #
-# Last update: 08/07/2017
+# Last update: 10/07/2017
 #
 echo -e "\n# Create a txz from opera-stable-version.rpm #\n"
 
@@ -61,7 +61,7 @@ else
         ((tailNumber++))
     done
 
-    installedVersion=$(find /var/log/packages/$progName* | cut -d '_' -f2)
+    installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then

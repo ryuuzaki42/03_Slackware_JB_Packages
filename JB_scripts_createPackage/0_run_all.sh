@@ -43,7 +43,7 @@ else
 
     ./opera-stable/opera-stable_dl_JBs.sh n
 
-    ./mozilla-firefox_preCompiled_dl_JBs.sh n
+    ./mozilla-firefox_preCompiled_dl_JBs.sh n "en-GB" # Create a package with language en-GB
 
     #./wps/wps_office_dl_JBs.sh n
 

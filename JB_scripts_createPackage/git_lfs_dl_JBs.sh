@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of git-lfs
 # Based in: https://slackbuilds.org/repository/14.2/development/git-lfs/
 #
-# Last update: 08/07/2017
+# Last update: 12/07/2017
 #
 echo -e "\n# Script to build a Slackware package of git-lfs #\n"
 

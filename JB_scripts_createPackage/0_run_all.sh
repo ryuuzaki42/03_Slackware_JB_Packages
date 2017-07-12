@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 08/07/2017
+# Last update: 12/07/2017
 #
 echo -e "\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\n"
 

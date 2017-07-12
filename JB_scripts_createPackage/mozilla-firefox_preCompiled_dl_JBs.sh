@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 08/07/2017
+# Last update: 12/07/2017
 #
 echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
 progName="mozilla-firefox" # last tested: "54.0.1"
@@ -30,21 +30,24 @@ progName="mozilla-firefox" # last tested: "54.0.1"
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    echo -en "\nWhich arch you want? (32 or 64 bits) (hit enter to 64 bits): "
-    read -r archDL
+    languageDl=$2
 
-    if [ "$archDL" == '' ] || [ "$archDL" == '64' ]; then
-        archDL="Linux 64-bit in"
-        archFinal="x86_64"
-    else
-        archDL="Linux in"
-        archFinal="i586"
-    fi
+    case "$(uname -m)" in
+        "i?86") archDL="Linux 64-bit in"
+            archFinal="x86_64"
+            ;;
+        "x86_64") archDL="Linux in"
+            archFinal="i586"
+            ;;
+    esac
+
     tag="2_JB"
     folderDest=$(pwd)
 
-    echo -en "\nWhich language you want? (e.g. en-US, en-GB, pt-BR) (hit enter to insert en-GB): "
-    read -r languageDl
+    if [ "$languageDl" == '' ]; then
+        echo -en "Which language you want? (e.g. en-US, en-GB, pt-BR) (hit enter to insert en-GB): "
+        read -r languageDl
+    fi
 
     if [ "$languageDl" == '' ]; then
         languageDl="en-GB"
@@ -72,7 +75,11 @@ else
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
             echo -n "Want continue? (y)es - (n)o (hit enter to no): "
-            read -r continue
+
+            continue=$1
+            if [ "$continue" == '' ]; then
+                read -r continue
+            fi
 
             if [ "$continue" != 'y' ]; then
                 echo -e "\nJust exiting\n"

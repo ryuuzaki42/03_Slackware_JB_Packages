@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from wps-office-version.rpm
 #
-# Last update: 08/07/2017
+# Last update: 12/07/2017
 #
 echo -e "\n# Create a txz from wps-office-version.rpm #\n"
 
@@ -37,11 +37,11 @@ else
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
-            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
-            echo -n "Want continue? (y)es - (n)o (hit enter to no): "
+            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"            
 
             continue=$1
             if [ "$continue" == '' ]; then
+                echo -n "Want continue? (y)es - (n)o (hit enter to no): "
                 read -r continue
             fi
 

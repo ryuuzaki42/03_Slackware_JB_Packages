@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 08/07/2017
+# Last update: 12/07/2017
 #
 echo -e "\n# Script to build a Slackware package of smplayer (without skins and themes) #\n"
 
@@ -44,10 +44,10 @@ else
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
-            echo -n "Want continue? (y)es - (n)o (hit enter to no): "
 
             continue=$1
             if [ "$continue" == '' ]; then
+                echo -n "Want continue? (y)es - (n)o (hit enter to no): "
                 read -r continue
             fi
 

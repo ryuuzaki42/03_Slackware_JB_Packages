@@ -44,10 +44,10 @@ else
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
-            echo -n "Want continue? (y)es - (n)o (hit enter to no): "
 
             continue=$1
             if [ "$continue" == '' ]; then
+                echo -n "Want continue? (y)es - (n)o (hit enter to no): "
                 read -r continue
             fi
 

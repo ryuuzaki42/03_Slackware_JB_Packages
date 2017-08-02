@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 12/07/2017
+# Last update: 02/08/2017
 #
 echo -e "\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\n"
 
@@ -37,7 +37,7 @@ else
     fi
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit" # last tested: "17_0_4"
+        progName="smartgit" # last tested: "17_0_5"
         progNameTmp="SmartGit"
         partFile="-linux"
     elif [ "$progBuild" == '2' ]; then
@@ -138,7 +138,7 @@ $progName:
 $progName: SmartGit is a commercial desktop git client that provides
 $progName: a free non-commercial use license. " >> install/slack-desc
 else
-echo "                |-----handy-ruler------------------------------------------------------|
+    echo "                |-----handy-ruler------------------------------------------------------|
 $progName: $progName (file and directory compare tool)
 $progName:
 $progName: SmartSynchronize is a commercial desktop directory compare tool

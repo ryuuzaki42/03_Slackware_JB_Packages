@@ -22,10 +22,10 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 12/07/2017
+# Last update: 10/08/2017
 #
 echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
-progName="mozilla-firefox" # last tested: "54.0.1"
+progName="mozilla-firefox" # last tested: "55.0"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
@@ -33,15 +33,15 @@ else
     languageDl=$2
 
     case "$(uname -m)" in
-        "i?86") archDL="Linux 64-bit in"
+        "x86_64" ) archDL="Linux 64-bit in"
             archFinal="x86_64"
             ;;
-        "x86_64") archDL="Linux in"
+        "i?86" ) archDL="Linux in"
             archFinal="i586"
             ;;
     esac
 
-    tag="2_JB"
+    tag="1_JB"
     folderDest=$(pwd)
 
     if [ "$languageDl" == '' ]; then

@@ -22,14 +22,14 @@
 #
 # Script: Create a txz from atom-version.rpm
 #
-# Last update: 10/08/2017
+# Last update: 16/08/2017
 #
 echo -e "\n# Create a txz from atom-version.rpm #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="atom" # last tested: "1.19.0"
+    progName="atom" # last tested: "1.19.1"
     tag="1_JB"
 
     linkGetVersion="https://github.com/atom/atom/releases/latest"

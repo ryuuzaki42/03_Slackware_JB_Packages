@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 16/08/2017
+# Last update: 12/10/2017
 #
 echo -e "\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\n"
 
@@ -37,7 +37,7 @@ else
     fi
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit" # last tested: "17_0_5"
+        progName="smartgit" # last tested: "17_1_0"
         progNameTmp="SmartGit"
         partFile="-linux"
     elif [ "$progBuild" == '2' ]; then
@@ -55,6 +55,11 @@ else
     version=$(cat ${progName}-latest | grep "Download $progNameTmp" | cut -d '<' -f3 | sed 's/[^0-9,.]*//g')
     version=${version//./_}
     rm "${progName}-latest"
+
+    countUnderscore=$(grep -o "_" <<< "$version" | wc -l)
+    if [ "$countUnderscore" -lt '2' ]; then # IF the version has only one "_" will added "_0" to the end
+        version="${version}_0"
+    fi
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"

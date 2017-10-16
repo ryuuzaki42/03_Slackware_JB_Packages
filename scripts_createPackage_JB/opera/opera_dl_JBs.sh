@@ -20,16 +20,16 @@
 #
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-# Script: Create a txz from opera-stable-version.rpm
+# Script: Create a txz from opera-version.rpm
 #
-# Last update: 10/10/2017
+# Last update: 16/10/2017
 #
-echo -e "\n# Create a txz from opera-stable-version.rpm #\n"
+echo -e "\n# Create a txz from opera-version.rpm #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="opera-stable" # last tested: "48.0.2685.39"
+    progName="opera" # last tested: "48.0.2685.39"
     tag="1_JB"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"
@@ -61,7 +61,7 @@ else
         ((tailNumber++))
     done
 
-    installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3)
+    installedVersion=$(find /var/log/packages/$progName* | grep -v "opera-ffmpeg" | cut -d '-' -f2)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
@@ -91,13 +91,13 @@ else
     fi
 
     if [ "$ARCH" == "amd64" ] || [ "$ARCH" == "i386" ]; then
-        wget -c "$linkDl/${progName}_${version}_${ARCH}.rpm"
+        wget -c "$linkDl/${progName}-stable_${version}_${ARCH}.rpm"
     else
         echo -e "\nError: ARCH $ARCH not configured\n"
         exit 1
     fi
 
-    mv "${progName}_${version}_${ARCH}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
+    mv "${progName}-stable_${version}_${ARCH}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
 
     rpm2txz -d -c -s -r "${progName}-${version}-${ARCH}-${tag}.rpm"
 

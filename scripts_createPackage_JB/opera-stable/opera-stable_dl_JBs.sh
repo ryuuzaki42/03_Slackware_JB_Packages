@@ -20,16 +20,16 @@
 #
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-# Script: Create a txz from opera-version.rpm
+# Script: Create a txz from opera-stable-version.rpm
 #
-# Last update: 16/10/2017
+# Last update: 21/10/2017
 #
-echo -e "\n# Create a txz from opera-version.rpm #\n"
+echo -e "\n# Create a txz from opera-stable-version.rpm #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="opera" # last tested: "48.0.2685.39"
+    progName="opera-stable" # last tested: "48.0.2685.50"
     tag="1_JB"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"
@@ -91,13 +91,13 @@ else
     fi
 
     if [ "$ARCH" == "amd64" ] || [ "$ARCH" == "i386" ]; then
-        wget -c "$linkDl/${progName}-stable_${version}_${ARCH}.rpm"
+        wget -c "$linkDl/${progName}_${version}_${ARCH}.rpm"
     else
         echo -e "\nError: ARCH $ARCH not configured\n"
         exit 1
     fi
 
-    mv "${progName}-stable_${version}_${ARCH}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
+    mv "${progName}_${version}_${ARCH}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
 
     rpm2txz -d -c -s -r "${progName}-${version}-${ARCH}-${tag}.rpm"
 

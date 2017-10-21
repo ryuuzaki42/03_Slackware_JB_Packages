@@ -1,10 +1,10 @@
 ## Opera to Slackwre ##
 
 ## Run the script
-./opera_dl_JBs.sh
+./opera-stable_dl_JBs.sh
 
 ## Install
-installpkg opera*.txz
+installpkg opera-stable*.txz
 
 ## Add the MSE & H.264 plugins
 Compile the "opera-ffmpeg-codecs" form Slackbuilds

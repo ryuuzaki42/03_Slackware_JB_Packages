@@ -41,7 +41,7 @@ else
 
     ./smplayer_dl_JBs.sh n
 
-    ./opera/opera_dl_JBs.sh n
+    ./opera-stable/opera-stable_dl_JBs.sh n
 
     ./mozilla-firefox_preCompiled_dl_JBs.sh n "en-GB" # Create a package with language en-GB
 

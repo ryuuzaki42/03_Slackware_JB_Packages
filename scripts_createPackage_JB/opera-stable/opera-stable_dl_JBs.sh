@@ -61,7 +61,7 @@ else
         ((tailNumber++))
     done
 
-    installedVersion=$(find /var/log/packages/$progName* | grep -v "opera-ffmpeg" | cut -d '-' -f2)
+    installedVersion=$(find /var/log/packages/$progName* | grep -v "opera-ffmpeg" | cut -d '-' -f3)
     echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then

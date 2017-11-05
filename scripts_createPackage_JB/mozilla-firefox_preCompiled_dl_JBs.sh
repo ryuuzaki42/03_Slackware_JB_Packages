@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 26/10/2017
+# Last update: 05/11/2017
 #
 echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
 progName="mozilla-firefox" # last tested: "56.0.2"
@@ -57,6 +57,8 @@ else
     echo
     wget "https://www.mozilla.org/firefox/all/" -O "${progName}_latest"
     linkDl=$(grep "$archDL" < "${progName}_latest" | grep "$languageDl" | cut -d '"' -f2)
+
+    version=$(grep "latest-firefox" < "${progName}_latest" | cut -d '"' -f8- | cut -d '"' -f1)
     rm "${progName}_latest"
     echo -e "Link to download: $linkDl"
 
@@ -65,7 +67,6 @@ else
         exit
     fi
 
-    version=$(echo "$linkDl" | cut -d '=' -f2 | cut -d '-' -f2)
     fileName="firefox-$version.tar.bz2"
     echo -e "\nLatest Firefox stable version: $fileName"
 

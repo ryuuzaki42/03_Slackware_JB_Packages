@@ -33,7 +33,7 @@ else
         "x86_64" ) archDL="x86_64" ;;
     esac
 
-    if [ "$ARCH" != "x86_64" ]; then
+    if [ "$archDL" != "x86_64" ]; then
         echo "# Only 64 bits, without 32 bits precompiled  package in the $progName repository/release"
         exit 1
     fi

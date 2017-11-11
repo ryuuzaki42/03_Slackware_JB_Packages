@@ -22,20 +22,33 @@
 #
 # Script: Create a txz from atom-version.rpm
 #
-# Last update: 08/11/2017
+# Last update: 11/11/2017
 #
 echo -e "\n# Create a txz from atom-version.rpm #\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
+    if [ -z "$ARCH" ]; then
+        case "$(uname -m)" in
+            i?86) ARCH="i386" ;;
+            arm*) ARCH="arm" ;;
+            *) ARCH=$(uname -m) ;;
+        esac
+    fi
+
+    if [ "$ARCH" != "x86_64" ]; then
+        echo "# Only 64 bits, without 32 bits precompiled  package in the $progName repository/release"
+        exit 1
+    fi
+
     progName="atom" # last tested: "1.22.0"
     tag="1_JB"
 
     linkGetVersion="https://github.com/atom/atom/releases/latest"
     wget "$linkGetVersion" -O "${progName}-latest"
 
-    version=$(cat $progName-latest | grep "Release.*[[:digit:]].*" | sed 's/[^0-9,.]*//g')
+    version=$(grep "Release.*[[:digit:]].*" < "${progName}-latest" | sed 's/[^0-9,.]*//g')
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
@@ -58,21 +71,7 @@ else
     fi
 
     linkDl="https://github.com/atom/atom/releases/download"
-
-    if [ -z "$ARCH" ]; then
-        case "$(uname -m)" in
-            i?86) ARCH="i386" ;;
-            arm*) ARCH="arm" ;;
-            *) ARCH=$(uname -m) ;;
-        esac
-    fi
-
-    if [ "$ARCH" == "x86_64" ]; then # Only 64 bits, without 32 bits precompiled rpm package in the atom repository/release
-        wget -c "$linkDl/v$version/${progName}.${ARCH}.rpm"
-    else
-        echo -e "\nError: ARCH $ARCH not configured\n"
-        exit 1
-    fi
+    wget -c "$linkDl/v$version/${progName}.${ARCH}.rpm"
 
     mv "${progName}.${ARCH}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
 

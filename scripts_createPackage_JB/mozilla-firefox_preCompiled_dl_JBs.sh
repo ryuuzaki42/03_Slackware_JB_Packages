@@ -22,13 +22,13 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 05/11/2017
+# Last update: 14/11/2017
 #
-echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
-progName="mozilla-firefox" # last tested: "56.0.2"
+echo -e "\\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\\n"
+progName="mozilla-firefox" # last tested: "57.0.0"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\nNeed to be superuser (root)\nExiting\n"
+    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     languageDl=$2
 
@@ -59,6 +59,12 @@ else
     linkDl=$(grep "$archDL" < "${progName}_latest" | grep "$languageDl" | cut -d '"' -f2)
 
     version=$(grep "latest-firefox" < "${progName}_latest" | cut -d '"' -f8- | cut -d '"' -f1)
+
+    countChar=${#version}
+    if [ "$countChar" == '4' ]; then
+        version="${version}.0"
+    fi
+
     rm "${progName}_latest"
     echo -e "Link to download: $linkDl"
 
@@ -68,10 +74,10 @@ else
     fi
 
     fileName="firefox-$version.tar.bz2"
-    echo -e "\nLatest Firefox stable version: $fileName"
+    echo -e "\\nLatest Firefox stable version: $fileName"
 
     installedVersion=$(find /var/log/packages/ | grep "firefox" | cut -d '-' -f3)
-    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -83,7 +89,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\nJust exiting\n"
+                echo -e "\\nJust exiting\\n"
                 exit 0
             fi
         fi

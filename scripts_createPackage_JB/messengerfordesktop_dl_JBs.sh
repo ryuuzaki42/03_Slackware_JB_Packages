@@ -22,12 +22,12 @@
 #
 # Script: Create a txz from messengerfordesktop-version.rpm
 #
-# Last update: 12/07/2017
+# Last update: 14/11/2017
 #
-echo -e "\n# Create a txz from messengerfordesktop-version.rpm #\n"
+echo -e "\\n# Create a txz from messengerfordesktop-version.rpm #\\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\nNeed to be superuser (root)\nExiting\n"
+    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="messengerfordesktop" # last tested: "2.0.9" - beta
     tag="2_JB"
@@ -39,7 +39,7 @@ else
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
-    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -51,7 +51,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\nJust exiting\n"
+                echo -e "\\nJust exiting\\n"
                 exit 0
             fi
         fi
@@ -69,7 +69,7 @@ else
     if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i386" ]; then
         wget -c "$linkDl/v$version/${progName}-${version}-linux-${ARCH}.rpm"
     else
-        echo -e "\nError: ARCH $ARCH not configured\n"
+        echo -e "\\nError: ARCH $ARCH not configured\\n"
         exit 1
     fi
 

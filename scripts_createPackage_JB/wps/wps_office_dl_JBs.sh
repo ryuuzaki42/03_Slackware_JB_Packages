@@ -22,22 +22,22 @@
 #
 # Script: Create a txz from wps-office-version.rpm
 #
-# Last update: 12/07/2017
+# Last update: 14/11/2017
 #
-echo -e "\n# Create a txz from wps-office-version.rpm #\n"
+echo -e "\\n# Create a txz from wps-office-version.rpm #\\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\nNeed to be superuser (root)\nExiting\n"
+    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="wps-office"
     version="10.1.0.5707-1.a21"
     tag="2_JB"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3-4 | cut -d '.' -f1-5)
-    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
-            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"            
+            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
 
             continue=$1
             if [ "$continue" == '' ]; then
@@ -46,7 +46,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\nJust exiting\n"
+                echo -e "\\nJust exiting\\n"
                 exit 0
             fi
         fi
@@ -65,7 +65,7 @@ else
     if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i686" ] ; then
         wget -c "$linkDl/${progName}-${version}.${ARCH}.rpm"
     else
-        echo -e "\nError: ARCH $ARCH not configured\n"
+        echo -e "\\nError: ARCH $ARCH not configured\\n"
         exit 1
     fi
 

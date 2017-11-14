@@ -22,12 +22,12 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 11/11/2017
+# Last update: 14/11/2017
 #
-echo -e "\n# Script to create a Slackware package from the shellcheck pre-compiled #\n"
+echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\nNeed to be superuser (root)\nExiting\n"
+    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     case "$(uname -m)" in
         "x86_64" ) archDL="x86_64" ;;
@@ -51,12 +51,12 @@ else
     linkDl="https://shellcheck.storage.googleapis.com"
     wget "$linkDl/README.txt" -O "${progName}_latest"
 
-    versionCommit=$(grep "commit " < "${progName}_latest" | head -n 1 | cut -d ' ' -f2 | tr -d "\r" | cut -c1-7)
+    versionCommit=$(grep "commit " < "${progName}_latest" | head -n 1 | cut -d ' ' -f2 | tr -d "\\r" | cut -c1-7)
     version="${versionNumber}_git${versionCommit}"
     rm "${progName}_latest"
 
     installedVersion=$(find /var/log/packages/ | grep "$progName" | cut -d '-' -f2)
-    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -68,7 +68,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\nJust exiting\n"
+                echo -e "\\nJust exiting\\n"
                 exit 0
             fi
         fi
@@ -80,7 +80,7 @@ else
     tar -xvf "$fileName"
     rm "$fileName"
 
-    cd "${progName}-latest"
+    cd "${progName}-latest" || exit
 
     mkdir -p usr/bin/
     mv "$progName" usr/bin/

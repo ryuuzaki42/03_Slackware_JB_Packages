@@ -22,12 +22,12 @@
 #
 # Script: Create a txz from atom-version.rpm
 #
-# Last update: 11/11/2017
+# Last update: 14/11/2017
 #
-echo -e "\n# Create a txz from atom-version.rpm #\n"
+echo -e "\\n# Create a txz from atom-version.rpm #\\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\nNeed to be superuser (root)\nExiting\n"
+    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     if [ -z "$ARCH" ]; then
         case "$(uname -m)" in
@@ -52,7 +52,7 @@ else
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
-    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -64,7 +64,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\nJust exiting\n"
+                echo -e "\\nJust exiting\\n"
                 exit 0
             fi
         fi

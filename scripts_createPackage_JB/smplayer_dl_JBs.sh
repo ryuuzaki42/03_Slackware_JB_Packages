@@ -23,12 +23,12 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 05/11/2017
+# Last update: 14/11/2017
 #
-echo -e "\n# Script to build a Slackware package of smplayer (without skins and themes) #\n"
+echo -e "\\n# Script to build a Slackware package of smplayer (without skins and themes) #\\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\nNeed to be superuser (root)\nExiting\n"
+    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="smplayer" # last tested: "17.11.0"
     tag="1_JB"
@@ -40,7 +40,7 @@ else
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
-    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -52,7 +52,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\nJust exiting\n"
+                echo -e "\\nJust exiting\\n"
                 exit 0
             fi
         fi
@@ -93,9 +93,9 @@ else
 
     chown -R root:root .
 
-    sed -i "/^PREFIX/s/=.*$/=\/usr/;
-            /^DOC_PATH/s/\/.*$/\/doc\/${progName}-$version/;
-            s/share\/man/man/g;
+    sed -i "/^PREFIX/s/=.*$/=\\/usr/;
+            /^DOC_PATH/s/\\/.*$/\\/doc\\/${progName}-$version/;
+            s/share\\/man/man/g;
             s/^QMAKE_OPTS=/QMAKE_OPTS+=/" Makefile
 
     QMAKE_OPTS="QMAKE_CXXFLAGS=\"$SLKCFLAGS\"" \

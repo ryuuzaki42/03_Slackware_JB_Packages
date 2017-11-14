@@ -35,6 +35,12 @@ else
 
     ./mendeleydesktop_dl_JBs.sh n
 
+    #./messengerfordesktop_dl_JBs.sh n
+
+    ./mozilla-firefox_preCompiled_dl_JBs.sh n "en-GB" # Create a package with language en-GB
+
+    ./opera-stable/opera-stable_dl_JBs.sh n
+
     ./shellcheck_x86_64_preCompiled_dl_JBs.sh n
 
     ./smartgit_and_smartsynchronize_dl_JBs.sh 1 n
@@ -43,11 +49,5 @@ else
 
     ./smplayer_dl_JBs.sh n
 
-    ./opera-stable/opera-stable_dl_JBs.sh n
-
-    ./mozilla-firefox_preCompiled_dl_JBs.sh n "en-GB" # Create a package with language en-GB
-
     #./wps/wps_office_dl_JBs.sh n
-
-    #./messengerfordesktop_dl_JBs.sh n
 fi

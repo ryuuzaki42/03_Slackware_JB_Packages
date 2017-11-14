@@ -22,12 +22,12 @@
 #
 # Script: Create a txz from opera-stable-version.rpm
 #
-# Last update: 08/11/2017
+# Last update: 14/11/2017
 #
-echo -e "\n# Create a txz from opera-stable-version.rpm #\n"
+echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\nNeed to be superuser (root)\nExiting\n"
+    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="opera-stable" # last tested: "49.0.2725.34"
     tag="1_JB"
@@ -43,11 +43,11 @@ else
         rm "${progName}-latest"
 
         if [ "$version" == '' ]; then
-            echo -e "Not found any more version\nJust exiting"
+            echo -e "\\nNot found any more version\\nJust exiting"
             exit 0
         fi
 
-        echo -e "\n Version test: $version\n"
+        echo -e "\\n Version test: $version\\n"
         linkGetVersionLinux="http://ftp.opera.com/ftp/pub/opera/desktop/$version/"
         wget "$linkGetVersionLinux" -O "${progName}-downloads"
 
@@ -62,7 +62,7 @@ else
     done
 
     installedVersion=$(find /var/log/packages/$progName* | grep -v "opera-ffmpeg" | cut -d '-' -f3)
-    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -74,7 +74,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\nJust exiting\n"
+                echo -e "\\nJust exiting\\n"
                 exit 0
             fi
         fi
@@ -93,7 +93,7 @@ else
     if [ "$ARCH" == "amd64" ] || [ "$ARCH" == "i386" ]; then
         wget -c "$linkDl/${progName}_${version}_${ARCH}.rpm"
     else
-        echo -e "\nError: ARCH $ARCH not configured\n"
+        echo -e "\\nError: ARCH $ARCH not configured\\n"
         exit 1
     fi
 

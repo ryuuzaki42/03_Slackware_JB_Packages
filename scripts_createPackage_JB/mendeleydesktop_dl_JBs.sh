@@ -23,12 +23,12 @@
 # Script: Script to build a Slackware package of mendeleydesktop
 # Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/
 #
-# Last update: 12/09/2017
+# Last update: 14/11/2017
 #
-echo -e "\n# Script to build a Slackware package of mendeleydesktop #\n"
+echo -e "\\n# Script to build a Slackware package of mendeleydesktop #\\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\nNeed to be superuser (root)\nExiting\n"
+    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="mendeleydesktop" # last tested: "1.17.11"
     tag="1_JB"
@@ -40,7 +40,7 @@ else
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
-    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -52,7 +52,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\nJust exiting\n"
+                echo -e "\\nJust exiting\\n"
                 exit 0
             fi
         fi
@@ -83,7 +83,7 @@ else
     if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i486" ]; then
         wget -c "$linkDl/${progName}-${version}-linux-${ARCH}.tar.bz2"
     else
-        echo -e "\nError: ARCH $ARCH not configured\n"
+        echo -e "\\nError: ARCH $ARCH not configured\\n"
         exit 1
     fi
 

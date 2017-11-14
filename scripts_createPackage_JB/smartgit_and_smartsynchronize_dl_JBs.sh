@@ -23,21 +23,21 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 26/10/2017
+# Last update: 14/11/2017
 #
-echo -e "\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\n"
+echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\nNeed to be superuser (root)\nExiting\n"
+    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progBuild=$1
     if [ "$progBuild" == '' ]; then
-        echo -en "\nYou want build SmartGit or SmartSynchronize?\n1 to SmartGit or - 2 to SmartSynchronize: "
+        echo -en "\\nYou want build SmartGit or SmartSynchronize?\\n1 to SmartGit or - 2 to SmartSynchronize: "
         read -r progBuild
     fi
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit" # last tested: "17_1_1"
+        progName="smartgit" # last tested: "17_1_2"
         progNameTmp="SmartGit"
         partFile="-linux"
     elif [ "$progBuild" == '2' ]; then
@@ -45,7 +45,7 @@ else
         progNameTmp="SmartSynchronize"
         partFile="-generic"
     else
-        echo -e "\nError: The chosen program ($progBuild) is unknown\n"
+        echo -e "\\nError: The chosen program ($progBuild) is unknown\\n"
         exit 1
     fi
 
@@ -62,7 +62,7 @@ else
     fi
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
-    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
+    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -74,12 +74,12 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\nJust exiting\n"
+                echo -e "\\nJust exiting\\n"
                 exit 0
             fi
         fi
     fi
-    echo -e "\n\nWill build $progName, please wait\n\n"
+    echo -e "\\n\\nWill build $progName, please wait\\n\\n"
 
     linkDl="http://www.syntevo.com/static/smart/download/$progName"
     folderDest=$(pwd)

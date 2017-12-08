@@ -22,10 +22,10 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 30/11/2017
+# Last update: 08/12/2017
 #
 echo -e "\\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\\n"
-progName="mozilla-firefox" # last tested: "57.0.1"
+progName="mozilla-firefox" # last tested: "57.0.2"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"

@@ -52,7 +52,7 @@ else
     wget "$linkDl/README.txt" -O "${progName}_latest"
 
     checkStableVersion=$(head -n 25 "${progName}_latest" | sed -n '/^Date/,/^commit/p')
-    if echo $checkStableVersion | grep -q "Stable version"; then
+    if echo "$checkStableVersion" | grep -q "Stable version"; then
         version=$versionNumber
 
         fileName="shellcheck-v${versionNumber}.linux.x86_64.tar.xz"

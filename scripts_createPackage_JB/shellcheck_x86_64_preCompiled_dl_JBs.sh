@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 08/12/2017
+# Last update: 10/12/2017
 #
 echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
@@ -38,7 +38,7 @@ else
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.4.6_gite801da0"
+    progName="shellcheck" # last tested: "0.4.7"
     tag="1_JB"
     folderDest=$(pwd)
 
@@ -51,8 +51,19 @@ else
     linkDl="https://shellcheck.storage.googleapis.com"
     wget "$linkDl/README.txt" -O "${progName}_latest"
 
-    versionCommit=$(grep "commit " < "${progName}_latest" | head -n 1 | cut -d ' ' -f2 | tr -d "\\r" | cut -c1-7)
-    version="${versionNumber}_git${versionCommit}"
+    checkStableVersion=$(head -n 25 "${progName}_latest" | sed -n '/^Date/,/^commit/p')
+    if echo $checkStableVersion | grep -q "Stable version"; then
+        version=$versionNumber
+
+        fileName="shellcheck-v${versionNumber}.linux.x86_64.tar.xz"
+        folderName="${progName}-v$versionNumber"
+    else
+        versionCommit=$(grep "commit " < "${progName}_latest" | head -n 1 | cut -d ' ' -f2 | tr -d "\\r" | cut -c1-7)
+        version="${versionNumber}_git${versionCommit}"
+
+        fileName="shellcheck-latest.linux.x86_64.tar.xz"
+        folderName="${progName}-latest"
+    fi
     rm "${progName}_latest"
 
     installedVersion=$(find /var/log/packages/ | grep "$progName" | cut -d '-' -f2)
@@ -74,13 +85,12 @@ else
         fi
     fi
 
-    fileName="shellcheck-latest.linux.x86_64.tar.xz"
     wget -c "$linkDl/$fileName" -O "$fileName"
 
     tar -xvf "$fileName"
     rm "$fileName"
 
-    cd "${progName}-latest" || exit
+    cd "$folderName" || exit
 
     mkdir -p usr/bin/
     mv "$progName" usr/bin/
@@ -113,5 +123,5 @@ shellcheck:" > install/slack-desc
     /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-${archDL}-${tag}.txz"
 
     cd .. || exit
-    rm -r "${progName}-latest"
+    rm -r "$folderName"
 fi

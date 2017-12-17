@@ -51,7 +51,10 @@ else
 
     ./smplayer_dl_JBs.sh n
 
-    ./teamviewer/teamviewer_dl_JBs.sh n
+    cd teamviewer/ || exit
+    ./teamviewer_dl_JBs.sh n
+    mv teamviewer*txz ../
+    cd ../ || exit
 
     #./wps/wps_office_dl_JBs.sh n
 fi

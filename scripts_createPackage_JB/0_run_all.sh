@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 16/12/2017
+# Last update: 17/12/2017
 #
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
@@ -50,6 +50,8 @@ else
     ./smartgit_and_smartsynchronize_dl_JBs.sh 2 n
 
     ./smplayer_dl_JBs.sh n
+
+    ./teamviewer/teamviewer_dl_JBs.sh n
 
     #./wps/wps_office_dl_JBs.sh n
 fi

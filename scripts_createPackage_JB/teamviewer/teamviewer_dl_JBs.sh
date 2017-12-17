@@ -1,71 +1,58 @@
 #!/bin/bash
 #
-# Slackware build script for teamviewer
-# Copyright 2010-2012  Binh Nguyen <binhvng@gmail.com>
-# Copyright 2013-2016 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
-# Copyright 2017-2017 João Batista Ribeiro <joao42lbatista@gmail.com>
-# All rights reserved.
+# Autor= João Batista Ribeiro
+# Bugs, Agradecimentos, Críticas "construtivas"
+# Mande me um e-mail. Ficarei Grato!
+# e-mail: joao42lbatista@gmail.com
 #
-# Redistribution and use of this script, with or without modification, is
-# permitted provided that the following conditions are met:
+# Este programa é um software livre; você pode redistribui-lo e/ou
+# modifica-lo dentro dos termos da Licença Pública Geral GNU como
+# publicada pela Fundação do Software Livre (FSF); na versão 2 da
+# Licença, ou (na sua opinião) qualquer versão.
 #
-# 1. Redistributions of this script must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
+# Este programa é distribuído na esperança que possa ser útil,
+# mas SEM NENHUMA GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a
+# qualquer MERCADO ou APLICAÇÃO EM PARTICULAR.
 #
-#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
-#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
-#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# Veja a Licença Pública Geral GNU para mais detalhes.
+# Você deve ter recebido uma cópia da Licença Pública Geral GNU
+# junto com este programa, se não, escreva para a Fundação do Software
+#
+# Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+#
+# Script: Script to build a Slackware package of teamviewer
+# Based in: http://slackbuilds.org/repository/14.2/network/teamviewer/
 #
 # Last update: 17/12/2017
 #
 echo "This script create a txz version from teamviewer_arch.deb"
+
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="teamviewer" # Last version tested: "13.0.5693"
     tag="1_JB"
 
-    if [ -z "$ARCH" ]; then
-        case "$(uname -m)" in
-            i?86) ARCH=i586 ;;
-            arm*) ARCH=arm ;;
-            *) ARCH=$(uname -m) ;;
-        esac
-    fi
+    folderDest=$(pwd)
+    folderTmp="$folderDest/${progName}_tmp"
 
-    CWD=$(pwd)
-    TMP="/tmp/SBo"
-    PKG="$TMP/package-$progName"
-    OUTPUT="/tmp"
-
-    # Sanity check, we make sure resulting package will work on users system.
-    case "$ARCH" in
-        i?86)
-            DEBARCHTmp="i386" ;;
-        x86_64)
-            ARCH="x86_64"
-            DEBARCHTmp="amd64" ;;
-        *)
-            echo "$ARCH is not supported."
+    arch=$(uname -m)
+    case "$arch" in
+        i?86 )
+            archDl="i386" ;;
+        x86_64 )
+            arch="x86_64"
+            archDl="amd64" ;;
+        * )
+            echo "$arch is not supported."
             exit 1 ;;
     esac
-
-    set -e
 
     linkVersion="https://www.teamviewer.com/pt/download/linux/"
     wget "$linkVersion" -O "${progName}-latest"
 
     version=$(grep "deb package" "${progName}-latest" | head -n 1 | cut -d 'v' -f2 | cut -d '<' -f1)
     rm "${progName}-latest"
-
-    DEBARCH="${version}_$DEBARCHTmp"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
     echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
@@ -87,25 +74,18 @@ else
     fi
 
     linkDl="https://download.teamviewer.com/download/linux"
-    fileDl="teamviewer_${DEBARCHTmp}.deb"
+    fileDl="teamviewer_${archDl}.deb"
 
     wget -c "$linkDl/$fileDl"
 
-    rm -rf "$PKG"
-    mkdir -p "$TMP" "$PKG" "$OUTPUT"
-    cd "$PKG"
+    rm -r "$folderTmp" 2> /dev/null
+    mkdir -p "$folderTmp"
+    cd "$folderTmp" || exit
 
-    if [ -f "$CWD/teamviewer_${DEBARCH}.deb" ]; then
-        # Get the real version
-        REAL_VER=$(ar p "$CWD/teamviewer_${DEBARCH}.deb" control.tar.gz | tar xzO ./control | grep Version | cut -d\  -f2 | cut -d- -f1)
-        if [ "$version" != "$REAL_VER" ]; then
-            echo "Version of downloaded source [$REAL_VER] does not match version of SlackBuild [$version]"
-            exit 1
-        fi
-
-        ar p "$CWD/teamviewer_${DEBARCH}.deb" data.tar.xz | tar -xvJ
+    if [ -f "$folderDest/teamviewer_${archDl}.deb" ]; then
+        ar p "$folderDest/teamviewer_${archDl}.deb" data.tar.xz | tar -xvJ
     else
-        ar p "$CWD/teamviewer_${version}_${DEBARCH}.deb" data.tar.xz | tar xjv
+        ar p "$folderDest/teamviewer_${version}_${archDl}.deb" data.tar.xz | tar -xvJ
     fi
 
     chown -R root:root .
@@ -115,39 +95,30 @@ else
     \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
     -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-    find "$PKG" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+    find "$folderTmp" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-    # Make a .desktop file
-    mkdir -p "$PKG/usr/share/applications"
-    cat "$PKG/opt/teamviewer/tv_bin/desktop/com.teamviewer.TeamViewer.desktop" \
-    | sed -e 's/EXEC/teamviewer/' -e 's/ICON/teamviewer/' \
-    > "$PKG/usr/share/applications/teamviewer.desktop"
-
-    # Remove the dangling symlink first
-    rm -f "$PKG/usr/bin/teamviewer"
-
-    # Re-create the generic executable
-    ( cd "$PKG/usr/bin"; ln -s /opt/teamviewer/tv_bin/script/teamviewer teamviewer )
-
     # Link icon to /usr/share/pixmaps
-    mkdir -p "$PKG/usr/share/pixmaps"
-    ( ln -sf /opt/teamviewer/tv_bin/desktop/teamviewer.png  "$PKG/usr/share/pixmaps/teamviewer.png" )
+    mkdir -p "$folderTmp/usr/share/pixmaps"
+    ( ln -sf /opt/teamviewer/tv_bin/desktop/teamviewer.png  "$folderTmp/usr/share/pixmaps/teamviewer.png" )
 
-    mkdir -p "$PKG/usr/doc/$progName-$version"
-    cat "$CWD/$progName.SlackBuild" > "$PKG/usr/doc/$progName-$version/$progName.SlackBuild"
+    # Delete deb "legacy" from apt
+    rm -r "$folderTmp/etc/apt"
 
     # Move docs to official place
-    mv "$PKG/opt/teamviewer/doc/*.txt" "$PKG/usr/doc/$progName-$version"
-    rm -rf "$PKG/opt/teamviewer/doc/"
+    mkdir -p "$folderTmp/usr/doc/$progName/"
+    mv "$folderTmp"/opt/teamviewer/doc/*txt "$folderTmp/usr/doc/$progName/"
+    rm -r "$folderTmp/opt/teamviewer/doc/"
 
-    #mkdir -p $PKG/etc/init.d/
-    ( ln -sf /opt/teamviewer/tv_bin/teamviewerd "$PKG/etc/init.d/" )
+    # Create link to start daemon by "teamviewer daemon start"
+    mkdir -p "$folderTmp/etc/init.d/"
+    ( ln -sf /opt/teamviewer/tv_bin/teamviewerd "$folderTmp/etc/init.d/" )
 
-    mkdir -p "$PKG/etc/rc.d/"
-    install -m 0644 "$CWD/rc.teamviewerd" "$PKG/etc/rc.d/rc.teamviewerd.new"
+    # Install script to start daemon in the Slackware
+    mkdir -p "$folderTmp/etc/rc.d/"
+    install -m 0644 "$folderDest/rc.teamviewerd" "$folderTmp/etc/rc.d/rc.teamviewerd.new"
 
-    mkdir -p "$PKG/install"
+    mkdir -p "$folderTmp/install"
     echo "# HOW TO EDIT THIS FILE:
 # The \"handy ruler\" below makes it easier to edit a package description.
 # Line up the first '|' above the ':' following the base package name, and
@@ -166,10 +137,13 @@ teamviewer: free of charge to access your private computers or to help your
 teamviewer: friends with their computer problems.
 teamviewer:
 teamviewer: Homepage: https://www.teamviewer.com/
-teamviewer:" > "$PKG/install/slack-desc"
+teamviewer:" > "$folderTmp/install/slack-desc"
 
-    cat "$CWD/doinst.sh" > "$PKG/install/doinst.sh"
+    cat "$folderDest/doinst.sh" > "$folderTmp/install/doinst.sh"
 
-    cd "$PKG" || exit
-    /sbin/makepkg -l y -c n "$OUTPUT/$progName-$version-$ARCH-$tag.txz"
+    cd "$folderTmp" || exit
+    /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-${arch}-${tag}.txz"
+
+    cd "$folderDest" || exit
+    rm -r "$folderTmp" "$fileDl"
 fi

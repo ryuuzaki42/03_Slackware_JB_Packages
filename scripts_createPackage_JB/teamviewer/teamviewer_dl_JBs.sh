@@ -1,7 +1,6 @@
 #!/bin/bash
 #
 # Slackware build script for teamviewer
-#
 # Copyright 2010-2012  Binh Nguyen <binhvng@gmail.com>
 # Copyright 2013-2016 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
 # Copyright 2017-2017 João Batista Ribeiro <joao42lbatista@gmail.com>

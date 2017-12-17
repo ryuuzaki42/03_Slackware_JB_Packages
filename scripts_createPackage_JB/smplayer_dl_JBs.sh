@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 16/11/2017
+# Last update: 17/12/2017
 #
 echo -e "\\n# Script to build a Slackware package of smplayer (without skins and themes) #\\n"
 
@@ -68,8 +68,8 @@ else
         esac
     fi
 
-    initialFolder=$(pwd)
-    progInstallFolder="$initialFolder/${progName}-$version"
+    folderDest=$(pwd)
+    progInstallFolder="$folderDest/${progName}-$version"
     tmpFolder="${progInstallFolder}-tmp"
 
     if [ "$ARCH" = "i486" ]; then
@@ -88,7 +88,7 @@ else
     mkdir "$tmpFolder"
     cd "$tmpFolder" || exit
 
-    tar xvf "$initialFolder/${progName}-${version}.tar.bz2"
+    tar xvf "$folderDest/${progName}-${version}.tar.bz2"
     cd "${progName}-$version" || exit
 
     chown -R root:root .
@@ -132,8 +132,8 @@ smplayer:
 smplayer:" > "$progInstallFolder/install/slack-desc"
 
     cd "$progInstallFolder" || exit
-    /sbin/makepkg -l y -c n "$initialFolder/${progName}-${version}-${ARCH}-${tag}.txz"
+    /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-${ARCH}-${tag}.txz"
 
-    cd "$initialFolder" || exit
+    cd "$folderDest" || exit
     rm -r "$tmpFolder" "${progName}-$version" "${progName}-${version}.tar.bz2"
 fi

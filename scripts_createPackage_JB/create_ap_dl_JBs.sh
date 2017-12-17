@@ -24,15 +24,14 @@
 #
 # Link: https://github.com/oblique/create_ap
 #
-# Last update: 12/12/2017
+# Last update: 17/12/2017
 #
 echo -e "\\n# Script to build a Slackware package of create_ap #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="create_ap"
-    versionNumber="0.4.6"
+    progName="create_ap" # last tested: "0.4.6_gitb8df69a"
     arch="noArch"
     tag="1_JB"
 

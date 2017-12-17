@@ -28,3 +28,10 @@ attempting to upgrade as the path and configs may change on each major release.
     teamviewer daemon start     Start             TeamViewer daemon
     teamviewer daemon stop      Stop              TeamViewer daemon
     teamviewer daemon restart   Stop/Start        TeamViewer daemon
+
+## TeamViewer needs qt5 - Install these programs for a full qt5
+        qt5
+        qt5-webkit
+        libxkbcommon
+        libinput
+        libwacom

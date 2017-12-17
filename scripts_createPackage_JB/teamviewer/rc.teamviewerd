@@ -9,7 +9,7 @@
 # Also, add this line in your /etc/rc.d/rc.local:
 #
 # if [ -x /etc/rc.d/rc.teamviewerd ]; then
-#        /etc/rc.d/rc.teamviewerd start
+#     /etc/rc.d/rc.teamviewerd start
 # fi
 #
 

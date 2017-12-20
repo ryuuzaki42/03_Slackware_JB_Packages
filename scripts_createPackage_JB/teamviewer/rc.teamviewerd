@@ -16,33 +16,30 @@
 # fi
 #
 teamviewerd_start() {
-  if [ -x /opt/teamviewer/tv_bin/teamviewerd ]; then
-    echo "Starting TeamViewer Daemon"
-    /opt/teamviewer/tv_bin/teamviewerd --daemon start
-  fi
+    if [ -x /opt/teamviewer/tv_bin/teamviewerd ]; then
+        echo "Starting TeamViewer Daemon"
+        /opt/teamviewer/tv_bin/teamviewerd --daemon start
+    fi
 }
 
 teamviewerd_stop() {
     echo "Terminating TeamViewer Daemon"
-  killall teamviewerd
+    killall teamviewerd
 }
 
 teamviewerd_restart() {
-  teamviewerd_stop
-  sleep 2
-  teamviewerd_start
+    teamviewerd_stop
+    sleep 2
+    teamviewerd_start
 }
 
 case "$1" in
-'start')
-  teamviewerd_start
-  ;;
-'stop')
-  teamviewerd_stop
-  ;;
-'restart')
-  teamviewerd_restart
-  ;;
-*)
-  echo "usage $0 start|stop|restart"
+    'start' )
+        teamviewerd_start ;;
+    'stop' )
+        teamviewerd_stop ;;
+    'restart' )
+        teamviewerd_restart ;;
+    * )
+        echo "usage $0 start|stop|restart"
 esac

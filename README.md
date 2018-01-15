@@ -3,9 +3,9 @@ Some packages (txz) and some shell scripts to create packages to Slacwkare - (ww
 
 # README
 
-`compiled_SlackBuilds/` - Some packages compiled with SlackBuilds scripts  (e.g., R, qpdfview, webcore-fonts)
+`compiled_SlackBuilds/` - Some packages compiled with SlackBuilds scripts (e.g., R, qpdfview, webcore-fonts)
 
-`packages_JB/` - My personal packages for some programs  (e.g., diffpdf, shellcheck, skypeforlinux)
+`packages_JB/` - My personal packages for some programs (e.g., diffpdf, shellcheck, skypeforlinux)
 
 `scripts_createPackage_JB/` - My scripts to create packages (e.g., atom, firefox, smplayer) for Slackware
 

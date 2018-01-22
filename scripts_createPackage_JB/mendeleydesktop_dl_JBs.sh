@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of mendeleydesktop
 # Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/
 #
-# Last update: 08/01/2018
+# Last update: 22/01/2018
 #
 echo -e "\\n# Script to build a Slackware package of mendeleydesktop #\\n"
 
@@ -129,14 +129,14 @@ else
 # The \"handy ruler\" below makes it easier to edit a package description.
 # Line up the first '|' above the ':' following the base package name, and
 # the '|' on the right side marks the last column you can put a character in.
-# You must make exactly 11 lines for the formatting to be correct.  It's also
+# You must make exactly 11 lines for the formatting to be correct. It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 
                |-----handy-ruler------------------------------------------------------|
 mendeleydesktop: mendeleydesktop (managing and sharing research papers tool)
 mendeleydesktop:
 mendeleydesktop: Mendeley is a software to organize, share, and discover
-mendeleydesktop: research papers.  Before you download and use this software,
+mendeleydesktop: research papers. Before you download and use this software,
 mendeleydesktop: make sure you agree with the terms and conditions located at:
 mendeleydesktop: http://www.mendeley.com/terms/
 mendeleydesktop:

@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 20/01/2018
+# Last update: 22/01/2018
 #
 echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
@@ -34,22 +34,22 @@ else
     esac
 
     if [ "$archDL" != "x86_64" ]; then
-        echo "# Only 64 bits, without 32 bits precompiled  package in the $progName repository/release"
+        echo "# Only 64 bits, without 32 bits precompiled package in the $progName repository/release"
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.4.7_git3b00427"
+    progName="shellcheck" # last tested: "0.4.7_gitba5f20d"
     tag="1_JB"
     folderDest=$(pwd)
 
     linkGetVersion="https://github.com/koalaman/shellcheck/releases"
-    wget "$linkGetVersion" -O "${progName}-latest"
+    wget --compress=none "$linkGetVersion" -O "${progName}-latest"
 
     versionNumber=$(grep "Stable version" < "${progName}-latest" | head -n 1 | cut -d ' ' -f9)
     rm "${progName}-latest"
 
     linkDl="https://shellcheck.storage.googleapis.com"
-    wget "$linkDl/README.txt" -O "${progName}_latest"
+    wget --compress=none "$linkDl/README.txt" -O "${progName}_latest"
 
     checkStableVersion=$(head -n 25 "${progName}_latest" | sed -n '/^Date/,/^commit/p')
     if echo "$checkStableVersion" | grep -q "Stable version"; then
@@ -104,7 +104,7 @@ else
 # The \"handy ruler\" below makes it easier to edit a package description.
 # Line up the first '|' above the ':' following the base package name, and
 # the '|' on the right side marks the last column you can put a character in.
-# You must make exactly 11 lines for the formatting to be correct.  It's also
+# You must make exactly 11 lines for the formatting to be correct. It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|

@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of git-lfs
 # Based in: https://slackbuilds.org/repository/14.2/development/git-lfs/
 #
-# Last update: 14/11/2017
+# Last update: 22/11/2017
 #
 echo -e "\\n# Script to build a Slackware package of git-lfs #\\n"
 
@@ -34,7 +34,7 @@ else
     tag="1_JB"
 
     linkGetVersion="https://github.com/git-lfs/git-lfs/releases/latest"
-    wget "$linkGetVersion" -O "${progName}-latest"
+    wget --compress=none "$linkGetVersion" -O "${progName}-latest"
 
     version=$(cat $progName-latest | grep "/git-lfs/git-lfs/tree/v" | head -n 1 | cut -d "v" -f2 | cut -d "\"" -f1)
     rm "${progName}-latest"
@@ -94,7 +94,7 @@ else
 # The \"handy ruler\" below makes it easier to edit a package description.
 # Line up the first '|' above the ':' following the base package name, and
 # the '|' on the right side marks the last column you can put a character in.
-# You must make exactly 11 lines for the formatting to be correct.  It's also
+# You must make exactly 11 lines for the formatting to be correct. It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 
        |-----handy-ruler------------------------------------------------------|

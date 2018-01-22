@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of teamviewer
 # Based in: http://slackbuilds.org/repository/14.2/network/teamviewer/
 #
-# Last update: 21/12/2017
+# Last update: 22/01/2018
 #
 echo "This script create a txz version from teamviewer_arch.deb"
 
@@ -100,7 +100,7 @@ else
 
     # Link icon to /usr/share/pixmaps
     mkdir -p "$folderTmp/usr/share/pixmaps"
-    ( ln -sf /opt/teamviewer/tv_bin/desktop/teamviewer.png  "$folderTmp/usr/share/pixmaps/teamviewer.png" )
+    ( ln -sf /opt/teamviewer/tv_bin/desktop/teamviewer.png "$folderTmp/usr/share/pixmaps/teamviewer.png" )
 
     # Delete deb "legacy" from apt
     rm -r "$folderTmp/etc/apt"
@@ -123,7 +123,7 @@ else
 # The \"handy ruler\" below makes it easier to edit a package description.
 # Line up the first '|' above the ':' following the base package name, and
 # the '|' on the right side marks the last column you can put a character in.
-# You must make exactly 11 lines for the formatting to be correct.  It's also
+# You must make exactly 11 lines for the formatting to be correct. It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|

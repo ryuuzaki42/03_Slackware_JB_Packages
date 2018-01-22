@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 05/01/2018
+# Last update: 22/01/2018
 #
 echo -e "\\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\\n"
 
@@ -123,22 +123,22 @@ else
 
     mkdir -p install
     echo "# HOW TO EDIT THIS FILE:
-# The \"handy ruler\" below makes it easier to edit a package description.  Line
+# The \"handy ruler\" below makes it easier to edit a package description. Line
 # up the first '|' above the ':' following the base package name, and the '|' on
-# the right side marks the last column you can put a character in.  You must make
-# exactly 11 lines for the formatting to be correct.  It's also customary to
+# the right side marks the last column you can put a character in. You must make
+# exactly 11 lines for the formatting to be correct. It's also customary to
 # leave one space after the ':'.
 
                |-----handy-ruler------------------------------------------------------|
 mozilla-firefox: mozilla-firefox (Mozilla Firefox Web browser)
 mozilla-firefox:
 mozilla-firefox: This project is a redesign of the Mozilla browser component written
-mozilla-firefox: using the XUL user interface language.  Firefox empowers you to
+mozilla-firefox: using the XUL user interface language. Firefox empowers you to
 mozilla-firefox: browse faster, more safely and more efficiently than with any other
 mozilla-firefox: browser.
 mozilla-firefox:
 mozilla-firefox: Visit the Mozilla Firefox project online:
-mozilla-firefox:   http://www.mozilla.org/projects/firefox/
+mozilla-firefox: http://www.mozilla.org/projects/firefox/
 mozilla-firefox:
 mozilla-firefox:" > install/slack-desc
 

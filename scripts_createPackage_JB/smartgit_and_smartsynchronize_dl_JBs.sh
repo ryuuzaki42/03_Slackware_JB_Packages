@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 08/12/2017
+# Last update: 22/01/2018
 #
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
@@ -131,7 +131,7 @@ Icon=$progName" > "usr/share/applications/${progName}.desktop"
 # The \"handy ruler\" below makes it easier to edit a package description.
 # Line up the first '|' above the ':' following the base package name, and
 # the '|' on the right side marks the last column you can put a character in.
-# You must make exactly 11 lines for the formatting to be correct.  It's also
+# You must make exactly 11 lines for the formatting to be correct. It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 " > install/slack-desc
 

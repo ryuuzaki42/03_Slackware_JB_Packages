@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from atom-version.rpm
 #
-# Last update: 10/01/2018
+# Last update: 22/01/2018
 #
 echo -e "\\n# Create a txz from atom-version.rpm #\\n"
 
@@ -38,7 +38,7 @@ else
     fi
 
     if [ "$ARCH" != "x86_64" ]; then
-        echo "# Only 64 bits, without 32 bits precompiled  package in the $progName repository/release"
+        echo "# Only 64 bits, without 32 bits precompiled package in the $progName repository/release"
         exit 1
     fi
 
@@ -46,7 +46,7 @@ else
     tag="1_JB"
 
     linkGetVersion="https://github.com/atom/atom/releases/latest"
-    wget "$linkGetVersion" -O "${progName}-latest"
+    wget --compress=none "$linkGetVersion" -O "${progName}-latest"
 
     version=$(grep "Release.*[[:digit:]].*" < "${progName}-latest" | sed 's/[^0-9,.]*//g')
     rm "${progName}-latest"

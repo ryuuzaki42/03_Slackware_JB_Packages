@@ -23,14 +23,14 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 22/01/2018
+# Last update: 23/01/2018
 #
 echo -e "\\n# Script to build a Slackware package of smplayer (without skins and themes) #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="smplayer" # last tested: "18.1.0"
+    progName="smplayer" # last tested: "18.2.0"
     tag="1_JB"
 
     linkGetVersion="https://app.assembla.com/spaces/smplayer/subversion/source/HEAD/smplayer/trunk/OBS/Makefile?_format=raw"

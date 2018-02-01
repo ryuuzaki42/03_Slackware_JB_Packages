@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 30/01/2018
+# Last update: 01/02/2018
 #
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
@@ -38,22 +38,22 @@ else
 
     if [ "$progBuild" == '1' ]; then
         progName="smartgit" # last tested: "17_1_4"
-        progNameTmp="SmartGit"
+        countF='2'
     elif [ "$progBuild" == '2' ]; then
         progName="smartsynchronize" # last tested: "3_4_12"
-        progNameTmp="SmartSynchronize"
+        countF='1'
     else
         echo -e "\\nError: The chosen program ($progBuild) is unknown\\n"
         exit 1
     fi
     partFile="-linux"
 
-    linkGetVersion="http://www.syntevo.com/$progName/download"
-    wget "$linkGetVersion" -O "${progName}-latest"
+    linkGetVersion="https://www.syntevo.net/$progName/changelog.txt"
+    wget "$linkGetVersion" -O "${progName}-latest.txt"
 
-    version=$(cat ${progName}-latest | grep "Download $progNameTmp" | cut -d '<' -f3 | sed 's/[^0-9,.]*//g')
+    version=$(cat ${progName}-latest.txt | head -n 1 | cut -d ' ' -f$countF | sed 's/[^0-9,.]*//g')
     version=${version//./_}
-    rm "${progName}-latest"
+    rm "${progName}-latest.txt"
 
     countUnderscore=$(grep -o "_" <<< "$version" | wc -l)
     if [ "$countUnderscore" -lt '2' ]; then # IF the version has only one "_" will added "_0" to the end

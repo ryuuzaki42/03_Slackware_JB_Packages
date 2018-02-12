@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 23/01/2018
+# Last update: 12/02/2018
 #
 echo -e "\\n# Script to build a Slackware package of smplayer (without skins and themes) #\\n"
 
@@ -62,7 +62,7 @@ else
 
     if [ -z "$ARCH" ]; then
         case "$(uname -m)" in
-            i?86) ARCH="i486" ;;
+            i?86) ARCH="i586" ;;
             arm*) ARCH="arm" ;;
             *) ARCH=$(uname -m) ;;
         esac
@@ -72,14 +72,18 @@ else
     progInstallFolder="$folderDest/${progName}-$version"
     tmpFolder="${progInstallFolder}-tmp"
 
-    if [ "$ARCH" = "i486" ]; then
-        SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+    if [ "$ARCH" = "i586" ]; then
+        SLKCFLAGS="-O2 -march=i586 -mtune=i686"
+        LIBDIRSUFFIX=""
     elif [ "$ARCH" = "i686" ]; then
         SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+        LIBDIRSUFFIX=""
     elif [ "$ARCH" = "x86_64" ]; then
         SLKCFLAGS="-O2 -fPIC"
+        LIBDIRSUFFIX="64"
     else
         SLKCFLAGS="-O2"
+        LIBDIRSUFFIX=""
     fi
 
     wget -c "$linkDl/$progName-$version.tar.bz2"
@@ -93,14 +97,34 @@ else
 
     chown -R root:root .
 
-    sed -i "/^PREFIX/s/=.*$/=\\/usr/;
-            /^DOC_PATH/s/\\/.*$/\\/doc\\/${progName}-$version/;
-            s/share\\/man/man/g;
-            s/^QMAKE_OPTS=/QMAKE_OPTS+=/" Makefile
+	find -L . \
+ 	\( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  	-o -perm 511 \) -exec chmod 755 {} \; -o \
+ 	\( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+  	-o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-    QMAKE_OPTS="QMAKE_CXXFLAGS=\"$SLKCFLAGS\"" \
-    make
-    make install DESTDIR="$progInstallFolder"
+    # Fix man page path.
+    sed -i "s/share\\/man/man/g" Makefile
+
+    if [ ${USE_QT5:-no} = yes ]; then
+        QMAKE=qmake-qt5
+        LRELEASE=lrelease-qt5
+    else
+        QMAKE=qmake
+        LRELEASE=lrelease
+    fi
+
+    make \
+        QMAKE=$QMAKE \
+        LRELEASE=$LRELEASE \
+        PREFIX=/usr \
+        DOC_PATH="\\\"/usr/doc/$progName-$version/\\\"" \
+        QMAKE_OPTS="QMAKE_CXXFLAGS=\"$SLKCFLAGS\""
+
+    make install \
+        PREFIX=/usr \
+        DOC_PATH=/usr/doc/$progName-"$version" \
+        DESTDIR="$progInstallFolder"
 
     find "$progInstallFolder" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

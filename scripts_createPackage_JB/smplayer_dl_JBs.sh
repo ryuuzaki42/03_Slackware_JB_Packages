@@ -23,7 +23,10 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 12/02/2018
+# Last update: 14/02/2018
+#
+# Tip: To build against Qt5 rather than Qt4
+# Use: USE_QT5=yes ./smplayer_dl_JBs.sh
 #
 echo -e "\\n# Script to build a Slackware package of smplayer (without skins and themes) #\\n"
 
@@ -106,12 +109,12 @@ else
     # Fix man page path.
     sed -i "s/share\\/man/man/g" Makefile
 
-    if [ ${USE_QT5:-no} = yes ]; then
-        QMAKE=qmake-qt5
-        LRELEASE=lrelease-qt5
+    if [ "$USE_QT5" = "yes" ]; then
+        QMAKE="qmake-qt5"
+        LRELEASE="lrelease-qt5"
     else
-        QMAKE=qmake
-        LRELEASE=lrelease
+        QMAKE="qmake"
+        LRELEASE="lrelease"
     fi
 
     make \

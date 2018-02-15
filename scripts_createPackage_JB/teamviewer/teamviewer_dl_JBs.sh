@@ -23,14 +23,14 @@
 # Script: Script to build a Slackware package of teamviewer
 # Based in: http://slackbuilds.org/repository/14.2/network/teamviewer/
 #
-# Last update: 22/01/2018
+# Last update: 15/02/2018
 #
 echo "This script create a txz version from teamviewer_arch.deb"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="teamviewer" # last tested: "13.0.6634"
+    progName="teamviewer" # last tested: "13.0.9865"
     tag="1_JB"
 
     folderDest=$(pwd)
@@ -112,11 +112,8 @@ else
 
     # Create link to start daemon by "teamviewer daemon start"
     mkdir -p "$folderTmp/etc/init.d/"
-    ( ln -sf /opt/teamviewer/tv_bin/teamviewerd "$folderTmp/etc/init.d/" )
-
-    # Install script to start daemon in the Slackware
-    mkdir -p "$folderTmp/etc/rc.d/"
-    install -m 0644 "$folderDest/rc.teamviewerd" "$folderTmp/etc/rc.d/rc.teamviewerd.new"
+    ( chmod +x /opt/teamviewer/tv_bin/teamviewerd
+      ln -sf /opt/teamviewer/tv_bin/teamviewerd "$folderTmp/etc/init.d/")
 
     mkdir -p "$folderTmp/install"
     echo "# HOW TO EDIT THIS FILE:
@@ -139,7 +136,10 @@ teamviewer:
 teamviewer: Homepage: https://www.teamviewer.com/
 teamviewer:" > "$folderTmp/install/slack-desc"
 
-    cat "$folderDest/doinst.sh" > "$folderTmp/install/doinst.sh"
+echo "if [ -x /usr/bin/update-desktop-database ]; then
+    /usr/bin/update-desktop-database -q usr/share/applications >/dev/null 2>&1
+fi
+chmod 753 /etc/teamviewer/" > "$folderTmp/install/doinst.sh"
 
     cd "$folderTmp" || exit
     /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-${arch}-${tag}.txz"

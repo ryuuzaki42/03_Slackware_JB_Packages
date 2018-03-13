@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 01/02/2018
+# Last update: 13/03/2018
 #
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
@@ -46,10 +46,9 @@ else
         echo -e "\\nError: The chosen program ($progBuild) is unknown\\n"
         exit 1
     fi
-    partFile="-linux"
 
     linkGetVersion="https://www.syntevo.net/$progName/changelog.txt"
-    wget "$linkGetVersion" -O "${progName}-latest.txt"
+    wget --no-check-certificate "$linkGetVersion" -O "${progName}-latest.txt"
 
     version=$(cat ${progName}-latest.txt | head -n 1 | cut -d ' ' -f$countF | sed 's/[^0-9,.]*//g')
     version=${version//./_}
@@ -80,15 +79,15 @@ else
     fi
     echo -e "\\n\\nWill build $progName, please wait\\n\\n"
 
-    linkDl="http://www.syntevo.com/static/smart/download/$progName"
+    linkDl="https://www.syntevo.com/downloads/$progName"
     folderDest=$(pwd)
     tag="1_JB"
 
-    wget -c "$linkDl/$progName${partFile}-${version}.tar.gz"
+    wget -c "$linkDl/${progName}-linux-${version}.tar.gz"
 
     rm -r "$progName" 2> /dev/null
 
-    tar -xvf "$progName${partFile}-${version}.tar.gz"
+    tar -xvf "${progName}-linux-${version}.tar.gz"
 
     cd "$progName" || exit
     mkdir -p "usr/doc/${progName}-$version"
@@ -167,5 +166,5 @@ $progName:" >> install/slack-desc
 
     cd .. || exit
     rm -r "$progName"
-    rm "$progName${partFile}-${version}.tar.gz"
+    rm "${progName}-linux-${version}.tar.gz"
 fi

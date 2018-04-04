@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 21/03/2018
+# Last update: 04/04/2018
 #
 # Tip: To build against Qt5 rather than Qt4
 # Use: USE_QT5=yes ./smplayer_dl_JBs.sh
@@ -100,11 +100,11 @@ else
 
     chown -R root:root .
 
-	find -L . \
- 	\( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
-  	-o -perm 511 \) -exec chmod 755 {} \; -o \
- 	\( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
-  	-o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+    find -L . \
+    \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+    -o -perm 511 \) -exec chmod 755 {} \; -o \
+    \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+    -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
     # Fix man page path.
     sed -i "s/share\\/man/man/g" Makefile

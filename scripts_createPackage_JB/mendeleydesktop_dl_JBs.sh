@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of mendeleydesktop
 # Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/
 #
-# Last update: 22/01/2018
+# Last update: 11/04/2018
 #
 echo -e "\\n# Script to build a Slackware package of mendeleydesktop #\\n"
 
@@ -36,7 +36,7 @@ else
     linkGetVersion="https://www.mendeley.com/release-notes/"
     wget "$linkGetVersion" -O "${progName}-latest"
 
-    version=$(cat $progName-latest | grep "Release Notes for Mendeley Desktop" | head -n 1 | sed 's/[^0-9,.]*//g')
+    version=$(grep "/release-notes/" $progName-latest | head -n 1 | rev | cut -d ' ' -f1 | rev | sed 's/[^0-9,.]*//g')
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)

@@ -23,14 +23,14 @@
 # Script: Script to build a Slackware package of mendeleydesktop
 # Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/
 #
-# Last update: 11/04/2018
+# Last update: 13/04/2018
 #
 echo -e "\\n# Script to build a Slackware package of mendeleydesktop #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="mendeleydesktop" # last tested: "1.17.13"
+    progName="mendeleydesktop" # last tested: "1.18.0"
     tag="1_JB"
 
     linkGetVersion="https://www.mendeley.com/release-notes/"
@@ -69,15 +69,8 @@ else
         esac
     fi
 
-    if [ "$ARCH" = "i486" ]; then
-        LIBDIRSUFFIX=''
-    elif [ "$ARCH" = "i586" ] || [ "$ARCH" = "i686" ]; then
-        ARCH="i486" # mendeleydesktop doesn't have i586/i686 pre-builds
-        LIBDIRSUFFIX=''
-    elif [ "$ARCH" = "x86_64" ]; then
-        LIBDIRSUFFIX="64"
-    else
-        LIBDIRSUFFIX=''
+    if [ "$ARCH" = "i586" ] || [ "$ARCH" = "i686" ]; then
+        ARCH="i486" # mendeleydesktop doesn't have i586/i686 pre-builds.
     fi
 
     if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i486" ]; then
@@ -89,13 +82,11 @@ else
 
     set -e
     folderSourceCode="$folderDest/${progName}-${version}-linux-$ARCH"
-
     rm -rf "$folderSourceCode" "$folderSourceCode-tmp"
-
     tar xvf "$folderDest/${progName}-${version}-linux-${ARCH}.tar.bz2"
-    mv "${progName}-${version}-linux-$ARCH" "${progName}-${version}-linux-${ARCH}-tmp"
+    mv "$folderSourceCode" "$folderSourceCode-tmp"
+    cd "$folderSourceCode-tmp" || exit
 
-    cd "${progName}-${version}-linux-${ARCH}-tmp" || exit
     chown -R root:root .
     find -L . \
     \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -103,28 +94,19 @@ else
     \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
     -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-    # Remove the bundled qt since it should be present in the system already
-    rm -rf lib/qt bin/qt.conf lib/mendeleydesktop/plugins
+    # Using /opt for installation and prevent conflicts with QT5 applications
+    mkdir -p "$folderSourceCode"/opt/mendeleydesktop
+    mv ./* "$folderSourceCode"/opt/mendeleydesktop
 
-    [ "$ARCH" = "x86_64" ] && mv lib "lib$LIBDIRSUFFIX"
-
-    rm bin/mendeleydesktop
-    ln -s ../lib${LIBDIRSUFFIX}/mendeleydesktop/libexec/mendeleydesktop.$ARCH bin/mendeleydesktop
-
-    # Some docs lay on the top folder, so install them first
-    mkdir -p "$folderSourceCode/usr/doc"
-    mv share/doc/mendeleydesktop "$folderSourceCode/usr/doc/${progName}-$version"
-    mv LICENSE README "$folderSourceCode/usr/doc/${progName}-$version"
-
-    rm INSTALL
-    rmdir share/doc
-
-    mv ./* "$folderSourceCode/usr"
+    # Make symlinks and moving some important files
+    mkdir -p "$folderSourceCode"/usr/{bin,share}
+    cp -r "$folderSourceCode"/opt/mendeleydesktop/share/{applications,icons} "$folderSourceCode"/usr/share
+    ln -s /opt/mendeleydesktop/bin/mendeleydesktop "$folderSourceCode"/usr/bin
 
     find "$folderSourceCode" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-    mkdir "$folderSourceCode/install"
+    mkdir "$folderSourceCode"/install
     echo "# HOW TO EDIT THIS FILE:
 # The \"handy ruler\" below makes it easier to edit a package description.
 # Line up the first '|' above the ':' following the base package name, and
@@ -143,7 +125,7 @@ mendeleydesktop:
 mendeleydesktop: Homepage: https://www.mendeley.com/
 mendeleydesktop:
 mendeleydesktop:
-mendeleydesktop:" > "$folderSourceCode/install/slack-desc"
+mendeleydesktop:" > "$folderSourceCode"/install/slack-desc
 
     cd "$folderSourceCode" || exit
     /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-${ARCH}-${tag}.txz"

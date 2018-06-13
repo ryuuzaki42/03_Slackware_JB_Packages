@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of mendeleydesktop
 # Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/
 #
-# Last update: 06/06/2018
+# Last update: 13/06/2018
 #
 echo -e "\\n# Script to build a Slackware package of mendeleydesktop #\\n"
 

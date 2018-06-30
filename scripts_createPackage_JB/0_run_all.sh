@@ -22,14 +22,14 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 04/01/2018
+# Last update: 30/06/2018
 #
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    ./atom_dl_JBs.sh n
+    #./atom_dl_JBs.sh n
 
     ./create_ap_dl_JBs.sh n
 

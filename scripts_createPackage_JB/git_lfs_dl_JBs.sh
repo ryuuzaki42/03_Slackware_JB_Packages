@@ -23,14 +23,14 @@
 # Script: Script to build a Slackware package of git-lfs
 # Based in: https://slackbuilds.org/repository/14.2/development/git-lfs/
 #
-# Last update: 29/05/2018
+# Last update: 28/07/2018
 #
 echo -e "\\n# Script to build a Slackware package of git-lfs #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="git-lfs" # last tested: "2.4.2"
+    progName="git-lfs" # last tested: "2.5.0"
     tag="1_JB"
 
     linkGetVersion="https://github.com/git-lfs/git-lfs/releases/latest"
@@ -79,12 +79,15 @@ else
     folderDest=$(pwd)
     linkDl="https://github.com/git-lfs/git-lfs/releases/download"
 
-    wget -c "$linkDl/v$version/${progName}-linux-${SRCARCH}-${version}.tar.gz"
+    fileName="${progName}-linux-${SRCARCH}-v${version}"
+    wget -c "$linkDl/v$version/${fileName}.tar.gz"
 
-    tar xvf "${progName}-linux-${SRCARCH}-${version}.tar.gz"
-    rm "${progName}-linux-${SRCARCH}-${version}.tar.gz"
+    mkdir "$fileName"
+    mv "${fileName}.tar.gz" "$fileName"
+    cd "$fileName" || exit
 
-    cd "${progName}-$version" || exit
+    tar xvf "${fileName}.tar.gz"
+    rm "${fileName}.tar.gz"
 
     mkdir -p usr/bin
     install -m0755 "$progName" usr/bin
@@ -118,5 +121,5 @@ git-lfs:" > install/slack-desc
     /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-${ARCH}-${tag}.txz"
 
     cd .. || exit
-    rm -r "${progName}-$version"
+    rm -r "$fileName"
 fi

@@ -22,23 +22,20 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 19/08/2018
+# Last update: 28/08/2018
 #
 echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    case "$(uname -m)" in
-        "x86_64" ) archDL="x86_64" ;;
-    esac
-
+    archDL=$(uname -m)
     if [ "$archDL" != "x86_64" ]; then
         echo "# Only 64 bits, without 32 bits precompiled package in the $progName repository/release"
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.5.0_git165e408"
+    progName="shellcheck" # last tested: "0.5.0_git488d6dc"
     tag="1_JB"
     folderDest=$(pwd)
 

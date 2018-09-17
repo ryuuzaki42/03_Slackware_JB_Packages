@@ -23,14 +23,14 @@
 # Script: Script to build a Slackware package of git-lfs
 # Based in: https://slackbuilds.org/repository/14.2/development/git-lfs/
 #
-# Last update: 03/08/2018
+# Last update: 17/09/2018
 #
 echo -e "\\n# Script to build a Slackware package of git-lfs #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="git-lfs" # last tested: "2.5.1"
+    progName="git-lfs" # last tested: "2.5.2"
     tag="1_JB"
 
     linkGetVersion="https://github.com/git-lfs/git-lfs/releases/latest"

@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of teamviewer
 # Based in: http://slackbuilds.org/repository/14.2/network/teamviewer/
 #
-# Last update: 18/12/2018
+# Last update: 04/01/2019
 #
 echo "This script create a txz version from teamviewer_arch.deb"
 
@@ -51,7 +51,7 @@ else
     linkVersion="https://www.teamviewer.com/en/download/linux/"
     wget "$linkVersion" -O "${progName}-latest"
 
-    version=$(grep "deb package [/0-9./]" "${progName}-latest" | cut -d '*' -f2 | cut -d '<' -f1 | rev | cut -d ' ' -f1 | rev)
+    version=$(grep "deb package [/0-9./]" "${progName}-latest" | cut -d '*' -f2 | cut -d '<' -f1 | rev | cut -d ' ' -f1 | rev | head -n 1)
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)

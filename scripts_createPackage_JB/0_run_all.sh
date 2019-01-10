@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 30/06/2018
+# Last update: 09/01/2019
 #
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
@@ -35,7 +35,7 @@ else
 
     ./git_lfs_dl_JBs.sh n
 
-    ./mendeleydesktop_dl_JBs.sh n
+    #./mendeleydesktop_dl_JBs.sh n
 
     #./messengerfordesktop_dl_JBs.sh n
 

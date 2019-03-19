@@ -22,22 +22,22 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 09/01/2019
+# Last update: 19/03/2019
 #
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    #./atom_dl_JBs.sh n
+    #./others/atom_dl_JBs.sh n
 
     ./create_ap_dl_JBs.sh n
 
     ./git_lfs_dl_JBs.sh n
 
-    #./mendeleydesktop_dl_JBs.sh n
+    #./others/mendeleydesktop_dl_JBs.sh n
 
-    #./messengerfordesktop_dl_JBs.sh n
+    #./others/messengerfordesktop_dl_JBs.sh n
 
     ./mozilla-firefox_preCompiled_dl_JBs.sh n "en-GB" # Create a package with language en-GB
 

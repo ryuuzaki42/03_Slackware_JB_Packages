@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 19/03/2019
+# Last update: 10/04/2019
 #
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
@@ -56,5 +56,5 @@ else
     mv teamviewer*txz ../ 2> /dev/null
     cd ../ || exit
 
-    #./wps/wps_office_dl_JBs.sh n
+    #./others/wps/wps_office_dl_JBs.sh n
 fi

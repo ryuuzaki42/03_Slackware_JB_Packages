@@ -29,7 +29,7 @@ echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="opera" # last tested: "60.0.3255.27"
+    progName="opera" # last tested: "60.0.3255.59"
     tag="1_JB"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"

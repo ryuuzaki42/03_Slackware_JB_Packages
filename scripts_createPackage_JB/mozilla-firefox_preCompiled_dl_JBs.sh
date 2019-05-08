@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 06/05/2019
+# Last update: 08/05/2019
 #
 echo -e "\\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\\n"
 
@@ -40,7 +40,7 @@ else
             ;;
     esac
 
-    progName="mozilla-firefox" # last tested: "66.0.4"
+    progName="mozilla-firefox" # last tested: "66.0.5"
     tag="1_JB"
     folderDest=$(pwd)
 

@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 10/04/2019
+# Last update: 02/07/2019
 #
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
@@ -57,4 +57,6 @@ else
     cd ../ || exit
 
     #./others/wps/wps_office_dl_JBs.sh n
+
+    #./others/skypeforlinux_dl_JBs.sh n
 fi

@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 20/06/2019
+# Last update: 02/07/2019
 #
 echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
@@ -35,7 +35,7 @@ else
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.6.0_git9059024"
+    progName="shellcheck" # last tested: "0.6.0_gitef764b6"
     tag="1_JB"
     folderDest=$(pwd)
 
@@ -52,13 +52,13 @@ else
     if echo "$checkStableVersion" | grep -q "Stable version"; then
         version=$versionNumber
 
-        fileName="shellcheck-v${versionNumber}.linux.x86_64.tar.xz"
+        fileName="${progName}-v${versionNumber}.linux.x86_64.tar.xz"
         folderName="${progName}-v$versionNumber"
     else
         versionCommit=$(grep "commit " < "${progName}_latest" | head -n 1 | cut -d ' ' -f2 | tr -d "\\r" | cut -c1-7)
         version="${versionNumber}_git${versionCommit}"
 
-        fileName="shellcheck-latest.linux.x86_64.tar.xz"
+        fileName="${progName}-latest.linux.x86_64.tar.xz"
         folderName="${progName}-latest"
     fi
     rm "${progName}_latest"

@@ -26,6 +26,19 @@
 #
 echo -e "\\n# Script to create a Slackware package from the SkypeForLinux pre-compiled #\\n"
 
+if [ -z "$ARCH" ]; then
+    case "$(uname -m)" in
+        i?86) ARCH="i386" ;;
+        arm*) ARCH="arm" ;;
+        *) ARCH=$(uname -m) ;;
+    esac
+fi
+
+if [ "$ARCH" != "x86_64" ]; then
+    echo "# Only 64 bits, without 32 bits precompiled package in the $progName repository/release"
+    exit 1
+fi
+
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else

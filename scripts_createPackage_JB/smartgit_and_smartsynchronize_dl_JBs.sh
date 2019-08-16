@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 12/08/2019
+# Last update: 16/08/2019
 #
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
@@ -40,7 +40,7 @@ else
         progName="smartgit" # last tested: "19_1_1"
         countF='2'
     elif [ "$progBuild" == '2' ]; then
-        progName="smartsynchronize" # last tested: "4_0_0"
+        progName="smartsynchronize" # last tested: "4_0_1"
         countF='1'
     else
         echo -e "\\nError: The chosen program ($progBuild) is unknown\\n"
@@ -83,17 +83,11 @@ else
     folderDest=$(pwd)
     tag="1_JB"
 
-    if [ "$progBuild" == '1' ]; then
-        versionTmp=$version
-    elif [ "$progBuild" == '2' ]; then
-        versionTmp=${version//_/.}
-    fi
-
-    wget -c "$linkDl/${progName}-linux-${versionTmp}.tar.gz"
+    wget -c "$linkDl/${progName}-linux-${version}.tar.gz"
 
     rm -r "$progName" 2> /dev/null
 
-    tar -xvf "${progName}-linux-${versionTmp}.tar.gz"
+    tar -xvf "${progName}-linux-${version}.tar.gz"
 
     cd "$progName" || exit
     mkdir -p "usr/doc/${progName}-$version"
@@ -172,5 +166,5 @@ $progName:" >> install/slack-desc
 
     cd .. || exit
     rm -r "$progName"
-    rm "${progName}-linux-${versionTmp}.tar.gz"
+    rm "${progName}-linux-${version}.tar.gz"
 fi

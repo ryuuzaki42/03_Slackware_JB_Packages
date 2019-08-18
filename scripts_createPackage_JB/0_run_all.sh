@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 02/07/2019
+# Last update: 18/08/2019
 #
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
@@ -45,9 +45,9 @@ else
 
     ./shellcheck_preCompiled_dl_JBs.sh n
 
-    ./smartgit_and_smartsynchronize_dl_JBs.sh 1 n
+    #./others/smartgit_and_smartsynchronize_dl_JBs.sh 1 n
 
-    ./smartgit_and_smartsynchronize_dl_JBs.sh 2 n
+    #./others/smartgit_and_smartsynchronize_dl_JBs.sh 2 n
 
     ./smplayer_dl_JBs.sh n
 

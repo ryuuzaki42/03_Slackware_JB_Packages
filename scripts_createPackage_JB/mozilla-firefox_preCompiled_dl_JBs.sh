@@ -40,7 +40,7 @@ else
             ;;
     esac
 
-    progName="mozilla-firefox" # last tested: "70.0.1"
+    progName="mozilla-firefox" # last tested: "71.0.0"
     tag="1_JB"
     folderDest=$(pwd)
 

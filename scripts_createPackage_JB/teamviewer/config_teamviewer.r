@@ -25,3 +25,6 @@ fast and secure remote access to Linux, Windows PCs, and Macs.
     libxkbcommon
     libinput
     libwacom
+
+## Start daemon
+    bash /etc/rc.d/rc.teamviewerd start

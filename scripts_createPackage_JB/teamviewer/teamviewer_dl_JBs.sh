@@ -23,14 +23,14 @@
 # Script: Script to build a Slackware package of teamviewer
 # Based in: http://slackbuilds.org/repository/14.2/network/teamviewer/
 #
-# Last update: 25/11/2019
+# Last update: 01/01/2020
 #
 echo "This script create a txz version from teamviewer_arch.deb"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="teamviewer" # last tested: "15.0.8397"
+    progName="teamviewer" # last tested: "15.1.3937"
     tag="1_JB"
 
     folderDest=$(pwd)
@@ -98,6 +98,12 @@ else
     find "$folderTmp" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+    # Remove the dangling symlink first
+    rm -f $folderTmp/usr/bin/teamviewer
+
+    # Re-create the generic executable
+    ( cd $folderTmp/usr/bin; ln -s /opt/teamviewer/tv_bin/script/teamviewer teamviewer )
+
     # Link icon to /usr/share/pixmaps
     mkdir -p "$folderTmp/usr/share/pixmaps"
     ( ln -sf /opt/teamviewer/tv_bin/desktop/teamviewer.png "$folderTmp/usr/share/pixmaps/teamviewer.png" )
@@ -110,10 +116,8 @@ else
     mv "$folderTmp"/opt/teamviewer/doc/*txt "$folderTmp/usr/doc/$progName/"
     rm -r "$folderTmp/opt/teamviewer/doc/"
 
-    # Create link to start daemon by "teamviewer daemon start"
-    mkdir -p "$folderTmp/etc/init.d/"
-    ( chmod +x /opt/teamviewer/tv_bin/teamviewerd
-      ln -sf /opt/teamviewer/tv_bin/teamviewerd "$folderTmp/etc/init.d/")
+    mkdir -p $folderTmp/etc/rc.d/
+    install -m 0644 $folderDest/rc.teamviewerd $folderTmp/etc/rc.d/rc.teamviewerd
 
     mkdir -p "$folderTmp/install"
     echo "# HOW TO EDIT THIS FILE:

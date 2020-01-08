@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from wps-office-version.rpm
 #
-# Last update: 11/07/2019
+# Last update: 08/01/2020
 #
 echo -e "\\n# Create a txz from wps-office-version.rpm #\\n"
 
@@ -30,7 +30,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="wps-office"
-    version="11.1.0.8722-1"
+    version="11.1.0.8865-1"
     tag="1_JB"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3-4 | cut -d '.' -f1-4)
@@ -53,7 +53,7 @@ else
     fi
 
     folderTmpDl=$(echo $version | rev | cut -d '.' -f1 | rev | cut -d '-' -f1)
-    linkDl="http://kdl.cc.ksosoft.com/wps-community/download/$folderTmpDl"
+    linkDl="http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/$folderTmpDl"
 
     if [ -z "$ARCH" ]; then
         case "$(uname -m)" in

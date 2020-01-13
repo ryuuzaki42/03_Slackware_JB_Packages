@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the SkypeForLinux pre-compiled
 #
-# Last update: 01/01/2020
+# Last update: 13/01/2020
 #
 echo -e "\\n# Script to create a Slackware package from the SkypeForLinux pre-compiled #\\n"
 
@@ -42,7 +42,7 @@ fi
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="skypeforlinux" # last tested: "8.56.76.35"
+    progName="skypeforlinux" # last tested: "8.56.76.90"
     linkProg="https://repo.skype.com/deb/pool/main/s/skypeforlinux"
     linkSlackbuilds142Prog="https://slackbuilds.org/slackbuilds/14.2/network/skypeforlinux.tar.gz"
 

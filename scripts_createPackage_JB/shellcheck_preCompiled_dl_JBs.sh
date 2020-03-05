@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 17/02/2020
+# Last update: 05/03/2020
 #
 echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
@@ -42,7 +42,7 @@ else
     linkGetVersion="https://github.com/koalaman/shellcheck/releases"
     wget --compress=none "$linkGetVersion" -O "${progName}-latest"
 
-    versionNumber=$(grep "Stable version" < "${progName}-latest" | head -n 1 | cut -d ' ' -f9)
+    versionNumber=$(grep "Stable version" < "${progName}-latest" | head -n 1 | cut -d 'v' -f2 | cut -d '"' -f1)
     rm "${progName}-latest"
 
     linkDl="https://shellcheck.storage.googleapis.com"

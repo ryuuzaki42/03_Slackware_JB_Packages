@@ -23,14 +23,14 @@
 # Script: Script to build a Slackware package of mendeleydesktop
 # Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/
 #
-# Last update: 12/07/2019
+# Last update: 06/05/2020
 #
 echo -e "\\n# Script to build a Slackware package of mendeleydesktop #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="mendeleydesktop" # last tested: "1.19.5"
+    progName="mendeleydesktop" # last tested: "1.19.6"
     tag="1_JB"
 
     linkGetVersion="https://www.mendeley.com/release-notes/"

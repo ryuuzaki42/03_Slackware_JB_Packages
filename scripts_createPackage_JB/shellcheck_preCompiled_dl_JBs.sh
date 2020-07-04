@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 08/04/2020
+# Last update: 04/07/2020
 #
 echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
@@ -35,34 +35,24 @@ else
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.7.1"
+    progName="shellcheck" # last tested: "0.7.1_gitbaab5b5"
     tag="1_JB"
     folderDest=$(pwd)
 
     linkGetVersion="https://github.com/koalaman/shellcheck/releases"
-    wget --compress=none "$linkGetVersion" -O "${progName}-latest"
+    wget --compress=none "$linkGetVersion" -O "${progName}_latest"
+    versionNumber=$(grep "Stable version" < "${progName}_latest" | head -n 1 | cut -d 'v' -f2 | cut -d '"' -f1)
+    rm "${progName}_latest"
 
-    versionNumber=$(grep "Stable version" < "${progName}-latest" | head -n 1 | cut -d 'v' -f2 | cut -d '"' -f1)
-    rm "${progName}-latest"
+    linkGetGitCommit="https://github.com/koalaman/shellcheck/commits/master"
+    wget "$linkGetGitCommit" -O "${progName}_latest"
+    versionCommit=$(grep "https://github.com/koalaman/shellcheck/commit/" < "${progName}_latest" | head -n 1 | cut -d '/' -f7- | cut -d'"' -f1 | cut -c1-7)
+    rm "${progName}_latest"
+    version="${versionNumber}_git${versionCommit}"
 
-#     linkDl="https://shellcheck.storage.googleapis.com"
-    linkDl="https://github.com/koalaman/shellcheck/releases/download/v$versionNumber/"
-#     wget --compress=none "$linkDl/README.txt" -O "${progName}_latest"
-
-#     checkStableVersion=$(head -n 25 "${progName}_latest" | sed -n '/^Date/,/^commit/p')
-#     if echo "$checkStableVersion" | grep -q "Stable version"; then
-        version=$versionNumber
-
-        fileName="${progName}-v${versionNumber}.linux.x86_64.tar.xz"
-        folderName="${progName}-v$versionNumber"
-#     else
-#         versionCommit=$(grep "commit " < "${progName}_latest" | head -n 1 | cut -d ' ' -f2 | tr -d "\\r" | cut -c1-7)
-#         version="${versionNumber}_git${versionCommit}"
-# 
-#         fileName="${progName}-latest.linux.x86_64.tar.xz"
-#         folderName="${progName}-latest"
-#     fi
-#     rm "${progName}_latest"
+    linkDl="https://github.com/koalaman/shellcheck/releases/download/latest/shellcheck-latest.linux.x86_64.tar.xz"
+    fileName="${progName}-latest.linux.x86_64.tar.xz"
+    folderName="${progName}-latest"
 
     installedVersion=$(find /var/log/packages/ | grep "$progName" | cut -d '-' -f2)
     echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
@@ -83,7 +73,7 @@ else
         fi
     fi
 
-    wget -c "$linkDl/$fileName" -O "$fileName"
+    wget -c "$linkDl" -O "$fileName"
 
     tar -xvf "$fileName"
     rm "$fileName"

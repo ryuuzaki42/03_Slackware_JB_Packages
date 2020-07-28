@@ -22,12 +22,12 @@
 #
 # Script: Scripts to update the scripts with "last tested" and "Last update" from Slackware packages (txz) updates
 #
-# Last update: 25/07/2020
+# Last update: 28/07/2020
 #
 for filePackage in *.txz; do
     echo
 
-    programName=$(cut -d '-' -f1 <<< "$filePackage")
+    programName=$(rev <<< "$filePackage" | cut -d '-' -f4- | rev)
     scriptNamePlace=$(find . | grep "${programName}.*_JBs.sh$")
     fileFinal=$(rev <<< "$scriptNamePlace" | cut -d '/' -f1- | rev)".new"
 
@@ -36,7 +36,7 @@ for filePackage in *.txz; do
     dateNew=$(date +%d\\/%m\\/%Y)
     echo -n "New date: $dateNew | "
 
-    versionNew=$(cut -d '-' -f2 <<< "$filePackage")
+    versionNew=$(rev <<< "$filePackage" | cut -d '-' -f3 | rev)
     echo "New version: $versionNew"
 
     sed 's/Last update: .*/Last update: '"$dateNew"'/1' "$scriptNamePlace" | sed 's/last tested: .*/last tested: '\""$versionNew"\"'/1' > "$fileFinal"

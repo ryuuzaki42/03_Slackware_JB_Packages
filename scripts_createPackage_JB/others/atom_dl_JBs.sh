@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from atom-version.rpm
 #
-# Last update: 06/05/2020
+# Last update: 29/07/2020
 #
 echo -e "\\n# Create a txz from atom-version.rpm #\\n"
 
@@ -42,13 +42,13 @@ else
         exit 1
     fi
 
-    progName="atom" # last tested: "1.46.0"
+    progName="atom" # last tested: "1.49.0"
     tag="1_JB"
 
     linkGetVersion="https://github.com/atom/atom/releases/latest"
     wget --compress=none "$linkGetVersion" -O "${progName}-latest"
 
-    version=$(grep "Release.*[[:digit:]].*" < "${progName}-latest" | sed 's/[^0-9,.]*//g')
+    version=$(grep "Release.*[[:digit:]].*" < "${progName}-latest" | sed 's/[^0-9,.]*//g' | head -n 1)
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)

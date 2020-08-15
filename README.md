@@ -1,12 +1,19 @@
 # 6_slackware_jb_packages
+
 Some packages (txz) and some shell scripts to create packages to Slacwkare - (www.slackware.com)
 
-# README
+## README
 
-`compiled _SlackBuilds/` - Some packages compiled with SlackBuilds scripts (e.g., R, qpdfview, webcore-fonts)
+`compiled _SlackBuilds/` - Some packages compiled with SlackBuilds scripts (e.g., redshift, qpdfview, webcore-fonts)
 
-`packages _JB/` - My personal packages for some programs (e.g., tomighty, qjoypad, skypeforlinux)
+`packages _JB/` - My personal packages for some programs (e.g., tomighty, qjoypad, unrar)
 
-`scripts _ create Package _JB/` - My scripts to create packages (e.g., atom, firefox, smplayer) for Slackware
+`scripts _ create Package _JB/` - My scripts to create packages (e.g., opera, mozilla-firefox, smplayer) for Slackware
 
 `theme/` - "KDE Slackware Splash Screen" + "Bridge Cursor Theme"
+
+## Download others packages in my Telegram channels
+
+Slackware 14.2: https://t.me/SlackwarePkg
+
+Slackware Current: https://t.me/SlackwarePkgC

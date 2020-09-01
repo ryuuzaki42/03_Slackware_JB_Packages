@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from atom-version.rpm
 #
-# Last update: 29/07/2020
+# Last update: 01/09/2020
 #
 echo -e "\\n# Create a txz from atom-version.rpm #\\n"
 
@@ -42,7 +42,7 @@ else
         exit 1
     fi
 
-    progName="atom" # last tested: "1.49.0"
+    progName="atom" # last tested: "1.50.0"
     tag="1_JB"
 
     linkGetVersion="https://github.com/atom/atom/releases/latest"

@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from messengerfordesktop-version.rpm
 #
-# Last update: 22/01/2018
+# Last update: 08/09/2020
 #
 echo -e "\\n# Create a txz from messengerfordesktop-version.rpm #\\n"
 
@@ -35,7 +35,7 @@ else
     linkGetVersion="https://github.com/Aluxian/Messenger-for-Desktop/releases/"
     wget --compress=none "$linkGetVersion" -O "${progName}-latest"
 
-    version=$(cat $progName-latest | grep "Messenger-for-Desktop/releases/tag/v" | head -n 1 | cut -d'>' -f2 | sed 's/[^0-9,.]*//g')
+    version=$(grep "Messenger-for-Desktop/releases/tag/v" $progName-latest | head -n 1 | cut -d'>' -f2 | sed 's/[^0-9,.]*//g')
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)

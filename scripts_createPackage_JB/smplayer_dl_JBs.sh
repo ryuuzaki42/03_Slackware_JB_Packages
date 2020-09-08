@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 17/06/2020
+# Last update: 08/09/2020
 #
 # Tip: To build against Qt5 rather than Qt4
 # Use: USE_QT5=yes ./smplayer_dl_JBs.sh
@@ -39,7 +39,7 @@ else
     linkGetVersion="https://app.assembla.com/spaces/smplayer/subversion/source/HEAD/smplayer/trunk/OBS/Makefile?_format=raw"
     wget "$linkGetVersion" -O "${progName}-latest"
 
-    version=$(cat $progName-latest | grep "VERSION" | head -n 1 | sed 's/[^0-9,.]*//g')
+    version=$(grep "VERSION" $progName-latest | head -n 1 | sed 's/[^0-9,.]*//g')
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)

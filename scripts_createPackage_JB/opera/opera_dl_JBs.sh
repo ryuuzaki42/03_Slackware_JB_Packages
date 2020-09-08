@@ -22,14 +22,14 @@
 #
 # Script: Create a txz from opera-stable-version.rpm
 #
-# Last update: 05/08/2020
+# Last update: 08/09/2020
 #
 echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="opera" # last tested: "70.0.3728.95"
+    progName="opera" # last tested: "70.0.3728.178"
     tag="1_JB"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"
@@ -39,7 +39,7 @@ else
     while [ "$continue" == '0' ]; do
         wget "$linkGetVersion" -O "${progName}-latest"
 
-        version=$(cat ${progName}-latest | grep "href" | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
+        version=$(grep "href" ${progName}-latest | grep -v "Index" | sort --version-sort --field-separator=. | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
         rm "${progName}-latest"
 
         if [ "$version" == '' ]; then

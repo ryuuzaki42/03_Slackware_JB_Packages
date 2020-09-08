@@ -29,7 +29,7 @@ echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="opera" # last tested: "70.0.3728.178"
+    progName="opera-stable" # last tested: "70.0.3728.178"
     tag="1_JB"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"
@@ -61,7 +61,7 @@ else
         ((tailNumber++))
     done
 
-    installedVersion=$(find /var/log/packages/$progName* | grep -v "${progName}.*ffmpeg-codecs" | cut -d '-' -f2)
+    installedVersion=$(find /var/log/packages/$progName* | rev | cut -d '-' -f3 | rev)
     echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
@@ -85,13 +85,13 @@ else
     ARCHdl="amd64"
 
     if [ "$ARCH" == "x86_64" ]; then
-        wget -c "$linkDl/${progName}-stable_${version}_${ARCHdl}.rpm"
+        wget -c "$linkDl/${progName}_${version}_${ARCHdl}.rpm"
     else
         echo -e "\\nError: arch: $ARCH - This package is currently only available for 64bit.\\n"
         exit 1
     fi
 
-    mv "${progName}-stable_${version}_${ARCHdl}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
+    mv "${progName}_${version}_${ARCHdl}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
 
     rpm2txz -d -c -s -r "${progName}-${version}-${ARCH}-${tag}.rpm"
 

@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 01/09/2020
+# Last update: 08/09/2020
 #
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
@@ -50,7 +50,7 @@ else
     linkGetVersion="https://www.syntevo.net/$progName/changelog.txt"
     wget --no-check-certificate "$linkGetVersion" -O "${progName}-latest.txt"
 
-    version=$(cat ${progName}-latest.txt | head -n 1 | cut -d ' ' -f$countF | sed 's/[^0-9,.]*//g')
+    version=$(head -n 1 ${progName}-latest.txt | cut -d ' ' -f$countF | sed 's/[^0-9,.]*//g')
     version=${version//./_}
     rm "${progName}-latest.txt"
 

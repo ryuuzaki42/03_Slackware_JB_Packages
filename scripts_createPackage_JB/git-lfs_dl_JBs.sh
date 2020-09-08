@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of git-lfs
 # Based in: https://slackbuilds.org/repository/14.2/development/git-lfs/
 #
-# Last update: 02/09/2020
+# Last update: 08/09/2020
 #
 echo -e "\\n# Script to build a Slackware package of git-lfs #\\n"
 
@@ -36,7 +36,7 @@ else
     linkGetVersion="https://github.com/git-lfs/git-lfs/releases/latest"
     wget --compress=none "$linkGetVersion" -O "${progName}-latest"
 
-    version=$(cat $progName-latest | grep "/git-lfs/git-lfs/tree/v" | head -n 1 | cut -d "/" -f5 | cut -d 'v' -f2 | cut -d "\"" -f1)
+    version=$(grep "/git-lfs/git-lfs/tree/v" $progName-latest | head -n 1 | cut -d "/" -f5 | cut -d 'v' -f2 | cut -d "\"" -f1)
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3)

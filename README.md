@@ -1,4 +1,4 @@
-# 3_slackware_jb_packages
+# slackware_jb_packages
 
 Some packages (txz) and some shell scripts to create packages to Slacwkare - (www.slackware.com)
 

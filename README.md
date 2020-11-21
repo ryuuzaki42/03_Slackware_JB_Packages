@@ -1,4 +1,4 @@
-# 6_slackware_jb_packages
+# 3_slackware_jb_packages
 
 Some packages (txz) and some shell scripts to create packages to Slacwkare - (www.slackware.com)
 
@@ -12,8 +12,5 @@ Some packages (txz) and some shell scripts to create packages to Slacwkare - (ww
 
 `theme/` - "KDE Slackware Splash Screen" + "Bridge Cursor Theme"
 
-## Download others packages in my Telegram channels
-
-Slackware 14.2: https://t.me/SlackwarePkg
-
-Slackware Current: https://t.me/SlackwarePkgC
+## Download others packages in the Telegram group or request packages/programs
+https://t.me/SlackwarePackages

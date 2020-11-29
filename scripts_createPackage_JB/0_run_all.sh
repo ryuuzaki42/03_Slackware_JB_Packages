@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 08/09/2020
+# Last update: 28/11/2020
 #
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
@@ -31,7 +31,7 @@ if [ "$USER" != "root" ]; then
 else
     #./others/atom_dl_JBs.sh n
 
-    ./create_ap_dl_JBs.sh n
+    #./others/create_ap_dl_JBs.sh n
 
     ./git_lfs_dl_JBs.sh n
 

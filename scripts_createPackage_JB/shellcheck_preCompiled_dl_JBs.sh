@@ -35,7 +35,7 @@ else
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.7.1_gitcc3884c"
+    progName="shellcheck" # last tested: "0.7.1_gitbd3299e"
     tag="1_JB"
     folderDest=$(pwd)
 

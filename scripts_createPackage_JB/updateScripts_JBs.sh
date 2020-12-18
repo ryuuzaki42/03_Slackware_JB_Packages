@@ -22,7 +22,7 @@
 #
 # Script: Scripts to update the scripts with "last tested" and "Last update" from Slackware packages (txz) updates
 #
-# Last update: 28/07/2020
+# Last update: 16/12/2020
 #
 for filePackage in *.txz; do
     echo
@@ -44,9 +44,6 @@ for filePackage in *.txz; do
     echo -e "\\nsdiff -s $scriptNamePlace $fileFinal\\n"
     sdiff -s "$scriptNamePlace" "$fileFinal"
 
-    mv "$scriptNamePlace" "$scriptNamePlace".back
     mv "$fileFinal" "$scriptNamePlace"
-
-    trash-put "$scriptNamePlace".back
     chmod +x "$scriptNamePlace"
 done

@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 18/12/2020
+# Last update: 25/12/2020
 #
 echo -e "\\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\\n"
 
@@ -40,7 +40,7 @@ else
             ;;
     esac
 
-    progName="mozilla-firefox" # last tested: "84.0.0"
+    progName="mozilla-firefox" # last tested: "84.0.1"
     tag="1_JB"
     folderDest=$(pwd)
 
@@ -111,7 +111,7 @@ else
     else
         libFolder="lib"
     fi
-    firefoxFolder="usr/$libFolder/firefox-$version"
+    firefoxFolder="usr/$libFolder/firefox"
 
     mkdir -p "$firefoxFolder"
     mv ./* "$firefoxFolder" 2> /dev/null
@@ -119,7 +119,7 @@ else
     mkdir -p "$libFolder/mozilla/plugins/"
 
     mkdir -p usr/bin/
-    ln -s "../$libFolder/firefox-$version/firefox" usr/bin/firefox
+    ln -s "../$libFolder/firefox/firefox" usr/bin/firefox
 
     mkdir -p install
     echo "# HOW TO EDIT THIS FILE:

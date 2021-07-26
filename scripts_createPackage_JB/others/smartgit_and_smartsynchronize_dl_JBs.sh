@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 27/11/2020
+# Last update: 26/07/2021
 #
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
@@ -37,7 +37,7 @@ else
     fi
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit" # last tested: "20_2_0"
+        progName="smartgit" # last tested: "21_1_0"
         countF='2'
     elif [ "$progBuild" == '2' ]; then
         progName="smartsynchronize" # last tested: "4_1_2"
@@ -104,10 +104,10 @@ else
     cp "bin/${progName}-128.png" "usr/share/pixmaps/${progName}.png"
 
     mkdir -p "usr/share/$progName"
-    mv bin/ lib/ "usr/share/$progName"
+    mv bin/ lib/ jre/ "usr/share/$progName"
 
     if [ "$progBuild" == '1' ]; then
-        mv dictionaries/ jre/ "usr/share/$progName"
+        mv dictionaries/ "usr/share/$progName"
     fi
 
     mkdir -p usr/share/applications

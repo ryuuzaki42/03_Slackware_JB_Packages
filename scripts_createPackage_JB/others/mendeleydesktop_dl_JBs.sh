@@ -23,14 +23,14 @@
 # Script: Script to build a Slackware package of mendeleydesktop
 # Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/
 #
-# Last update: 06/05/2020
+# Last update: 28/07/2021
 #
 echo -e "\\n# Script to build a Slackware package of mendeleydesktop #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="mendeleydesktop" # last tested: "1.19.6"
+    progName="mendeleydesktop" # last tested: "1.19.8"
     tag="1_JB"
 
     linkGetVersion="https://www.mendeley.com/release-notes/"
@@ -101,7 +101,27 @@ else
     # Make symlinks and moving some important files
     mkdir -p "$folderSourceCode"/usr/{bin,share}
     cp -r "$folderSourceCode"/opt/mendeleydesktop/share/{applications,icons} "$folderSourceCode"/usr/share
-    ln -s /opt/mendeleydesktop/bin/mendeleydesktop "$folderSourceCode"/usr/bin
+
+    #ln -s /opt/mendeleydesktop/bin/mendeleydesktop "$folderSourceCode"/usr/bin
+
+    ## To "resolve" the error:
+        # ...
+        # Could not find QtWebEngineProcess
+        # ...
+        # Calling _exit(1). Core file will not be generated.
+    echo "#!/bin/bash
+MENDELEY_BASE=/opt/mendeleydesktop
+MENDELEY_LIB=lib
+
+LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:\${MENDELEY_BASE}/\${MENDELEY_LIB}
+export LD_LIBRARY_PATH
+
+cd /opt/mendeleydesktop/
+
+PROFILEHOME=/opt/mendeleydesktop/lib/mendeleydesktop/libexec/QtWebEngineProcess
+
+./bin/mendeleydesktop" > "$folderSourceCode"/usr/bin/mendeleydesktop
+    chmod +x "$folderSourceCode"/usr/bin/mendeleydesktop
 
     find "$folderSourceCode" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

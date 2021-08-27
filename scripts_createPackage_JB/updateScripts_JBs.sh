@@ -22,7 +22,7 @@
 #
 # Script: Scripts to update the scripts with "last tested" and "Last update" from Slackware packages (txz) updates
 #
-# Last update: 28/07/2021
+# Last update: 27/08/2021
 #
 set -e
 

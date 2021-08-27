@@ -22,8 +22,10 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 28/11/2020
+# Last update: 27/08/2021
 #
+set -e
+
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
 if [ "$USER" != "root" ]; then
@@ -33,7 +35,7 @@ else
 
     #./others/create_ap_dl_JBs.sh n
 
-    ./git_lfs_dl_JBs.sh n
+    ./git-lfs_dl_JBs.sh n
 
     #./others/mendeleydesktop_dl_JBs.sh n
 

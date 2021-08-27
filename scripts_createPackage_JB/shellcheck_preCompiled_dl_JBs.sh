@@ -22,8 +22,10 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 27/07/2021
+# Last update: 27/08/2021
 #
+set -e
+
 echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
 if [ "$USER" != "root" ]; then
@@ -35,7 +37,7 @@ else
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.7.2_gitc471e45"
+    progName="shellcheck" # last tested: "0.7.2_git081f7eb"
     tag="1_JB"
     folderDest=$(pwd)
 

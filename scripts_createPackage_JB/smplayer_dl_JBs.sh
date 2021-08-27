@@ -23,23 +23,25 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 07/01/2021
+# Last update: 27/08/2021
 #
 # Tip: To build against Qt5 rather than Qt4
 # Use: USE_QT5=yes ./smplayer_dl_JBs.sh
 #
+set -e
+
 echo -e "\\n# Script to build a Slackware package of smplayer (without skins and themes) #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="smplayer" # last tested: "21.1.0"
+    progName="smplayer" # last tested: "21.8.0"
     tag="1_JB"
 
-    linkGetVersion="https://app.assembla.com/spaces/smplayer/subversion/source/HEAD/smplayer/trunk/OBS/Makefile?_format=raw"
+    linkGetVersion="https://www.smplayer.info/en/downloads"
     wget "$linkGetVersion" -O "${progName}-latest"
 
-    version=$(grep "VERSION" $progName-latest | head -n 1 | sed 's/[^0-9,.]*//g')
+    version=$(grep "Click here to download SMPlayer" $progName-latest | cut -d 'r' -f9 | cut -d ' ' -f2)
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
@@ -91,7 +93,6 @@ else
 
     wget -c "$linkDl/$progName-$version.tar.bz2"
 
-    set -e
     mkdir "$tmpFolder"
     cd "$tmpFolder" || exit
 
@@ -133,7 +134,7 @@ else
     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
     mkdir -p "$progInstallFolder/usr/doc/${progName}-$version"
-    cp -a ./*.txt Changelog "$progInstallFolder/usr/doc/${progName}-$version"
+    cp -a ./*.txt Release_notes.md "$progInstallFolder/usr/doc/${progName}-$version"
 
     rm "$progInstallFolder/usr/share/applications/smplayer_enqueue.desktop"
 

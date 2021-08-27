@@ -22,8 +22,10 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 25/08/2021
+# Last update: 27/08/2021
 #
+set -e
+
 echo -e "\\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\\n"
 
 if [ "$USER" != "root" ]; then
@@ -113,8 +115,9 @@ else
     fi
     firefoxFolder="usr/$libFolder/firefox"
 
-    mkdir -p "$firefoxFolder"
-    mv ./* "$firefoxFolder" 2> /dev/null
+    mkdir -p "../$firefoxFolder"
+    mv ./* "../$firefoxFolder"
+    mv "../usr" .
 
     mkdir -p "$libFolder/mozilla/plugins/"
 

@@ -24,6 +24,8 @@
 #
 # Last update: 07/01/2021
 #
+set -e
+
 for filePackage in $(find . | grep ".*.txz" | grep -v "opera-ffmpeg"); do
     echo
 
@@ -42,7 +44,7 @@ for filePackage in $(find . | grep ".*.txz" | grep -v "opera-ffmpeg"); do
     sed 's/Last update: .*/Last update: '"$dateNew"'/1' "$scriptNamePlace" | sed 's/last tested: .*/last tested: '\""$versionNew"\"'/1' > "$fileFinal"
 
     echo -e "\\nsdiff -s $scriptNamePlace $fileFinal\\n"
-    sdiff -s "$scriptNamePlace" "$fileFinal"
+    sdiff -s "$scriptNamePlace" "$fileFinal" || true # https://stackoverflow.com/a/53612582
 
     mv "$fileFinal" "$scriptNamePlace"
     chmod +x "$scriptNamePlace"

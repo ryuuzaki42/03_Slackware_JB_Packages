@@ -22,11 +22,11 @@
 #
 # Script: Scripts to update the scripts with "last tested" and "Last update" from Slackware packages (txz) updates
 #
-# Last update: 27/08/2021
+# Last update: 22/10/2021
 #
 set -e
 
-for filePackage in $(find . | grep ".*.txz" | grep -v "opera-ffmpeg"); do
+for filePackage in $(find . | grep ".*.txz" | grep -v "opera-ffmpeg-codecs" | grep -v "opera-beta-ffmpeg-codecs"); do
     echo
 
     programName=$(rev <<< "$filePackage" | cut -d '-' -f4- | rev)

@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 18/10/2021
+# Last update: 01/11/2021
 #
 # Tip: To build against Qt5 rather than Qt4
 # Use: USE_QT5=yes ./smplayer_dl_JBs.sh
@@ -35,7 +35,7 @@ echo -e "\\n# Script to build a Slackware package of smplayer (without skins and
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="smplayer" # last tested: "21.8.0"
+    progName="smplayer" # last tested: "21.10.0"
     tag="1_JB"
 
     linkGetVersion="https://www.smplayer.info/en/downloads"

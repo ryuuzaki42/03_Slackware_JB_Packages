@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 02/11/2021
+# Last update: 20/11/2021
 #
 set -e
 
@@ -37,7 +37,7 @@ else
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.7.2_gitefd49e4"
+    progName="shellcheck" # last tested: "0.8.0_git499c993"
     tag="1_JB"
     folderDest=$(pwd)
 

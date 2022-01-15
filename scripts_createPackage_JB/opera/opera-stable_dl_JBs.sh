@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from opera-stable-version.rpm
 #
-# Last update: 24/12/2021
+# Last update: 15/01/2022
 #
 set -e
 
@@ -31,7 +31,7 @@ echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="opera-stable" # last tested: "82.0.4227.43"
+    progName="opera-stable" # last tested: "82.0.4227.58"
     tag="1_JB"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"

@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 20/11/2021
+# Last update: 11/02/2022
 #
 set -e
 
@@ -37,18 +37,18 @@ else
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.8.0_git499c993"
+    progName="shellcheck" # last tested: "0.8.0_git88cdb4e"
     tag="1_JB"
     folderDest=$(pwd)
 
     linkGetVersion="https://github.com/koalaman/shellcheck/releases"
     wget --compress=none "$linkGetVersion" -O "${progName}_latest"
-    versionNumber=$(grep "Stable version" < "${progName}_latest" | head -n 1 | cut -d 'v' -f3 | cut -d '"' -f1)
+    versionNumber=$(grep "Stable version" "${progName}_latest" | head -n 1 | cut -d 'v' -f3 | cut -d '"' -f1)
     rm "${progName}_latest"
 
     linkGetGitCommit="https://github.com/koalaman/shellcheck/commits/master"
     wget "$linkGetGitCommit" -O "${progName}_latest"
-    versionCommit=$(grep "https://github.com/koalaman/shellcheck/commit/" < "${progName}_latest" | head -n 1 | cut -d '/' -f7- | cut -d'"' -f1 | cut -c1-7)
+    versionCommit=$(grep "/koalaman/shellcheck/commit/" "${progName}_latest" | head -n 1 | awk -F 'commit/' '{print $2}' | cut -c1-7)
     rm "${progName}_latest"
     version="${versionNumber}_git${versionCommit}"
 

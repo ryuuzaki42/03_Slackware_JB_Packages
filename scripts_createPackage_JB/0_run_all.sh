@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 27/08/2021
+# Last update: 09/02/2022
 #
 set -e
 
@@ -45,7 +45,7 @@ else
 
     ./opera/opera-stable_dl_JBs.sh n
 
-    ./shellcheck_preCompiled_dl_JBs.sh n
+    #./others/shellcheck_preCompiled_dl_JBs.sh n
 
     #./others/smartgit_and_smartsynchronize_dl_JBs.sh 1 n
 

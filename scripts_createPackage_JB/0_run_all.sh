@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 09/02/2022
+# Last update: 16/02/2022
 #
 set -e
 
@@ -35,7 +35,7 @@ else
 
     #./others/create_ap_dl_JBs.sh n
 
-    ./git-lfs_dl_JBs.sh n
+    #./others/git-lfs_dl_JBs.sh n
 
     #./others/mendeleydesktop_dl_JBs.sh n
 

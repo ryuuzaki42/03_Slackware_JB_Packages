@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of teamviewer
 # Based in: http://slackbuilds.org/repository/14.2/network/teamviewer/
 #
-# Last update: 24/12/2021
+# Last update: 21/03/2022
 #
 set -e
 
@@ -35,7 +35,7 @@ echo "This script create a txz version from teamviewer_arch.deb"
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="teamviewer" # last tested: "15.25.5"
+    progName="teamviewer" # last tested: "15.27.3"
     tag="1_JB"
 
     folderDest=$(pwd)

@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 16/02/2022
+# Last update: 24/03/2022
 #
 set -e
 
@@ -41,7 +41,7 @@ else
 
     #./others/messengerfordesktop_dl_JBs.sh n
 
-    ./mozilla-firefox_preCompiled_dl_JBs.sh n "en-GB" # Create a package with language en-GB
+    ./mozilla-firefox_preCompiled_dl_JBs.sh n "en-US" # Create a package with language en-US
 
     ./opera/opera-stable_dl_JBs.sh n
 

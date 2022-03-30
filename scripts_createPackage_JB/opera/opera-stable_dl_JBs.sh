@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from opera-stable-version.rpm
 #
-# Last update: 17/03/2022
+# Last update: 29/03/2022
 #
 set -e
 
@@ -31,7 +31,7 @@ echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="opera-stable" # last tested: "84.0.4316.42"
+    progName="opera-stable" # last tested: "85.0.4341.28"
     tag="1_JB"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"
@@ -54,11 +54,16 @@ else
         wget "$linkGetVersionLinux" -O "${progName}-downloads"
 
         if grep "href" "${progName}-downloads" | grep -q "linux"; then
-            continue='1'
+            wget "http://ftp.opera.com/ftp/pub/opera/desktop/$version/linux" -O "${progName}-downloads2"
+            if grep "rpm" "${progName}-downloads2"; then
+                continue='1'
+            else
+                echo -e "\\t# The version \"$version\" don't have rpm version yet\\n"
+            fi
         else
-            echo "The version $version don't have Linux version yet"
+            echo -e "\\t# The version \"$version\" don't have Linux version yet\\n"
         fi
-        rm "${progName}-downloads"
+        rm "${progName}-downloads" "${progName}-downloads2"
 
         ((tailNumber++))
     done

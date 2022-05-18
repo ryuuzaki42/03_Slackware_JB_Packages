@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from opera-stable-version.rpm
 #
-# Last update: 17/05/2022
+# Last update: 18/05/2022
 #
 set -e
 
@@ -60,10 +60,11 @@ else
             else
                 echo -e "\\t# The version \"$version\" don't have rpm version yet\\n"
             fi
+
+            rm "${progName}-downloads" "${progName}-downloads2"
         else
             echo -e "\\t# The version \"$version\" don't have Linux version yet\\n"
         fi
-        rm "${progName}-downloads" "${progName}-downloads2"
 
         ((tailNumber++))
     done

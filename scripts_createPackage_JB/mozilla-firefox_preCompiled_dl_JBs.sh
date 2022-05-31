@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 20/05/2022
+# Last update: 31/05/2022
 #
 set -e
 
@@ -42,7 +42,7 @@ else
             ;;
     esac
 
-    progName="mozilla-firefox" # last tested: "100.0.2"
+    progName="mozilla-firefox" # last tested: "101.0"
     tag="1_JB"
     folderDest=$(pwd)
 
@@ -62,11 +62,6 @@ else
 
     version=$(grep "latest-firefox" "${progName}_latest" | sed 's/.*latest-firefox="//; s/" .*//')
 
-    countChar=${#version}
-    if [ "$countChar" == '4' ]; then
-        version="${version}.0"
-    fi
-
     rm "${progName}_latest"
     echo -e "Link to download: $linkDl"
 
@@ -78,7 +73,7 @@ else
     fileName="firefox-$version.tar.bz2"
     echo -e "\\nLatest Firefox stable version: $fileName"
 
-    installedVersion=$(find /var/log/packages/ | grep "firefox" | cut -d '-' -f3)
+    installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3)
     echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then

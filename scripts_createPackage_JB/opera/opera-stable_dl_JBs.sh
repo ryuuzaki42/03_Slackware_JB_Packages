@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from opera-stable-version.rpm
 #
-# Last update: 28/05/2022
+# Last update: 03/06/2022
 #
 set -e
 
@@ -31,43 +31,40 @@ echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="opera-stable" # last tested: "87.0.4390.36"
+    progName="opera-stable" # last tested: "87.0.4390.45"
     tag="1_JB"
 
-    linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop/"
+    linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop"
 
     tailNumber='1'
     continue='0'
     while [ "$continue" == '0' ]; do
         wget "$linkGetVersion" -O "${progName}-latest"
 
-        version=$(grep "href" ${progName}-latest | grep -v "Index" | sort --version-sort --field-separator=. | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
-        rm "${progName}-latest"
-
+        version=$(grep "href" ${progName}-latest | grep -v "Index" | sort -V -t '.' | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
         if [ "$version" == '' ]; then
             echo -e "\\nNot found any more version\\nJust exiting"
             exit 0
         fi
 
         echo -e "\\n Version test: $version\\n"
-        linkGetVersionLinux="http://ftp.opera.com/ftp/pub/opera/desktop/$version/"
-        wget "$linkGetVersionLinux" -O "${progName}-downloads"
+        linkGetVersionLinux="$linkGetVersion/$version/"
+        wget "$linkGetVersionLinux" -O "${progName}-latest"
 
-        if grep "href" "${progName}-downloads" | grep -q "linux"; then
-            wget "http://ftp.opera.com/ftp/pub/opera/desktop/$version/linux" -O "${progName}-downloads2"
-            if grep "rpm" "${progName}-downloads2"; then
+        if grep -q "linux" "${progName}-latest"; then
+            wget "$linkGetVersion/$version/linux" -O "${progName}-latest"
+            if grep -q "rpm" "${progName}-latest"; then
                 continue='1'
             else
                 echo -e "\\t# The version \"$version\" don't have rpm version yet\\n"
             fi
-
-            rm "${progName}-downloads" "${progName}-downloads2"
         else
-            echo -e "\\t# The version \"$version\" don't have Linux version yet\\n"
+            echo -e "\\t# The version \"$version\" don't have GNU/Linux version yet\\n"
         fi
 
         ((tailNumber++))
     done
+    rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | rev | cut -d '-' -f3 | rev)
     echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
@@ -87,19 +84,17 @@ else
             fi
         fi
     fi
-    linkDl="http://ftp.opera.com/ftp/pub/opera/desktop/$version/linux"
+    linkDl="$linkGetVersion/$version/linux"
 
     ARCH=$(uname -m)
-    ARCHdl="amd64"
-
     if [ "$ARCH" == "x86_64" ]; then
-        wget -c "$linkDl/${progName}_${version}_${ARCHdl}.rpm"
+        wget -c "$linkDl/${progName}_${version}_amd64.rpm"
     else
         echo -e "\\nError: arch: $ARCH - This package is currently only available for 64bit.\\n"
         exit 1
     fi
 
-    mv "${progName}_${version}_${ARCHdl}.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
+    mv "${progName}_${version}_amd64.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
 
     rpm2txz -d -c -s -r "${progName}-${version}-${ARCH}-${tag}.rpm"
 

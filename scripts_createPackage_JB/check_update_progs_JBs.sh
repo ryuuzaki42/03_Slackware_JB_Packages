@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 08/06/2022
+# Last update: 12/06/2022
 #
 set -e
 
@@ -140,7 +140,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "101.0"
+    progName="mozilla-firefox" # last tested: "101.0.1"
     link="https://www.mozilla.org/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -217,7 +217,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.75"
+    installedVersion="1.0.76"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -291,11 +291,11 @@ revouninstaller(){
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
 
-sumatrapdfreader(){
-    progName="sumatrapdfreader"
+sumatraPDFReader(){
+    progName="sumatraPDFReader"
     link="https://www.sumatrapdfreader.org/download-free-pdf-viewer"
     command="grep -o 'SumatraPDF-.*-64-install.exe\"' a.html | cut -d '-' -f2"
-    installedVersion="3.4.5"
+    installedVersion="3.4.6"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -316,7 +316,7 @@ windowsPrograms(){
     nettraffic
     notepad-plus-plus
     revouninstaller
-    sumatrapdfreader
+    sumatraPDFReader
     winrar
 }
 

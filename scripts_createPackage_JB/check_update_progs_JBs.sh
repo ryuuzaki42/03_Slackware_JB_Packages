@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 12/06/2022
+# Last update: 14/06/2022
 #
 set -e
 
@@ -148,7 +148,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera-stable" # last tested: "88.0.4412.27"
+    progName="opera-stable" # last tested: "88.0.4412.40"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -189,7 +189,7 @@ opera(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.65.0"
+    progName="opera-ffmpeg-codecs" # last tested: "0.65.1"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 
@@ -286,7 +286,7 @@ revouninstaller(){
     link="https://www.revouninstaller.com/products/revo-uninstaller-free"
     command="grep -o -E '>Version: (.{4}|.{5})<' a.html | tr -d 'a-zA-Z : <>'"
 
-    installedVersion="2.3.8"
+    installedVersion="2.3.9"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

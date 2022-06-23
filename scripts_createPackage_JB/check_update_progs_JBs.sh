@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 14/06/2022
+# Last update: 23/06/2022
 #
 set -e
 
@@ -90,7 +90,7 @@ checkVersion() {
 ## GNU/Linux programs
 
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.8.52"
+    progName="MasterPDFEditor" # last tested: "5.8.63"
     link="https://code-industry.net/free-pdf-editor"
     command="grep -o 'http[^\"]*' a.html | grep \"x86.64.tar.gz\" | cut -d '-' -f5"
 
@@ -148,7 +148,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera-stable" # last tested: "88.0.4412.40"
+    progName="opera-stable" # last tested: "88.0.4412.53"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -217,7 +217,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.76"
+    installedVersion="1.0.77"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

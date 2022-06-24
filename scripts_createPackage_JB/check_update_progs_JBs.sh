@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 23/06/2022
+# Last update: 24/06/2022
 #
 set -e
 
@@ -90,7 +90,7 @@ checkVersion() {
 ## GNU/Linux programs
 
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.8.63"
+    progName="MasterPDFEditor" # last tested: "5.8.65"
     link="https://code-industry.net/free-pdf-editor"
     command="grep -o 'http[^\"]*' a.html | grep \"x86.64.tar.gz\" | cut -d '-' -f5"
 
@@ -232,6 +232,14 @@ virtualbox(){
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
 
+zotero(){
+    progName="zotero" # last tested: "6.0.9"
+    link="https://www.zotero.org/download/"
+    command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
+
+    checkVersion "$progName" "$link" "$command"
+}
+
 ## GNU/Linux calls
 GNULinuxPrograms(){
     MasterPDFEditor
@@ -247,6 +255,7 @@ GNULinuxPrograms(){
     teamviewer
     ventoy
     virtualbox
+    zotero
 }
 
 ## Windows programs

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 24/06/2022
+# Last update: 01/07/2022
 #
 set -e
 
@@ -140,7 +140,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "101.0.1"
+    progName="mozilla-firefox" # last tested: "102.0"
     link="https://www.mozilla.org/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -205,7 +205,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.30.3"
+    progName="teamviewer" # last tested: "15.31.5"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 
@@ -217,7 +217,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.77"
+    installedVersion="1.0.78"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

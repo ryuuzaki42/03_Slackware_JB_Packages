@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 01/07/2022
+# Last update: 06/07/2022
 #
 set -e
 
@@ -90,7 +90,7 @@ checkVersion() {
 ## GNU/Linux programs
 
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.8.65"
+    progName="MasterPDFEditor" # last tested: "5.8.70"
     link="https://code-industry.net/free-pdf-editor"
     command="grep -o 'http[^\"]*' a.html | grep \"x86.64.tar.gz\" | cut -d '-' -f5"
 
@@ -140,15 +140,15 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "102.0"
+    progName="mozilla-firefox" # last tested: "102.0.1"
     link="https://www.mozilla.org/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
     checkVersion "$progName" "$link" "$command"
 }
 
-opera(){
-    progName="opera-stable" # last tested: "88.0.4412.53"
+opera-stable(){
+    progName="opera-stable" # last tested: "88.0.4412.74"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -189,7 +189,7 @@ opera(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.65.1"
+    progName="opera-ffmpeg-codecs" # last tested: "0.66.0"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 
@@ -249,7 +249,7 @@ GNULinuxPrograms(){
     maestral
     mkvtoolnix
     mozilla-firefox
-    opera
+    opera-stable
     opera-ffmpeg-codecs
     smplayer
     teamviewer

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 06/07/2022
+# Last update: 14/07/2022
 #
 set -e
 
@@ -132,7 +132,7 @@ maestral(){
 }
 
 mkvtoolnix () {
-    progName="mkvtoolnix" # last tested: "68.0.0"
+    progName="mkvtoolnix" # last tested: "69.0.0"
     link="https://mkvtoolnix.download/index.html"
     command="grep -o 'Released v.*(' a.html | head -n1 | tr -d 'a-zA-Z ('"
 
@@ -148,7 +148,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "88.0.4412.74"
+    progName="opera-stable" # last tested: "89.0.4447.48"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -197,7 +197,7 @@ opera-ffmpeg-codecs(){
 }
 
 smplayer(){
-    progName="smplayer" # last tested: "22.2.0"
+    progName="smplayer" # last tested: "22.7.0"
     link="https://www.smplayer.info/en/downloads"
     command="grep -o '/smplayer.*-x64.exe\"' a.html | cut -d '-' -f2"
 
@@ -283,9 +283,9 @@ nettraffic(){
 notepad-plus-plus(){
     progName="notepad-plus-plus"
     link="https://notepad-plus-plus.org/downloads"
-    command="grep \"Download Notepad\" a.html | head -n1 | cut -d 'v' -f2 | tr -d '\r'"
+    command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.4.2"
+    installedVersion="8.4.3"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

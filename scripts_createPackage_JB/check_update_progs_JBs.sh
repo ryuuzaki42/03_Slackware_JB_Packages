@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 14/07/2022
+# Last update: 20/07/2022
 #
 set -e
 
@@ -106,7 +106,7 @@ TLP(){
 }
 
 authy(){
-    progName="authy" # last tested: "2.2.0"
+    progName="authy" # last tested: "2.2.1"
     link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
     command="grep -o 'authy-[0-9].*sig' a.html | cut -d '-' -f2"
 
@@ -148,7 +148,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "89.0.4447.48"
+    progName="opera-stable" # last tested: "89.0.4447.51"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -227,13 +227,13 @@ virtualbox(){
     link="https://www.virtualbox.org/wiki/Linux_Downloads"
     command="grep -o 'http.*run' a.html | cut -d '-' -f2-3"
 
-    installedVersion="6.1.34-150636"
+    installedVersion="6.1.36-152435"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.9"
+    progName="zotero" # last tested: "6.0.10"
     link="https://www.zotero.org/download/"
     command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 
@@ -285,7 +285,7 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.4.3"
+    installedVersion="8.4.4"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

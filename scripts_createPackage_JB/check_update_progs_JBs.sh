@@ -141,7 +141,7 @@ mkvtoolnix () {
 
 mozilla-firefox(){
     progName="mozilla-firefox" # last tested: "102.0.1"
-    link="https://www.mozilla.org/firefox/all"
+    link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
     checkVersion "$progName" "$link" "$command"

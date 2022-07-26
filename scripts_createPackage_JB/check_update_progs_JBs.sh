@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 20/07/2022
+# Last update: 26/07/2022
 #
 set -e
 
@@ -205,7 +205,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.31.5"
+    progName="teamviewer" # last tested: "15.32.3"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 

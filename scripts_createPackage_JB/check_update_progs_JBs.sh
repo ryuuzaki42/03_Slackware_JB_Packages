@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 26/07/2022
+# Last update: 01/08/2022
 #
 set -e
 
@@ -140,7 +140,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "103.0"
+    progName="mozilla-firefox" # last tested: "103.0.1"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -148,7 +148,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "89.0.4447.51"
+    progName="opera-stable" # last tested: "89.0.4447.71"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -217,7 +217,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.78"
+    installedVersion="1.0.79"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 01/08/2022
+# Last update: 15/08/2022
 #
 set -e
 
@@ -132,7 +132,7 @@ maestral(){
 }
 
 mkvtoolnix () {
-    progName="mkvtoolnix" # last tested: "69.0.0"
+    progName="mkvtoolnix" # last tested: "70.0.0"
     link="https://mkvtoolnix.download/index.html"
     command="grep -o 'Released v.*(' a.html | head -n1 | tr -d 'a-zA-Z ('"
 
@@ -140,7 +140,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "103.0.1"
+    progName="mozilla-firefox" # last tested: "103.0.2"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -148,7 +148,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "89.0.4447.71"
+    progName="opera-stable" # last tested: "89.0.4447.83"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -233,7 +233,7 @@ virtualbox(){
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.10"
+    progName="zotero" # last tested: "6.0.12"
     link="https://www.zotero.org/download/"
     command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 

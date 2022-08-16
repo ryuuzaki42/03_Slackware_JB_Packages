@@ -21,21 +21,26 @@
 #
 # Descrição: Script to download the last version of Slackware Live, made by AlienBob
 #
-# Last update: 14/08/2022
+# Last update: 16/08/2022
 #
-set -e
+# My dls:
+# Live    - current 64 bits - ./0dl_Slackware_Live_LastVersion_JB.sh . 1 3 y
+# Stable  - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 2 1 y
+# Current - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 3 1 y
+#
 
+set -e
 echo -e "\\nScript to download the last version of Slackware Live (made by Alien Bob)"
 
 # Last tested:
-    # 1 slackware64-15.0-live/    - day 2022-07-31
-    # 2 slackware64-current-live/ - day 2022-08-14
-    # 3 slackware-live/           - version 1.5.3
+    # 1 slackware-live/           - version 1.6.0
+    # 2 slackware64-15.0-live/    - day 2022-08-14
+    # 3 slackware64-current-live/ - day 2022-08-16
 
-#repoLink="https://download.liveslak.org/"
-#repoLink="https://bear.alienbase.nl/mirrors/slackware-live/"
-#repoLink="https://slackware.nl/slackware-live/"
-repoLink="https://slackware.uk/people/alien-slacklive/"
+#repoLink="https://download.liveslak.org"
+#repoLink="https://bear.alienbase.nl/mirrors/slackware-live"
+#repoLink="https://slackware.nl/slackware-live"
+repoLink="https://slackware.uk/people/alien-slacklive"
 
 help() {
     echo -e "\\n$(basename "$0") \$pathDl \$versionDownload \$downloadIsoNumbers \$continueOrNot
@@ -49,6 +54,10 @@ pathDl=$1
 versionDownload=$2
 downloadIsoNumbers=$3
 continueOrNot=$4
+
+downloadLive="slackware-live"
+downloadStable="slackware64-15.0-live"
+downloadCurrent="slackware64-current-live"
 
 if [ "$pathDl" == "-h" ]; then
     help
@@ -122,25 +131,25 @@ while [ "$countTmp" -lt "$countLine" ]; do
 done
 printTrace "$countTrace"
 
-versionSlackwareLive=$(grep -o "href=\"[0-9]\.[0-9]\.[0-9]" < latestVersion | cut -d '"' -f2)
-versionSlackwareCurrentLive=$(grep "href=" < latestVersion | grep "slackware64-current" | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
-versionSlackwareStableLive=$(grep "href=" < latestVersion | grep "slackware64-15.0-live" | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
+versionRepoLive=$(grep -o "href=\"[0-9]\.[0-9]\.[0-9]" < latestVersion | cut -d '"' -f2)
+versionRepoStable=$(grep "href=" < latestVersion | grep $downloadStable | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
+versionRepoCurrent=$(grep "href=" < latestVersion | grep $downloadCurrent | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
 rm latestVersion
 
-versionLocalLive=$(find slackware-live-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f3-)
-versionLocalCurrent=$(find slackware64-15.0-live_day* 2> /dev/null | sort | head -n 1 | cut -d '-' -f4-)
-versionLocalStableLive=$(find slackware64-current-live_day* 2> /dev/null | sort | head -n 1 | cut -d '-' -f4-)
+versionLocalLive=$(find ${downloadLive}-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f3-)
+versionLocalStable=$(find ${downloadStable}_day-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f4-)
+versionLocalCurrent=$(find ${downloadCurrent}_day-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f4-)
 
 echo -e "\\nTake a look in the folders \"bonus/\" and \"secureboot/\" for more goodies!"
 
-echo -e "\\nslackware-live/           Version Online (repo): \"$versionSlackwareLive\" Version Downloaded: \"$versionLocalLive\"
-slackware64-15.0-live/    Version Online (repo): \"$versionSlackwareCurrentLive\" Version Downloaded: \"$versionLocalCurrent\"
-slackware64-current-live/ Version Online (repo): \"$versionSlackwareStableLive\" Version Downloaded: \"$versionLocalStableLive\""
+echo -e "\\n$downloadLive/           - Version online (repo): \"$versionRepoLive\" Version downloaded: \"$versionLocalLive\"
+$downloadStable/    - Version online (repo): \"$versionRepoStable\" Version downloaded: \"$versionLocalStable\"
+$downloadCurrent/ - Version online (repo): \"$versionRepoCurrent\" Version downloaded: \"$versionLocalCurrent\""
 
 echo -e "\\n\\n Live with all update until the day of release of the ISO\\n
-1) \"slackware-live/\"           - Live from Slackware Current (32 and 64 bits) with more flavors (kde, xfce, cinnamon, mate, daw, lean)
-2) \"slackware64-15.0-live/\"    - Live from Slackware Stable 15.0 64 bits
-3) \"slackware64-current-live/\" - Live from Slackware Current 64 bits"
+1) \"$downloadLive/\"           - Live from Slackware Current (32 and 64 bits) with more flavors (kde, xfce, cinnamon, mate, daw, lean)
+2) \"$downloadStable/\"    - Live from Slackware Stable 15.0 64 bits
+3) \"$downloadCurrent/\" - Live from Slackware Current 64 bits"
 
 echo -en "\\nWant download 1, 2 or 3: "
 if [ "$versionDownload" == '' ]; then
@@ -149,32 +158,32 @@ else
     echo -e "\\nversionDownload: \"$versionDownload\""
 fi
 
-if [ "$versionDownload" == '1' ]; then # slackware-live/
+if [ "$versionDownload" == '1' ]; then # slackware-live
     versionLocal=$versionLocalLive
-    versionOnRepo=$versionSlackwareLive
+    versionRepo=$versionRepoLive
 
-    folderCreate="slackware-live-$versionOnRepo"
-    linkDl="$repoLink/$versionOnRepo/"
+    folderCreate=$downloadLive"-"
+    linkDl="$repoLink/$versionRepo"
 
-elif [ "$versionDownload" == '2' ]; then #slackware64-15.0-live/
-    versionLocal=$versionLocalCurrent
-    versionOnRepo=$versionSlackwareCurrentLive
+elif [ "$versionDownload" == '2' ]; then # slackware64-15.0-live
+    versionLocal=$versionLocalStable
+    versionRepo=$versionRepoStable
 
-    folderCreate="slackware64-15.0-live_day-$versionOnRepo"
-    linkDl="$repoLink/slackware64-15.0-live/"
+    folderCreate=$downloadStable"_day-"
+    linkDl="$repoLink/$downloadStable"
 
-else # slackware64-current-live/
+else # slackware64-current-live
     versionDownload=3
 
-    versionLocal=$versionLocalStableLive
-    versionOnRepo=$versionSlackwareStableLive
+    versionLocal=$versionLocalCurrent
+    versionRepo=$versionRepoCurrent
 
-    folderCreate="slackware64-current-live_day-$versionOnRepo"
-    linkDl="$repoLink/slackware64-current-live/"
+    folderCreate=$downloadCurrent"_day-"
+    linkDl="$repoLink/$downloadCurrent"
 fi
 
-if [ "$versionLocal" == "$versionOnRepo" ]; then
-    echo -e "\\n# No new version found #"
+if [ "$versionLocal" == "$versionRepo" ]; then
+    echo -e "\\n# No new version found #\\n"
     echo "Version online (repo) is equal to version downloaded: \"$versionLocal\""
 
     echo -n "Want continue and maybe download more one ISO? (y)es - (n)o (hit enter to no): "
@@ -190,8 +199,10 @@ if [ "$versionLocal" == "$versionOnRepo" ]; then
     fi
 fi
 
-mkdir "$folderCreate" || true
-cd "$folderCreate" || exit
+echo -e "\\nfolderCreate: \"$folderCreate$versionRepo\"\\n"
+
+mkdir "$folderCreate$versionRepo" || true
+cd "$folderCreate$versionRepo" || exit
 
 wget "$linkDl" -O "latestVersion"
 
@@ -267,7 +278,10 @@ while [ "$countTmp" -lt "$countLine" ]; do
 done
 
 if [ "$versionDownload" == '1' ]; then
+    echo -e '\\n wget -c "$repoLink/README" -O changelog.txt"\\n'
     wget -c "$repoLink/README" -O changelog.txt
+
+    echo -e "\\n wget -c \"$repoLink/slackware64-15.0-live/README\"\\n"
     wget -c "$repoLink/slackware64-15.0-live/README"
 
 else # "$versionDownload" == 2 or 3
@@ -281,7 +295,7 @@ else # "$versionDownload" == 2 or 3
     fi
 fi
 
-echo "Downloading some good script from alien to the \"foldeer script_alien/\""
+echo "Downloading some good script from alien to the \"folder script_alien/\""
 repoLinkConfig="https://www.slackware.com/~alien/liveslak"
 
 files="README.txt make_slackware_live.sh makemod setup2hd iso2usb.sh upslak.sh"
@@ -299,7 +313,7 @@ md5sum -c slackware*.md5
 
 cd .. || exit
 
-if [ "$versionLocal" != '' ] && [ "$versionLocal" != "$versionOnRepo" ]; then
+if [ "$versionLocal" != '' ] && [ "$versionLocal" != "$versionRepo" ]; then
     echo "Delete the old version ($versionLocal)?"
     echo -n "(y)es - (n)o (hit enter to yes): "
     read -r deleteOldVersion

@@ -24,7 +24,7 @@
 # Last update: 16/08/2022
 #
 # My dls:
-# Live    - current 64 bits - ./0dl_Slackware_Live_LastVersion_JB.sh . 1 3 y
+# Live    - LEAN 64 bits - ./0dl_Slackware_Live_LastVersion_JB.sh . 1 5 y
 # Stable  - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 2 1 y
 # Current - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 3 1 y
 #
@@ -64,6 +64,20 @@ if [ "$pathDl" == "-h" ]; then
     exit 0
 fi
 
+linkPrintAndDl() {
+    linkDlFunction=$1
+    fileName=$2
+
+    echo -en "\\n wget -c \"$linkDlFunction\""
+    if [ "$fileName" == '' ]; then
+        echo -e "\\n"
+        wget -c "$linkDlFunction"
+    else
+        echo -e " -O \"$fileName\"\\n"
+        wget -c "$linkDlFunction" -O "$fileName"
+    fi
+}
+
 alinPrint() {
     inputValue=$1
     countSpaces=$2
@@ -101,9 +115,8 @@ else
     echo "\"$pathDl\""
     cd "$pathDl/" || exit
 fi
-echo
 
-wget "$repoLink" -O "latestVersion"
+linkPrintAndDl "$repoLink" "latestVersion"
 
 infoLatest=$(grep "href=" latestVersion | grep -E "\[DIR\]|\[   \]|\[!!!\]" | sed 's/.* href="//g')
 infoName=$(echo "$infoLatest" | sed 's/">.*//g')
@@ -140,14 +153,14 @@ versionLocalLive=$(find ${downloadLive}-* 2> /dev/null | sort | head -n 1 | cut 
 versionLocalStable=$(find ${downloadStable}_day-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f4-)
 versionLocalCurrent=$(find ${downloadCurrent}_day-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f4-)
 
-echo -e "\\nTake a look in the folders \"bonus/\" and \"secureboot/\" for more goodies!"
+echo -e "\\n # Take a look in the folders \"bonus/\" and \"secureboot/\" for more goodies! #"
 
 echo -e "\\n$downloadLive/           - Version online (repo): \"$versionRepoLive\" Version downloaded: \"$versionLocalLive\"
 $downloadStable/    - Version online (repo): \"$versionRepoStable\" Version downloaded: \"$versionLocalStable\"
 $downloadCurrent/ - Version online (repo): \"$versionRepoCurrent\" Version downloaded: \"$versionLocalCurrent\""
 
-echo -e "\\n\\n Live with all update until the day of release of the ISO\\n
-1) \"$downloadLive/\"           - Live from Slackware Current (32 and 64 bits) with more flavors (kde, xfce, cinnamon, mate, daw, lean)
+echo -e "\\n\\n # The Lives ISO has all update until the day of release #\\n
+1) \"$downloadLive/\"           - Live from Slackware Current (32 and 64 bits) with more flavors (like MATE, DAW, LEAN)
 2) \"$downloadStable/\"    - Live from Slackware Stable 15.0 64 bits
 3) \"$downloadCurrent/\" - Live from Slackware Current 64 bits"
 
@@ -158,21 +171,21 @@ else
     echo -e "\\nversionDownload: \"$versionDownload\""
 fi
 
-if [ "$versionDownload" == '1' ]; then # slackware-live
+if [ "$versionDownload" == '1' ]; then # Live
     versionLocal=$versionLocalLive
     versionRepo=$versionRepoLive
 
     folderCreate=$downloadLive"-"
     linkDl="$repoLink/$versionRepo"
 
-elif [ "$versionDownload" == '2' ]; then # slackware64-15.0-live
+elif [ "$versionDownload" == '2' ]; then # Stable
     versionLocal=$versionLocalStable
     versionRepo=$versionRepoStable
 
     folderCreate=$downloadStable"_day-"
     linkDl="$repoLink/$downloadStable"
 
-else # slackware64-current-live
+else # Current
     versionDownload=3
 
     versionLocal=$versionLocalCurrent
@@ -204,7 +217,7 @@ echo -e "\\nfolderCreate: \"$folderCreate$versionRepo\"\\n"
 mkdir "$folderCreate$versionRepo" || true
 cd "$folderCreate$versionRepo" || exit
 
-wget "$linkDl" -O "latestVersion"
+linkPrintAndDl "$linkDl" "latestVersion"
 
 infoISO=$(grep ".iso\"" < latestVersion | sed 's/.* href="//g')
 rm latestVersion
@@ -262,54 +275,53 @@ while [ "$countTmp" -lt "$countLine" ]; do
     if echo "$downloadIsoNumbers" | grep -q "$countTmp"; then
         echo "Download: $countTmp - $tmpInfo"
 
-        echo -e "\\n wget -c \"$linkDl/$tmpInfo\"\\n"
-        wget -c "$linkDl/$tmpInfo"
+        linkPrintAndDl "$linkDl/$tmpInfo"
 
-        echo -e "\\n wget -c \"$linkDl/$tmpInfo.md5\"\\n"
-        wget -c "$linkDl/$tmpInfo.md5"
+        linkPrintAndDl "$linkDl/$tmpInfo.md5"
 
         if [ "$versionDownload" == '1' ]; then
-            echo -e "\\n wget -c \"$linkDl/$tmpInfo.asc\"\\n"
-            wget -c "$linkDl/$tmpInfo.asc"
+            linkPrintAndDl "$linkDl/$tmpInfo.asc"
         fi
     fi
 
     ((countTmp++))
 done
 
-if [ "$versionDownload" == '1' ]; then
-    echo -e '\\n wget -c "$repoLink/README" -O changelog.txt"\\n'
-    wget -c "$repoLink/README" -O changelog.txt
+linkPrintAndDl "$repoLink/README" "ChangeLog.txt"
 
-    echo -e "\\n wget -c \"$repoLink/slackware64-15.0-live/README\"\\n"
-    wget -c "$repoLink/slackware64-15.0-live/README"
+if [ "$versionDownload" == '1' ]; then
+    linkPrintAndDl "$repoLink/slackware64-current-live/README"
 
 else # "$versionDownload" == 2 or 3
-    wget -c "$linkDl/liveslak.log"
-    wget -c "$linkDl/README"
+    linkPrintAndDl "$linkDl/liveslak.log"
+
+    linkPrintAndDl "$linkDl/README"
 
     if [ "$versionDownload" == '2' ]; then
-        wget -c "$linkDl/LATEST_ADDITION_TO_150"
+        linkPrintAndDl "$linkDl/LATEST_ADDITION_TO_150"
     else
-        wget -c "$linkDl/LATEST_ADDITION_TO_CURRENT"
+        linkPrintAndDl "$linkDl/LATEST_ADDITION_TO_CURRENT"
     fi
 fi
 
-echo "Downloading some good script from alien to the \"folder script_alien/\""
+folderScriptsAlien="alien_scripts/"
+echo -e "\\nDownloading some good script from alien to the folder \"$folderScriptsAlien\""
 repoLinkConfig="https://www.slackware.com/~alien/liveslak"
 
-files="README.txt make_slackware_live.sh makemod setup2hd iso2usb.sh upslak.sh"
+files="iso2usb.sh isocomp.sh make_slackware_live.sh make_slackware_live.conf makemod upslak.sh"
 
-mkdir script_alien/ || true
-cd script_alien/ || exit
+linkPrintAndDl "$repoLinkConfig/README.txt"
+
+mkdir $folderScriptsAlien || true
+cd $folderScriptsAlien || exit
+
 for file in $files; do
-    echo -e "\\n wget -c \"$repoLinkConfig/$file\"\\n"
-    wget -c "$repoLinkConfig/$file"
+    linkPrintAndDl "$repoLinkConfig/$file"
 done
 cd .. || exit
 
 echo " # Md5sum check #"
-md5sum -c slackware*.md5
+md5sum -c *.md5
 
 cd .. || exit
 
@@ -324,9 +336,9 @@ if [ "$versionLocal" != '' ] && [ "$versionLocal" != "$versionRepo" ]; then
 fi
 
 echo -e "\\nUseful links:
-    1 https://download.liveslak.org/
-    2 https://alien.slackbook.org/blog/slackware-live-edition/
-    3 https://docs.slackware.com/slackware:liveslak
-    4 https://git.liveslak.org/liveslak/about/"
+    1 https://git.liveslak.org/liveslak/about/
+    2 https://download.liveslak.org/
+    3 https://alien.slackbook.org/blog/slackware-live-edition/
+    4 https://docs.slackware.com/slackware:liveslak"
 
 echo -e "\\nEnd of script!\\n"

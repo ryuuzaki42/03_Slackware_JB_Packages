@@ -23,8 +23,10 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 13/06/2022
+# Last update: 20/08/2022
 #
+
+set -e
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
 if [ "$USER" != "root" ]; then
@@ -32,31 +34,33 @@ if [ "$USER" != "root" ]; then
 else
     progBuild=$1
     if [ "$progBuild" == '' ]; then
-        echo -en "\\nYou want build SmartGit or SmartSynchronize?\\n1 to SmartGit or - 2 to SmartSynchronize: "
+        echo -en "You want build SmartGit or SmartSynchronize?\\n1 to SmartGit or - 2 to SmartSynchronize: "
         read -r progBuild
     fi
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit" # last tested: "21_1_0"
+        progName="smartgit" # last tested: "21.2.3"
         countF='2'
     elif [ "$progBuild" == '2' ]; then
-        progName="smartsynchronize" # last tested: "4_3_1"
+        progName="smartsynchronize" # last tested: "4.3.1"
         countF='1'
     else
         echo -e "\\nError: The chosen program ($progBuild) is unknown\\n"
         exit 1
     fi
 
+    echo
     linkGetVersion="https://www.syntevo.net/$progName/changelog.txt"
     wget --no-check-certificate "$linkGetVersion" -O "${progName}-latest.txt"
 
     version=$(head -n 1 ${progName}-latest.txt | cut -d ' ' -f$countF | sed 's/[^0-9,.]*//g')
-    version=${version//./_}
+    versionDL=${version//./_}
     rm "${progName}-latest.txt"
 
-    countUnderscore=$(grep -o "_" <<< "$version" | wc -l)
+    countUnderscore=$(grep -o "_" <<< "$versionDL" | wc -l)
     if [ "$countUnderscore" -lt '2' ]; then # IF the version has only one "_" will added "_0" to the end
-        version="${version}_0"
+        versionDL="${versionDL}_0"
+        version="${version}.0"
     fi
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
@@ -77,17 +81,17 @@ else
             fi
         fi
     fi
-    echo -e "\\n\\nWill build $progName, please wait\\n\\n"
+    echo -e "\\nWill build $progName, please wait\\n"
 
     linkDl="https://www.syntevo.com/downloads/$progName"
     folderDest=$(pwd)
     tag="1_JB"
 
-    wget -c "$linkDl/${progName}-linux-${version}.tar.gz"
+    wget -c "$linkDl/${progName}-linux-${versionDL}.tar.gz"
 
-    rm -r "$progName" 2> /dev/null
+    rm -r "$progName" 2> /dev/null || true
 
-    tar -xvf "${progName}-linux-${version}.tar.gz"
+    tar -xvf "${progName}-linux-${versionDL}.tar.gz"
 
     cd "$progName" || exit
     mkdir -p "usr/doc/${progName}-$version"
@@ -100,17 +104,17 @@ else
         lnFile="sg"
     fi
 
-    mkdir -p usr/share/pixmaps
+    mkdir -p usr/share/pixmaps/ || exit
     cp "bin/${progName}-128.png" "usr/share/pixmaps/${progName}.png"
 
-    mkdir -p "usr/share/$progName"
-    mv bin/ lib/ jre/ "usr/share/$progName"
+    mkdir -p "usr/share/$progName/" || exit
+    mv bin/ lib/ jre/ "usr/share/$progName/"
 
     if [ "$progBuild" == '1' ]; then
-        mv dictionaries/ "usr/share/$progName"
+        mv dictionaries/ "usr/share/$progName/"
     fi
 
-    mkdir -p usr/share/applications
+    mkdir -p usr/share/applications/
     echo "[Desktop Entry]
 Version=1.0
 Encoding=UTF-8
@@ -156,8 +160,8 @@ $progName:
 $progName:
 $progName:" >> install/slack-desc
 
-    mkdir -p usr/bin
-    cd usr/bin || exit
+    mkdir -p usr/bin/
+    cd usr/bin/ || exit
     ln -s "../share/$progName/bin/$progName.sh" "$progName"
     ln -s "../share/$progName/bin/$progName.sh" "$lnFile"
     cd ../.. || exit
@@ -166,5 +170,5 @@ $progName:" >> install/slack-desc
 
     cd .. || exit
     rm -r "$progName"
-    rm "${progName}-linux-${version}.tar.gz"
+    rm "${progName}-linux-${versionDL}.tar.gz"
 fi

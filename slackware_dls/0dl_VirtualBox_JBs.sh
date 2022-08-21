@@ -23,6 +23,8 @@
 #
 # Last update: 20/07/2022
 #
+set -e
+
 case "$(uname -m)" in
     i?86) archDL="x86" ;;
     x86_64) archDL="amd64" ;;

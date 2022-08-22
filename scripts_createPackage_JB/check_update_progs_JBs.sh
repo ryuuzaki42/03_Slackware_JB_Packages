@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 17/08/2022
+# Last update: 22/08/2022
 #
 set -e
 
@@ -156,7 +156,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "89.0.4447.83"
+    progName="opera-stable" # last tested: "90.0.4480.48"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -241,7 +241,7 @@ virtualbox(){
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.12"
+    progName="zotero" # last tested: "6.0.13"
     link="https://www.zotero.org/download/"
     command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 

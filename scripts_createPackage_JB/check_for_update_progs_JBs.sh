@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 22/08/2022
+# Last update: 26/08/2022
 #
 set -e
 
@@ -148,7 +148,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "103.0.2"
+    progName="mozilla-firefox" # last tested: "104.0"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -156,7 +156,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "90.0.4480.48"
+    progName="opera-stable" # last tested: "90.0.4480.54"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -197,7 +197,7 @@ opera-stable(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.66.0"
+    progName="opera-ffmpeg-codecs" # last tested: "0.67.1"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 

@@ -21,7 +21,7 @@
 #
 # Descrição: Script to download the last version VirtualBox
 #
-# Last update: 03/09/2022
+# Last update: 02/09/2022
 #
 set -e
 

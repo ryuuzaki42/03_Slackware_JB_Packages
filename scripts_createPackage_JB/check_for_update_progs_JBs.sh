@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 26/08/2022
+# Last update: 07/09/2022
 #
 set -e
 
@@ -148,7 +148,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "104.0"
+    progName="mozilla-firefox" # last tested: "104.0.2"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -156,7 +156,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "90.0.4480.54"
+    progName="opera-stable" # last tested: "90.0.4480.84"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -213,7 +213,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.32.3"
+    progName="teamviewer" # last tested: "15.33.7"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 
@@ -235,7 +235,7 @@ virtualbox(){
     link="https://www.virtualbox.org/wiki/Linux_Downloads"
     command="grep -o 'http.*run' a.html | cut -d '-' -f2-3"
 
-    installedVersion="6.1.36-152435"
+    installedVersion="6.1.38-153438"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -294,7 +294,7 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.4.4"
+    installedVersion="8.4.5"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

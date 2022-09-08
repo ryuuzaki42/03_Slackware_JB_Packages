@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 07/09/2022
+# Last update: 08/09/2022
 #
 set -e
 
@@ -131,8 +131,8 @@ maestral(){
     checkVersion "$progName" "$link" "$command"
 }
 
-mangohud(){ # Version 0.6.8 need meson >= 0.60, not yet on Slackware 15.0
-    progName="mangohud" # last tested: "0.6.7.1"
+mangohud(){
+    progName="mangohud" # last tested: "0.6.8"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
     command="grep 'Release MangoHud ' a.html | head -n1 | sed 's/.*Version //; s/ .*//'"
 
@@ -255,7 +255,7 @@ GNULinuxPrograms(){
     authy
     gitahead
     maestral
-    #mangohud
+    mangohud
     mkvtoolnix
     mozilla-firefox
     opera-stable

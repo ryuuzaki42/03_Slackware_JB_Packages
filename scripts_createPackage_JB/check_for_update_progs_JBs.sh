@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 08/09/2022
+# Last update: 15/09/2022
 #
 set -e
 
@@ -156,7 +156,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "90.0.4480.84"
+    progName="opera-stable" # last tested: "91.0.4516.16"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -352,3 +352,5 @@ default(){
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
+
+echo

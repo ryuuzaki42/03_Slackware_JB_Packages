@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 15/09/2022
+# Last update: 19/09/2022
 #
 set -e
 
@@ -197,7 +197,7 @@ opera-stable(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.67.1"
+    progName="opera-ffmpeg-codecs" # last tested: "0.68.1"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 

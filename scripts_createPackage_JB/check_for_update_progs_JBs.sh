@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 29/09/2022
+# Last update: 04/10/2022
 #
 set -e
 
@@ -148,7 +148,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "105.0.1"
+    progName="mozilla-firefox" # last tested: "105.0.2"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -156,7 +156,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "91.0.4516.16"
+    progName="opera-stable" # last tested: "91.0.4516.20"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -241,7 +241,7 @@ virtualbox(){
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.13"
+    progName="zotero" # last tested: "6.0.15"
     link="https://www.zotero.org/download/"
     command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 
@@ -304,7 +304,7 @@ revouninstaller(){
     link="https://www.revouninstaller.com/products/revo-uninstaller-free"
     command="grep -o -E '>Version: (.{4}|.{5})<' a.html | tr -d 'a-zA-Z : <>'"
 
-    installedVersion="2.3.9"
+    installedVersion="2.4.1"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from wps-office-version.rpm
 #
-# Last update: 09/10/2022
+# Last update: 08/10/2022
 #
 echo -e "\\n# Create a txz from wps-office-version.rpm #\\n"
 

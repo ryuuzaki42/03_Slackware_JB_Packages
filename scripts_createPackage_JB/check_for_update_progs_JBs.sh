@@ -22,9 +22,10 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 04/10/2022
+# Last update: 08/10/2022
 #
-set -e
+set -eE
+trap 'echo -e "\\n\\n${RED}Error at line $LINENO$NC - Command:\\n$RED$BASH_COMMAND\\n"' ERR
 
 ## Color
 useColor() {
@@ -148,7 +149,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "105.0.2"
+    progName="mozilla-firefox" # last tested: "105.0.3"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -156,7 +157,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "91.0.4516.20"
+    progName="opera-stable" # last tested: "91.0.4516.65"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 

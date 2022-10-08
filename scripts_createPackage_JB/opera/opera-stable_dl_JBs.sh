@@ -24,7 +24,8 @@
 #
 # Last update: 08/10/2022
 #
-set -e
+set -eE
+trap 'echo -e "\\n\\n${RED}Error at line $LINENO$NC - Command:\\n$RED$BASH_COMMAND\\n"' ERR
 
 echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
 

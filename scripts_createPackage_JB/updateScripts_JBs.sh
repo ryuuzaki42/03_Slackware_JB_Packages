@@ -42,7 +42,7 @@ for filePackage in $(find . | grep ".*.txz" | grep -v "opera-ffmpeg-codecs" | gr
     versionNew=$(rev <<< "$filePackage" | cut -d '-' -f3 | rev)
     echo "New version: $versionNew"
 
-    sed 's/Last update: 08/10/2022
+    sed 's/^# Last update: .*/# Last update: '"$dateNew"'/1' "$scriptNamePlace" | sed 's/last tested: .*/last tested: '\""$versionNew"\"'/1' > "$fileFinal"
 
     echo -e "\\nsdiff -s $scriptNamePlace $fileFinal\\n"
     sdiff -s "$scriptNamePlace" "$fileFinal" || true # https://stackoverflow.com/a/53612582

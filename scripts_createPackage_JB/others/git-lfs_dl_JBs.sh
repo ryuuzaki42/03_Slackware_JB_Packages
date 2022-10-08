@@ -23,16 +23,17 @@
 # Script: Script to build a Slackware package of git-lfs
 # Based in: https://slackbuilds.org/repository/14.2/development/git-lfs/
 #
-# Last update: 16/02/2022
+# Last update: 08/10/2022
 #
-set -e
+set -eE
+trap 'echo -e "\\n\\n${RED}Error at line $LINENO$NC - Command:\\n$RED$BASH_COMMAND\\n"' ERR
 
 echo -e "\\n# Script to build a Slackware package of git-lfs #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="git-lfs" # last tested: "3.1.2"
+    progName="git-lfs" # last tested: "3.2.0"
     tag="1_JB"
 
     linkGetVersion="https://github.com/git-lfs/git-lfs/releases/latest"
@@ -84,6 +85,7 @@ else
     fileName="${progName}-linux-${SRCARCH}-v${version}"
     wget -c "$linkDl/v$version/${fileName}.tar.gz"
 
+    rm -r "$fileName" || true
     mkdir "$fileName"
     mv "${fileName}.tar.gz" "$fileName"
     cd "$fileName" || exit
@@ -92,6 +94,8 @@ else
     rm "${fileName}.tar.gz"
 
     mkdir -p usr/bin
+    mv "$progName-$version/"* .
+    rmdir "$progName-$version/"
     install -m0755 "$progName" usr/bin
 
     mkdir install
@@ -116,7 +120,7 @@ git-lfs:
 git-lfs:" > install/slack-desc
 
     mkdir -p "usr/doc/${progName}-$version"
-    mv ./*.md "usr/doc/${progName}-$version"
+    mv *.md man/ "usr/doc/${progName}-$version"
 
     rm git-lfs install.sh
 

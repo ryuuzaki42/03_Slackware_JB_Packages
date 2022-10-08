@@ -23,9 +23,10 @@
 # Script: Script to build a Slackware package of teamviewer
 # Based in: http://slackbuilds.org/repository/14.2/network/teamviewer/
 #
-# Last update: 27/09/2022
+# Last update: 08/10/2022
 #
-set -e
+set -eE
+trap 'echo -e "\\n\\n${RED}Error at line $LINENO$NC - Command:\\n$RED$BASH_COMMAND\\n"' ERR
 
 echo "This script create a txz version from teamviewer_arch.deb"
 

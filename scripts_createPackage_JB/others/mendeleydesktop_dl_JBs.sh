@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of mendeleydesktop
 # Based in: https://slackbuilds.org/slackbuilds/14.2/academic/mendeleydesktop/
 #
-# Last update: 28/07/2021
+# Last update: 08/10/2022
 #
 echo -e "\\n# Script to build a Slackware package of mendeleydesktop #\\n"
 
@@ -33,11 +33,8 @@ else
     progName="mendeleydesktop" # last tested: "1.19.8"
     tag="1_JB"
 
-    linkGetVersion="https://www.mendeley.com/release-notes/"
-    wget "$linkGetVersion" -O "${progName}-latest"
-
-    version=$(grep "/release-notes/" $progName-latest | head -n 1 | rev | cut -d ' ' -f1 | rev | sed 's/[^0-9,.]*//g')
-    rm "${progName}-latest"
+    #linkGetVersion="https://www.mendeley.com/release-notes/"
+    version="1.19.8"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
     echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"

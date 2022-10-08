@@ -22,9 +22,10 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 11/02/2022
+# Last update: 08/10/2022
 #
-set -e
+set -eE
+trap 'echo -e "\\n\\n${RED}Error at line $LINENO$NC - Command:\\n$RED$BASH_COMMAND\\n"' ERR
 
 echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
@@ -37,13 +38,13 @@ else
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.8.0_git88cdb4e"
+    progName="shellcheck" # last tested: "0.8.0_gitd71d6ff"
     tag="1_JB"
     folderDest=$(pwd)
 
     linkGetVersion="https://github.com/koalaman/shellcheck/releases"
     wget --compress=none "$linkGetVersion" -O "${progName}_latest"
-    versionNumber=$(grep "Stable version" "${progName}_latest" | head -n 1 | cut -d 'v' -f3 | cut -d '"' -f1)
+    versionNumber=$(grep "Stable version" "${progName}_latest" | head -n 1 | sed 's/.*Stable version //g' | cut -d '<' -f1)
     rm "${progName}_latest"
 
     linkGetGitCommit="https://github.com/koalaman/shellcheck/commits/master"

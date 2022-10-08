@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the SkypeForLinux pre-compiled
 #
-# Last update: 19/02/2021
+# Last update: 08/10/2022
 #
 echo -e "\\n# Script to create a Slackware package from the SkypeForLinux pre-compiled #\\n"
 
@@ -42,14 +42,14 @@ fi
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="skypeforlinux" # last tested: "8.69.76.76"
+    progName="skypeforlinux" # last tested: "8.89.76.401"
     linkProg="https://repo.skype.com/deb/pool/main/s/skypeforlinux"
-    linkSlackbuilds142Prog="https://slackbuilds.org/slackbuilds/14.2/network/skypeforlinux.tar.gz"
+    linkSlackbuilds150Prog="https://slackbuilds.org/slackbuilds/15.0/network/skypeforlinux.tar.gz"
 
-    wget "$linkProg" -O "${progName}-latest"
-    dlProgName=$(grep "deb" "${progName}-latest" | cut -d '"' -f8 | tail -n1)
+    wget "$linkProg" -O "${progName}_latest"
+    dlProgName=$(grep "deb" "${progName}_latest" | cut -d '"' -f8 | tail -n1)
 
-    rm -r "${progName}-latest"
+    rm -r "${progName}_latest"
     version=$(echo "$dlProgName" | cut -d '_' -f2)
 
     installedVersion=$(find /var/log/packages/ | grep "$progName" | cut -d '-' -f2)
@@ -74,14 +74,14 @@ else
     mkdir "$progName"
     cd "$progName" || exit
 
-    wget -c "$linkSlackbuilds142Prog"
+    wget -c "$linkSlackbuilds150Prog"
     wget -c "$linkProg/$dlProgName"
 
     if [ -e "$progName.tar.gz" ] && [ -e "${progName}"_*"deb" ]; then
         tar zvxf "$progName.tar.gz"
         cp "${progName}"_*"deb" "$progName"
     else
-        echo -e "Error: file not found"
+        echo -e "\\nError: file not found\\n"
         exit
     fi
 

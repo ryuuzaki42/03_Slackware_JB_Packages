@@ -24,7 +24,7 @@
 #
 # Link: https://github.com/oblique/create_ap
 #
-# Last update: 26/07/2021
+# Last update: 08/10/2022
 #
 echo -e "\\n# Script to build a Slackware package of create_ap #\\n"
 
@@ -38,13 +38,13 @@ else
     linkGetLastRealease="https://github.com/oblique/create_ap/releases"
     linkGetLastCommit="https://github.com/oblique/create_ap/commits/master"
 
-    wget --compress=none "$linkGetLastRealease" -O "${progName}-latest"
-    versionNumber=$(grep "/oblique/create_ap/tree/" "${progName}-latest" | head -n 1 | cut -d 'v' -f2 | cut -d '"' -f1)
-    rm "${progName}-latest"
+    wget --compress=none "$linkGetLastRealease" -O "${progName}_latest"
+    versionNumber=$(grep "/oblique/create_ap/tree/" "${progName}_latest" | head -n 1 | cut -d 'v' -f2 | cut -d '"' -f1)
+    rm "${progName}_latest"
 
-    wget --compress=none "$linkGetLastCommit" -O "${progName}-latest"
-    versionCommit=$(grep "https://github.com/oblique/create_ap/commit/" "${progName}-latest" | head -n 1 | cut -d '/' -f7 | cut -d '"' -f1 | cut -c1-7)
-    rm "${progName}-latest"
+    wget --compress=none "$linkGetLastCommit" -O "${progName}_latest"
+    versionCommit=$(grep "/oblique/create_ap/commit/" "${progName}_latest" | head -n 1 | sed 's/.*commit\///g;s/" .*//g' | cut -c1-7)
+    rm "${progName}_latest"
 
     version="${versionNumber}_git$versionCommit"
 

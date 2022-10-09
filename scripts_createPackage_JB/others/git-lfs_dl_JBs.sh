@@ -25,9 +25,6 @@
 #
 # Last update: 09/10/2022
 #
-set -eEuo pipefail
-trap 'echo -e "\\n\\n\e[1;31mError at line $LINENO\033[0m - Command:\\n\e[1;31m$BASH_COMMAND\033[0m\\n"' ERR
-
 echo -e "\\n# Script to build a Slackware package of git-lfs #\\n"
 
 if [ "$USER" != "root" ]; then
@@ -85,7 +82,7 @@ else
     fileName="${progName}-linux-${SRCARCH}-v${version}"
     wget -c "$linkDl/v$version/${fileName}.tar.gz"
 
-    rm -r "$fileName" || true
+    rm -r "$fileName"
     mkdir "$fileName"
     mv "${fileName}.tar.gz" "$fileName"
     cd "$fileName" || exit

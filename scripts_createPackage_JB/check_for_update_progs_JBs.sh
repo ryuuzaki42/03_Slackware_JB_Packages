@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 08/10/2022
+# Last update: 09/10/2022
 #
 set -eE
 trap 'echo -e "\\n\\n${RED}Error at line $LINENO$NC - Command:\\n$RED$BASH_COMMAND\\n"' ERR
@@ -108,8 +108,8 @@ TLP(){
 
 authy(){
     progName="authy" # last tested: "2.2.1"
-    link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
-    command="grep -o 'authy-[0-9].*sig' a.html | cut -d '-' -f2"
+    link="https://aur.archlinux.org/packages/authy"
+    command="grep 'Package Details' a.html | sed 's/.*authy //g' | cut -d '-' -f1"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -141,9 +141,9 @@ mangohud(){
 }
 
 mkvtoolnix () {
-    progName="mkvtoolnix" # last tested: "70.0.0"
-    link="https://mkvtoolnix.download/index.html"
-    command="grep -o 'Released v.*(' a.html | head -n1 | tr -d 'a-zA-Z ('"
+    progName="mkvtoolnix" # last tested: "71.1.0"
+    link="https://mkvtoolnix.download/source.html"
+    command="grep 'sources/mkvtoolnix' a.html | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
     checkVersion "$progName" "$link" "$command"
 }

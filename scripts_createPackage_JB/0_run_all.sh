@@ -24,9 +24,6 @@
 #
 # Last update: 09/10/2022
 #
-set -eEuo pipefail
-trap 'echo -e "\\n\\n\e[1;31mError at line $LINENO\033[0m - Command:\\n\e[1;31m$BASH_COMMAND\033[0m\\n"' ERR
-
 echo -e "\\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\\n"
 
 if [ "$USER" != "root" ]; then
@@ -56,7 +53,7 @@ else
 
     cd teamviewer/ || exit # Go to teamviewer folder to create the package
     ./teamviewer_dl_JBs.sh n
-    mv teamviewer*txz ../ 2> /dev/null || true
+    mv teamviewer*txz ../ 2> /dev/null
     cd ../ || exit
 
     #./others/wps/wps_office_dl_JBs.sh n

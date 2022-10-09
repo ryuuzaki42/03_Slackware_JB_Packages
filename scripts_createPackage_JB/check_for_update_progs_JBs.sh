@@ -54,7 +54,7 @@ downloadHTML() {
 
 compareVersion(){
     version=$1
-    installedVersion=$2
+    installedVersion=${2:-}
 
     if [ "$installedVersion" == '' ]; then
         installedVersion=$(find /var/log/packages/$progName* | rev | cut -d '-' -f3 | rev)
@@ -73,7 +73,7 @@ checkVersion() {
     progName=$1
     link=$2
     command=$3
-    installedVersion=$4
+    installedVersion=${4:-}
 
     echo -en "\\n$BLUE$progName"
 

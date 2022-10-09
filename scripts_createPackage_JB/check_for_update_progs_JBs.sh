@@ -24,9 +24,6 @@
 #
 # Last update: 09/10/2022
 #
-set -eEuo pipefail
-trap 'echo -e "\\n\\n\e[1;31mError at line $LINENO\033[0m - Command:\\n\e[1;31m$BASH_COMMAND\033[0m\\n"' ERR
-
 ## Color
 useColor() {
     #BLACK='\e[1;30m'
@@ -54,7 +51,7 @@ downloadHTML() {
 
 compareVersion(){
     version=$1
-    installedVersion=${2:-}
+    installedVersion=$2
 
     if [ "$installedVersion" == '' ]; then
         installedVersion=$(find /var/log/packages/$progName* | rev | cut -d '-' -f3 | rev)
@@ -73,7 +70,7 @@ checkVersion() {
     progName=$1
     link=$2
     command=$3
-    installedVersion=${4:-}
+    installedVersion=$4
 
     echo -en "\\n$BLUE$progName"
 

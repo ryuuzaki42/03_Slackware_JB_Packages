@@ -24,9 +24,6 @@
 #
 # Last update: 09/10/2022
 #
-set -eEuo pipefail
-trap 'echo -e "\\n\\n\e[1;31mError at line $LINENO\033[0m - Command:\\n\e[1;31m$BASH_COMMAND\033[0m\\n"' ERR
-
 for filePackage in $(find . | grep ".*.txz" | grep -v "opera-ffmpeg-codecs" | grep -v "opera-beta-ffmpeg-codecs"); do
     echo
 
@@ -45,7 +42,7 @@ for filePackage in $(find . | grep ".*.txz" | grep -v "opera-ffmpeg-codecs" | gr
     sed 's/^# Last update: .*/# Last update: '"$dateNew"'/1' "$scriptNamePlace" | sed 's/last tested: .*/last tested: '\""$versionNew"\"'/1' > "$fileFinal"
 
     echo -e "\\nsdiff -s $scriptNamePlace $fileFinal\\n"
-    sdiff -s "$scriptNamePlace" "$fileFinal" || true # https://stackoverflow.com/a/53612582
+    sdiff -s "$scriptNamePlace" "$fileFinal"
 
     mv "$fileFinal" "$scriptNamePlace"
     chmod +x "$scriptNamePlace"

@@ -25,9 +25,6 @@
 #
 # Last update: 09/10/2022
 #
-set -eEuo pipefail
-trap 'echo -e "\\n\\n\e[1;31mError at line $LINENO\033[0m - Command:\\n\e[1;31m$BASH_COMMAND\033[0m\\n"' ERR
-
 echo "This script create a txz version from teamviewer_arch.deb"
 
 # teamviewer now ("15.19.3" and up) need libminizip
@@ -84,7 +81,7 @@ else
 
     wget -c "$linkDl/$fileDl"
 
-    rm -r "$folderTmp" 2> /dev/null || true
+    rm -r "$folderTmp" 2> /dev/null
     mkdir -p "$folderTmp"
     cd "$folderTmp" || exit
 

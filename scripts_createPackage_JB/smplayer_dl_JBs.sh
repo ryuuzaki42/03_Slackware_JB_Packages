@@ -23,13 +23,13 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 08/10/2022
+# Last update: 09/10/2022
 #
 # Tip: To build against Qt5 rather than Qt4
 # Use: USE_QT5=yes ./smplayer_dl_JBs.sh
 #
-set -eE
-trap 'echo -e "\\n\\n${RED}Error at line $LINENO$NC - Command:\\n$RED$BASH_COMMAND\\n"' ERR
+set -eEuo pipefail
+trap 'echo -e "\\n\\n\e[1;31mError at line $LINENO\033[0m - Command:\\n\e[1;31m$BASH_COMMAND\033[0m\\n"' ERR
 
 echo -e "\\n# Script to build a Slackware package of smplayer (without skins and themes) #\\n"
 

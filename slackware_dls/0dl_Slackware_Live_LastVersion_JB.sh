@@ -28,9 +28,6 @@
 # Stable  - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 2 1 y
 # Current - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 3 1 y
 #
-set -eEuo pipefail
-trap 'echo -e "\\n\\n\e[1;31mError at line $LINENO\033[0m - Command:\\n\e[1;31m$BASH_COMMAND\033[0m\\n"' ERR
-
 echo -e "\\nScript to download the last version of Slackware Live (made by Alien Bob)"
 
 # Last tested:
@@ -215,7 +212,7 @@ fi
 
 echo -e "\\nfolderCreate: \"$folderCreate$versionRepo\"\\n"
 
-mkdir "$folderCreate$versionRepo" || true
+mkdir "$folderCreate$versionRepo"
 cd "$folderCreate$versionRepo" || exit
 
 linkPrintAndDl "$linkDl" "latestVersion"
@@ -313,7 +310,7 @@ files="iso2usb.sh isocomp.sh make_slackware_live.sh make_slackware_live.conf mak
 
 linkPrintAndDl "$repoLinkConfig/README.txt"
 
-mkdir $folderScriptsAlien || true
+mkdir $folderScriptsAlien
 cd $folderScriptsAlien || exit
 
 for file in $files; do

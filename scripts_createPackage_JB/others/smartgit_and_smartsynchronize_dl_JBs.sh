@@ -25,8 +25,6 @@
 #
 # Last update: 09/10/2022
 #
-set -eEuo pipefail
-trap 'echo -e "\\n\\n\e[1;31mError at line $LINENO\033[0m - Command:\\n\e[1;31m$BASH_COMMAND\033[0m\\n"' ERR
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
 if [ "$USER" != "root" ]; then
@@ -89,7 +87,7 @@ else
 
     wget -c "$linkDl/${progName}-linux-${versionDL}.tar.gz"
 
-    rm -r "$progName" 2> /dev/null || true
+    rm -r "$progName" 2> /dev/null
 
     tar -xvf "${progName}-linux-${versionDL}.tar.gz"
 
@@ -104,10 +102,10 @@ else
         lnFile="sg"
     fi
 
-    mkdir -p usr/share/pixmaps/ || exit
+    mkdir -p usr/share/pixmaps/
     cp "bin/${progName}-128.png" "usr/share/pixmaps/${progName}.png"
 
-    mkdir -p "usr/share/$progName/" || exit
+    mkdir -p "usr/share/$progName/"
     mv bin/ lib/ jre/ "usr/share/$progName/"
 
     if [ "$progBuild" == '1' ]; then

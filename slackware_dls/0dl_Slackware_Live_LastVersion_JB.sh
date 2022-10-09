@@ -21,15 +21,15 @@
 #
 # Descrição: Script to download the last version of Slackware Live, made by AlienBob
 #
-# Last update: 08/10/2022
+# Last update: 09/10/2022
 #
 # My dls:
 # Live    - LEAN 64 bits - ./0dl_Slackware_Live_LastVersion_JB.sh . 1 5 y
 # Stable  - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 2 1 y
 # Current - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 3 1 y
 #
-set -eE
-trap 'echo -e "\\n\\n${RED}Error at line $LINENO$NC - Command:\\n$RED$BASH_COMMAND\\n"' ERR
+set -eEuo pipefail
+trap 'echo -e "\\n\\n\e[1;31mError at line $LINENO\033[0m - Command:\\n\e[1;31m$BASH_COMMAND\033[0m\\n"' ERR
 
 echo -e "\\nScript to download the last version of Slackware Live (made by Alien Bob)"
 

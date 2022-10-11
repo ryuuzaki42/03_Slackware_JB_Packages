@@ -21,43 +21,46 @@
 #
 # Descrição: Script to download the last version of Slackware Live, made by AlienBob
 #
-# Last update: 09/10/2022
+# Last update: 11/10/2022
 #
 # My dls:
-# Live    - LEAN 64 bits - ./0dl_Slackware_Live_LastVersion_JB.sh . 1 5 y
-# Stable  - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 2 1 y
-# Current - only one option - ./0dl_Slackware_Live_LastVersion_JB.sh . 3 1 y
+#     Live    - LEAN 64 bits - ./slackware_live_dl_JBs.sh 1 . 1 4 y
+#     Stable  - only one option - ./slackware_live_dl_JBs.sh 1 . 2 1 y
+#     Current - only one option - ./slackware_live_dl_JBs.sh 1 . 3 1 y
 #
-echo -e "\\nScript to download the last version of Slackware Live (made by Alien Bob)"
+echo -e "\\nScript to download the last version of Slackware Live (made by Alien Bob)\\n"
 
 # Last tested:
     # 1 slackware-live/           - version 1.6.0
     # 2 slackware64-15.0-live/    - day 2022-08-14
     # 3 slackware64-current-live/ - day 2022-08-16
 
-#repoLink="https://download.liveslak.org"
-#repoLink="https://bear.alienbase.nl/mirrors/slackware-live"
-#repoLink="https://slackware.nl/slackware-live"
-repoLink="https://slackware.uk/people/alien-slacklive"
-
 help() {
-    echo -e "\\n$(basename "$0") \$pathDl \$versionDownload \$downloadIsoNumbers \$continueOrNot
-    \$pathDl             - path to download files (with -h show this message)
-    \$versionDownload    - Live version to download
+    echo -e "$(basename "$0") \$mirror_choose \$pathDl \$versionDownload \$downloadIsoNumbers \$continueOrNot
+    \$mirror_choose      - which mirror use to download (with -h show this message)
+    \$pathDl             - path to download the files (with -h show this message)
+    \$versionDownload    - which version download
     \$downloadIsoNumbers - ISO numbers to download
-    \$continueOrNot      - continue or not if already has downloaded the same version in the repo\\n"
+    \$continueOrNot      - continue or not if already has downloaded the same version in the repo
+
+    my personal use:
+        ./$(basename "$0") 1 . 1 4 y\\n"
 }
 
-pathDl=$1
-versionDownload=$2
-downloadIsoNumbers=$3
-continueOrNot=$4
+mirror_choose=$1
+pathDl=$2
+versionDownload=$3
+downloadIsoNumbers=$4
+continueOrNot=$5
+
+## Test
+echo "mirror_choose=$mirror_choose - pathDl=$pathDl versionDownload=$versionDownload downloadIsoNumbers=$downloadIsoNumbers continueOrNot=$continueOrNot"
 
 downloadLive="slackware-live"
 downloadStable="slackware64-15.0-live"
 downloadCurrent="slackware64-current-live"
 
-if [ "$pathDl" == "-h" ]; then
+if [ "$mirror_choose" == "-h" ] || [ "$mirror_choose" == "--help" ]; then
     help
     exit 0
 fi
@@ -101,6 +104,38 @@ printTrace() {
     echo "#"
 }
 
+mirros_link=("https://slackware.uk/people/alien-slaklive"
+"https://download.liveslak.org" # Netherlands (Alien BOB)
+"https://bear.alienbase.nl/mirrors/slackware-live"
+"https://slackware.uk/liveslak" # United Kingdom (Tadgy)
+"https://us.liveslak.org" # USA (Alien BOB)
+"https://mirrors.slackware.devl.club/slackware-live" # Brazil (DrBeco)
+"https://slackware.nl/slackware-live")
+
+i=1
+count_mirror=${#mirros_link[*]}
+while [ "$i" -le "$count_mirror" ]; do
+    echo "$i - ${mirros_link[$i - 1]}"
+    ((i++))
+done
+
+if [ "$mirror_choose" == '' ]; then
+echo -en "\\nUse with mirror to download (enter to first one): "
+    read -r mirror_choose
+fi
+
+if [ "$mirror_choose" == '' ]; then
+    mirror_choose=1
+fi
+
+if [ "$mirror_choose" -lt "$count_mirror" ]; then
+    repoLink=${mirros_link[$mirror_choose - 1]}
+else
+    repoLink=${mirros_link[0]}
+fi
+
+echo -e "\\nrepoLink: $repoLink"
+
 if [ "$pathDl" == '' ]; then
     echo -en "\\nPath to download (enter to local folder): "
     read -r pathDl
@@ -114,9 +149,9 @@ else
     cd "$pathDl/" || exit
 fi
 
-linkPrintAndDl "$repoLink" "latestVersion"
+linkPrintAndDl "$repoLink" "latest_version"
 
-infoLatest=$(grep "href=" latestVersion | grep -E "\[DIR\]|\[   \]|\[!!!\]" | sed 's/.* href="//g')
+infoLatest=$(grep "href=" latest_version | grep -E "\[DIR\]|\[   \]|\[!!!\]|\[directory\]" | sed 's/.* href="//g')
 infoName=$(echo "$infoLatest" | sed 's/">.*//g')
 infoDate=$(echo "$infoLatest" | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
 
@@ -142,10 +177,10 @@ while [ "$countTmp" -lt "$countLine" ]; do
 done
 printTrace "$countTrace"
 
-versionRepoLive=$(grep -o "href=\"[0-9]\.[0-9]\.[0-9]" < latestVersion | cut -d '"' -f2)
-versionRepoStable=$(grep "href=" < latestVersion | grep $downloadStable | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
-versionRepoCurrent=$(grep "href=" < latestVersion | grep $downloadCurrent | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
-rm latestVersion
+versionRepoLive=$(grep -o "href=\"[0-9]\.[0-9]\.[0-9]" < latest_version | cut -d '"' -f2)
+versionRepoStable=$(grep "href=" < latest_version | grep $downloadStable | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
+versionRepoCurrent=$(grep "href=" < latest_version | grep $downloadCurrent | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
+rm latest_version
 
 versionLocalLive=$(find ${downloadLive}-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f3-)
 versionLocalStable=$(find ${downloadStable}_day-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f4-)
@@ -215,10 +250,10 @@ echo -e "\\nfolderCreate: \"$folderCreate$versionRepo\"\\n"
 mkdir "$folderCreate$versionRepo"
 cd "$folderCreate$versionRepo" || exit
 
-linkPrintAndDl "$linkDl" "latestVersion"
+linkPrintAndDl "$linkDl" "latest_version"
 
-infoISO=$(grep ".iso\"" < latestVersion | sed 's/.* href="//g')
-rm latestVersion
+infoISO=$(grep ".iso\"" < latest_version | sed 's/.* href="//g')
+rm latest_version
 
 nameISO=$(echo "$infoISO" | sed 's/">.*//g')
 dateISO=$(echo "$infoISO" | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
@@ -267,23 +302,27 @@ else
     echo -e "\\ndownloadIsoNumbers \"$downloadIsoNumbers\"\\n"
 fi
 
-countTmp='1'
-while [ "$countTmp" -lt "$countLine" ]; do
-    tmpInfo=$(echo "$nameISO" | sed -n "${countTmp}p")
-    if echo "$downloadIsoNumbers" | grep -q "$countTmp"; then
-        echo "Download: $countTmp - $tmpInfo"
+if [ "$downloadIsoNumbers" != "" ]; then
+    countTmp='1'
+    while [ "$countTmp" -lt "$countLine" ]; do
+        tmpInfo=$(echo "$nameISO" | sed -n "${countTmp}p")
+        if echo "$downloadIsoNumbers" | grep -q "$countTmp"; then
+            echo "Download: $countTmp - $tmpInfo"
 
-        linkPrintAndDl "$linkDl/$tmpInfo"
+            linkPrintAndDl "$linkDl/$tmpInfo"
 
-        linkPrintAndDl "$linkDl/$tmpInfo.md5"
+            linkPrintAndDl "$linkDl/$tmpInfo.md5"
 
-        if [ "$versionDownload" == '1' ]; then
-            linkPrintAndDl "$linkDl/$tmpInfo.asc"
+            if [ "$versionDownload" == '1' ]; then
+                linkPrintAndDl "$linkDl/$tmpInfo.asc"
+            fi
         fi
-    fi
 
-    ((countTmp++))
-done
+        ((countTmp++))
+    done
+else
+    echo -e "\\nNot downloading any ISO file!\\n"
+fi
 
 linkPrintAndDl "$repoLink/README" "ChangeLog.txt"
 

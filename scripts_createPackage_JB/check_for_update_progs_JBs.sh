@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 09/10/2022
+# Last update: 11/10/2022
 #
 ## Color
 useColor() {
@@ -230,10 +230,10 @@ ventoy(){
 
 virtualbox(){
     progName="virtualbox"
-    link="https://www.virtualbox.org/wiki/Linux_Downloads"
-    command="grep -o 'http.*run' a.html | cut -d '-' -f2-3"
+    link="https://www.virtualbox.org/wiki/Downloads"
+    command="grep 'VirtualBox.* platform packages' a.html | cut -d '>' -f4 | cut -d ' ' -f2"
 
-    installedVersion="6.1.38-153438"
+    installedVersion="7.0.0"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

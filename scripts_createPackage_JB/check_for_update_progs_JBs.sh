@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 11/10/2022
+# Last update: 15/10/2022
 #
 ## Color
 useColor() {
@@ -105,6 +105,9 @@ TLP(){
 
 authy(){
     progName="authy" # last tested: "2.2.1"
+    #link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
+    #command="grep -o 'authy-[0-9].*sig' a.html | cut -d '-' -f2"
+
     link="https://aur.archlinux.org/packages/authy"
     command="grep 'Package Details' a.html | sed 's/.*authy //g' | cut -d '-' -f1"
 
@@ -154,7 +157,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "91.0.4516.65"
+    progName="opera-stable" # last tested: "91.0.4516.77"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 

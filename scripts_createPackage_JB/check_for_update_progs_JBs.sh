@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 15/10/2022
+# Last update: 19/10/2022
 #
 ## Color
 useColor() {
@@ -149,7 +149,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "105.0.3"
+    progName="mozilla-firefox" # last tested: "106.0"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -157,7 +157,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "91.0.4516.77"
+    progName="opera-stable" # last tested: "92.0.4561.21"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -198,7 +198,7 @@ opera-stable(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.68.1"
+    progName="opera-ffmpeg-codecs" # last tested: "0.69.1"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 

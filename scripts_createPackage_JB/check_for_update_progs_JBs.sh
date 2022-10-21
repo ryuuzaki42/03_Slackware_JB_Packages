@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 19/10/2022
+# Last update: 21/10/2022
 #
 ## Color
 useColor() {
@@ -149,7 +149,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "106.0"
+    progName="mozilla-firefox" # last tested: "106.0.1"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -236,7 +236,7 @@ virtualbox(){
     link="https://www.virtualbox.org/wiki/Downloads"
     command="grep 'VirtualBox.* platform packages' a.html | cut -d '>' -f4 | cut -d ' ' -f2"
 
-    installedVersion="7.0.0"
+    installedVersion="7.0.2"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

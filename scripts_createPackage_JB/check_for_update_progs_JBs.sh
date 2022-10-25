@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 21/10/2022
+# Last update: 25/10/2022
 #
 ## Color
 useColor() {
@@ -214,7 +214,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.34.4"
+    progName="teamviewer" # last tested: "15.35.5"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 
@@ -226,7 +226,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.80"
+    installedVersion="1.0.81"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -254,7 +254,7 @@ GNULinuxPrograms(){
     MasterPDFEditor
     TLP
     authy
-    gitahead
+    # gitahead # GitAhead is no longer under active development
     maestral
     mangohud
     mkvtoolnix
@@ -275,7 +275,7 @@ hwmonitor(){
     link="https://www.cpuid.com/softwares/hwmonitor.html"
     command="grep -o 'href.*hwmonitor_.*.exe' a.html | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
 
-    installedVersion="1.46"
+    installedVersion="1.47"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

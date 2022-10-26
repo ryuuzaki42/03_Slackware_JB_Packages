@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 25/10/2022
+# Last update: 26/10/2022
 #
 ## Color
 useColor() {
@@ -88,7 +88,7 @@ checkVersion() {
 ## GNU/Linux programs
 
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.8.70"
+    progName="MasterPDFEditor" # last tested: "5.9.06"
     link="https://code-industry.net/free-pdf-editor"
     command="grep -o 'http[^\"]*' a.html | grep \"x86.64.tar.gz\" | cut -d '-' -f5"
 
@@ -149,7 +149,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "106.0.1"
+    progName="mozilla-firefox" # last tested: "106.0.2"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -157,7 +157,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "92.0.4561.21"
+    progName="opera-stable" # last tested: "92.0.4561.30"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 

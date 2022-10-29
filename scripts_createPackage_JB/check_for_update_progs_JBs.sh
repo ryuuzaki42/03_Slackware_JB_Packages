@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 26/10/2022
+# Last update: 29/10/2022
 #
 ## Color
 useColor() {
@@ -157,7 +157,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "92.0.4561.30"
+    progName="opera-stable" # last tested: "92.0.4561.33"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -214,7 +214,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.35.5"
+    progName="teamviewer" # last tested: "15.35.7"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 

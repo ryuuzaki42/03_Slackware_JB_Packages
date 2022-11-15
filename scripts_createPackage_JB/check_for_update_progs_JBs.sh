@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 08/11/2022
+# Last update: 15/11/2022
 #
 ## Color
 useColor() {
@@ -88,7 +88,7 @@ checkVersion() {
 ## GNU/Linux programs
 
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.9.06"
+    progName="MasterPDFEditor" # last tested: "5.9.10"
     link="https://code-industry.net/free-pdf-editor"
     command="grep -o 'http[^\"]*' a.html | grep \"x86.64.tar.gz\" | cut -d '-' -f5"
 
@@ -141,7 +141,7 @@ mangohud(){
 }
 
 mkvtoolnix () {
-    progName="mkvtoolnix" # last tested: "71.1.0"
+    progName="mkvtoolnix" # last tested: "72.0.0"
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix' a.html | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
@@ -149,7 +149,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "106.0.5"
+    progName="mozilla-firefox" # last tested: "107.0.0"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 

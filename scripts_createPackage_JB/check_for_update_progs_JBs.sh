@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 15/11/2022
+# Last update: 18/11/2022
 #
 ## Color
 useColor() {
@@ -157,7 +157,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "92.0.4561.33"
+    progName="opera-stable" # last tested: "93.0.4585.11"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -226,7 +226,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.81"
+    installedVersion="1.0.82"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -236,7 +236,7 @@ virtualbox(){
     link="https://www.virtualbox.org/wiki/Downloads"
     command="grep 'VirtualBox.* platform packages' a.html | cut -d '>' -f4 | cut -d ' ' -f2"
 
-    installedVersion="7.0.2"
+    installedVersion="7.0.4"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

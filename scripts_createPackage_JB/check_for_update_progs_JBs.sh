@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 18/11/2022
+# Last update: 29/11/2022
 #
 ## Color
 useColor() {
@@ -104,7 +104,7 @@ TLP(){
 }
 
 authy(){
-    progName="authy" # last tested: "2.2.1"
+    progName="authy" # last tested: "2.2.2"
     #link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
     #command="grep -o 'authy-[0-9].*sig' a.html | cut -d '-' -f2"
 
@@ -149,7 +149,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "107.0.0"
+    progName="mozilla-firefox" # last tested: "107.0.1"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -214,7 +214,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.35.7"
+    progName="teamviewer" # last tested: "15.36.8"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 

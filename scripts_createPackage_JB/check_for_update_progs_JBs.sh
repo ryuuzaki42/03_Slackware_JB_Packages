@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 29/11/2022
+# Last update: 04/12/2022
 #
 ## Color
 useColor() {
@@ -125,7 +125,7 @@ gitahead(){
 }
 
 maestral(){
-    progName="maestral" # last tested: "1.6.3"
+    progName="maestral" # last tested: "1.6.4"
     link="https://github.com/samschott/maestral/releases/latest"
     command="grep 'Release v' a.html | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
@@ -157,7 +157,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "93.0.4585.11"
+    progName="opera-stable" # last tested: "93.0.4585.37"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -226,7 +226,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.82"
+    installedVersion="1.0.84"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -275,7 +275,7 @@ hwmonitor(){
     link="https://www.cpuid.com/softwares/hwmonitor.html"
     command="grep -o 'href.*hwmonitor_.*.exe' a.html | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
 
-    installedVersion="1.47"
+    installedVersion="1.48"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

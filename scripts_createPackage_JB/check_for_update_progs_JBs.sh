@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 04/12/2022
+# Last update: 13/12/2022
 #
 ## Color
 useColor() {
@@ -125,9 +125,12 @@ gitahead(){
 }
 
 maestral(){
-    progName="maestral" # last tested: "1.6.4"
-    link="https://github.com/samschott/maestral/releases/latest"
-    command="grep 'Release v' a.html | head -n1 | sed 's/.*Release v//; s/ .*//'"
+    progName="maestral" # last tested: "1.6.5"
+    #link="https://github.com/samschott/maestral/releases/latest"
+    #command="grep 'Release v' a.html | head -n1 | sed 's/.*Release v//; s/ .*//'"
+
+    link="https://pypi.org/project/maestral/"
+    command="grep 'release__card' a.html | grep -v 'dev' | head -n1 | sed 's/.*maestral\///; s/\/\">//'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -149,7 +152,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "107.0.1"
+    progName="mozilla-firefox" # last tested: "108.0"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -157,7 +160,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "93.0.4585.37"
+    progName="opera-stable" # last tested: "93.0.4585.64"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -305,7 +308,7 @@ revouninstaller(){
     link="https://www.revouninstaller.com/products/revo-uninstaller-free"
     command="grep -o -E '>Version: (.{4}|.{5})<' a.html | tr -d 'a-zA-Z : <>'"
 
-    installedVersion="2.4.1"
+    installedVersion="2.4.2"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

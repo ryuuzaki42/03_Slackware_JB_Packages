@@ -24,8 +24,9 @@
 #
 # Last update: 15/12/2022
 #
-## Color
-useColor() {
+# Tip: Pass all as parameter to call the windowsPrograms
+#
+useColor() { # Color
     #BLACK='\e[1;30m'
     RED='\e[1;31m'
     GREEN='\e[1;32m'
@@ -37,7 +38,7 @@ useColor() {
 }
 useColor
 
-## Usual functions
+# Usual functions
 downloadHTML() {
     link=$1
 
@@ -86,7 +87,6 @@ checkVersion() {
 }
 
 ## GNU/Linux programs
-
 MasterPDFEditor(){
     progName="MasterPDFEditor" # last tested: "5.9.10"
     link="https://code-industry.net/free-pdf-editor"
@@ -252,7 +252,7 @@ zotero(){
     checkVersion "$progName" "$link" "$command"
 }
 
-## GNU/Linux calls
+# GNU/Linux calls
 GNULinuxPrograms(){
     MasterPDFEditor
     TLP
@@ -271,8 +271,7 @@ GNULinuxPrograms(){
     zotero
 }
 
-## Windows programs
-
+# Windows programs
 hwmonitor(){
     progName="hwmonitor"
     link="https://www.cpuid.com/softwares/hwmonitor.html"
@@ -332,7 +331,7 @@ winrar(){
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
 
-## Windows calls
+# Windows calls
 windowsPrograms(){
     hwmonitor
     nettraffic
@@ -342,9 +341,12 @@ windowsPrograms(){
     winrar
 }
 
-## Call to check version
+# Call to check version
 GNULinuxPrograms
-windowsPrograms
+
+if [ "$1" == "all" ]; then # of '$0 all' will call the windowsPrograms
+    windowsPrograms
+fi
 
 # Default function
 default(){

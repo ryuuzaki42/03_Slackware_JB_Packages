@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 13/12/2022
+# Last update: 15/12/2022
 #
 ## Color
 useColor() {
@@ -160,7 +160,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "93.0.4585.64"
+    progName="opera-stable" # last tested: "94.0.4606.26"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -201,7 +201,7 @@ opera-stable(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.69.1"
+    progName="opera-ffmpeg-codecs" # last tested: "0.70.1"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 
@@ -217,7 +217,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.36.8"
+    progName="teamviewer" # last tested: "15.37.3"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 
@@ -245,7 +245,7 @@ virtualbox(){
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.16"
+    progName="zotero" # last tested: "6.0.18"
     link="https://www.zotero.org/download/"
     command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 

@@ -22,10 +22,11 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 09/10/2022
+# Last update: 15/12/2022
 #
 echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
 
+commit_version='0' # Use commit version '0' to no or '1'to yes
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
@@ -35,20 +36,22 @@ else
         exit 1
     fi
 
-    progName="shellcheck" # last tested: "0.8.0_gitd71d6ff"
+    progName="shellcheck" # last tested: "0.9.0"
     tag="1_JB"
     folderDest=$(pwd)
 
     linkGetVersion="https://github.com/koalaman/shellcheck/releases"
     wget --compress=none "$linkGetVersion" -O "${progName}_latest"
-    versionNumber=$(grep "Stable version" "${progName}_latest" | head -n 1 | sed 's/.*Stable version //g' | cut -d '<' -f1)
+    version=$(grep "Stable version" "${progName}_latest" | head -n 1 | sed 's/.*Stable version //g' | cut -d '<' -f1)
     rm "${progName}_latest"
 
-    linkGetGitCommit="https://github.com/koalaman/shellcheck/commits/master"
-    wget "$linkGetGitCommit" -O "${progName}_latest"
-    versionCommit=$(grep "/koalaman/shellcheck/commit/" "${progName}_latest" | head -n 1 | awk -F 'commit/' '{print $2}' | cut -c1-7)
-    rm "${progName}_latest"
-    version="${versionNumber}_git${versionCommit}"
+    if [ "$commit_version" == '1' ]; then # Commit version
+        linkGetGitCommit="https://github.com/koalaman/shellcheck/commits/master"
+        wget "$linkGetGitCommit" -O "${progName}_latest"
+        versionCommit=$(grep "/koalaman/shellcheck/commit/" "${progName}_latest" | head -n 1 | awk -F 'commit/' '{print $2}' | cut -c1-7)
+        rm "${progName}_latest"
+        version="${version}_git${versionCommit}"
+    fi
 
     linkDl="https://github.com/koalaman/shellcheck/releases/download/latest/shellcheck-latest.linux.x86_64.tar.xz"
     fileName="${progName}-latest.linux.x86_64.tar.xz"

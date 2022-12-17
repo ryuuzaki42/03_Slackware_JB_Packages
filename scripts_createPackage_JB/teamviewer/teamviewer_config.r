@@ -26,7 +26,6 @@ fi
     4. The GUI client only seems to work in runlevel 4. Using runlevel 3 +
     startx/startwayland does not work.
 
-
 ## Requires: libminizip
 
 ## Good commands

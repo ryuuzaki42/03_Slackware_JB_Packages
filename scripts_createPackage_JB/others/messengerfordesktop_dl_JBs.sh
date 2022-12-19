@@ -22,14 +22,14 @@
 #
 # Script: Create a txz from messengerfordesktop-version.rpm
 #
-# Last update: 08/09/2020
+# Last update: 19/12/2022
 #
 echo -e "\\n# Create a txz from messengerfordesktop-version.rpm #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="messengerfordesktop" # last tested: "2.0.9" - beta
+    progName="messengerfordesktop" # last tested: "2.0.9" - beta # This is the last release of messengerfordesktop
     tag="2_JB"
 
     linkGetVersion="https://github.com/Aluxian/Messenger-for-Desktop/releases/"

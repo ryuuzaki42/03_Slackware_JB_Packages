@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the SkypeForLinux pre-compiled
 #
-# Last update: 08/10/2022
+# Last update: 19/12/2022
 #
 echo -e "\\n# Script to create a Slackware package from the SkypeForLinux pre-compiled #\\n"
 
@@ -42,7 +42,7 @@ fi
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="skypeforlinux" # last tested: "8.89.76.401"
+    progName="skypeforlinux" # last tested: "8.92.76.400"
     linkProg="https://repo.skype.com/deb/pool/main/s/skypeforlinux"
     linkSlackbuilds150Prog="https://slackbuilds.org/slackbuilds/15.0/network/skypeforlinux.tar.gz"
 
@@ -71,6 +71,7 @@ else
         fi
     fi
 
+    rm -r "$progName"
     mkdir "$progName"
     cd "$progName" || exit
 
@@ -79,7 +80,7 @@ else
 
     if [ -e "$progName.tar.gz" ] && [ -e "${progName}"_*"deb" ]; then
         tar zvxf "$progName.tar.gz"
-        cp "${progName}"_*"deb" "$progName"
+        mv "${progName}"_*"deb" "$progName"
     else
         echo -e "\\nError: file not found\\n"
         exit
@@ -88,6 +89,7 @@ else
     versaoProg=$(find "$progName"/"${progName}"_*"deb" | cut -d '_' -f2)
     sed -i "s/VERSION:-.*/VERSION:-$versaoProg}/g" $progName/$progName.SlackBuild
     sed -i "s/tgz/txz/g" $progName/$progName.SlackBuild
+    sed -i "s/SBo/JB/g" $progName/$progName.SlackBuild
 
     cd "$progName" || exit
     ./"$progName.SlackBuild"

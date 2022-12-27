@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 15/12/2022
+# Last update: 27/12/2022
 #
 # Tip: Pass all as parameter to call the windowsPrograms
 #
@@ -152,7 +152,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "108.0"
+    progName="mozilla-firefox" # last tested: "108.0.1"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -160,7 +160,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "94.0.4606.26"
+    progName="opera-stable" # last tested: "94.0.4606.38"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -229,7 +229,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.84"
+    installedVersion="1.0.86"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -245,7 +245,7 @@ virtualbox(){
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.18"
+    progName="zotero" # last tested: "6.0.19"
     link="https://www.zotero.org/download/"
     command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 
@@ -297,7 +297,7 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.4.7"
+    installedVersion="8.4.8"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

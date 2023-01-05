@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 27/12/2022
+# Last update: 05/01/2023
 #
 # Tip: Pass all as parameter to call the windowsPrograms
 #
@@ -88,7 +88,7 @@ checkVersion() {
 
 ## GNU/Linux programs
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.9.10"
+    progName="MasterPDFEditor" # last tested: "5.9.20"
     link="https://code-industry.net/free-pdf-editor"
     command="grep -o 'http[^\"]*' a.html | grep \"x86.64.tar.gz\" | cut -d '-' -f5"
 
@@ -144,7 +144,7 @@ mangohud(){
 }
 
 mkvtoolnix () {
-    progName="mkvtoolnix" # last tested: "72.0.0"
+    progName="mkvtoolnix" # last tested: "73.0.0"
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix' a.html | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
@@ -152,7 +152,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "108.0.1"
+    progName="mozilla-firefox" # last tested: "108.0.2"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 

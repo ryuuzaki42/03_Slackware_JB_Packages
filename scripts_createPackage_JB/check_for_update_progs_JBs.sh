@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 05/01/2023
+# Last update: 13/01/2023
 #
 # Tip: Pass all as parameter to call the windowsPrograms
 #
@@ -160,7 +160,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "94.0.4606.38"
+    progName="opera-stable" # last tested: "94.0.4606.65"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -211,7 +211,7 @@ opera-ffmpeg-codecs(){
 smplayer(){
     progName="smplayer" # last tested: "22.7.0"
     link="https://www.smplayer.info/en/downloads"
-    command="grep -o '/smplayer.*-x64.exe\"' a.html | cut -d '-' -f2"
+    command="grep -o '/smplayer.*-x64.exe\"' a.html | cut -d '-' -f3"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -229,7 +229,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.86"
+    installedVersion="1.0.87"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

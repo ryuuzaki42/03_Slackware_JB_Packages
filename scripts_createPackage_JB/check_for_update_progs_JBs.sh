@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 13/01/2023
+# Last update: 17/01/2023
 #
 # Tip: Pass all as parameter to call the windowsPrograms
 #
@@ -152,7 +152,7 @@ mkvtoolnix () {
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "108.0.2"
+    progName="mozilla-firefox" # last tested: "109.0"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -201,7 +201,7 @@ opera-stable(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.70.1"
+    progName="opera-ffmpeg-codecs" # last tested: "0.72.0"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 
@@ -217,7 +217,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.37.3"
+    progName="teamviewer" # last tested: "15.37.8"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 
@@ -229,7 +229,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.87"
+    installedVersion="1.0.88"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -239,13 +239,13 @@ virtualbox(){
     link="https://www.virtualbox.org/wiki/Downloads"
     command="grep 'VirtualBox.* platform packages' a.html | cut -d '>' -f4 | cut -d ' ' -f2"
 
-    installedVersion="7.0.4"
+    installedVersion="7.0.6"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.19"
+    progName="zotero" # last tested: "6.0.20"
     link="https://www.zotero.org/download/"
     command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 

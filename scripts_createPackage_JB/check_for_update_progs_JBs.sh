@@ -22,11 +22,12 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 17/01/2023
+# Last update: 23/01/2023
 #
-# Tip: Pass all as parameter to call the windowsPrograms
+# Tip: Pass "win" as parameter to call the windowsPrograms
+# Tip: Pass "all" as parameter to call program with lower updates
 #
-useColor() { # Color
+useColor(){ # Color
     #BLACK='\e[1;30m'
     RED='\e[1;31m'
     GREEN='\e[1;32m'
@@ -38,8 +39,11 @@ useColor() { # Color
 }
 useColor
 
+s1=$1 # To check if is win
+s2=$2 # To check if is all
+
 # Usual functions
-downloadHTML() {
+downloadHTML(){
     link=$1
 
     if [ "$link" == '' ]; then
@@ -67,7 +71,7 @@ compareVersion(){
     fi
 }
 
-checkVersion() {
+checkVersion(){
     progName=$1
     link=$2
     command=$3
@@ -78,8 +82,9 @@ checkVersion() {
     downloadHTML "$link"
 
     #set -x
-    version=$(eval $command)
+    version=$(eval "$command")
     #echo "version: \"$version\""
+    #set +x
 
     rm a.html
 
@@ -88,9 +93,9 @@ checkVersion() {
 
 ## GNU/Linux programs
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.9.20"
-    link="https://code-industry.net/free-pdf-editor"
-    command="grep -o 'http[^\"]*' a.html | grep \"x86.64.tar.gz\" | cut -d '-' -f5"
+    progName="MasterPDFEditor" # last tested: "5.9.30"
+    link="https://code-industry.net/downloads/"
+    command="grep -o 'Version .* now available for Linux' a.html | cut -d ' ' -f2"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -143,7 +148,7 @@ mangohud(){
     checkVersion "$progName" "$link" "$command"
 }
 
-mkvtoolnix () {
+mkvtoolnix (){
     progName="mkvtoolnix" # last tested: "73.0.0"
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix' a.html | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
@@ -160,7 +165,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "94.0.4606.65"
+    progName="opera-stable" # last tested: "94.0.4606.76"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -255,11 +260,8 @@ zotero(){
 # GNU/Linux calls
 GNULinuxPrograms(){
     MasterPDFEditor
-    TLP
     authy
-    # gitahead # GitAhead is no longer under active development
     maestral
-    mangohud
     mkvtoolnix
     mozilla-firefox
     opera-stable
@@ -269,6 +271,12 @@ GNULinuxPrograms(){
     ventoy
     virtualbox
     zotero
+
+    if [ "$1" == "all" ]; then # of '$0 win' will also call the windowsPrograms
+        TLP
+        gitahead # GitAhead is no longer under active development
+        mangohud
+    fi
 }
 
 # Windows programs
@@ -326,7 +334,7 @@ winrar(){
     link="https://www.win-rar.com/start.html"
     command="grep -o '>WinRAR [0-9].*<' a.html | tr -d 'a-zA-Z <>'"
 
-    installedVersion="6.11"
+    installedVersion="6.20"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -334,18 +342,21 @@ winrar(){
 # Windows calls
 windowsPrograms(){
     hwmonitor
-    nettraffic
     notepad-plus-plus
     revouninstaller
-    sumatraPDFReader
     winrar
+
+    if [ "$1" == "all" ]; then # of '$0 win' will also call the windowsPrograms
+        nettraffic
+        sumatraPDFReader
+    fi
 }
 
 # Call to check version
-GNULinuxPrograms
+GNULinuxPrograms $s2
 
-if [ "$1" == "all" ]; then # of '$0 all' will call the windowsPrograms
-    windowsPrograms
+if [ "$s1" == "win" ]; then # of '$0 win' will also call the windowsPrograms
+    windowsPrograms $s2
 fi
 
 # Default function

@@ -22,10 +22,10 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 23/01/2023
+# Last update: 26/01/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
-# Tip: Pass "all" as parameter to call program with lower updates
+# Tip: Pass "all" as parameter to call program updates
 #
 useColor(){ # Color
     #BLACK='\e[1;30m'
@@ -39,8 +39,7 @@ useColor(){ # Color
 }
 useColor
 
-s1=$1 # To check if is win
-s2=$2 # To check if is all
+s1=$1 # To check if is win or all
 
 # Usual functions
 downloadHTML(){
@@ -93,7 +92,7 @@ checkVersion(){
 
 ## GNU/Linux programs
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.9.30"
+    progName="MasterPDFEditor" # last tested: "5.9.35"
     link="https://code-industry.net/downloads/"
     command="grep -o 'Version .* now available for Linux' a.html | cut -d ' ' -f2"
 
@@ -222,7 +221,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.37.8"
+    progName="teamviewer" # last tested: "15.38.3"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 
@@ -285,7 +284,7 @@ hwmonitor(){
     link="https://www.cpuid.com/softwares/hwmonitor.html"
     command="grep -o 'href.*hwmonitor_.*.exe' a.html | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
 
-    installedVersion="1.48"
+    installedVersion="1.49"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -353,10 +352,10 @@ windowsPrograms(){
 }
 
 # Call to check version
-GNULinuxPrograms $s2
+GNULinuxPrograms $s1
 
-if [ "$s1" == "win" ]; then # of '$0 win' will also call the windowsPrograms
-    windowsPrograms $s2
+if [ "$s1" == "win" ] || [ "$s1" == "all" ]; then # of '$0 win' will also call the windowsPrograms
+    windowsPrograms $s1
 fi
 
 # Default function

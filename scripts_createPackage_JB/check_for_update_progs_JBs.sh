@@ -271,7 +271,7 @@ GNULinuxPrograms(){
     virtualbox
     zotero
 
-    if [ "$1" == "all" ]; then # of '$0 win' will also call the windowsPrograms
+    if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
         TLP
         gitahead # GitAhead is no longer under active development
         mangohud
@@ -345,7 +345,7 @@ windowsPrograms(){
     revouninstaller
     winrar
 
-    if [ "$1" == "all" ]; then # of '$0 win' will also call the windowsPrograms
+    if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
         nettraffic
         sumatraPDFReader
     fi
@@ -354,7 +354,7 @@ windowsPrograms(){
 # Call to check version
 GNULinuxPrograms $s1
 
-if [ "$s1" == "win" ] || [ "$s1" == "all" ]; then # of '$0 win' will also call the windowsPrograms
+if [ "$s1" == "win" ] || [ "$s1" == "all" ]; then # if "win" or "all" call the windowsPrograms
     windowsPrograms $s1
 fi
 

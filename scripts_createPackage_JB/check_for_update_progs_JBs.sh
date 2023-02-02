@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 26/01/2023
+# Last update: 01/02/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -156,7 +156,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "109.0"
+    progName="mozilla-firefox" # last tested: "109.0.1"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "94.0.4606.76"
+    progName="opera-stable" # last tested: "95.0.4635.25"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -304,7 +304,7 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.4.8"
+    installedVersion="8.4.9"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

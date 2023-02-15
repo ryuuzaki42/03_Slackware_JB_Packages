@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 19/12/2022
+# Last update: 15/02/2023
 #
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
@@ -37,7 +37,7 @@ else
     fi
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit" # last tested: "22.1.1"
+        progName="smartgit" # last tested: "22.1.3"
         countF='2'
     elif [ "$progBuild" == '2' ]; then
         progName="smartsynchronize" # last tested: "4.3.2"
@@ -83,7 +83,8 @@ else
 
     linkDl="https://www.syntevo.com/downloads/$progName"
     folderDest=$(pwd)
-    tag="1_JB"
+    TAG="1_JB"
+    ARCH=noarch
 
     wget -c "$linkDl/${progName}-linux-${versionDL}.tar.gz"
 
@@ -164,7 +165,7 @@ $progName:" >> install/slack-desc
     ln -s "../share/$progName/bin/$progName.sh" "$lnFile"
     cd ../.. || exit
 
-    /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-noArch-${tag}.txz"
+    /sbin/makepkg -l y -c n "$folderDest/$progName-$version-$ARCH-$TAG.txz"
 
     cd .. || exit
     rm -r "$progName"

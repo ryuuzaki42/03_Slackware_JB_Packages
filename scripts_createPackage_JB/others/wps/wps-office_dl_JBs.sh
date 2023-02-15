@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from wps-office-version.rpm
 #
-# Last update: 08/10/2022
+# Last update: 15/02/2023
 #
 echo -e "\\n# Create a txz from wps-office-version.rpm #\\n"
 
@@ -30,14 +30,14 @@ if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="wps-office"
-    version="11.1.0.11664.XA-1"
-    tag="1_JB"
+    VERSION="11.1.0.11691.XA-1"
+    TAG="1_JB"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3-4 | cut -d '.' -f1-4)
-    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
+    echo -e "\\n   Latest version: $VERSION\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
-        if [ "$version" == "$installedVersion" ]; then
-            echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
+        if [ "$VERSION" == "$installedVersion" ]; then
+            echo -e "Version installed ($installedVersion) is equal to latest version ($VERSION)"
 
             continue=$1
             if [ "$continue" == '' ]; then
@@ -52,7 +52,7 @@ else
         fi
     fi
 
-    folderTmpDl=$(echo $version | rev | cut -d '.' -f2 | rev | cut -d '-' -f1)
+    folderTmpDl=$(echo $VERSION | rev | cut -d '.' -f2 | rev | cut -d '-' -f1)
     linkDl="http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/$folderTmpDl"
 
     if [ -z "$ARCH" ]; then
@@ -64,15 +64,15 @@ else
     fi
 
     if [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "i686" ] ; then
-        wget -c "$linkDl/${progName}-${version}.${ARCH}.rpm"
+        wget -c "$linkDl/$progName-$VERSION.$ARCH.rpm"
     else
         echo -e "\\nError: ARCH $ARCH not configured\\n"
         exit 1
     fi
 
-    rpm2txz -d -c -s -r "${progName}-${version}.${ARCH}.rpm"
+    rpm2txz -d -c -s -r "$progName-$VERSION.$ARCH.rpm"
 
-    rm "${progName}-${version}.${ARCH}.rpm"
+    rm "$progName-$VERSION.$ARCH.rpm"
 
-    mv "${progName}-${version}.${ARCH}.txz" "${progName}-${version}.${ARCH}-${tag}.txz"
+    mv "$progName-$VERSION.$ARCH.txz" "$progName-$VERSION-$ARCH-$TAG.txz"
 fi

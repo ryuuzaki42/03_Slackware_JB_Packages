@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 13/02/2023
+# Last update: 20/02/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -156,7 +156,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "109.0.1"
+    progName="mozilla-firefox" # last tested: "110.0"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "95.0.4635.37"
+    progName="opera-stable" # last tested: "95.0.4635.46"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -205,7 +205,7 @@ opera-stable(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.72.0"
+    progName="opera-ffmpeg-codecs" # last tested: "0.73.0"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 
@@ -333,7 +333,7 @@ winrar(){
     link="https://www.win-rar.com/start.html"
     command="grep -o '>WinRAR [0-9].*<' a.html | tr -d 'a-zA-Z <>'"
 
-    installedVersion="6.20"
+    installedVersion="6.21"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

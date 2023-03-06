@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 23/02/2023
+# Last update: 06/03/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -156,7 +156,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "110.0"
+    progName="mozilla-firefox" # last tested: "110.0.1"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "96.0.4693.20"
+    progName="opera-stable" # last tested: "96.0.4693.31"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -284,7 +284,7 @@ hwmonitor(){
     link="https://www.cpuid.com/softwares/hwmonitor.html"
     command="grep -o 'href.*hwmonitor_.*.exe' a.html | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
 
-    installedVersion="1.49"
+    installedVersion="1.50"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -304,7 +304,7 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.4.9"
+    installedVersion="8.5"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

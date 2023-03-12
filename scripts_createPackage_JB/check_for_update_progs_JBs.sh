@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 06/03/2023
+# Last update: 12/03/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -92,7 +92,7 @@ checkVersion(){
 
 ## GNU/Linux programs
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.9.35"
+    progName="MasterPDFEditor" # last tested: "5.9.40"
     link="https://code-industry.net/downloads/"
     command="grep -o 'Version .* now available for Linux' a.html | cut -d ' ' -f2"
 
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "96.0.4693.31"
+    progName="opera-stable" # last tested: "96.0.4693.50"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -233,7 +233,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.88"
+    installedVersion="1.0.89"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 12/03/2023
+# Last update: 14/03/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -93,7 +93,7 @@ checkVersion(){
 ## GNU/Linux programs
 MasterPDFEditor(){
     progName="MasterPDFEditor" # last tested: "5.9.40"
-    link="https://code-industry.net/downloads/"
+    link="https://code-industry.net/downloads"
     command="grep -o 'Version .* now available for Linux' a.html | cut -d ' ' -f2"
 
     checkVersion "$progName" "$link" "$command"
@@ -108,7 +108,7 @@ TLP(){
 }
 
 authy(){
-    progName="authy" # last tested: "2.2.2"
+    progName="authy" # last tested: "2.2.3"
     #link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
     #command="grep -o 'authy-[0-9].*sig' a.html | cut -d '-' -f2"
 
@@ -133,7 +133,7 @@ maestral(){
     #link="https://github.com/samschott/maestral/releases/latest"
     #command="grep 'Release v' a.html | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
-    link="https://pypi.org/project/maestral/"
+    link="https://pypi.org/project/maestral"
     command="grep 'release__card' a.html | grep -v 'dev' | head -n1 | sed 's/.*maestral\///; s/\/\">//'"
 
     checkVersion "$progName" "$link" "$command"
@@ -156,7 +156,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "110.0.1"
+    progName="mozilla-firefox" # last tested: "111.0"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -249,8 +249,8 @@ virtualbox(){
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.22"
-    link="https://www.zotero.org/download/"
+    progName="zotero" # last tested: "6.0.23"
+    link="https://www.zotero.org/download"
     command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 
     checkVersion "$progName" "$link" "$command"

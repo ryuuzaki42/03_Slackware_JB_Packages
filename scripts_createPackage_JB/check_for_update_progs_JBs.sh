@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 14/03/2023
+# Last update: 21/03/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera-stable(){
-    progName="opera-stable" # last tested: "96.0.4693.50"
+    progName="opera-stable" # last tested: "96.0.4693.80"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -221,7 +221,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.39.3"
+    progName="teamviewer" # last tested: "15.40.6"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 

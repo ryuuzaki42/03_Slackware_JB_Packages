@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from opera-stable-version.rpm
 #
-# Last update: 02/03/2023
+# Last update: 21/03/2023
 #
 echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
 

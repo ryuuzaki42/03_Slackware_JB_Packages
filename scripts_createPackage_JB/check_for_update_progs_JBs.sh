@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 21/03/2023
+# Last update: 22/03/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -58,7 +58,7 @@ compareVersion(){
     installedVersion=$2
 
     if [ "$installedVersion" == '' ]; then
-        installedVersion=$(find /var/log/packages/$progName* | rev | cut -d '-' -f3 | rev)
+        installedVersion=$(find /var/log/packages/$progName-[0-9]* | rev | cut -d '-' -f3 | rev)
     fi
 
     if [ "$version" == "$installedVersion" ]; then
@@ -163,12 +163,12 @@ mozilla-firefox(){
     checkVersion "$progName" "$link" "$command"
 }
 
-opera-stable(){
-    progName="opera-stable" # last tested: "96.0.4693.80"
+opera(){
+    progName="opera" # last tested: "97.0.4719.26"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
-    echo -e "\\n$BLUE$progName - Checking for the last version to GNU/Linux (rpm)$NC"
+    echo -e "\\n$BLUE$progName - Checking for the last version to GNU/Linux (deb)$NC"
 
     tailNumber='1'
     continue='0'
@@ -189,10 +189,10 @@ opera-stable(){
             echo -e "         ${CYAN}wget -q $GREEN$link/$version/linux$CYAN -O a.html$NC"
             wget -q "$link/$version/linux" -O a.html
 
-            if grep -q "rpm" a.html; then
+            if grep -q "deb" a.html; then
                 continue='1'
             else
-                echo -e "            # The version \"$version\" don't have rpm version yet\\n"
+                echo -e "            # The version \"$version\" don't have deb version yet\\n"
             fi
         else
             echo -e "         # The version \"$version\" don't have GNU/Linux version yet\\n"
@@ -201,7 +201,8 @@ opera-stable(){
         ((tailNumber++))
     done
 
-    compareVersion "$version"
+    #installedVersion="1.50"
+    compareVersion "$version" #"$installedVersion"
 }
 
 opera-ffmpeg-codecs(){
@@ -263,7 +264,7 @@ GNULinuxPrograms(){
     maestral
     mkvtoolnix
     mozilla-firefox
-    opera-stable
+    opera
     opera-ffmpeg-codecs
     smplayer
     teamviewer

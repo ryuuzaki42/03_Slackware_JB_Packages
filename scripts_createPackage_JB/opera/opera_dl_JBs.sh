@@ -20,19 +20,20 @@
 #
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-# Script: Create a txz from opera-stable-version.rpm
+# Script: Create a txz from opera-stable-version.deb
 #
-# Last update: 21/03/2023
+# Last update: 22/03/2023
 #
-echo -e "\\n# Create a txz from opera-stable-version.rpm #\\n"
+echo -e "\\n# Create a txz from opera-stable-version.deb #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="opera-stable" # last tested: "96.0.4693.80"
-    tag="1_JB"
+    progName="opera" # last tested: "97.0.4719.26"
+    SRCNAM="$progName-stable"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop"
+    linkSlackbuilds150Prog="https://slackbuilds.org/slackbuilds/15.0/network/opera.tar.gz"
 
     tailNumber='1'
     continue='0'
@@ -51,10 +52,10 @@ else
 
         if grep -q "linux" "${progName}-latest"; then
             wget "$linkGetVersion/$version/linux" -O "${progName}-latest"
-            if grep -q "rpm" "${progName}-latest"; then
+            if grep -q "deb" "${progName}-latest"; then
                 continue='1'
             else
-                echo -e "\\t# The version \"$version\" don't have rpm version yet\\n"
+                echo -e "\\t# The version \"$version\" don't have deb version yet\\n"
             fi
         else
             echo -e "\\t# The version \"$version\" don't have GNU/Linux version yet\\n"
@@ -64,7 +65,7 @@ else
     done
     rm "${progName}-latest"
 
-    installedVersion=$(find /var/log/packages/$progName* | rev | cut -d '-' -f3 | rev)
+    installedVersion=$(find /var/log/packages/$progName-[0-9]* | rev | cut -d '-' -f3 | rev)
     echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
@@ -82,19 +83,43 @@ else
             fi
         fi
     fi
-    linkDl="$linkGetVersion/$version/linux"
 
     ARCH=$(uname -m)
-    if [ "$ARCH" == "x86_64" ]; then
-        wget -c "$linkDl/${progName}_${version}_amd64.rpm"
-    else
+    if [ "$ARCH" != "x86_64" ]; then
         echo -e "\\nError: arch: $ARCH - This package is currently only available for 64bit.\\n"
         exit 1
     fi
 
-    mv "${progName}_${version}_amd64.rpm" "${progName}-${version}-${ARCH}-${tag}.rpm"
+    rm -r "$progName"
+    mkdir "$progName"
+    cd "$progName" || exit
 
-    rpm2txz -d -c -s -r "${progName}-${version}-${ARCH}-${tag}.rpm"
+    linkDl="$linkGetVersion/$version/linux"
+    wget -c "$linkSlackbuilds150Prog"
+    wget -c "$linkDl/${SRCNAM}_${version}_amd64.deb"
 
-    rm "${progName}-${version}-${ARCH}-${tag}.rpm"
+    set -x
+    if [ -e "opera.tar.gz" ] && [ -e "$SRCNAM"*".deb" ]; then
+        rm -r $progName/
+        tar zvxf "opera.tar.gz"
+        mv "${SRCNAM}_"*".deb" "$progName"
+    else
+        echo -e "\\nError: files not found\\n"
+        exit 1
+    fi
+
+    cd "$progName" || exit
+
+    versionProg=$(find "${SRCNAM}_"*"deb" | cut -d '_' -f2)
+    sed -i "s/VERSION:-.*/VERSION:-$versionProg}/g" $progName.SlackBuild
+    sed -i "s/tgz/txz/g" $progName.SlackBuild
+    sed -i "s/SBo/JB/g" $progName.SlackBuild
+
+    ./"$progName.SlackBuild"
+
+    cd ../../ || exit
+    rm -r "$progName"
+
+    mv /tmp/$progName-"$version"*txz .
+    echo -e "File moved to: $(pwd)\\n"
 fi

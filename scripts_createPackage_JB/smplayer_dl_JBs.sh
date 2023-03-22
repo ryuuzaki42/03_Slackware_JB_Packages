@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 09/10/2022
+# Last update: 22/03/2023
 #
 # Tip: To build against Qt5 rather than Qt4
 # Use: USE_QT5=yes ./smplayer_dl_JBs.sh
@@ -39,7 +39,7 @@ else
     linkGetVersion="https://www.smplayer.info/en/downloads"
     wget "$linkGetVersion" -O "${progName}-latest"
 
-    version=$(grep -o '/smplayer.*-x64.exe\"' $progName-latest | cut -d '-' -f2)
+    version=$(grep -o '/smplayer.*-x64.exe\"' $progName-latest | cut -d '-' -f3)
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)

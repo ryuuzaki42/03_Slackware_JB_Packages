@@ -98,7 +98,6 @@ else
     wget -c "$linkSlackbuilds150Prog"
     wget -c "$linkDl/${SRCNAM}_${version}_amd64.deb"
 
-    set -x
     if [ -e "opera.tar.gz" ] && [ -e "$SRCNAM"*".deb" ]; then
         rm -r $progName/
         tar zvxf "opera.tar.gz"
@@ -112,8 +111,8 @@ else
 
     versionProg=$(find "${SRCNAM}_"*"deb" | cut -d '_' -f2)
     sed -i "s/VERSION:-.*/VERSION:-$versionProg}/g" $progName.SlackBuild
-    sed -i "s/tgz/txz/g" $progName.SlackBuild
-    sed -i "s/SBo/JB/g" $progName.SlackBuild
+    sed -i "s/PKGTYPE:-tgz/PKGTYPE:-txz/g" $progName.SlackBuild
+    sed -i "s/TAG:-_SBo/TAG:-_JB/g" $progName.SlackBuild
 
     ./"$progName.SlackBuild"
 

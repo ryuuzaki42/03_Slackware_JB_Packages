@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 22/03/2023
+# Last update: 26/03/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -148,7 +148,7 @@ mangohud(){
 }
 
 mkvtoolnix (){
-    progName="mkvtoolnix" # last tested: "74.0.0"
+    progName="mkvtoolnix" # last tested: "75.0.0"
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix' a.html | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "97.0.4719.26"
+    progName="opera" # last tested: "97.0.4719.28"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -222,7 +222,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.40.6"
+    progName="teamviewer" # last tested: "15.40.8"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
 
@@ -234,7 +234,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.89"
+    installedVersion="1.0.90"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -305,7 +305,7 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.5"
+    installedVersion="8.5.1"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

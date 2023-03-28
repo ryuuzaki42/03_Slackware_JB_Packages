@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 27/03/2023
+# Last update: 28/03/2023
 #
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
@@ -81,7 +81,7 @@ else
 
     linkDl="https://www.syntevo.com/downloads/$progName"
     folderDest=$(pwd)
-    TAG="1_JB"
+    TAG="2_JB"
     ARCH=noarch
 
     wget -c "$linkDl/${progName}-linux-${versionDL}.tar.gz"
@@ -108,7 +108,11 @@ else
     mv bin/ lib/ jre/ "usr/share/$progName/"
 
     if [ "$progBuild" == '1' ]; then
-        mv dictionaries/ "usr/share/$progName/"
+        mv dictionaries/ git/ opt/ "usr/share/$progName/"
+    fi
+
+    if [ "$progBuild" == '2' ]; then
+        mv filemanager-themes/ "usr/share/$progName/"
     fi
 
     mkdir -p usr/share/applications/

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 26/03/2023
+# Last update: 05/04/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "97.0.4719.28"
+    progName="opera" # last tested: "97.0.4719.63"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -234,7 +234,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.90"
+    installedVersion="1.0.91"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -315,7 +315,7 @@ revouninstaller(){
     link="https://www.revouninstaller.com/products/revo-uninstaller-free"
     command="grep -o -E '>Version: (.{4}|.{5})<' a.html | tr -d 'a-zA-Z : <>'"
 
-    installedVersion="2.4.2"
+    installedVersion="2.4.4"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

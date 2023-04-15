@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 05/04/2023
+# Last update: 15/04/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -134,15 +134,15 @@ maestral(){
     #command="grep 'Release v' a.html | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
     link="https://pypi.org/project/maestral"
-    command="grep 'release__card' a.html | grep -v 'dev' | head -n1 | sed 's/.*maestral\///; s/\/\">//'"
+    command="grep 'release__card' a.html | grep -v 'dev' | head -n 1 | sed 's/.*maestral\///; s/\/\">//'"
 
     checkVersion "$progName" "$link" "$command"
 }
 
 mangohud(){
-    progName="mangohud" # last tested: "0.6.8"
+    progName="mangohud" # last tested: "0.6.9"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
-    command="grep 'Release MangoHud ' a.html | head -n1 | sed 's/.*Version //; s/ .*//'"
+    command="grep 'href=.*/tree/v.*' a.html | head -n 1 | sed 's/.*tree\/v//' | cut -d '\"' -f1"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -156,7 +156,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "111.0.1"
+    progName="mozilla-firefox" # last tested: "112.0"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -224,7 +224,7 @@ smplayer(){
 teamviewer(){
     progName="teamviewer" # last tested: "15.40.8"
     link="https://www.teamviewer.com/en/download/linux"
-    command="grep -o 'deb package .*' a.html | head -n1 | tr -d 'a-z <>/'"
+    command="grep -o 'deb package .*' a.html | head -n 1 | tr -d 'a-z <>/'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -232,7 +232,7 @@ teamviewer(){
 ventoy(){
     progName="ventoy"
     link="https://github.com/ventoy/Ventoy/releases/latest"
-    command="grep 'Release Ventoy' a.html | head -n1 | sed 's/.*Release Ventoy //; s/ .*//'"
+    command="grep 'Release Ventoy' a.html | head -n 1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
     installedVersion="1.0.91"
 
@@ -305,7 +305,7 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.5.1"
+    installedVersion="8.5.2"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

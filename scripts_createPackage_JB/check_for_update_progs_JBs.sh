@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 18/04/2023
+# Last update: 19/04/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "97.0.4719.63"
+    progName="opera" # last tested: "97.0.4719.83"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -244,7 +244,7 @@ virtualbox(){
     link="https://www.virtualbox.org/wiki/Downloads"
     command="grep 'VirtualBox.* platform packages' a.html | cut -d '>' -f4 | cut -d ' ' -f2"
 
-    installedVersion="7.0.6"
+    installedVersion="7.0.8"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

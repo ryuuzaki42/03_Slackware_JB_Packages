@@ -22,14 +22,14 @@
 #
 # Script: Create a txz from opera-stable-version.deb
 #
-# Last update: 05/04/2023
+# Last update: 19/04/2023
 #
 echo -e "\\n# Create a txz from opera-stable-version.deb #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="opera" # last tested: "97.0.4719.63"
+    progName="opera" # last tested: "97.0.4719.83"
     SRCNAM="$progName-stable"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop"

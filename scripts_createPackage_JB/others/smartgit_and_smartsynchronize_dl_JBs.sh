@@ -23,8 +23,9 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 06/04/2023
+# Last update: 19/04/2023
 #
+set -e
 echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
 
 if [ "$USER" != "root" ]; then
@@ -86,16 +87,17 @@ else
 
     wget -c "$linkDl/${progName}-linux-${versionDL}.tar.gz"
 
-    rm -r "$progName" 2> /dev/null
+    rm -r "$progName/" 2> /dev/null || true
 
     tar -xvf "${progName}-linux-${versionDL}.tar.gz"
 
     cd "$progName" || exit
-    mkdir -p "usr/doc/${progName}-$version"
-    mv licenses/ changelog.txt readme-linux.txt checksums license.html "$progName.url" "usr/doc/${progName}-$version"
+    mkdir -p "usr/doc/${progName}-$version/"
+    mv licenses/ changelog.txt readme-linux.txt checksums license.html "$progName.url" "usr/doc/${progName}-$version/"
 
     if [ "$progBuild" == '2' ]; then
-        mv ./*.pdf "usr/doc/${progName}-$version"
+        mv ./*.pdf "usr/doc/${progName}-$version/" || true
+
         lnFile="ss"
     else
         lnFile="sg"
@@ -110,6 +112,7 @@ else
 
     if [ "$progBuild" == '1' ]; then
         mv dictionaries/ git/ opt/ "usr/share/$progName/"
+        mv known-issues.txt "usr/doc/${progName}-$version/"
     fi
 
     if [ "$progBuild" == '2' ]; then
@@ -170,7 +173,7 @@ $progName:" >> install/slack-desc
 
     /sbin/makepkg -l y -c n "$folderDest/$progName-$version-$ARCH-$TAG.txz"
 
-    cd .. || exit
-    rm -r "$progName"
+    cd ../ || exit
+    rm -r "$progName/" || true
     rm "${progName}-linux-${versionDL}.tar.gz"
 fi

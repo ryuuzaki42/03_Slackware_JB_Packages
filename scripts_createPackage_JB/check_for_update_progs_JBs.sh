@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 19/04/2023
+# Last update: 21/04/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -108,7 +108,7 @@ TLP(){
 }
 
 authy(){
-    progName="authy" # last tested: "2.2.3"
+    progName="authy" # last tested: "2.3.0"
     #link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
     #command="grep -o 'authy-[0-9].*sig' a.html | cut -d '-' -f2"
 
@@ -140,7 +140,7 @@ maestral(){
 }
 
 mangohud(){
-    progName="mangohud" # last tested: "0.6.9"
+    progName="mangohud" # last tested: "0.6.9-1"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
     command="grep 'href=.*/tree/v.*' a.html | head -n 1 | sed 's/.*tree\/v//' | cut -d '\"' -f1"
 
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "97.0.4719.83"
+    progName="opera" # last tested: "98.0.4759.6"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -250,7 +250,7 @@ virtualbox(){
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.23"
+    progName="zotero" # last tested: "6.0.26"
     link="https://www.zotero.org/download"
     command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 

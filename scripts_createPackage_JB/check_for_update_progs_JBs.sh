@@ -140,9 +140,9 @@ maestral(){
 }
 
 mangohud(){
-    progName="mangohud" # last tested: "0.6.9-1"
+    progName="mangohud" # last tested: "0.6.9.1"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
-    command="grep 'href=.*/tree/v.*' a.html | head -n 1 | sed 's/.*tree\/v//' | cut -d '\"' -f1"
+    command="grep 'href=.*/tree/v.*' a.html | head -n 1 | sed 's/.*tree\/v//' | cut -d '\"' -f1 | sed 's/-/./'"
 
     checkVersion "$progName" "$link" "$command"
 }

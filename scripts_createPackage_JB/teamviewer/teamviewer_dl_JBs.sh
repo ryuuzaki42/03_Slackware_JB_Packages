@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of teamviewer
 # Based in: http://slackbuilds.org/repository/14.2/network/teamviewer/
 #
-# Last update: 26/03/2023
+# Last update: 28/04/2023
 #
 echo "This script create a txz version from teamviewer_arch.deb"
 
@@ -33,7 +33,7 @@ echo "This script create a txz version from teamviewer_arch.deb"
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="teamviewer" # last tested: "15.40.8"
+    progName="teamviewer" # last tested: "15.41.7"
     tag="1_JB"
 
     folderDest=$(pwd)
@@ -76,12 +76,14 @@ else
         fi
     fi
 
+    set -eu
+
     linkDl="https://download.teamviewer.com/download/linux"
     fileDl="teamviewer_${archDl}.deb"
 
     wget -c "$linkDl/$fileDl"
 
-    rm -r "$folderTmp" 2> /dev/null
+    rm -r "$folderTmp" 2> /dev/null || true
     mkdir -p "$folderTmp"
     cd "$folderTmp" || exit
 
@@ -91,32 +93,44 @@ else
         ar p "$folderDest/teamviewer_${version}_${archDl}.deb" data.tar.xz | tar -xvJ
     fi
 
-    chown -R root:root .
-    find -L . \
-    \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
-    -o -perm 511 \) -exec chmod 755 {} \; -o \
-    \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
-    -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+#     # make all symbolic links relative
+#     # (code from https://unix.stackexchange.com/a/100955/16829)
+#     ( #cd $PKG
+#     for link in $(find . -lname '/*'); do
+#         target=$(readlink "$link")
+#         link=${link#./}
+#         root=$(echo $link | sed -E 's|[^/](.[^/]*)|..|g'); root=${root#/}; root=${root%..}
+#         rm "$link"
+#         ln -s "$root${target#/}" "$link"
+#     done
+#     )
 
-    find "$folderTmp" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
-    | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+#     chown -R root:root .
+#     find -L . \
+#     \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+#     -o -perm 511 \) -exec chmod 755 {} \; -o \
+#     \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+#     -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+#
+#     find "$folderTmp" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+#     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-    # Remove the dangling symlink first
-    rm -f $folderTmp/usr/bin/teamviewer
-
-    # Re-create the generic executable
-    ( cd $folderTmp/usr/bin; ln -s /opt/teamviewer/tv_bin/script/teamviewer teamviewer )
-
-    # Link icon to /usr/share/pixmaps
-    mkdir -p "$folderTmp/usr/share/pixmaps"
-    ( ln -sf /opt/teamviewer/tv_bin/desktop/teamviewer.png "$folderTmp/usr/share/pixmaps/teamviewer.png" )
+#     # Remove the dangling symlink first
+#     rm -f $folderTmp/usr/bin/teamviewer
+#
+#     # Re-create the generic executable
+#     ( cd $folderTmp/usr/bin; ln -s /opt/teamviewer/tv_bin/script/teamviewer teamviewer )
+#
+#     # Link icon to /usr/share/pixmaps
+#     mkdir -p "$folderTmp/usr/share/pixmaps"
+#     ( ln -sf /opt/teamviewer/tv_bin/desktop/teamviewer.png "$folderTmp/usr/share/pixmaps/teamviewer.png" )
 
     # Delete deb "legacy" from apt
     rm -r "$folderTmp/etc/apt"
 
     # Copy docs to official/usual place
     mkdir -p "$folderTmp/usr/doc/$progName/"
-    cp "$folderTmp"/opt/teamviewer/doc/*txt "$folderTmp/usr/doc/$progName/"
+    cp -r "$folderTmp"/opt/teamviewer/doc/* "$folderTmp/usr/doc/$progName/"
     #rm -r "$folderTmp/opt/teamviewer/doc/" # Was given error "EULA failed to load"
 
     mkdir -p $folderTmp/etc/rc.d/

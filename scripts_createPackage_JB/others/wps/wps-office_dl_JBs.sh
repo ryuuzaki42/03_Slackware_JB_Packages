@@ -22,7 +22,7 @@
 #
 # Script: Create a txz from wps-office-version.rpm
 #
-# Last update: 15/02/2023
+# Last update: 28/04/2023
 #
 echo -e "\\n# Create a txz from wps-office-version.rpm #\\n"
 
@@ -30,7 +30,7 @@ if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="wps-office"
-    VERSION="11.1.0.11691.XA-1"
+    VERSION="11.1.0.11698.XA-1"
     TAG="1_JB"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3-4 | cut -d '.' -f1-4)

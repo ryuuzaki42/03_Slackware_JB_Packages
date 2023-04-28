@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 21/04/2023
+# Last update: 28/04/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -156,7 +156,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "112.0.1"
+    progName="mozilla-firefox" # last tested: "112.0.2"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -164,7 +164,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "98.0.4759.6"
+    progName="opera" # last tested: "98.0.4759.15"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -222,7 +222,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.40.8"
+    progName="teamviewer" # last tested: "15.41.7"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep -o 'deb package .*' a.html | head -n 1 | tr -d 'a-z <>/'"
 

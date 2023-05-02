@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 28/04/2023
+# Last update: 02/05/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -58,7 +58,7 @@ compareVersion(){
     installedVersion=$2
 
     if [ "$installedVersion" == '' ]; then
-        installedVersion=$(find /var/log/packages/$progName-[0-9]* | rev | cut -d '-' -f3 | rev)
+        installedVersion=$(find /var/log/packages/$progName-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
     fi
 
     if [ "$version" == "$installedVersion" ]; then
@@ -129,7 +129,7 @@ gitahead(){
 }
 
 maestral(){
-    progName="maestral" # last tested: "1.6.5"
+    progName="maestral" # last tested: "1.7.2"
     #link="https://github.com/samschott/maestral/releases/latest"
     #command="grep 'Release v' a.html | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
@@ -148,11 +148,13 @@ mangohud(){
 }
 
 mkvtoolnix (){
-    progName="mkvtoolnix" # last tested: "75.0.0"
+    progName="mkvtoolnix"
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix' a.html | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
-    checkVersion "$progName" "$link" "$command"
+    installedVersion="76.0"
+
+    checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
 
 mozilla-firefox(){

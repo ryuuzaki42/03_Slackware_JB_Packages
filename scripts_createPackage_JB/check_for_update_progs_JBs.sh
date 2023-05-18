@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 09/05/2023
+# Last update: 18/05/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -158,7 +158,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "113.0"
+    progName="mozilla-firefox" # last tested: "113.0.1"
     link="https://www.mozilla.org/en-US/firefox/all"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
@@ -166,7 +166,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "98.0.4759.39"
+    progName="opera" # last tested: "99.0.4788.13"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -208,7 +208,7 @@ opera(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.75.1"
+    progName="opera-ffmpeg-codecs" # last tested: "0.76.1"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 
@@ -307,7 +307,7 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.5.2"
+    installedVersion="8.5.3"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

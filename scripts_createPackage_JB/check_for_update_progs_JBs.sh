@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 24/05/2023
+# Last update: 31/05/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -224,9 +224,9 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.41.7"
+    progName="teamviewer" # last tested: "15.42.4"
     link="https://www.teamviewer.com/en/download/linux"
-    command="grep 'Current version' a.html | tr -d 'Ca-z: <>/'"
+    command="grep 'Current version' a.html | tr -d 'Ca-z :<\->/'"
 
     checkVersion "$progName" "$link" "$command"
 }

@@ -166,7 +166,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "99.0.4788.13"
+    progName="opera" # last tested: "99.0.4788.31"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -315,7 +315,7 @@ notepad-plus-plus(){
 revouninstaller(){
     progName="revouninstaller"
     link="https://www.revouninstaller.com/products/revo-uninstaller-free"
-    command="grep -o -E '>Version: (.{4}|.{5})<' a.html | tr -d 'a-zA-Z : <>'"
+    command="grep -o -E '>Version: (.{4}|.{5}|.{6})<' a.html | tr -d 'a-zA-Z : <>'"
 
     installedVersion="2.4.4"
 
@@ -336,7 +336,7 @@ winrar(){
     link="https://www.win-rar.com/start.html"
     command="grep -o '>WinRAR [0-9].*<' a.html | tr -d 'a-zA-Z <>'"
 
-    installedVersion="6.21"
+    installedVersion="6.22"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

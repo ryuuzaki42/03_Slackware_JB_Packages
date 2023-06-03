@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 31/05/2023
+# Last update: 02/06/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -172,9 +172,9 @@ opera(){
 
     echo -e "\\n$BLUE$progName - Checking for the last version to GNU/Linux (deb)$NC"
 
-    tailNumber='1'
-    continue='0'
-    while [ "$continue" == '0' ]; do
+    tailNumber=1
+    continue=0
+    while [ "$continue" == 0 ]; do
         echo -e "   ${CYAN}wget -q $GREEN$link$CYAN -O a.html$NC"
         wget -q "$link" -O a.html
 
@@ -192,7 +192,7 @@ opera(){
             wget -q "$link/$version/linux" -O a.html
 
             if grep -q "deb" a.html; then
-                continue='1'
+                continue=1
             else
                 echo -e "            # The version \"$version\" don't have deb version yet\\n"
             fi

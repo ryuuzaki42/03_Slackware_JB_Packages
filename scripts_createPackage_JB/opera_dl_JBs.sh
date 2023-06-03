@@ -22,22 +22,22 @@
 #
 # Script: Create a txz from opera-stable-version.deb
 #
-# Last update: 31/05/2023
+# Last update: 02/06/2023
 #
 echo -e "\\n# Create a txz from opera-stable-version.deb #\\n"
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
-    progName="opera" # last tested: "99.0.4788.31"
+    progName="opera" # last tested: "99.0.4788.47"
     SRCNAM="$progName-stable"
 
     linkGetVersion="http://ftp.opera.com/ftp/pub/opera/desktop"
     linkSlackbuilds150Prog="https://slackbuilds.org/slackbuilds/15.0/network/opera.tar.gz"
 
-    tailNumber='1'
-    continue='0'
-    while [ "$continue" == '0' ]; do
+    tailNumber=1
+    continue=0
+    while [ "$continue" == 0 ]; do
         wget "$linkGetVersion" -O "${progName}-latest"
 
         version=$(grep "href" ${progName}-latest | grep -v "Index" | sort -V -t '.' | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
@@ -53,7 +53,7 @@ else
         if grep -q "linux" "${progName}-latest"; then
             wget "$linkGetVersion/$version/linux" -O "${progName}-latest"
             if grep -q "deb" "${progName}-latest"; then
-                continue='1'
+                continue=1
             else
                 echo -e "\\t# The version \"$version\" don't have deb version yet\\n"
             fi

@@ -21,7 +21,7 @@
 #
 # Descrição: Script to download the last version of Slackware Live, made by AlienBob
 #
-# Last update: 11/10/2022
+# Last update: 02/06/2023
 #
 # My dls:
 #     Live    - LEAN 64 bits - ./slackware_live_dl_JBs.sh 1 . 1 4 y
@@ -95,7 +95,7 @@ printTrace() {
     countTraceTmp=$1
     echo -n " #"
 
-    countTmpPrint='1'
+    countTmpPrint=1
     while [ "$countTmpPrint" -lt "$countTraceTmp" ]; do
         echo -n "-"
         ((countTmpPrint++))
@@ -155,13 +155,13 @@ infoLatest=$(grep "href=" latest_version | grep -E "\[DIR\]|\[   \]|\[!!!\]|\[di
 infoName=$(echo "$infoLatest" | sed 's/">.*//g')
 infoDate=$(echo "$infoLatest" | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
 
-count1="30"
-count2="17"
-countTrace="52"
+count1=30
+count2=17
+countTrace=52
 
 countLine=$(echo -e "$infoName" | wc -l)
 ((countLine++))
-countTmp='1'
+countTmp=1
 
 while [ "$countTmp" -lt "$countLine" ]; do
     printTrace "$countTrace"
@@ -204,14 +204,14 @@ else
     echo -e "\\nversionDownload: \"$versionDownload\""
 fi
 
-if [ "$versionDownload" == '1' ]; then # Live
+if [ "$versionDownload" == 1 ]; then # Live
     versionLocal=$versionLocalLive
     versionRepo=$versionRepoLive
 
     folderCreate=$downloadLive"-"
     linkDl="$repoLink/$versionRepo"
 
-elif [ "$versionDownload" == '2' ]; then # Stable
+elif [ "$versionDownload" == 2 ]; then # Stable
     versionLocal=$versionLocalStable
     versionRepo=$versionRepoStable
 
@@ -259,10 +259,10 @@ nameISO=$(echo "$infoISO" | sed 's/">.*//g')
 dateISO=$(echo "$infoISO" | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
 sizeISO=$(echo "$infoISO" | grep -oE "...M|...G")
 
-count1="40"
-count2="20"
-count3='6'
-countTrace="78"
+count1=40
+count2=20
+count3=6
+countTrace=78
 
 printTrace "$countTrace"
 echo -n " # N"
@@ -273,7 +273,7 @@ echo "#"
 
 countLine=$(echo -e "$nameISO" | wc -l)
 ((countLine++))
-countTmp='1'
+countTmp=1
 
 while [ "$countTmp" -lt "$countLine" ]; do
     printTrace "$countTrace"
@@ -303,7 +303,7 @@ else
 fi
 
 if [ "$downloadIsoNumbers" != "" ]; then
-    countTmp='1'
+    countTmp=1
     while [ "$countTmp" -lt "$countLine" ]; do
         tmpInfo=$(echo "$nameISO" | sed -n "${countTmp}p")
         if echo "$downloadIsoNumbers" | grep -q "$countTmp"; then
@@ -313,7 +313,7 @@ if [ "$downloadIsoNumbers" != "" ]; then
 
             linkPrintAndDl "$linkDl/$tmpInfo.md5"
 
-            if [ "$versionDownload" == '1' ]; then
+            if [ "$versionDownload" == 1 ]; then
                 linkPrintAndDl "$linkDl/$tmpInfo.asc"
             fi
         fi
@@ -326,7 +326,7 @@ fi
 
 linkPrintAndDl "$repoLink/README" "ChangeLog.txt"
 
-if [ "$versionDownload" == '1' ]; then
+if [ "$versionDownload" == 1 ]; then
     linkPrintAndDl "$repoLink/slackware64-current-live/README"
 
 else # "$versionDownload" == 2 or 3
@@ -334,7 +334,7 @@ else # "$versionDownload" == 2 or 3
 
     linkPrintAndDl "$linkDl/README"
 
-    if [ "$versionDownload" == '2' ]; then
+    if [ "$versionDownload" == 2 ]; then
         linkPrintAndDl "$linkDl/LATEST_ADDITION_TO_150"
     else
         linkPrintAndDl "$linkDl/LATEST_ADDITION_TO_CURRENT"

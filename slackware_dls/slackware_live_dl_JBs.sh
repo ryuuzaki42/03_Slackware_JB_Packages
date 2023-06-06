@@ -21,19 +21,19 @@
 #
 # Descrição: Script to download the last version of Slackware Live, made by AlienBob
 #
-# Last update: 02/06/2023
+# Last update: 06/06/2023
 #
 # My dls:
-#     Live    - LEAN 64 bits - ./slackware_live_dl_JBs.sh 1 . 1 4 y
+#     Live    - LEAN 64 bits - ./slackware_live_dl_JBs.sh 1 . 1 6 y
 #     Stable  - only one option - ./slackware_live_dl_JBs.sh 1 . 2 1 y
 #     Current - only one option - ./slackware_live_dl_JBs.sh 1 . 3 1 y
 #
 echo -e "\\nScript to download the last version of Slackware Live (made by Alien Bob)\\n"
 
 # Last tested:
-    # 1 slackware-live/           - version 1.6.0
-    # 2 slackware64-15.0-live/    - day 2022-08-14
-    # 3 slackware64-current-live/ - day 2022-08-16
+    # 1 slackware-live/           - version 1.7.0
+    # 2 slackware64-15.0-live/    - day 2023-06-04
+    # 3 slackware64-current-live/ - day 2023-06-05
 
 help() {
     echo -e "$(basename "$0") \$mirror_choose \$pathDl \$versionDownload \$downloadIsoNumbers \$continueOrNot

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 02/06/2023
+# Last update: 06/06/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call program updates
@@ -129,7 +129,7 @@ gitahead(){
 }
 
 maestral(){
-    progName="maestral" # last tested: "1.7.2"
+    progName="maestral" # last tested: "1.7.3"
     #link="https://github.com/samschott/maestral/releases/latest"
     #command="grep 'Release v' a.html | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
@@ -152,14 +152,17 @@ mkvtoolnix (){
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix' a.html | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
-    installedVersion="76.0"
+    installedVersion="77.0"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "113.0.2"
-    link="https://www.mozilla.org/en-US/firefox/all"
+    progName="mozilla-firefox" # last tested: "114.0"
+    #link="https://www.mozilla.org/firefox/notes/"
+    #command="grep 'release-version' a.html | sed 's/.*release-version\">//; s/<.*//'"
+
+    link="https://www.mozilla.org/firefox/all/"
     command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
     checkVersion "$progName" "$link" "$command"
@@ -317,7 +320,7 @@ revouninstaller(){
     link="https://www.revouninstaller.com/products/revo-uninstaller-free"
     command="grep -o -E '>Version: (.{4}|.{5}|.{6})<' a.html | tr -d 'a-zA-Z : <>'"
 
-    installedVersion="2.4.4"
+    installedVersion="2.4.5"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

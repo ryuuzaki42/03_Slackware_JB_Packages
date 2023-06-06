@@ -25,8 +25,11 @@
 # Last update: 06/06/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
-# Tip: Pass "all" as parameter to call program updates
+# Tip: Pass "all" as parameter to call programs updates
+# Tip: Use FULL_INFO=1 ./check_for_update_progs_JBs.sh to show all info about the programs
 #
+FULL_INFO=${FULL_INFO-0} # 1 to show all info or 0 to more clean output
+
 useColor(){ # Color
     #BLACK='\e[1;30m'
     RED='\e[1;31m'
@@ -41,6 +44,14 @@ useColor
 
 s1=$1 # To check if is win or all
 
+echo_FULL_INFO(){
+    TEXT=$1
+
+    if [ "$FULL_INFO" == 1 ]; then
+        echo -e "$TEXT"
+    fi
+}
+
 # Usual functions
 downloadHTML(){
     link=$1
@@ -48,23 +59,32 @@ downloadHTML(){
     if [ "$link" == '' ]; then
         echo -e "\\n${RED}Error: The link: \"$link\" is not valid!$NC"
     else
-        echo -e "$CYAN - wget -q $GREEN$link$CYAN -O a.html$NC"
-        wget -q $link -O a.html
+        echo_FULL_INFO "$CYAN - wget -q $GREEN$link$CYAN -O a.html$NC"
+        wget -q "$link" -O a.html
     fi
 }
 
 compareVersion(){
     version=$1
     installedVersion=$2
+    link=$3
 
     if [ "$installedVersion" == '' ]; then
-        installedVersion=$(find /var/log/packages/$progName-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
+        installedVersion=$(find /var/log/packages/"$progName"-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
     fi
 
     if [ "$version" == "$installedVersion" ]; then
-        echo -e "$BLUE   Latest version ($GREEN$version$BLUE) is ${GREEN}equal$BLUE to the installed$NC"
+        if [ "$FULL_INFO" == 1 ]; then
+            echo -e "$BLUE   Latest version ($GREEN$version$BLUE) is ${GREEN}equal$BLUE to the installed$NC"
+        else
+            echo -en "$GREEN $version$NC"
+        fi
     else
-        echo -en "\n$BLUE   Latest version ($GREEN$version$BLUE) is$RED not equal$BLUE to the installed ($GREEN$installedVersion$BLUE). "
+        if [ "$FULL_INFO" == 0 ]; then
+            echo -en "$CYAN - wget -q $GREEN$link$CYAN -O a.html$NC"
+        fi
+
+        echo -en "\\n$BLUE   Latest version ($GREEN$version$BLUE) is$RED not equal$BLUE to the installed ($GREEN$installedVersion$BLUE). "
         echo -en "Press enter to continue...$NC"
         read -r continue
     fi
@@ -87,7 +107,7 @@ checkVersion(){
 
     rm a.html
 
-    compareVersion "$version" "$installedVersion"
+    compareVersion "$version" "$installedVersion" "$link"
 }
 
 ## GNU/Linux programs
@@ -173,12 +193,13 @@ opera(){
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
-    echo -e "\\n$BLUE$progName - Checking for the last version to GNU/Linux (deb)$NC"
+    echo -en "\\n$BLUE$progName"
+    echo_FULL_INFO " - Checking for the last version to GNU/Linux (deb)$NC"
 
     tailNumber=1
     continue=0
     while [ "$continue" == 0 ]; do
-        echo -e "   ${CYAN}wget -q $GREEN$link$CYAN -O a.html$NC"
+        echo_FULL_INFO "   ${CYAN}wget -q $GREEN$link$CYAN -O a.html$NC"
         wget -q "$link" -O a.html
 
         version=$(grep "href" a.html | grep -v "Index" | sort -V -t '.' | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
@@ -187,11 +208,11 @@ opera(){
             exit 0
         fi
 
-        echo -e "$BLUE      Version test: $version$CYAN - wget -q $GREEN$link/$version$CYAN -O a.html$NC"
+        echo_FULL_INFO "$BLUE      Version test: $version$CYAN - wget -q $GREEN$link/$version$CYAN -O a.html$NC"
         wget -q "$link/$version" -O a.html
 
         if grep -q "linux" a.html; then
-            echo -e "         ${CYAN}wget -q $GREEN$link/$version/linux$CYAN -O a.html$NC"
+            echo_FULL_INFO "        $CYAN wget -q $GREEN$link/$version/linux$CYAN -O a.html$NC"
             wget -q "$link/$version/linux" -O a.html
 
             if grep -q "deb" a.html; then
@@ -206,8 +227,7 @@ opera(){
         ((tailNumber++))
     done
 
-    #installedVersion="1.50"
-    compareVersion "$version" #"$installedVersion"
+    compareVersion "$version" "" "$link"
 }
 
 opera-ffmpeg-codecs(){
@@ -358,10 +378,10 @@ windowsPrograms(){
 }
 
 # Call to check version
-GNULinuxPrograms $s1
+GNULinuxPrograms "$s1"
 
 if [ "$s1" == "win" ] || [ "$s1" == "all" ]; then # if "win" or "all" call the windowsPrograms
-    windowsPrograms $s1
+    windowsPrograms "$s1"
 fi
 
 # Default function

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 06/06/2023
+# Last update: 09/06/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -178,7 +178,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "114.0"
+    progName="mozilla-firefox" # last tested: "114.0.1"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' a.html | sed 's/.*release-version\">//; s/<.*//'"
 
@@ -189,7 +189,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "99.0.4788.31"
+    progName="opera" # last tested: "99.0.4788.65"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -240,8 +240,8 @@ opera-ffmpeg-codecs(){
 
 smplayer(){
     progName="smplayer" # last tested: "22.7.0"
-    link="https://www.smplayer.info/en/downloads"
-    command="grep -o '/smplayer.*-x64.exe\"' a.html | cut -d '-' -f3"
+    link="https://www.smplayer.info/downloads"
+    command="grep -o '\">smplayer.*tar.bz2' a.html | cut -d '.' -f1-3 | cut -d '-' -f2"
 
     checkVersion "$progName" "$link" "$command"
 }

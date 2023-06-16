@@ -21,32 +21,32 @@
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 # Script: Script to build a Slackware package of teamviewer
-# Based in: http://slackbuilds.org/repository/14.2/network/teamviewer/
+# Based in: http://slackbuilds.org/repository/15.0/network/teamviewer/
 #
-# Last update: 31/05/2023
+# Last update: 16/06/2023
 #
 echo "This script create a txz version from teamviewer_arch.deb"
 
 # teamviewer now ("15.19.3" and up) need libminizip
-# https://slackbuilds.org/repository/14.2/libraries/libminizip/
+# https://slackbuilds.org/repository/15.0/libraries/libminizip/
 
 if [ "$USER" != "root" ]; then
     echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
 else
     progName="teamviewer" # last tested: "15.42.4"
-    tag="1_JB"
+    tag="2_JB"
 
     folderDest=$(pwd)
     folderTmp="$folderDest/${progName}_tmp"
 
     arch=$(uname -m)
     case "$arch" in
-        i?86 )
+        i?86)
             archDl="i386" ;;
-        x86_64 )
+        x86_64)
             arch="x86_64"
             archDl="amd64" ;;
-        * )
+        *)
             echo "$arch is not supported."
             exit 1 ;;
     esac
@@ -93,48 +93,54 @@ else
         ar p "$folderDest/teamviewer_${version}_${archDl}.deb" data.tar.xz | tar -xvJ
     fi
 
-#     # make all symbolic links relative
-#     # (code from https://unix.stackexchange.com/a/100955/16829)
-#     ( #cd $PKG
-#     for link in $(find . -lname '/*'); do
-#         target=$(readlink "$link")
-#         link=${link#./}
-#         root=$(echo $link | sed -E 's|[^/](.[^/]*)|..|g'); root=${root#/}; root=${root%..}
-#         rm "$link"
-#         ln -s "$root${target#/}" "$link"
-#     done
-#     )
 
-#     chown -R root:root .
-#     find -L . \
-#     \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
-#     -o -perm 511 \) -exec chmod 755 {} \; -o \
-#     \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
-#     -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-#
-#     find "$folderTmp" -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
-#     | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+    # make all symbolic links relative
+    # (code from https://unix.stackexchange.com/a/100955/16829)
+    ( cd "$folderDest"
+    for link in $(find . -lname '/*'); do
+        target=$(readlink "$link")
+        link=${link#./}
+        root=$(echo "$link" | sed -E 's|[^/](.[^/]*)|..|g'); root=${root#/}; root=${root%..}
+        rm "$link"
+        ln -s "$root${target#/}" "$link"
+    done
+    )
+
+    chown -R root:root .
+    find -L . \
+    \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+    -o -perm 511 \) -exec chmod 755 {} \; -o \
+    \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+    -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+    # we do not strip te libicudata library as it prevents the package from working.
+    find "$folderTmp" -print0 | xargs -0 file | grep -v -e 'libicudata' | grep -e "executable" -e "shared object" | grep ELF \
+        | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 #     # Remove the dangling symlink first
 #     rm -f $folderTmp/usr/bin/teamviewer
-#
+
 #     # Re-create the generic executable
 #     ( cd $folderTmp/usr/bin; ln -s /opt/teamviewer/tv_bin/script/teamviewer teamviewer )
-#
-#     # Link icon to /usr/share/pixmaps
-#     mkdir -p "$folderTmp/usr/share/pixmaps"
-#     ( ln -sf /opt/teamviewer/tv_bin/desktop/teamviewer.png "$folderTmp/usr/share/pixmaps/teamviewer.png" )
 
-    # Delete deb "legacy" from apt
-    rm -r "$folderTmp/etc/apt"
+    # Link icon to /usr/share/pixmaps
+    mkdir -p "$folderTmp"/usr/share/pixmaps
+    ln -s /opt/teamviewer/tv_bin/desktop/teamviewer_256.png "$folderTmp"/usr/share/pixmaps/TeamViewer.png
+
+    # Delete deb "legacy" - We don't need apt
+    rm -rf "$folderTmp/etc/apt"
+
+    mv "$folderTmp"/usr/share/applications/com.teamviewer.TeamViewer.desktop "$folderTmp"/usr/share/applications/TeamViewer.desktop
 
     # Copy docs to official/usual place
-    mkdir -p "$folderTmp/usr/doc/$progName/"
+    mkdir -p "$folderTmp"/usr/doc/$progName/
     cp -r "$folderTmp"/opt/teamviewer/doc/* "$folderTmp/usr/doc/$progName/"
     #rm -r "$folderTmp/opt/teamviewer/doc/" # Was given error "EULA failed to load"
 
-    mkdir -p $folderTmp/etc/rc.d/
-    install -m 0644 $folderDest/rc.teamviewerd $folderTmp/etc/rc.d/rc.teamviewerd
+    cat "$folderDest"/teamviewer_dl_JBs.sh > "$folderTmp"/usr/doc/$progName/teamviewer_dl_JBs.sh
+
+    mkdir -p "$folderTmp"/etc/rc.d/
+    install -m 0644 "$folderDest"/rc.teamviewerd "$folderTmp"/etc/rc.d/rc.teamviewerd
 
     mkdir -p "$folderTmp/install"
     echo "# HOW TO EDIT THIS FILE:
@@ -160,7 +166,9 @@ teamviewer:" > "$folderTmp/install/slack-desc"
 echo "if [ -x /usr/bin/update-desktop-database ]; then
     /usr/bin/update-desktop-database -q usr/share/applications >/dev/null 2>&1
 fi
-chmod 753 /etc/teamviewer/" > "$folderTmp/install/doinst.sh"
+
+#chmod 753 /etc/teamviewer/ # Change folder permission - Not need
+" > "$folderTmp/install/doinst.sh"
 
     cd "$folderTmp" || exit
     /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-${arch}-${tag}.txz"

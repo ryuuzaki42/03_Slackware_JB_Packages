@@ -22,12 +22,12 @@
 #
 # Script: Create a txz from opera-stable-version.deb
 #
-# Last update: 09/06/2023
+# Last update: 19/06/2023
 #
-echo -e "\\n# Create a txz from opera-stable-version.deb #\\n"
+echo -e "\n# Create a txz from opera-stable-version.deb #\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
+    echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="opera" # last tested: "99.0.4788.65"
     SRCNAM="$progName-stable"
@@ -42,11 +42,11 @@ else
 
         version=$(grep "href" ${progName}-latest | grep -v "Index" | sort -V -t '.' | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
         if [ "$version" == '' ]; then
-            echo -e "\\nNot found any more version\\nJust exiting"
+            echo -e "\nNot found any more version\nJust exiting"
             exit 0
         fi
 
-        echo -e "\\n Version test: $version\\n"
+        echo -e "\n Version test: $version\n"
         linkGetVersionLinux="$linkGetVersion/$version/"
         wget "$linkGetVersionLinux" -O "${progName}-latest"
 
@@ -55,10 +55,10 @@ else
             if grep -q "deb" "${progName}-latest"; then
                 continue=1
             else
-                echo -e "\\t# The version \"$version\" don't have deb version yet\\n"
+                echo -e "\t# The version \"$version\" don't have deb version yet\n"
             fi
         else
-            echo -e "\\t# The version \"$version\" don't have GNU/Linux version yet\\n"
+            echo -e "\t# The version \"$version\" don't have GNU/Linux version yet\n"
         fi
 
         ((tailNumber++))
@@ -66,7 +66,7 @@ else
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName-[0-9]* | rev | cut -d '-' -f3 | rev)
-    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -78,7 +78,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\\nJust exiting\\n"
+                echo -e "\nJust exiting\n"
                 exit 0
             fi
         fi
@@ -86,7 +86,7 @@ else
 
     ARCH=$(uname -m)
     if [ "$ARCH" != "x86_64" ]; then
-        echo -e "\\nError: arch: $ARCH - This package is currently only available for 64bit.\\n"
+        echo -e "\nError: arch: $ARCH - This package is currently only available for 64bit.\n"
         exit 1
     fi
 
@@ -103,7 +103,7 @@ else
         tar zvxf "opera.tar.gz"
         mv "${SRCNAM}_"*".deb" "$progName"
     else
-        echo -e "\\nError: files not found\\n"
+        echo -e "\nError: files not found\n"
         exit 1
     fi
 
@@ -120,5 +120,5 @@ else
     rm -r "$progName"
 
     mv /tmp/$progName-"$version"*txz .
-    echo -e "File moved to: $(pwd)\\n"
+    echo -e "File moved to: $(pwd)\n"
 fi

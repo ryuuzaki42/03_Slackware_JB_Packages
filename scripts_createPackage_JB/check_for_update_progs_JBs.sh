@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 09/06/2023
+# Last update: 19/06/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -57,7 +57,7 @@ downloadHTML(){
     link=$1
 
     if [ "$link" == '' ]; then
-        echo -e "\\n${RED}Error: The link: \"$link\" is not valid!$NC"
+        echo -e "\n${RED}Error: The link: \"$link\" is not valid!$NC"
     else
         echo_FULL_INFO "$CYAN - wget -q $GREEN$link$CYAN -O a.html$NC"
         wget -q "$link" -O a.html
@@ -84,7 +84,7 @@ compareVersion(){
             echo -en "$CYAN - wget -q $GREEN$link$CYAN -O a.html$NC"
         fi
 
-        echo -en "\\n$BLUE   Latest version ($GREEN$version$BLUE) is$RED not equal$BLUE to the installed ($GREEN$installedVersion$BLUE). "
+        echo -en "\n$BLUE   Latest version ($GREEN$version$BLUE) is$RED not equal$BLUE to the installed ($GREEN$installedVersion$BLUE). "
         echo -en "Press enter to continue...$NC"
         read -r continue
     fi
@@ -96,7 +96,7 @@ checkVersion(){
     command=$3
     installedVersion=$4
 
-    echo -en "\\n$BLUE$progName"
+    echo -en "\n$BLUE$progName"
 
     downloadHTML "$link"
 
@@ -193,7 +193,7 @@ opera(){
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
-    echo -en "\\n$BLUE$progName"
+    echo -en "\n$BLUE$progName"
     echo_FULL_INFO " - Checking for the last version to GNU/Linux (deb)$NC"
 
     tailNumber=1
@@ -204,7 +204,7 @@ opera(){
 
         version=$(grep "href" a.html | grep -v "Index" | sort -V -t '.' | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
         if [ "$version" == '' ]; then
-            echo -e "\\n   Not found any more version\\nJust exiting"
+            echo -e "\n   Not found any more version\nJust exiting"
             exit 0
         fi
 
@@ -218,10 +218,10 @@ opera(){
             if grep -q "deb" a.html; then
                 continue=1
             else
-                echo -e "            # The version \"$version\" don't have deb version yet\\n"
+                echo -e "            # The version \"$version\" don't have deb version yet\n"
             fi
         else
-            echo -e "         # The version \"$version\" don't have GNU/Linux version yet\\n"
+            echo -e "         # The version \"$version\" don't have GNU/Linux version yet\n"
         fi
 
         ((tailNumber++))

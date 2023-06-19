@@ -21,14 +21,14 @@
 #
 # Descrição: Script to download the last version of Slackware Live, made by AlienBob
 #
-# Last update: 06/06/2023
+# Last update: 19/06/2023
 #
 # My dls:
 #     Live    - LEAN 64 bits - ./slackware_live_dl_JBs.sh 1 . 1 6 y
 #     Stable  - only one option - ./slackware_live_dl_JBs.sh 1 . 2 1 y
 #     Current - only one option - ./slackware_live_dl_JBs.sh 1 . 3 1 y
 #
-echo -e "\\nScript to download the last version of Slackware Live (made by Alien Bob)\\n"
+echo -e "\nScript to download the last version of Slackware Live (made by Alien Bob)\n"
 
 # Last tested:
     # 1 slackware-live/           - version 1.7.0
@@ -44,7 +44,7 @@ help() {
     \$continueOrNot      - continue or not if already has downloaded the same version in the repo
 
     my personal use:
-        ./$(basename "$0") 1 . 1 4 y\\n"
+        ./$(basename "$0") 1 . 1 4 y\n"
 }
 
 mirror_choose=$1
@@ -69,12 +69,12 @@ linkPrintAndDl() {
     linkDlFunction=$1
     fileName=$2
 
-    echo -en "\\n wget -c \"$linkDlFunction\""
+    echo -en "\n wget -c \"$linkDlFunction\""
     if [ "$fileName" == '' ]; then
-        echo -e "\\n"
+        echo -e "\n"
         wget -c "$linkDlFunction"
     else
-        echo -e " -O \"$fileName\"\\n"
+        echo -e " -O \"$fileName\"\n"
         wget -c "$linkDlFunction" -O "$fileName"
     fi
 }
@@ -120,7 +120,7 @@ while [ "$i" -le "$count_mirror" ]; do
 done
 
 if [ "$mirror_choose" == '' ]; then
-echo -en "\\nUse with mirror to download (enter to first one): "
+echo -en "\nUse with mirror to download (enter to first one): "
     read -r mirror_choose
 fi
 
@@ -134,14 +134,14 @@ else
     repoLink=${mirros_link[0]}
 fi
 
-echo -e "\\nrepoLink: $repoLink"
+echo -e "\nrepoLink: $repoLink"
 
 if [ "$pathDl" == '' ]; then
-    echo -en "\\nPath to download (enter to local folder): "
+    echo -en "\nPath to download (enter to local folder): "
     read -r pathDl
 fi
 
-echo -en "\\npathDl: "
+echo -en "\npathDl: "
 if [ "$pathDl" == '' ]; then
     echo "\"$(pwd)\""
 else
@@ -186,22 +186,22 @@ versionLocalLive=$(find ${downloadLive}-* 2> /dev/null | sort | head -n 1 | cut 
 versionLocalStable=$(find ${downloadStable}_day-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f4-)
 versionLocalCurrent=$(find ${downloadCurrent}_day-* 2> /dev/null | sort | head -n 1 | cut -d '-' -f4-)
 
-echo -e "\\n # Take a look in the folders \"bonus/\" and \"secureboot/\" for more goodies! #"
+echo -e "\n # Take a look in the folders \"bonus/\" and \"secureboot/\" for more goodies! #"
 
-echo -e "\\n$downloadLive/           - Version online (repo): \"$versionRepoLive\" Version downloaded: \"$versionLocalLive\"
+echo -e "\n$downloadLive/           - Version online (repo): \"$versionRepoLive\" Version downloaded: \"$versionLocalLive\"
 $downloadStable/    - Version online (repo): \"$versionRepoStable\" Version downloaded: \"$versionLocalStable\"
 $downloadCurrent/ - Version online (repo): \"$versionRepoCurrent\" Version downloaded: \"$versionLocalCurrent\""
 
-echo -e "\\n\\n # The Lives ISO has all update until the day of release #\\n
+echo -e "\n\n # The Lives ISO has all update until the day of release #\n
 1) \"$downloadLive/\"           - Live from Slackware Current (32 and 64 bits) with more flavors (like MATE, DAW, LEAN)
 2) \"$downloadStable/\"    - Live from Slackware Stable 15.0 64 bits
 3) \"$downloadCurrent/\" - Live from Slackware Current 64 bits"
 
-echo -en "\\nWant download 1, 2 or 3: "
+echo -en "\nWant download 1, 2 or 3: "
 if [ "$versionDownload" == '' ]; then
     read -r versionDownload
 else
-    echo -e "\\nversionDownload: \"$versionDownload\""
+    echo -e "\nversionDownload: \"$versionDownload\""
 fi
 
 if [ "$versionDownload" == 1 ]; then # Live
@@ -229,14 +229,14 @@ else # Current
 fi
 
 if [ "$versionLocal" == "$versionRepo" ]; then
-    echo -e "\\n# No new version found #\\n"
+    echo -e "\n# No new version found #\n"
     echo "Version online (repo) is equal to version downloaded: \"$versionLocal\""
 
     echo -n "Want continue and maybe download more one ISO? (y)es - (n)o (hit enter to no): "
     if [ "$continueOrNot" == '' ]; then
         read -r continueOrNot
     else
-        echo -e "\\ncontinueOrNot: \"$continueOrNot\""
+        echo -e "\ncontinueOrNot: \"$continueOrNot\""
     fi
 
     if [ "$continueOrNot" != 'y' ]; then
@@ -245,7 +245,7 @@ if [ "$versionLocal" == "$versionRepo" ]; then
     fi
 fi
 
-echo -e "\\nfolderCreate: \"$folderCreate$versionRepo\"\\n"
+echo -e "\nfolderCreate: \"$folderCreate$versionRepo\"\n"
 
 mkdir "$folderCreate$versionRepo"
 cd "$folderCreate$versionRepo" || exit
@@ -294,12 +294,12 @@ done
 
 printTrace "$countTrace"
 
-echo -e "\\nWant download with one of them?"
+echo -e "\nWant download with one of them?"
 echo -n "Insert the matching number separated by one space: "
 if [ "$downloadIsoNumbers" == '' ]; then
     read -r downloadIsoNumbers
 else
-    echo -e "\\ndownloadIsoNumbers \"$downloadIsoNumbers\"\\n"
+    echo -e "\ndownloadIsoNumbers \"$downloadIsoNumbers\"\n"
 fi
 
 if [ "$downloadIsoNumbers" != "" ]; then
@@ -321,7 +321,7 @@ if [ "$downloadIsoNumbers" != "" ]; then
         ((countTmp++))
     done
 else
-    echo -e "\\nNot downloading any ISO file!\\n"
+    echo -e "\nNot downloading any ISO file!\n"
 fi
 
 linkPrintAndDl "$repoLink/README" "ChangeLog.txt"
@@ -342,7 +342,7 @@ else # "$versionDownload" == 2 or 3
 fi
 
 folderScriptsAlien="alien_scripts/"
-echo -e "\\nDownloading some good script from alien to the folder \"$folderScriptsAlien\""
+echo -e "\nDownloading some good script from alien to the folder \"$folderScriptsAlien\""
 repoLinkConfig="https://www.slackware.com/~alien/liveslak"
 
 files="iso2usb.sh isocomp.sh make_slackware_live.sh make_slackware_live.conf makemod upslak.sh"
@@ -372,10 +372,10 @@ if [ "$versionLocal" != '' ] && [ "$versionLocal" != "$versionRepo" ]; then
     fi
 fi
 
-echo -e "\\nUseful links:
+echo -e "\nUseful links:
     1 https://git.liveslak.org/liveslak/about/
     2 https://download.liveslak.org/
     3 https://alien.slackbook.org/blog/slackware-live-edition/
     4 https://docs.slackware.com/slackware:liveslak"
 
-echo -e "\\nEnd of script!\\n"
+echo -e "\nEnd of script!\n"

@@ -21,7 +21,7 @@
 #
 # Descrição: Script to download the last version VirtualBox
 #
-# Last update: 18/04/2023
+# Last update: 19/06/2023
 #
 case "$(uname -m)" in
     i?86) archDL="x86" ;;
@@ -38,7 +38,7 @@ version=$(grep "VirtualBox.* platform packages" ${progName}_latest | cut -d '>' 
 rm "${progName}_latest"
 
 downloadedVersion=$(find VirtualBox-* | head -n 1 | cut -d '-' -f2)
-echo -e "\\n    Latest version: $version\nVersion downloaded: $downloadedVersion\\n"
+echo -e "\n    Latest version: $version\nVersion downloaded: $downloadedVersion\n"
 if [ "$downloadedVersion" != '' ]; then
     if [ "$version" == "$downloadedVersion" ]; then
         echo -e "Version downloaded ($downloadedVersion) is equal to latest version ($version)"
@@ -46,7 +46,7 @@ if [ "$downloadedVersion" != '' ]; then
         read -r continue
 
         if [ "$continue" != 'y' ]; then
-            echo -e "\\nJust exiting\\n"
+            echo -e "\nJust exiting\n"
             exit 0
         fi
     fi
@@ -69,7 +69,7 @@ wget -c "$mirrorDl/$runFile"
 wget -c "$mirrorDl/$extpackFile"
 #wget -c "$mirrorDl/UserManual.pdf"
 
-echo -e "\\nCheck md5sum files downloaded\\n"
+echo -e "\nCheck md5sum files downloaded\n"
 tmpFile=$(mktemp)
 echo "$runFileMd5" > "$tmpFile"
 echo "$extpackFileMd5" >> "$tmpFile"

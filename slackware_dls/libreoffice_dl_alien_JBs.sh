@@ -21,7 +21,7 @@
 #
 # Descrição: Script to download the last version of Libreoffice, made by AlienBob
 #
-# Last update: 09/06/2023
+# Last update: 19/06/2023
 #
 case "$(uname -m)" in
     i?86) archDL="x86" ;;
@@ -36,7 +36,7 @@ mirrorStart="http://www.slackware.com/~alien/slackbuilds"
 # Last tested - 15.0: "7.5.4"
 
 if [ "$1" == '' ]; then
-    echo -en "\\n$CYAN# Most downloaded versions:$GREEN 14.2, 15.0, current$CYAN\\nWith version Slackware you want? $GREEN(press enter to 15.0):$NC "
+    echo -en "\n$CYAN# Most downloaded versions:$GREEN 14.2, 15.0, current$CYAN\nWith version Slackware you want? $GREEN(press enter to 15.0):$NC "
     read -r slackwareVersion
 
     if [ "$slackwareVersion" == '' ]; then
@@ -46,7 +46,7 @@ else
     slackwareVersion=$1
 fi
 
-echo -e "\\nMirror: $mirrorStart\\nSlackware version: $slackwareVersion\\n"
+echo -e "\nMirror: $mirrorStart\nSlackware version: $slackwareVersion\n"
 wget "$mirrorStart/CHECKSUMS.md5" -O CHECKSUMS.md5
 
 grep "/$slackwareVersion/" < CHECKSUMS.md5 > CHECKSUMS.md5.2
@@ -56,7 +56,7 @@ progName="libreoffice"
 version=$(grep "$progName-[[:digit:]].*$archDL.*t*z$" < CHECKSUMS.md5 | cut -d '-' -f2)
 
 downloadedVersion=$(find Libreoffice-* | head -n 1 | cut -d '-' -f2)
-echo -e "\\n    Latest version: $version\nVersion downloaded: $downloadedVersion\\n"
+echo -e "\n    Latest version: $version\nVersion downloaded: $downloadedVersion\n"
 if [ "$downloadedVersion" != '' ]; then
     if [ "$version" == "$downloadedVersion" ]; then
         echo -e "Version downloaded ($downloadedVersion) is equal to latest version ($version)"
@@ -64,7 +64,7 @@ if [ "$downloadedVersion" != '' ]; then
         read -r continue
 
         if [ "$continue" != 'y' ]; then
-            echo -e "\\nJust exiting\\n"
+            echo -e "\nJust exiting\n"
             rm CHECKSUMS.md5
             exit 0
         fi
@@ -91,9 +91,9 @@ runFile5=$(grep "$progName-l10n-pt_BR-.*$archDL.*t*z$" < CHECKSUMS.md5 | cut -d 
 rm CHECKSUMS.md5
 
 #runFile=$(echo -e "$runFile1\n$runFile2\n$runFile3\n$runFile4\n$runFile5")
-runFile=$(echo -e "$runFile1\\n$runFile2\\n$runFile3\\n$runFile5")
+runFile=$(echo -e "$runFile1\n$runFile2\n$runFile3\n$runFile5")
 
-echo -e "Files found:\\n$runFile\\n"
+echo -e "Files found:\n$runFile\n"
 
 mkdir "Libreoffice-${version}"
 cd "Libreoffice-${version}" || exit
@@ -102,7 +102,7 @@ for fileGrep in $(echo -e "$runFile"); do
     wget -c "$mirrorStart/$fileGrep"
 done
 
-echo -e "\\n\\n# Checking md5sum #"
+echo -e "\n\n# Checking md5sum #"
 mv ../CHECKSUMS_libreoffice.md5 .
 sed -i 's/pkg64\/'$slackwareVersion'\///g' CHECKSUMS_libreoffice.md5
 sed -i 's/.\/libreoffice\///g' CHECKSUMS_libreoffice.md5
@@ -110,4 +110,4 @@ sed -i 's/.\/libreoffice\///g' CHECKSUMS_libreoffice.md5
 md5sum -c CHECKSUMS_libreoffice.md5
 
 rm CHECKSUMS_libreoffice.md5
-echo -e "\\n\\nList of files downloaded:\\n$(tree --noreport)\\n"
+echo -e "\n\nList of files downloaded:\n$(tree --noreport)\n"

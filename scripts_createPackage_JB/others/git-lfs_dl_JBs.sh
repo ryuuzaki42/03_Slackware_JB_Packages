@@ -23,12 +23,12 @@
 # Script: Script to build a Slackware package of git-lfs
 # Based in: https://slackbuilds.org/repository/14.2/development/git-lfs/
 #
-# Last update: 19/12/2022
+# Last update: 19/06/2023
 #
-echo -e "\\n# Script to build a Slackware package of git-lfs #\\n"
+echo -e "\n# Script to build a Slackware package of git-lfs #\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
+    echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="git-lfs" # last tested: "3.3.0"
     tag="1_JB"
@@ -40,7 +40,7 @@ else
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3)
-    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -52,7 +52,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\\nJust exiting\\n"
+                echo -e "\nJust exiting\n"
                 exit 0
             fi
         fi

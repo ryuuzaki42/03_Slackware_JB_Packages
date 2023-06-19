@@ -22,13 +22,13 @@
 #
 # Script: Script to create a Slackware package from the shellcheck pre-compiled
 #
-# Last update: 15/12/2022
+# Last update: 19/06/2023
 #
-echo -e "\\n# Script to create a Slackware package from the shellcheck pre-compiled #\\n"
+echo -e "\n# Script to create a Slackware package from the shellcheck pre-compiled #\n"
 
 commit_version='0' # Use commit version '0' to no or '1'to yes
 if [ "$USER" != "root" ]; then
-    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
+    echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     archDL=$(uname -m)
     if [ "$archDL" != "x86_64" ]; then
@@ -58,7 +58,7 @@ else
     folderName="${progName}-latest"
 
     installedVersion=$(find /var/log/packages/ | grep "$progName" | cut -d '-' -f2)
-    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -70,7 +70,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\\nJust exiting\\n"
+                echo -e "\nJust exiting\n"
                 exit 0
             fi
         fi

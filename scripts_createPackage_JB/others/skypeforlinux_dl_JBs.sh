@@ -22,9 +22,9 @@
 #
 # Script: Script to create a Slackware package from the SkypeForLinux pre-compiled
 #
-# Last update: 28/04/2023
+# Last update: 19/06/2023
 #
-echo -e "\\n# Script to create a Slackware package from the SkypeForLinux pre-compiled #\\n"
+echo -e "\n# Script to create a Slackware package from the SkypeForLinux pre-compiled #\n"
 
 if [ -z "$ARCH" ]; then
     case "$(uname -m)" in
@@ -40,7 +40,7 @@ if [ "$ARCH" != "x86_64" ]; then
 fi
 
 if [ "$USER" != "root" ]; then
-    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
+    echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progName="skypeforlinux" # last tested: "8.97.76.302"
     linkProg="https://repo.skype.com/deb/pool/main/s/skypeforlinux"
@@ -53,7 +53,7 @@ else
     version=$(echo "$dlProgName" | cut -d '_' -f2)
 
     installedVersion=$(find /var/log/packages/ | grep "$progName" | cut -d '-' -f2)
-    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -65,7 +65,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\\nJust exiting\\n"
+                echo -e "\nJust exiting\n"
                 exit 0
             fi
         fi
@@ -82,7 +82,7 @@ else
         tar zvxf "$progName.tar.gz"
         mv "${progName}"_*"deb" "$progName"
     else
-        echo -e "\\nError: file not found\\n"
+        echo -e "\nError: file not found\n"
         exit
     fi
 
@@ -98,5 +98,5 @@ else
     rm -r "$progName"
 
     mv /tmp/$progName-"$version"*txz .
-    echo -e "File moved to: $(pwd)\\n"
+    echo -e "File moved to: $(pwd)\n"
 fi

@@ -23,17 +23,17 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 09/06/2023
+# Last update: 19/06/2023
 #
 set -e
-echo -e "\\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\\n"
+echo -e "\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
+    echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     progBuild=$1
     if [ "$progBuild" == '' ]; then
-        echo -en "You want build SmartGit or SmartSynchronize?\\n1 to SmartGit or - 2 to SmartSynchronize: "
+        echo -en "You want build SmartGit or SmartSynchronize?\n1 to SmartGit or - 2 to SmartSynchronize: "
         read -r progBuild
     fi
 
@@ -42,7 +42,7 @@ else
     elif [ "$progBuild" == '2' ]; then
         progName="smartsynchronize" # last tested: "4.4.3"
     else
-        echo -e "\\nError: The chosen program ($progBuild) is unknown\\n"
+        echo -e "\nError: The chosen program ($progBuild) is unknown\n"
         exit 1
     fi
 
@@ -61,7 +61,7 @@ else
     fi
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
-    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -73,12 +73,12 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\\nJust exiting\\n"
+                echo -e "\nJust exiting\n"
                 exit 0
             fi
         fi
     fi
-    echo -e "\\nWill build $progName, please wait\\n"
+    echo -e "\nWill build $progName, please wait\n"
 
     linkDl="https://www.syntevo.com/downloads/$progName"
     folderDest=$(pwd)

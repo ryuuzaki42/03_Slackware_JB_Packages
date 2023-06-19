@@ -22,7 +22,7 @@
 #
 # Script: Scripts to update the scripts with "last tested" and "Last update" from Slackware packages (txz) updates
 #
-# Last update: 09/10/2022
+# Last update: 19/06/2023
 #
 for filePackage in $(find . | grep ".*.txz" | grep -v "opera-ffmpeg-codecs" | grep -v "opera-beta-ffmpeg-codecs"); do
     echo
@@ -41,7 +41,7 @@ for filePackage in $(find . | grep ".*.txz" | grep -v "opera-ffmpeg-codecs" | gr
 
     sed 's/^# Last update: .*/# Last update: '"$dateNew"'/1' "$scriptNamePlace" | sed 's/last tested: .*/last tested: '\""$versionNew"\"'/1' > "$fileFinal"
 
-    echo -e "\\nsdiff -s $scriptNamePlace $fileFinal\\n"
+    echo -e "\nsdiff -s $scriptNamePlace $fileFinal\n"
     sdiff -s "$scriptNamePlace" "$fileFinal"
 
     mv "$fileFinal" "$scriptNamePlace"

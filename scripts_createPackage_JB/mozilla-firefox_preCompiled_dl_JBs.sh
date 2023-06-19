@@ -22,12 +22,12 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 09/06/2023
+# Last update: 19/06/2023
 #
-echo -e "\\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\\n"
+echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
 
 if [ "$USER" != "root" ]; then
-    echo -e "\\nNeed to be superuser (root)\\nExiting\\n"
+    echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
     languageDl=$2
 
@@ -70,10 +70,10 @@ else
     fi
 
     fileName="firefox-$version.tar.bz2"
-    echo -e "\\nLatest Firefox stable version: $fileName"
+    echo -e "\nLatest Firefox stable version: $fileName"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f3)
-    echo -e "\\n   Latest version: $version\\nVersion installed: $installedVersion\\n"
+    echo -e "\n   Latest version: $version\nVersion installed: $installedVersion\n"
     if [ "$installedVersion" != '' ]; then
         if [ "$version" == "$installedVersion" ]; then
             echo -e "Version installed ($installedVersion) is equal to latest version ($version)"
@@ -85,7 +85,7 @@ else
             fi
 
             if [ "$continue" != 'y' ]; then
-                echo -e "\\nJust exiting\\n"
+                echo -e "\nJust exiting\n"
                 exit 0
             fi
         fi

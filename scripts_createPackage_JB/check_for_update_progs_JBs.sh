@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 19/06/2023
+# Last update: 20/06/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -178,7 +178,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "114.0.1"
+    progName="mozilla-firefox" # last tested: "114.0.2"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' a.html | sed 's/.*release-version\">//; s/<.*//'"
 
@@ -189,7 +189,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "99.0.4788.65"
+    progName="opera" # last tested: "100.0.4815.21"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -231,7 +231,7 @@ opera(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.76.1"
+    progName="opera-ffmpeg-codecs" # last tested: "0.77.0"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
 
@@ -310,7 +310,7 @@ hwmonitor(){
     link="https://www.cpuid.com/softwares/hwmonitor.html"
     command="grep -o 'href.*hwmonitor_.*.exe' a.html | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
 
-    installedVersion="1.50"
+    installedVersion="1.51"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -320,7 +320,7 @@ nettraffic(){
     link="https://www.venea.net/web/downloads"
     command="grep -o '>Version: [0-9].*<' a.html | head -n1 | tr -d 'a-zA-Z <>:'"
 
-    installedVersion="1.66.2"
+    installedVersion="1.67.0"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -330,7 +330,7 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.5.3"
+    installedVersion="8.5.4"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
@@ -395,4 +395,4 @@ default(){
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
 
-echo
+echo -e "\n"

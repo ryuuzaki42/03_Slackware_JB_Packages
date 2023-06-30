@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of smplayer
 # Based in: https://slackbuilds.org/repository/14.2/multimedia/smplayer/
 #
-# Last update: 19/06/2023
+# Last update: 29/06/2023
 #
 # Tip: To build against Qt5 rather than Qt4
 # Use: USE_QT5=yes ./smplayer_dl_JBs.sh
@@ -33,13 +33,13 @@ echo -e "\n# Script to build a Slackware package of smplayer (without skins and 
 if [ "$USER" != "root" ]; then
     echo -e "\nNeed to be superuser (root)\nExiting\n"
 else
-    progName="smplayer" # last tested: "22.7.0"
+    progName="smplayer" # last tested: "23.6.0"
     tag="1_JB"
 
     linkGetVersion="https://www.smplayer.info/en/downloads"
     wget "$linkGetVersion" -O "${progName}-latest"
 
-    version=$(grep -o '/smplayer.*-x64.exe\"' $progName-latest | cut -d '-' -f3)
+   version=$(grep -o '\">smplayer.*tar.bz2' $progName-latest | cut -d '.' -f1-3 | cut -d '-' -f2)
     rm "${progName}-latest"
 
     installedVersion=$(find /var/log/packages/$progName* | cut -d '-' -f2)
@@ -60,8 +60,6 @@ else
             fi
         fi
     fi
-
-    linkDl="http://downloads.sourceforge.net/smplayer"
 
     if [ -z "$ARCH" ]; then
         case "$(uname -m)" in
@@ -89,6 +87,7 @@ else
         LIBDIRSUFFIX=""
     fi
 
+    linkDl="https://github.com/smplayer-dev/smplayer/releases/download/v$version"
     wget -c "$linkDl/$progName-$version.tar.bz2"
 
     mkdir "$tmpFolder"

@@ -23,7 +23,7 @@
 # Script: Script to build a Slackware package of teamviewer
 # Based in: http://slackbuilds.org/repository/15.0/network/teamviewer/
 #
-# Last update: 19/06/2023
+# Last update: 29/06/2023
 #
 echo "This script create a txz version from teamviewer_arch.deb"
 
@@ -140,7 +140,7 @@ else
     cat "$folderDest"/teamviewer_dl_JBs.sh > "$folderTmp"/usr/doc/$progName/teamviewer_dl_JBs.sh
 
     mkdir -p "$folderTmp"/etc/rc.d/
-    install -m 0644 "$folderDest"/rc.teamviewerd "$folderTmp"/etc/rc.d/rc.teamviewerd
+    install -m 0644 "$folderDest"/rc.teamviewerd "$folderTmp"/etc/rc.d/rc.teamviewerd.new
 
     mkdir -p "$folderTmp/install"
     echo "# HOW TO EDIT THIS FILE:
@@ -163,12 +163,45 @@ teamviewer:
 teamviewer: Homepage: https://www.teamviewer.com/
 teamviewer:" > "$folderTmp/install/slack-desc"
 
-echo "if [ -x /usr/bin/update-desktop-database ]; then
-    /usr/bin/update-desktop-database -q usr/share/applications >/dev/null 2>&1
+echo -en 'config() {
+  NEW="$1"
+  OLD="$(dirname $NEW)/$(basename $NEW .new)"
+  # If there'"'"'s no config file by that name, mv it over:
+  if [ ! -r $OLD ]; then
+    mv $NEW $OLD
+  elif [ "$(cat $OLD | md5sum)" = "$(cat $NEW | md5sum)" ]; then
+    # toss the redundant copy
+    rm $NEW
+  fi
+  # Otherwise, we leave the .new copy for the admin to consider...
+}
+
+preserve_perms() {
+  NEW="$1"
+  OLD="$(dirname $NEW)/$(basename $NEW .new)"
+  if [ -e $OLD ]; then
+    cp -a $OLD ${NEW}.incoming
+    cat $NEW > ${NEW}.incoming
+    mv ${NEW}.incoming $NEW
+  fi
+  config $NEW
+}
+
+preserve_perms etc/rc.d/rc.teamviewerd.new
+
+if [ -x /usr/bin/update-desktop-database ]; then
+  /usr/bin/update-desktop-database -q usr/share/applications >/dev/null 2>&1
+fi
+
+# If other icon themes are installed, then add to/modify this as needed
+if [ -e usr/share/icons/hicolor/icon-theme.cache ]; then
+  if [ -x /usr/bin/gtk-update-icon-cache ]; then
+    /usr/bin/gtk-update-icon-cache -f usr/share/icons/hicolor >/dev/null 2>&1
+  fi
 fi
 
 #chmod 753 /etc/teamviewer/ # Change folder permission - Not need
-" > "$folderTmp/install/doinst.sh"
+' > "$folderTmp/install/doinst.sh"
 
     cd "$folderTmp" || exit
     /sbin/makepkg -l y -c n "$folderDest/${progName}-${version}-${arch}-${tag}.txz"

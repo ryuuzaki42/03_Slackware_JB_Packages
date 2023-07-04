@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 30/06/2023
+# Last update: 04/07/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -172,13 +172,13 @@ mkvtoolnix (){
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix' a.html | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
-    installedVersion="77.0"
+    installedVersion="78.0"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "114.0.2"
+    progName="mozilla-firefox" # last tested: "115.0"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' a.html | sed 's/.*release-version\">//; s/<.*//'"
 
@@ -247,7 +247,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.43.6"
+    progName="teamviewer" # last tested: "15.43.7"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep 'Current version' a.html | tr -d 'Ca-z :<\->/'"
 
@@ -320,7 +320,7 @@ nettraffic(){
     link="https://www.venea.net/web/downloads"
     command="grep -o '>Version: [0-9].*<' a.html | head -n1 | tr -d 'a-zA-Z <>:'"
 
-    installedVersion="1.68.0"
+    installedVersion="1.68.1"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

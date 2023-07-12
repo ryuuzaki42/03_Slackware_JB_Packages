@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 11/07/2023
+# Last update: 12/07/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -53,17 +53,6 @@ echo_FULL_INFO(){
 }
 
 # Usual functions
-downloadHTML(){
-    link=$1
-
-    if [ "$link" == '' ]; then
-        echo -e "\n${RED}Error: The link: \"$link\" is not valid!$NC"
-    else
-        echo_FULL_INFO "$CYAN - wget -q $GREEN$link$CYAN -O a.html$NC"
-        wget -q "$link" -O a.html
-    fi
-}
-
 compareVersion(){
     version=$1
     installedVersion=$2
@@ -81,7 +70,7 @@ compareVersion(){
         fi
     else
         if [ "$FULL_INFO" == 0 ]; then
-            echo -en "$CYAN - wget -q $GREEN$link$CYAN -O a.html$NC"
+            echo -en "$CYAN - wget -q -O - $GREEN$link$NC"
         fi
 
         echo -en "\n$BLUE   Latest version ($GREEN$version$BLUE) is$RED not equal$BLUE to the installed ($GREEN$installedVersion$BLUE). "
@@ -98,14 +87,18 @@ checkVersion(){
 
     echo -en "\n$BLUE$progName"
 
-    downloadHTML "$link"
+    if [ "$link" == '' ]; then
+        echo -e "\n${RED}Error: The link: \"$link\" is not valid!$NC"
+    else
+        echo_FULL_INFO "$CYAN - wget -q -O - $GREEN$link$NC"
+        web_site=$(wget -q -O - "$link")
+        #echo "$web_site"
+    fi
 
     #set -x
-    version=$(eval "$command")
+    version=$(echo "$web_site" | eval "$command")
     #echo "version: \"$version\""
     #set +x
-
-    rm a.html
 
     compareVersion "$version" "$installedVersion" "$link"
 }
@@ -114,7 +107,7 @@ checkVersion(){
 MasterPDFEditor(){
     progName="MasterPDFEditor" # last tested: "5.9.50"
     link="https://code-industry.net/downloads"
-    command="grep -o 'Version .* now available for Linux' a.html | cut -d ' ' -f2"
+    command="grep -o 'Version .* now available for Linux' | cut -d ' ' -f2"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -122,7 +115,7 @@ MasterPDFEditor(){
 TLP(){
     progName="TLP" # last tested: "1.5.0"
     link="https://github.com/linrunner/TLP/releases/latest"
-    command="grep \"Release TLP\" a.html | head -n1 | sed 's/.*Release TLP //; s/ .*//'"
+    command="grep \"Release TLP\" | head -n1 | sed 's/.*Release TLP //; s/ .*//'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -130,10 +123,10 @@ TLP(){
 authy(){
     progName="authy" # last tested: "2.3.0"
     #link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
-    #command="grep -o 'authy-[0-9].*sig' a.html | cut -d '-' -f2"
+    #command="grep -o 'authy-[0-9].*sig' | cut -d '-' -f2"
 
     link="https://aur.archlinux.org/packages/authy"
-    command="grep 'Package Details' a.html | sed 's/.*authy //g' | cut -d '-' -f1"
+    command="grep 'Package Details' | sed 's/.*authy //g' | cut -d '-' -f1"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -141,7 +134,7 @@ authy(){
 gitahead(){
     progName="gitahead"
     link="https://github.com/gitahead/gitahead/releases/latest"
-    command="grep 'Release v' a.html | head -n1 | sed 's/.*Release v//; s/ .*//'"
+    command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
     installedVersion="2.6.3"
 
@@ -151,10 +144,10 @@ gitahead(){
 maestral(){
     progName="maestral" # last tested: "1.7.3"
     #link="https://github.com/samschott/maestral/releases/latest"
-    #command="grep 'Release v' a.html | head -n1 | sed 's/.*Release v//; s/ .*//'"
+    #command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
     link="https://pypi.org/project/maestral"
-    command="grep 'release__card' a.html | grep -v 'dev' | head -n 1 | sed 's/.*maestral\///; s/\/\">//'"
+    command="grep 'release__card' | grep -v 'dev' | head -n 1 | sed 's/.*maestral\///; s/\/\">//'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -162,7 +155,7 @@ maestral(){
 mangohud(){
     progName="mangohud" # last tested: "0.6.9.1"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
-    command="grep 'href=.*/tree/v.*' a.html | head -n 1 | sed 's/.*tree\/v//' | cut -d '\"' -f1 | sed 's/-/./'"
+    command="grep 'href=.*/tree/v.*' | head -n 1 | sed 's/.*tree\/v//' | cut -d '\"' -f1 | sed 's/-/./'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -170,7 +163,7 @@ mangohud(){
 mkvtoolnix (){
     progName="mkvtoolnix"
     link="https://mkvtoolnix.download/source.html"
-    command="grep 'sources/mkvtoolnix' a.html | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
+    command="grep 'sources/mkvtoolnix' | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
     installedVersion="78.0"
 
@@ -180,10 +173,10 @@ mkvtoolnix (){
 mozilla-firefox(){
     progName="mozilla-firefox" # last tested: "115.0.1"
     #link="https://www.mozilla.org/firefox/notes/"
-    #command="grep 'release-version' a.html | sed 's/.*release-version\">//; s/<.*//'"
+    #command="grep 'release-version' | sed 's/.*release-version\">//; s/<.*//'"
 
     link="https://www.mozilla.org/firefox/all/"
-    command="grep 'latest-firefox' a.html | sed 's/.*latest-firefox=\"//; s/\" .*//'"
+    command="grep 'latest-firefox' | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -199,23 +192,23 @@ opera(){
     tailNumber=1
     continue=0
     while [ "$continue" == 0 ]; do
-        echo_FULL_INFO "   ${CYAN}wget -q $GREEN$link$CYAN -O a.html$NC"
-        wget -q "$link" -O a.html
+        echo_FULL_INFO "   ${CYAN}wget -q -O - $GREEN$link$NC"
+        web_site=$(wget -q -O - "$link")
 
-        version=$(grep "href" a.html | grep -v "Index" | sort -V -t '.' | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
+        version=$(echo "$web_site" | grep "href" | grep -v "Index" | sort -V -t '.' | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
         if [ "$version" == '' ]; then
             echo -e "\n   Not found any more version\nJust exiting"
             exit 0
         fi
 
-        echo_FULL_INFO "$BLUE      Version test: $version$CYAN - wget -q $GREEN$link/$version$CYAN -O a.html$NC"
-        wget -q "$link/$version" -O a.html
+        echo_FULL_INFO "$BLUE      Version test: $version$CYAN - wget -q -O - $GREEN$link/$version$NC"
+        web_site=$(wget -q "$link/$version" -O -)
 
-        if grep -q "linux" a.html; then
-            echo_FULL_INFO "        $CYAN wget -q $GREEN$link/$version/linux$CYAN -O a.html$NC"
-            wget -q "$link/$version/linux" -O a.html
+        if echo "$web_site" | grep -q "linux"; then
+            echo_FULL_INFO "        $CYAN wget -q -O - $GREEN$link/$version/linux$NC"
+            web_site=$(wget -q -O - "$link/$version/linux")
 
-            if grep -q "deb" a.html; then
+            if echo "$web_site" | grep -q "deb"; then
                 continue=1
             else
                 echo -e "            # The version \"$version\" don't have deb version yet\n"
@@ -233,7 +226,7 @@ opera(){
 opera-ffmpeg-codecs(){
     progName="opera-ffmpeg-codecs" # last tested: "0.77.0"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
-    command="grep \"Release \" a.html | head -n1 | sed 's/.*Release //; s/ .*//'"
+    command="grep \"Release \" | head -n1 | sed 's/.*Release //; s/ .*//'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -241,7 +234,7 @@ opera-ffmpeg-codecs(){
 smplayer(){
     progName="smplayer" # last tested: "22.7.0"
     link="https://www.smplayer.info/downloads"
-    command="grep -o '\">smplayer.*tar.bz2' a.html | cut -d '.' -f1-3 | cut -d '-' -f2"
+    command="grep -o '\">smplayer.*tar.bz2' | cut -d '.' -f1-3 | cut -d '-' -f2"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -249,7 +242,7 @@ smplayer(){
 teamviewer(){
     progName="teamviewer" # last tested: "15.43.7"
     link="https://www.teamviewer.com/en/download/linux"
-    command="grep 'Current version' a.html | tr -d 'Ca-z :<\->/'"
+    command="grep 'Current version' | tr -d 'Ca-z :<\->/'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -257,7 +250,7 @@ teamviewer(){
 ventoy(){
     progName="ventoy"
     link="https://github.com/ventoy/Ventoy/releases/latest"
-    command="grep 'Release Ventoy' a.html | head -n 1 | sed 's/.*Release Ventoy //; s/ .*//'"
+    command="grep 'Release Ventoy' | head -n 1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
     installedVersion="1.0.93"
 
@@ -267,7 +260,7 @@ ventoy(){
 virtualbox(){
     progName="virtualbox"
     link="https://www.virtualbox.org/wiki/Downloads"
-    command="grep 'VirtualBox.* platform packages' a.html | cut -d '>' -f4 | cut -d ' ' -f2"
+    command="grep 'VirtualBox.* platform packages' | cut -d '>' -f4 | cut -d ' ' -f2"
 
     installedVersion="7.0.8"
 
@@ -277,7 +270,7 @@ virtualbox(){
 zotero(){
     progName="zotero" # last tested: "6.0.26"
     link="https://www.zotero.org/download"
-    command="grep 'linux-x86_64' a.html | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
+    command="grep 'linux-x86_64' | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -308,7 +301,7 @@ GNULinuxPrograms(){
 hwmonitor(){
     progName="hwmonitor"
     link="https://www.cpuid.com/softwares/hwmonitor.html"
-    command="grep -o 'href.*hwmonitor_.*.exe' a.html | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
+    command="grep -o 'href.*hwmonitor_.*.exe' | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
 
     installedVersion="1.51"
 
@@ -318,7 +311,7 @@ hwmonitor(){
 nettraffic(){
     progName="nettraffic"
     link="https://www.venea.net/web/downloads"
-    command="grep -o '>Version: [0-9].*<' a.html | head -n1 | tr -d 'a-zA-Z <>:'"
+    command="grep -o '>Version: [0-9].*<' | head -n1 | tr -d 'a-zA-Z <>:'"
 
     installedVersion="1.68.2"
 
@@ -328,7 +321,7 @@ nettraffic(){
 notepad-plus-plus(){
     progName="notepad-plus-plus"
     link="https://notepad-plus-plus.org/downloads"
-    command="grep 'Current Version' a.html | cut -d 'v' -f2 | cut -d '/' -f1"
+    command="grep 'Current Version' | cut -d 'v' -f2 | cut -d '/' -f1"
 
     installedVersion="8.5.4"
 
@@ -338,7 +331,7 @@ notepad-plus-plus(){
 revouninstaller(){
     progName="revouninstaller"
     link="https://www.revouninstaller.com/products/revo-uninstaller-free"
-    command="grep -o -E '>Version: (.{4}|.{5}|.{6})<' a.html | tr -d 'a-zA-Z : <>'"
+    command="grep -o -E '>Version: (.{4}|.{5}|.{6})<' | tr -d 'a-zA-Z : <>'"
 
     installedVersion="2.4.5"
 
@@ -348,7 +341,7 @@ revouninstaller(){
 sumatraPDFReader(){
     progName="sumatraPDFReader"
     link="https://www.sumatrapdfreader.org/download-free-pdf-viewer"
-    command="grep -o 'SumatraPDF-.*-64-install.exe\"' a.html | cut -d '-' -f2"
+    command="grep -o 'SumatraPDF-.*-64-install.exe\"' | cut -d '-' -f2"
     installedVersion="3.4.6"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
@@ -357,7 +350,7 @@ sumatraPDFReader(){
 winrar(){
     progName="winrar"
     link="https://www.win-rar.com/start.html"
-    command="grep -o '>WinRAR [0-9].*<' a.html | tr -d 'a-zA-Z <>'"
+    command="grep -o '>WinRAR [0-9].*<' | tr -d 'a-zA-Z <>'"
 
     installedVersion="6.22"
 

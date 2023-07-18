@@ -121,7 +121,7 @@ TLP(){
 }
 
 authy(){
-    progName="authy" # last tested: "2.3.0"
+    progName="authy" # last tested: "2.4.0"
     #link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
     #command="grep -o 'authy-[0-9].*sig' | cut -d '-' -f2"
 

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 12/07/2023
+# Last update: 18/07/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -262,7 +262,7 @@ virtualbox(){
     link="https://www.virtualbox.org/wiki/Downloads"
     command="grep 'VirtualBox.* platform packages' | cut -d '>' -f4 | cut -d ' ' -f2"
 
-    installedVersion="7.0.8"
+    installedVersion="7.0.10"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

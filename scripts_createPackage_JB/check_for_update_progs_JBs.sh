@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 18/07/2023
+# Last update: 25/07/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -182,7 +182,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "100.0.4815.47"
+    progName="opera" # last tested: "100.0.4815.76"
     link="http://ftp.opera.com/ftp/pub/opera/desktop"
     #command=""
 
@@ -240,7 +240,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.43.7"
+    progName="teamviewer" # last tested: "15.44.4"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep 'Current version' | tr -d 'Ca-z :<\->/'"
 
@@ -252,7 +252,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' | head -n 1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.93"
+    installedVersion="1.0.94"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

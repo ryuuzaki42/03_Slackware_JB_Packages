@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 27/07/2023
+# Last update: 31/07/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -183,48 +183,15 @@ mozilla-firefox(){
 
 opera(){
     progName="opera" # last tested: "101.0.4843.25"
-    link="http://ftp.opera.com/ftp/pub/opera/desktop"
-    #command=""
+    link="https://deb.opera.com/opera-stable/pool/non-free/o/opera-stable/"
 
-    echo -en "\n$BLUE$progName"
-    echo_FULL_INFO " - Checking for the last version to GNU/Linux (deb)$NC"
+    command="grep 'deb' | grep -o -P '(?<=>opera-stable_).*(?=_amd64.deb)'"
 
-    tailNumber=1
-    continue=0
-    while [ "$continue" == 0 ]; do
-        echo_FULL_INFO "   ${CYAN}wget -q -O - $GREEN$link$NC"
-        web_site=$(wget -q -O - "$link")
-
-        version=$(echo "$web_site" | grep "href" | grep -v "Index" | sort -V -t '.' | tail -n $tailNumber | head -n 1 | cut -d '"' -f2 | cut -d '/' -f1)
-        if [ "$version" == '' ]; then
-            echo -e "\n   Not found any more version\nJust exiting"
-            exit 0
-        fi
-
-        echo_FULL_INFO "$BLUE      Version test: $version$CYAN - wget -q -O - $GREEN$link/$version$NC"
-        web_site=$(wget -q "$link/$version" -O -)
-
-        if echo "$web_site" | grep -q "linux"; then
-            echo_FULL_INFO "        $CYAN wget -q -O - $GREEN$link/$version/linux$NC"
-            web_site=$(wget -q -O - "$link/$version/linux")
-
-            if echo "$web_site" | grep -q "deb"; then
-                continue=1
-            else
-                echo -e "            # The version \"$version\" don't have deb version yet\n"
-            fi
-        else
-            echo -e "         # The version \"$version\" don't have GNU/Linux version yet\n"
-        fi
-
-        ((tailNumber++))
-    done
-
-    compareVersion "$version" "" "$link"
+    checkVersion "$progName" "$link" "$command"
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.77.0"
+    progName="opera-ffmpeg-codecs" # last tested: "0.78.0"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" | head -n1 | sed 's/.*Release //; s/ .*//'"
 
@@ -277,6 +244,8 @@ zotero(){
 
 # GNU/Linux calls
 GNULinuxPrograms(){
+    echo -e "\n$RED# GNU/Linux$NC"
+
     MasterPDFEditor
     authy
     maestral
@@ -359,6 +328,8 @@ winrar(){
 
 # Windows calls
 windowsPrograms(){
+    echo -e "\n\n$RED# Windows$NC"
+
     hwmonitor
     notepad-plus-plus
     revouninstaller

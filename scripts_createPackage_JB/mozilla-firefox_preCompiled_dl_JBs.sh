@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 27/07/2023
+# Last update: 01/08/2023
 #
 echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
 
@@ -40,7 +40,7 @@ else
             ;;
     esac
 
-    progName="mozilla-firefox" # last tested: "115.0.3"
+    progName="mozilla-firefox" # last tested: "116.0"
     tag="1_JB"
     folderDest=$(pwd)
 
@@ -55,13 +55,10 @@ else
     taglanguageDl="${tag}_${languageDl//-/_}"
 
     echo
-    link="https://www.mozilla.org/firefox/all/"
-    wget "$link" -O "${progName}_latest"
-    linkDl=$(grep "$archDL" "${progName}_latest" | grep "$languageDl" | head -n 1 | cut -d '"' -f2)
+    web_site=$(wget "https://www.mozilla.org/firefox/all/" -O -)
+    linkDl=$(echo "$web_site" | grep "$archDL" | grep "$languageDl" | head -n 1 | cut -d '"' -f2)
+    version=$(echo "$web_site" | grep "latest-firefox"  | sed 's/.*latest-firefox="//; s/" .*//')
 
-    version=$(grep "latest-firefox" "${progName}_latest" | sed 's/.*latest-firefox="//; s/" .*//')
-
-    rm "${progName}_latest"
     echo -e "Link to download: $linkDl"
 
     if [ "$linkDl" == '' ]; then

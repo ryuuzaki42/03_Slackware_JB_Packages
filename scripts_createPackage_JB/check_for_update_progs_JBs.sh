@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 31/07/2023
+# Last update: 05/08/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -142,7 +142,7 @@ gitahead(){
 }
 
 maestral(){
-    progName="maestral" # last tested: "1.7.3"
+    progName="maestral" # last tested: "1.8.0"
     #link="https://github.com/samschott/maestral/releases/latest"
     #command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
@@ -171,7 +171,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "115.0.3"
+    progName="mozilla-firefox" # last tested: "116.0.1"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' | sed 's/.*release-version\">//; s/<.*//'"
 
@@ -182,7 +182,7 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "101.0.4843.25"
+    progName="opera" # last tested: "101.0.4843.33"
     link="https://deb.opera.com/opera-stable/pool/non-free/o/opera-stable/"
 
     command="grep 'deb' | grep -o -P '(?<=>opera-stable_).*(?=_amd64.deb)'"
@@ -191,7 +191,7 @@ opera(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.78.0"
+    progName="opera-ffmpeg-codecs" # last tested: "0.78.1
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" | head -n1 | sed 's/.*Release //; s/ .*//'"
 
@@ -199,7 +199,7 @@ opera-ffmpeg-codecs(){
 }
 
 smplayer(){
-    progName="smplayer" # last tested: "22.7.0"
+    progName="smplayer" # last tested: "23.6.0"
     link="https://www.smplayer.info/downloads"
     command="grep -o '\">smplayer.*tar.bz2' | cut -d '.' -f1-3 | cut -d '-' -f2"
 
@@ -207,7 +207,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.44.4"
+    progName="teamviewer" # last tested: "15.44.5"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep 'Current version' | tr -d 'Ca-z :<\->/'"
 
@@ -321,7 +321,7 @@ winrar(){
     link="https://www.win-rar.com/start.html"
     command="grep -o '>WinRAR [0-9].*<' | tr -d 'a-zA-Z <>'"
 
-    installedVersion="6.22"
+    installedVersion="6.23"
 
     checkVersion "$progName" "$link" "$command" "$installedVersion"
 }

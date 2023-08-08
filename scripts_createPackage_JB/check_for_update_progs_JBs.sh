@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 05/08/2023
+# Last update: 08/08/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -171,7 +171,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "116.0.1"
+    progName="mozilla-firefox" # last tested: "116.0.2"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' | sed 's/.*release-version\">//; s/<.*//'"
 

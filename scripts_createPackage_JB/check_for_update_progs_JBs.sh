@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 08/08/2023
+# Last update: 10/08/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -55,16 +55,16 @@ echo_FULL_INFO(){
 # Usual functions
 compareVersion(){
     version=$1
-    installedVersion=$2
+    local_version=$2
     link=$3
 
-    if [ "$installedVersion" == '' ]; then
-        installedVersion=$(find /var/log/packages/"$progName"-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
+    if [ "$local_version" == '' ]; then
+        local_version=$(find /var/log/packages/"$progName"-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
     fi
 
-    if [ "$version" == "$installedVersion" ]; then
+    if [ "$version" == "$local_version" ]; then
         if [ "$FULL_INFO" == 1 ]; then
-            echo -e "$BLUE   Latest version ($GREEN$version$BLUE) is ${GREEN}equal$BLUE to the installed$NC"
+            echo -e "$BLUE   Online version ($GREEN$version$BLUE) is ${GREEN}equal$BLUE to Local version$NC"
         else
             echo -en "$GREEN $version$NC"
         fi
@@ -73,9 +73,8 @@ compareVersion(){
             echo -en "$CYAN - wget -q -O - $GREEN$link$NC"
         fi
 
-        echo -en "\n$BLUE   Latest version ($GREEN$version$BLUE) is$RED not equal$BLUE to the installed ($GREEN$installedVersion$BLUE). "
-        echo -en "Press enter to continue...$NC"
-        read -r continue
+        echo -e "\n$BLUE Online: $GREEN\"$version\"$NC\n $BLUE Local: $RED\"$local_version\"$NC"
+        #echo -en " Press enter to continue...$NC"; read -r continue
     fi
 }
 
@@ -83,7 +82,7 @@ checkVersion(){
     progName=$1
     link=$2
     command=$3
-    installedVersion=$4
+    local_version=$4
 
     echo -en "\n$BLUE$progName"
 
@@ -100,7 +99,7 @@ checkVersion(){
     #echo "version: \"$version\""
     #set +x
 
-    compareVersion "$version" "$installedVersion" "$link"
+    compareVersion "$version" "$local_version" "$link"
 }
 
 ## GNU/Linux programs
@@ -136,9 +135,9 @@ gitahead(){
     link="https://github.com/gitahead/gitahead/releases/latest"
     command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
-    installedVersion="2.6.3"
+    local_version="2.6.3"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 maestral(){
@@ -165,9 +164,9 @@ mkvtoolnix (){
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix' | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
-    installedVersion="78.0"
+    local_version="78.0"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 mozilla-firefox(){
@@ -219,9 +218,9 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' | head -n 1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    installedVersion="1.0.94"
+    local_version="1.0.94"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 virtualbox(){
@@ -229,9 +228,9 @@ virtualbox(){
     link="https://www.virtualbox.org/wiki/Downloads"
     command="grep 'VirtualBox.* platform packages' | cut -d '>' -f4 | cut -d ' ' -f2"
 
-    installedVersion="7.0.10"
+    local_version="7.0.10"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 zotero(){
@@ -272,9 +271,9 @@ hwmonitor(){
     link="https://www.cpuid.com/softwares/hwmonitor.html"
     command="grep -o 'href.*hwmonitor_.*.exe' | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
 
-    installedVersion="1.51"
+    local_version="1.51"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 nettraffic(){
@@ -282,9 +281,9 @@ nettraffic(){
     link="https://www.venea.net/web/downloads"
     command="grep -o '>Version: [0-9].*<' | head -n1 | tr -d 'a-zA-Z <>:'"
 
-    installedVersion="1.68.2"
+    local_version="1.68.2"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 notepad-plus-plus(){
@@ -292,9 +291,9 @@ notepad-plus-plus(){
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    installedVersion="8.5.4"
+    local_version="8.5.5"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 revouninstaller(){
@@ -302,18 +301,19 @@ revouninstaller(){
     link="https://www.revouninstaller.com/products/revo-uninstaller-free"
     command="grep -o -E '>Version: (.{4}|.{5}|.{6})<' | tr -d 'a-zA-Z : <>'"
 
-    installedVersion="2.4.5"
+    local_version="2.4.5"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 sumatraPDFReader(){
     progName="sumatraPDFReader"
     link="https://www.sumatrapdfreader.org/download-free-pdf-viewer"
     command="grep -o 'SumatraPDF-.*-64-install.exe\"' | cut -d '-' -f2"
-    installedVersion="3.4.6"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    local_version="3.4.6"
+
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 winrar(){
@@ -321,9 +321,9 @@ winrar(){
     link="https://www.win-rar.com/start.html"
     command="grep -o '>WinRAR [0-9].*<' | tr -d 'a-zA-Z <>'"
 
-    installedVersion="6.23"
+    local_version="6.23"
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 # Windows calls
@@ -354,9 +354,9 @@ default(){
     link=""
     command=""
 
-    installedVersion=""
+    local_version=""
 
-    checkVersion "$progName" "$link" "$command" "$installedVersion"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 echo -e "\n"

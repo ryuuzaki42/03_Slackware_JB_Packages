@@ -181,7 +181,7 @@ opera(){
     link="https://deb.opera.com/opera-stable/pool/non-free/o/opera-stable/"
     command="grep 'deb' | grep -o -P '(?<=>opera-stable_).*(?=_amd64.deb)'"
 
-    local_version="101.0.4843.58"
+    local_version="102.0.4880.16"
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -190,7 +190,7 @@ opera-ffmpeg-codecs(){
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" | head -n1 | sed 's/.*Release //; s/ .*//'"
 
-    local_version="0.78.1"
+    local_version="0.79.0"
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -203,7 +203,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.44.5"
+    progName="teamviewer" # last tested: "15.45.3"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep 'Current version' | tr -d 'Ca-z :<\->/'"
 
@@ -236,20 +236,15 @@ zotero(){
     checkVersion "$progName" "$link" "$command"
 }
 
-# GNU/Linux calls
 GNULinuxPrograms(){
     echo -e "\n$RED# GNU/Linux$NC"
 
     MasterPDFEditor
     authy
     maestral
-    mkvtoolnix
     mozilla-firefox
-    opera
-    opera-ffmpeg-codecs
     smplayer
     teamviewer
-    ventoy
     virtualbox
     zotero
 
@@ -258,6 +253,15 @@ GNULinuxPrograms(){
         gitahead # GitAhead is no longer under active development
         mangohud
     fi
+}
+
+AppImage(){
+    echo -e "\n\n$RED# AppImage$NC"
+
+    mkvtoolnix
+    opera
+    opera-ffmpeg-codecs
+    ventoy
 }
 
 # Windows programs
@@ -315,7 +319,6 @@ winrar(){
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
-# Windows calls
 windowsPrograms(){
     echo -e "\n\n$RED# Windows$NC"
 
@@ -332,6 +335,8 @@ windowsPrograms(){
 
 # Call to check version
 GNULinuxPrograms "$s1"
+
+AppImage
 
 if [ "$s1" == "win" ] || [ "$s1" == "all" ]; then # if "win" or "all" call the windowsPrograms
     windowsPrograms "$s1"

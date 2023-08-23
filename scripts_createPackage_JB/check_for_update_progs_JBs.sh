@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 17/08/2023
+# Last update: 23/08/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -104,7 +104,7 @@ checkVersion(){
 
 ## GNU/Linux programs
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.9.50"
+    progName="MasterPDFEditor" # last tested: "5.9.60"
     link="https://code-industry.net/downloads"
     command="grep -o 'Version .* now available for Linux' | cut -d ' ' -f2"
 
@@ -164,7 +164,7 @@ mkvtoolnix (){
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix' | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
-    local_version="78.0"
+    local_version="79.0"
 
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
@@ -218,7 +218,7 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep 'Release Ventoy' | head -n 1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    local_version="1.0.94"
+    local_version="1.0.95"
 
     checkVersion "$progName" "$link" "$command" "$local_version"
 }

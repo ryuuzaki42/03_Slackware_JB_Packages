@@ -45,10 +45,8 @@ useColor
 s1=$1 # To check if is win or all
 
 echo_FULL_INFO(){
-    TEXT=$1
-
     if [ "$FULL_INFO" == 1 ]; then
-        echo -e "$TEXT"
+        echo -e "$1"
     fi
 }
 
@@ -86,13 +84,13 @@ checkVersion(){
 
     echo -en "\n$BLUE$progName"
 
-    if [ "$link" == '' ]; then
-        echo -e "\n${RED}Error: The link: \"$link\" is not valid!$NC"
-    else
+#     if [ "$link" == '' ]; then
+#         echo -e "\n${RED}Error: The link: \"$link\" is not valid!$NC"
+#     else
         echo_FULL_INFO "$CYAN - wget -q -O - $GREEN$link$NC"
         web_site=$(wget -q -O - "$link")
         #echo "$web_site"
-    fi
+#     fi
 
     #set -x
     version=$(echo "$web_site" | eval "$command")
@@ -136,7 +134,6 @@ gitahead(){
     command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
     local_version="2.6.3"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -165,7 +162,6 @@ mkvtoolnix (){
     command="grep 'sources/mkvtoolnix' | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
     local_version="79.0"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -181,20 +177,21 @@ mozilla-firefox(){
 }
 
 opera(){
-    progName="opera" # last tested: "101.0.4843.58"
+    progName="opera"
     link="https://deb.opera.com/opera-stable/pool/non-free/o/opera-stable/"
-
     command="grep 'deb' | grep -o -P '(?<=>opera-stable_).*(?=_amd64.deb)'"
 
-    checkVersion "$progName" "$link" "$command"
+    local_version="101.0.4843.58"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested: "0.78.1
+    progName="opera-ffmpeg-codecs" # last tested:
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep \"Release \" | head -n1 | sed 's/.*Release //; s/ .*//'"
 
-    checkVersion "$progName" "$link" "$command"
+    local_version="0.78.1"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 smplayer(){
@@ -219,7 +216,6 @@ ventoy(){
     command="grep 'Release Ventoy' | head -n 1 | sed 's/.*Release Ventoy //; s/ .*//'"
 
     local_version="1.0.95"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -229,7 +225,6 @@ virtualbox(){
     command="grep 'VirtualBox.* platform packages' | cut -d '>' -f4 | cut -d ' ' -f2"
 
     local_version="7.0.10"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -272,7 +267,6 @@ hwmonitor(){
     command="grep -o 'href.*hwmonitor_.*.exe' | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
 
     local_version="1.51"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -282,7 +276,6 @@ nettraffic(){
     command="grep -o '>Version: [0-9].*<' | head -n1 | tr -d 'a-zA-Z <>:'"
 
     local_version="1.68.2"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -292,7 +285,6 @@ notepad-plus-plus(){
     command="grep 'Current Version' | cut -d 'v' -f2 | cut -d '/' -f1"
 
     local_version="8.5.6"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -302,7 +294,6 @@ revouninstaller(){
     command="grep -o -E '>Version: (.{4}|.{5}|.{6})<' | tr -d 'a-zA-Z : <>'"
 
     local_version="2.4.5"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -312,7 +303,6 @@ sumatraPDFReader(){
     command="grep -o 'SumatraPDF-.*-64-install.exe\"' | cut -d '-' -f2"
 
     local_version="3.4.6"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
@@ -322,7 +312,6 @@ winrar(){
     command="grep -o '>WinRAR [0-9].*<' | tr -d 'a-zA-Z <>'"
 
     local_version="6.23"
-
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 

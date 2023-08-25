@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 23/08/2023
+# Last update: 25/08/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -110,9 +110,9 @@ MasterPDFEditor(){
 }
 
 TLP(){
-    progName="TLP" # last tested: "1.5.0"
+    progName="TLP" # last tested: "1.6.0"
     link="https://github.com/linrunner/TLP/releases/latest"
-    command="grep \"Release TLP\" | head -n1 | sed 's/.*Release TLP //; s/ .*//'"
+    command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -131,7 +131,7 @@ authy(){
 gitahead(){
     progName="gitahead"
     link="https://github.com/gitahead/gitahead/releases/latest"
-    command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
+    command="grep '<title>Release v' | sed 's/.*Release v//; s/ .*//'"
 
     local_version="2.6.3"
     checkVersion "$progName" "$link" "$command" "$local_version"
@@ -151,7 +151,7 @@ maestral(){
 mangohud(){
     progName="mangohud" # last tested: "0.6.9.1"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
-    command="grep 'href=.*/tree/v.*' | head -n 1 | sed 's/.*tree\/v//' | cut -d '\"' -f1 | sed 's/-/./'"
+    command="grep '<title>Release' | sed 's/.*Version //; s/ .*//' | sed 's/-/./'"
 
     checkVersion "$progName" "$link" "$command"
 }
@@ -159,7 +159,7 @@ mangohud(){
 mkvtoolnix (){
     progName="mkvtoolnix"
     link="https://mkvtoolnix.download/source.html"
-    command="grep 'sources/mkvtoolnix' | head -n 1 | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
+    command="grep 'sources/mkvtoolnix.* release' | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
     local_version="79.0"
     checkVersion "$progName" "$link" "$command" "$local_version"
@@ -186,9 +186,9 @@ opera(){
 }
 
 opera-ffmpeg-codecs(){
-    progName="opera-ffmpeg-codecs" # last tested:
+    progName="opera-ffmpeg-codecs"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
-    command="grep \"Release \" | head -n1 | sed 's/.*Release //; s/ .*//'"
+    command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
 
     local_version="0.79.0"
     checkVersion "$progName" "$link" "$command" "$local_version"
@@ -213,7 +213,7 @@ teamviewer(){
 ventoy(){
     progName="ventoy"
     link="https://github.com/ventoy/Ventoy/releases/latest"
-    command="grep 'Release Ventoy' | head -n 1 | sed 's/.*Release Ventoy //; s/ .*//'"
+    command="grep '<title>Release Ventoy' | sed 's/.*Release Ventoy //; s/ .*//'"
 
     local_version="1.0.95"
     checkVersion "$progName" "$link" "$command" "$local_version"
@@ -268,7 +268,7 @@ AppImage(){
 hwmonitor(){
     progName="hwmonitor"
     link="https://www.cpuid.com/softwares/hwmonitor.html"
-    command="grep -o 'href.*hwmonitor_.*.exe' | head -n1 | grep -o \"[0-9].[0-9][0-9]\""
+    command="grep -o 'href.*hwmonitor_.*.exe' | head -n1 | grep -o '[0-9].[0-9][0-9]'"
 
     local_version="1.51"
     checkVersion "$progName" "$link" "$command" "$local_version"

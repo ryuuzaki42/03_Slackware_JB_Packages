@@ -118,14 +118,15 @@ TLP(){
 }
 
 authy(){
-    progName="authy" # last tested: "2.4.1"
+    progName="authy"
     #link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
     #command="grep -o 'authy-[0-9].*sig' | cut -d '-' -f2"
 
     link="https://aur.archlinux.org/packages/authy"
     command="grep 'Package Details' | sed 's/.*authy //g' | cut -d '-' -f1"
 
-    checkVersion "$progName" "$link" "$command"
+    local_version="2.4.1"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 gitahead(){
@@ -138,14 +139,15 @@ gitahead(){
 }
 
 maestral(){
-    progName="maestral" # last tested: "1.8.0"
+    progName="maestral"
     #link="https://github.com/samschott/maestral/releases/latest"
     #command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
     link="https://pypi.org/project/maestral"
     command="grep 'release__card' | grep -v 'dev' | head -n 1 | sed 's/.*maestral\///; s/\/\">//'"
 
-    checkVersion "$progName" "$link" "$command"
+    local_version="1.8.0"
+    checkVersion "$progName" "$link" "$command" "$local_version"
 }
 
 mangohud(){

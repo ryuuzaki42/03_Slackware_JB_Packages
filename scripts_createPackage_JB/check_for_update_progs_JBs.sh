@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 25/08/2023
+# Last update: 31/08/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -102,7 +102,7 @@ checkVersion(){
 
 ## GNU/Linux programs
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.9.60"
+    progName="MasterPDFEditor" # last tested: "5.9.61"
     link="https://code-industry.net/downloads"
     command="grep -o 'Version .* now available for Linux' | cut -d ' ' -f2"
 
@@ -118,7 +118,7 @@ TLP(){
 }
 
 authy(){
-    progName="authy" # last tested: "2.4.0"
+    progName="authy" # last tested: "2.4.1"
     #link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
     #command="grep -o 'authy-[0-9].*sig' | cut -d '-' -f2"
 
@@ -166,7 +166,7 @@ mkvtoolnix (){
 }
 
 mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "116.0.3"
+    progName="mozilla-firefox" # last tested: "117.0"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' | sed 's/.*release-version\">//; s/<.*//'"
 
@@ -240,7 +240,6 @@ GNULinuxPrograms(){
     echo -e "\n$RED# GNU/Linux$NC"
 
     MasterPDFEditor
-    authy
     maestral
     mozilla-firefox
     smplayer
@@ -258,6 +257,7 @@ GNULinuxPrograms(){
 AppImage(){
     echo -e "\n\n$RED# AppImage$NC"
 
+    authy
     mkvtoolnix
     opera
     opera-ffmpeg-codecs

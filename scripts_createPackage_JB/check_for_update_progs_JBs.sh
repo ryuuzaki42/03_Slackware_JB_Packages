@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 31/08/2023
+# Last update: 04/09/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -49,6 +49,32 @@ echo_FULL_INFO(){
         echo -e "$1"
     fi
 }
+
+## _lv => _local_version - last tested
+    ## GNU/Linux programs
+MasterPDFEditor_lv="5.9.61"
+authy_lv="2.4.1"
+TLP_lv="1.6.0"
+gitahead_lv="2.6.3"
+maestral_lv="1.8.0"
+mangohud_lv="0.6.9.1"
+mkvtoolnix_lv="79.0"
+mozilla_firefox_lv="117.0"
+opera_lv="102.0.4880.16"
+opera_ffmpeg_codecs_lv="0.79.0"
+smplayer_lv="23.6.0"
+teamviewer_lv="15.45.3"
+ventoy_lv="1.0.95"
+virtualbox_lv="7.0.10"
+zotero_lv="6.0.26"
+
+    ## Windows programs
+hwmonitor_lv="1.52"
+nettraffic_lv="1.68.2"
+notepad_plus_plus_lv="8.5.6"
+revouninstaller_lv="2.4.5"
+sumatraPDFReader_lv="3.4.6"
+WinRAR_lv="6.23"
 
 # Usual functions
 compareVersion(){
@@ -102,19 +128,19 @@ checkVersion(){
 
 ## GNU/Linux programs
 MasterPDFEditor(){
-    progName="MasterPDFEditor" # last tested: "5.9.61"
+    progName="MasterPDFEditor"
     link="https://code-industry.net/downloads"
     command="grep -o 'Version .* now available for Linux' | cut -d ' ' -f2"
 
-    checkVersion "$progName" "$link" "$command"
+    checkVersion "$progName" "$link" "$command" "$MasterPDFEditor_lv"
 }
 
 TLP(){
-    progName="TLP" # last tested: "1.6.0"
+    progName="TLP"
     link="https://github.com/linrunner/TLP/releases/latest"
     command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
 
-    checkVersion "$progName" "$link" "$command"
+    checkVersion "$progName" "$link" "$command" "$TLP_lv"
 }
 
 authy(){
@@ -125,8 +151,7 @@ authy(){
     link="https://aur.archlinux.org/packages/authy"
     command="grep 'Package Details' | sed 's/.*authy //g' | cut -d '-' -f1"
 
-    local_version="2.4.1"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$authy_lv"
 }
 
 gitahead(){
@@ -134,8 +159,7 @@ gitahead(){
     link="https://github.com/gitahead/gitahead/releases/latest"
     command="grep '<title>Release v' | sed 's/.*Release v//; s/ .*//'"
 
-    local_version="2.6.3"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$gitahead_lv"
 }
 
 maestral(){
@@ -146,16 +170,15 @@ maestral(){
     link="https://pypi.org/project/maestral"
     command="grep 'release__card' | grep -v 'dev' | head -n 1 | sed 's/.*maestral\///; s/\/\">//'"
 
-    local_version="1.8.0"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$maestral_lv"
 }
 
 mangohud(){
-    progName="mangohud" # last tested: "0.6.9.1"
+    progName="mangohud"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
     command="grep '<title>Release' | sed 's/.*Version //; s/ .*//' | sed 's/-/./'"
 
-    checkVersion "$progName" "$link" "$command"
+    checkVersion "$progName" "$link" "$command" "$mangohud_lv"
 }
 
 mkvtoolnix (){
@@ -164,18 +187,18 @@ mkvtoolnix (){
     command="grep 'sources/mkvtoolnix.* release' | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
     local_version="79.0"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$mkvtoolnix_lv"
 }
 
-mozilla-firefox(){
-    progName="mozilla-firefox" # last tested: "117.0"
+mozilla_firefox(){
+    progName="mozilla-firefox"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' | sed 's/.*release-version\">//; s/<.*//'"
 
     link="https://www.mozilla.org/firefox/all/"
     command="grep 'latest-firefox' | sed 's/.*latest-firefox=\"//; s/\" .*//'"
 
-    checkVersion "$progName" "$link" "$command"
+    checkVersion "$progName" "$link" "$command" "$mozilla_firefox_lv"
 }
 
 opera(){
@@ -184,32 +207,32 @@ opera(){
     command="grep 'deb' | grep -o -P '(?<=>opera-stable_).*(?=_amd64.deb)'"
 
     local_version="102.0.4880.16"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$opera_lv"
 }
 
-opera-ffmpeg-codecs(){
+opera_ffmpeg_codecs(){
     progName="opera-ffmpeg-codecs"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
 
     local_version="0.79.0"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$opera_ffmpeg_codecs_lv"
 }
 
 smplayer(){
-    progName="smplayer" # last tested: "23.6.0"
+    progName="smplayer"
     link="https://www.smplayer.info/downloads"
     command="grep -o '\">smplayer.*tar.bz2' | cut -d '.' -f1-3 | cut -d '-' -f2"
 
-    checkVersion "$progName" "$link" "$command"
+    checkVersion "$progName" "$link" "$command" "$smplayer_lv"
 }
 
 teamviewer(){
-    progName="teamviewer" # last tested: "15.45.3"
+    progName="teamviewer"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep 'Current version' | tr -d 'Ca-z :<\->/'"
 
-    checkVersion "$progName" "$link" "$command"
+    checkVersion "$progName" "$link" "$command" "$teamviewer_lv"
 }
 
 ventoy(){
@@ -218,7 +241,7 @@ ventoy(){
     command="grep '<title>Release Ventoy' | sed 's/.*Release Ventoy //; s/ .*//'"
 
     local_version="1.0.95"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$ventoy_lv"
 }
 
 virtualbox(){
@@ -227,15 +250,15 @@ virtualbox(){
     command="grep 'VirtualBox.* platform packages' | cut -d '>' -f4 | cut -d ' ' -f2"
 
     local_version="7.0.10"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$virtualbox_lv"
 }
 
 zotero(){
-    progName="zotero" # last tested: "6.0.26"
+    progName="zotero"
     link="https://www.zotero.org/download"
     command="grep 'linux-x86_64' | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
 
-    checkVersion "$progName" "$link" "$command"
+    checkVersion "$progName" "$link" "$command" "$zotero_lv"
 }
 
 GNULinuxPrograms(){
@@ -243,7 +266,7 @@ GNULinuxPrograms(){
 
     MasterPDFEditor
     maestral
-    mozilla-firefox
+    mozilla_firefox
     smplayer
     teamviewer
     virtualbox
@@ -262,18 +285,17 @@ AppImage(){
     authy
     mkvtoolnix
     opera
-    opera-ffmpeg-codecs
+    opera_ffmpeg_codecs
     ventoy
 }
 
-# Windows programs
+## Windows programs
 hwmonitor(){
     progName="hwmonitor"
     link="https://www.cpuid.com/softwares/hwmonitor.html"
     command="grep -o 'href.*hwmonitor_.*.exe' | head -n1 | grep -o '[0-9].[0-9][0-9]'"
 
-    local_version="1.51"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$hwmonitor_lv"
 }
 
 nettraffic(){
@@ -281,17 +303,15 @@ nettraffic(){
     link="https://www.venea.net/web/downloads"
     command="grep -o '>Version: [0-9].*<' | head -n1 | tr -d 'a-zA-Z <>:'"
 
-    local_version="1.68.2"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$nettraffic_lv"
 }
 
-notepad-plus-plus(){
+notepad_plus_plus(){
     progName="notepad-plus-plus"
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    local_version="8.5.6"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$notepad_plus_plus_lv"
 }
 
 revouninstaller(){
@@ -299,8 +319,7 @@ revouninstaller(){
     link="https://www.revouninstaller.com/products/revo-uninstaller-free"
     command="grep -o -E '>Version: (.{4}|.{5}|.{6})<' | tr -d 'a-zA-Z : <>'"
 
-    local_version="2.4.5"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$revouninstaller_lv"
 }
 
 sumatraPDFReader(){
@@ -309,25 +328,24 @@ sumatraPDFReader(){
     command="grep -o 'SumatraPDF-.*-64-install.exe\"' | cut -d '-' -f2"
 
     local_version="3.4.6"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$sumatraPDFReader_lv"
 }
 
-winrar(){
+WinRAR(){
     progName="winrar"
     link="https://www.win-rar.com/start.html"
     command="grep -o '>WinRAR [0-9].*<' | tr -d 'a-zA-Z <>'"
 
-    local_version="6.23"
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "$progName" "$link" "$command" "$WinRAR_lv"
 }
 
 windowsPrograms(){
     echo -e "\n\n$RED# Windows$NC"
 
     hwmonitor
-    notepad-plus-plus
+    notepad_plus_plus
     revouninstaller
-    winrar
+    WinRAR
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
         nettraffic

@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 29/06/2023
+# Last update: 10/09/2023
 #
 echo -e "\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\n"
 
@@ -41,7 +41,7 @@ else
 
     ./mozilla-firefox_preCompiled_dl_JBs.sh n "en-US" # Create a package with language en-US
 
-    ./opera_dl_JBs.sh n
+    #./others/opera_dl_JBs.sh n
 
     #./others/shellcheck_preCompiled_dl_JBs.sh n
 

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 18/09/2023
+# Last update: 20/09/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -54,7 +54,7 @@ echo_FULL_INFO(){
     ## GNU/Linux programs
 MasterPDFEditor_lv="5.9.61"
 authy_lv="2.4.1"
-TLP_lv="1.6.0"
+TLP_lv="1.6.1"
 gitahead_lv="2.6.3"
 maestral_lv="1.8.0"
 mangohud_lv="0.6.9.1"
@@ -138,7 +138,7 @@ MasterPDFEditor(){
 TLP(){
     progName="TLP"
     link="https://github.com/linrunner/TLP/releases/latest"
-    command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
+    command="grep '<title>Release ' | sed 's/.*Release TLP //; s/ .*//'"
 
     checkVersion "$progName" "$link" "$command" "$TLP_lv"
 }

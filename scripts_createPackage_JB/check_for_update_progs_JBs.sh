@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 26/09/2023
+# Last update: 05/10/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -59,9 +59,9 @@ gitahead_lv="2.6.3"
 maestral_lv="1.8.0"
 mangohud_lv="0.6.9.1"
 mkvtoolnix_lv="79.0"
-mozilla_firefox_lv="118.0"
-opera_lv="102.0.4880.56"
-opera_ffmpeg_codecs_lv="0.79.1"
+mozilla_firefox_lv="118.0.1"
+opera_lv="103.0.4928.16"
+opera_ffmpeg_codecs_lv="0.80.0"
 smplayer_lv="23.6.0"
 teamviewer_lv="15.46.5"
 ventoy_lv="1.0.95"
@@ -74,7 +74,7 @@ nettraffic_lv="1.71.0"
 notepad_plus_plus_lv="8.5.7"
 revouninstaller_lv="2.4.5"
 sumatraPDFReader_lv="3.4.6"
-WinRAR_lv="6.23"
+WinRAR_lv="6.24"
 
 # Usual functions
 compareVersion(){
@@ -186,7 +186,6 @@ mkvtoolnix (){
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix.* release' | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
-    local_version="79.0"
     checkVersion "$progName" "$link" "$command" "$mkvtoolnix_lv"
 }
 
@@ -206,16 +205,14 @@ opera(){
     link="https://deb.opera.com/opera-stable/pool/non-free/o/opera-stable/"
     command="grep 'deb' | grep -o -P '(?<=>opera-stable_).*(?=_amd64.deb)'"
 
-    local_version="102.0.4880.16"
     checkVersion "$progName" "$link" "$command" "$opera_lv"
 }
 
 opera_ffmpeg_codecs(){
     progName="opera-ffmpeg-codecs"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
-    command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
+    command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//' | cut -d ':' -f1"
 
-    local_version="0.79.0"
     checkVersion "$progName" "$link" "$command" "$opera_ffmpeg_codecs_lv"
 }
 
@@ -240,7 +237,6 @@ ventoy(){
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep '<title>Release Ventoy' | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    local_version="1.0.95"
     checkVersion "$progName" "$link" "$command" "$ventoy_lv"
 }
 
@@ -249,7 +245,6 @@ virtualbox(){
     link="https://www.virtualbox.org/wiki/Downloads"
     command="grep 'VirtualBox.* platform packages' | cut -d '>' -f4 | cut -d ' ' -f2"
 
-    local_version="7.0.10"
     checkVersion "$progName" "$link" "$command" "$virtualbox_lv"
 }
 
@@ -327,7 +322,6 @@ sumatraPDFReader(){
     link="https://www.sumatrapdfreader.org/download-free-pdf-viewer"
     command="grep -o 'SumatraPDF-.*-64-install.exe\"' | cut -d '-' -f2"
 
-    local_version="3.4.6"
     checkVersion "$progName" "$link" "$command" "$sumatraPDFReader_lv"
 }
 
@@ -368,8 +362,7 @@ default(){
     link=""
     command=""
 
-    local_version=""
-
+#   local_version=""
     checkVersion "$progName" "$link" "$command" "$local_version"
 }
 

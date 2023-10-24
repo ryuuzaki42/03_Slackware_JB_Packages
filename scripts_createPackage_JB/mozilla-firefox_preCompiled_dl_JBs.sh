@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 27/10/2023
+# Last update: 24/10/2023
 #
 echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
 

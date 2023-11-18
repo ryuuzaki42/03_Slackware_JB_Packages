@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 21/07/2023
+# Last update: 18/11/2023
 #
 set -e
 echo -e "\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\n"
@@ -38,9 +38,9 @@ else
     fi
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit" # last tested: "22.1.5"
+        progName="smartgit" # last tested: "22.1.7"
     elif [ "$progBuild" == '2' ]; then
-        progName="smartsynchronize" # last tested: "4.4.4"
+        progName="smartsynchronize" # last tested: "4.5.0"
     else
         echo -e "\nError: The chosen program ($progBuild) is unknown\n"
         exit 1

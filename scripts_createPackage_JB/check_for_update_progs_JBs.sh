@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 03/11/2023
+# Last update: 22/11/2023
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -53,14 +53,14 @@ echo_FULL_INFO(){
 ## _lv => _local_version - last tested
     ## GNU/Linux programs
 MasterPDFEditor_lv="5.9.61"
-authy_lv="2.4.1"
+authy_lv="2.4.2"
 TLP_lv="1.6.1"
 gitahead_lv="2.6.3"
 maestral_lv="1.8.0"
 mangohud_lv="0.6.9.1"
 mkvtoolnix_lv="80.0"
-mozilla_firefox_lv="119.0"
-opera_lv="104.0.4944.36"
+mozilla_firefox_lv="120.0"
+opera_lv="105.0.4970.13"
 opera_ffmpeg_codecs_lv="0.82.0"
 smplayer_lv="23.6.0"
 teamviewer_lv="15.47.3"
@@ -145,11 +145,11 @@ TLP(){
 
 authy(){
     progName="authy"
-    #link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
-    #command="grep -o 'authy-[0-9].*sig' | cut -d '-' -f2"
+    link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
+    command="grep -o 'authy-[0-9].*sig' | cut -d '-' -f2"
 
-    link="https://aur.archlinux.org/packages/authy"
-    command="grep 'Package Details' | sed 's/.*authy //g' | cut -d '-' -f1"
+    #link="https://aur.archlinux.org/packages/authy"
+    #command="grep 'Package Details' | sed 's/.*authy //g' | cut -d '-' -f1"
 
     checkVersion "$progName" "$link" "$command" "$authy_lv"
 }

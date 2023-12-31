@@ -22,7 +22,7 @@
 #
 # Script: Run the scripts in this folder looking for updates and create Slackware packages (txz)
 #
-# Last update: 10/09/2023
+# Last update: 31/12/2023
 #
 echo -e "\n# Run the scripts in this folder looking for updates and create Slackware packages (txz) #\n"
 
@@ -49,7 +49,7 @@ else
 
     #./others/smartgit_and_smartsynchronize_dl_JBs.sh 2 n
 
-    ./smplayer_dl_JBs.sh n
+    #./others/0_old/smplayer_dl_JBs.sh n
 
     #cd others/0_old/teamviewer/ || exit # Go to teamviewer folder to create the package
     #./teamviewer_dl_JBs.sh n

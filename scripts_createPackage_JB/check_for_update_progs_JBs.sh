@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 20/12/2023
+# Last update: 04/01/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -58,11 +58,11 @@ TLP_lv="1.6.1"
 gitahead_lv="2.6.3"
 maestral_lv="1.8.0"
 mangohud_lv="0.6.9.1"
-mkvtoolnix_lv="81.0"
+mkvtoolnix_lv="82.0"
 mozilla_firefox_lv="121.0"
-opera_lv="106.0.4998.16"
-opera_ffmpeg_codecs_lv="0.82.0"
-smplayer_lv="23.6.0"
+opera_lv="106.0.4998.19"
+opera_ffmpeg_codecs_lv="0.83.0"
+smplayer_lv="23.12.0"
 teamviewer_lv="15.49.2"
 ventoy_lv="1.0.96"
 virtualbox_lv="7.0.10"
@@ -97,7 +97,7 @@ compareVersion(){
             echo -en "$CYAN - wget -q -O - $GREEN$link$NC"
         fi
 
-        echo -e "\n$BLUE Online: $GREEN\"$version\"$NC\n $BLUE Local: $RED\"$local_version\"$NC"
+        echo -e "\n$BLUE Online: $GREEN$version$NC\n $BLUE Local: $RED$local_version$NC"
         #echo -en " Press enter to continue...$NC"; read -r continue
     fi
 }

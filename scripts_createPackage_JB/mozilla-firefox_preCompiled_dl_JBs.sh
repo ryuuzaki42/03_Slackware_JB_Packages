@@ -22,8 +22,10 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 10/01/2024
+# Last update: 23/01/2024
 #
+set -e
+
 echo -e "\n# Script to create a Slackware package from the mozilla-firefox stable pre-compiled #\n"
 
 if [ "$USER" != "root" ]; then
@@ -40,7 +42,7 @@ else
             ;;
     esac
 
-    progName="mozilla-firefox" # last tested: "121.0.1"
+    progName="mozilla-firefox" # last tested: "122.0"
     tag="1_JB"
     folderDest=$(pwd)
 
@@ -58,6 +60,8 @@ else
     web_site=$(wget "https://www.mozilla.org/firefox/all/" -O -)
     linkDl=$(echo "$web_site" | grep "$archDL" | grep "$languageDl" | head -n 1 | cut -d '"' -f2)
     version=$(echo "$web_site" | grep "latest-firefox"  | sed 's/.*latest-firefox="//; s/" .*//')
+
+    linkDl=$(echo "$linkDl" | sed 's/amp;//g') # Remove "&amp" from URL link
 
     echo -e "Link to download: $linkDl"
 
@@ -89,12 +93,13 @@ else
     fi
 
     echo
-    wget -c "$linkDl" -O "$fileName"
+    wget "$linkDl" -O "$fileName"
 
     tar -xvf "$fileName"
     rm "$fileName"
 
     fileNameFinal="${progName}-$version-$archFinal"
+    rm -r "$fileNameFinal" || true # Delete "old" version
     mv firefox "$fileNameFinal"
 
     cd "$fileNameFinal" || exit
@@ -156,6 +161,6 @@ X-KDE-StartupNotify=true" > "usr/share/applications/${progName}.desktop"
 
     /sbin/makepkg -l y -c n "$folderDest/${fileNameFinal}-${taglanguageDl}.txz"
 
-    cd .. || exit
+    cd ../ || exit
     rm -r "$fileNameFinal"
 fi

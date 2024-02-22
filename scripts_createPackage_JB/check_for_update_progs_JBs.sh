@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 14/02/2024
+# Last update: 22/02/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -58,7 +58,7 @@ TLP_lv="1.6.1"
 gitahead_lv="2.6.3"
 maestral_lv="1.8.0"
 mangohud_lv="0.6.9.1"
-mozilla_firefox_lv="122.0.1"
+mozilla_firefox_lv="123.0"
 smplayer_lv="23.12.0"
 teamviewer_lv="15.50.5"
 virtualbox_lv="7.0.14"
@@ -72,9 +72,9 @@ ventoy_lv="1.0.97"
 zotero_lv="6.0.30"
 
     ## Windows programs
-hwmonitor_lv="1.52"
+hwmonitor_lv="1.53"
 nettraffic_lv="1.71.0"
-notepad_plus_plus_lv="8.6.2"
+notepad_plus_plus_lv="8.6.4"
 revouninstaller_lv="2.4.5"
 sumatraPDFReader_lv="3.5.2"
 WinRAR_lv="6.24"

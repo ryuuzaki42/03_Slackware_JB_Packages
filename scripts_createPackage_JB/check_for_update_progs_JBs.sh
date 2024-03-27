@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 22/03/2024
+# Last update: 27/03/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -64,7 +64,6 @@ teamviewer_lv="15.51.5"
 virtualbox_lv="7.0.14"
 
     ## AppImage
-authy_lv="2.5.0"
 mkvtoolnix_lv="83.0"
 opera_lv="108.0.5067.24"
 opera_ffmpeg_codecs_lv="0.85.0"
@@ -144,17 +143,6 @@ TLP(){
     command="grep '<title>Release ' | sed 's/.*Release TLP //; s/ .*//'"
 
     checkVersion "$progName" "$link" "$command" "$TLP_lv"
-}
-
-authy(){
-    progName="authy"
-    link="https://builds.garudalinux.org/repos/chaotic-aur/x86_64"
-    command="grep -o 'authy-[0-9].*sig' | cut -d '-' -f2"
-
-    #link="https://aur.archlinux.org/packages/authy"
-    #command="grep 'Package Details' | sed 's/.*authy //g' | cut -d '-' -f1"
-
-    checkVersion "$progName" "$link" "$command" "$authy_lv"
 }
 
 gitahead(){
@@ -279,7 +267,6 @@ GNULinuxPrograms(){
 AppImage(){
     echo -e "\n\n$RED# AppImage$NC"
 
-    authy
     mkvtoolnix
     opera
     opera_ffmpeg_codecs

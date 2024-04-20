@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 29/03/2024
+# Last update: 20/04/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -56,27 +56,27 @@ echo_FULL_INFO(){
 MasterPDFEditor_lv="5.9.61"
 TLP_lv="1.6.1"
 gitahead_lv="2.6.3"
-maestral_lv="1.9.2"
 mangohud_lv="0.6.9.1"
-mozilla_firefox_lv="124.0.1"
+mozilla_firefox_lv="125.0.1"
 smplayer_lv="23.12.0"
 teamviewer_lv="15.52.3"
 virtualbox_lv="7.0.14"
 
     ## AppImage
+maestral_lv="1.9.2_3"
 mkvtoolnix_lv="83.0"
-opera_lv="109.0.5097.35"
-opera_ffmpeg_codecs_lv="0.85.0"
+opera_lv="109.0.5097.38"
+opera_ffmpeg_codecs_lv="0.86.0"
 ventoy_lv="1.0.97"
 zotero_lv="6.0.35"
 
     ## Windows programs
+WinRAR_lv="7.00"
 hwmonitor_lv="1.53"
 nettraffic_lv="1.71.0"
-notepad_plus_plus_lv="8.6.4"
+notepad_plus_plus_lv="8.6.5"
 revouninstaller_lv="2.4.5"
 sumatraPDFReader_lv="3.5.2"
-WinRAR_lv="7.00"
 
 # Usual functions
 compareVersion(){
@@ -242,7 +242,7 @@ virtualbox(){
 zotero(){
     progName="zotero"
     link="https://www.zotero.org/download"
-    command="grep 'linux-x86_64' | sed 's/.*linux-x86_64//' | tr -d '\":}),'"
+    command="grep 'linux-x86_64' | sed 's/.*linux-x86_64//' | cut -d '\"' -f3"
 
     checkVersion "$progName" "$link" "$command" "$zotero_lv"
 }

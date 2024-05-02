@@ -2,8 +2,6 @@
 
 Some packages (tgz/txz) and shell scripts to create packages to Slackware - (www.slackware.com)
 
-`packages_JB/` - My personal packages for some programs
-
 `scripts_createPackage_JB/` - My scripts to create some packages for Slackware
 
 `slackware_dls/` - Scripts to download some programs to Slackware

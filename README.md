@@ -12,4 +12,4 @@ Some packages (tgz/txz) and shell scripts to create packages to Slackware - (www
 https://t.me/SlackwarePackages
 
 ### AppImage backup:
-https://t.me/AppImageBkp
+https://t.me/AppImageBackup

@@ -7,8 +7,8 @@
 #
 set -x
 
-#cd ../../
-cd /media/sda2/git_clone/
+cd ../../
+#cd /media/sda2/git_clone/
 
 git clone https://ryuuzaki42@github.com/ryuuzaki42/01_Cool_Things.git
 

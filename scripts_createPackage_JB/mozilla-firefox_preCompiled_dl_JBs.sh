@@ -2,7 +2,7 @@
 #
 # Autor= João Batista Ribeiro
 # Bugs, Agradecimentos, Críticas "construtivas"
-# Mande me um e-mail. Ficarei Grato!
+# me envie um e-mail. Ficarei Grato!
 # e-mail: joao42lbatista@gmail.com
 #
 # Este programa é um software livre; você pode redistribui-lo e/ou
@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 14/05/2024
+# Last update: 28/05/2024
 #
 set -e
 
@@ -42,7 +42,7 @@ else
             ;;
     esac
 
-    progName="mozilla-firefox" # last tested: "126.0"
+    progName="mozilla-firefox" # last tested: "126.0.1"
     tag="1_JB"
     folderDest=$(pwd)
 

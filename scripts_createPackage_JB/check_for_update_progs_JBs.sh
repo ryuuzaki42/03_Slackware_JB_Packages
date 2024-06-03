@@ -2,7 +2,7 @@
 #
 # Autor= João Batista Ribeiro
 # Bugs, Agradecimentos, Críticas "construtivas"
-# Mande me um e-mail. Ficarei Grato!
+# me envie um e-mail. Ficarei Grato!
 # e-mail: joao42lbatista@gmail.com
 #
 # Este programa é um software livre; você pode redistribui-lo e/ou
@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 16/05/2024
+# Last update: 03/06/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -56,18 +56,18 @@ echo_FULL_INFO(){
 MasterPDFEditor_lv="5.9.61"
 TLP_lv="1.6.1"
 gitahead_lv="2.6.3"
-mangohud_lv="0.7.1"
-mozilla_firefox_lv="126.0"
+mangohud_lv="0.7.2"
+mozilla_firefox_lv="126.0.1"
 smplayer_lv="24.5.0"
 teamviewer_lv="15.53.6"
 virtualbox_lv="7.0.18"
 
     ## AppImage
 maestral_lv="1.9.3"
-mkvtoolnix_lv="84.0"
+mkvtoolnix_lv="85.0"
 opera_lv="110.0.5130.23"
 opera_ffmpeg_codecs_lv="0.87.0"
-ventoy_lv="1.0.97"
+ventoy_lv="1.0.98"
 zotero_lv="6.0.35"
 
     ## Windows programs

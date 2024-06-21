@@ -3,7 +3,7 @@
 # Clone some of my repositories
 # https://github.com/ryuuzaki42
 #
-# Last update: 01/06/2024
+# Last update: 21/06/2024
 #
 set -x
 
@@ -13,7 +13,7 @@ cd ../../
 git clone https://ryuuzaki42@github.com/ryuuzaki42/01_Cool_Things.git
 
 git clone https://ryuuzaki42@github.com/ryuuzaki42/02_Scripts_Linux.git
-cd 02_Scripts_Slackware/ || exit
+cd 02_Scripts_Linux/ || exit
 ./0install_scripts_JBi.sh
 cd ../
 

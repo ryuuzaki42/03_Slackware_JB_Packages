@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 15/06/2024
+# Last update: 26/06/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -57,9 +57,9 @@ MasterPDFEditor_lv="5.9.61"
 TLP_lv="1.6.1"
 gitahead_lv="2.6.3"
 mangohud_lv="0.7.2"
-mozilla_firefox_lv="127.0"
+mozilla_firefox_lv="127.0.2"
 smplayer_lv="24.5.0"
-teamviewer_lv="15.53.6"
+teamviewer_lv="15.54.3"
 virtualbox_lv="7.0.18"
 
     ## AppImage

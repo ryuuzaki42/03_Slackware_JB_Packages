@@ -6,10 +6,17 @@ Some packages (tgz/txz) and shell scripts to create packages to Slackware - (www
 
 `slackware_dls/` - Scripts to download some programs to Slackware
 
-## Download packages and AppImages:
+Old packages moved to: https://github.com/ryuuzaki42/99_Old_Files/tree/main/slackware_jb_packages
 
-### Slackware packages:
+---
+## Telegram Groups
+
+### Slackware Packages:
 https://t.me/SlackwarePackages
 
-### AppImage backup:
+### AppImage Backup:
 https://t.me/AppImageBackup
+
+---
+### Programs in AppImage
+https://github.com/ryuuzaki42/ryuuzaki42/blob/main/other_info.md#programs-in-appimage

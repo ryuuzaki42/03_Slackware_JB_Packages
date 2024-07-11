@@ -18,5 +18,5 @@ https://t.me/SlackwarePackages
 https://t.me/AppImageBackup
 
 ---
-### Programs in AppImage
+### Programs in AppImage:
 https://github.com/ryuuzaki42/ryuuzaki42/blob/main/other_info.md#programs-in-appimage

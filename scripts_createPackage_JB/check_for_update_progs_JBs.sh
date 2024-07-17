@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 11/07/2024
+# Last update: 17/07/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -60,11 +60,11 @@ mangohud_lv="0.7.2"
 mozilla_firefox_lv="128.0"
 smplayer_lv="24.5.0"
 teamviewer_lv="15.55.3"
-virtualbox_lv="7.0.18"
+virtualbox_lv="7.0.20"
 
     ## AppImage
 maestral_lv="1.9.4"
-mkvtoolnix_lv="85.0"
+mkvtoolnix_lv="86.0"
 opera_lv="112.0.5197.24"
 opera_ffmpeg_codecs_lv="0.89.0"
 ventoy_lv="1.0.99"
@@ -72,9 +72,9 @@ zotero_lv="6.0.35"
 
     ## Windows programs
 WinRAR_lv="7.01"
-hwmonitor_lv="1.53"
+hwmonitor_lv="1.54"
 nettraffic_lv="1.71.0"
-notepad_plus_plus_lv="8.6.8"
+notepad_plus_plus_lv="8.6.9"
 revouninstaller_lv="2.4.5"
 sumatraPDFReader_lv="3.5.2"
 
@@ -84,9 +84,9 @@ compareVersion(){
     local_version=$2
     link=$3
 
-    if [ "$local_version" == '' ]; then
-        local_version=$(find /var/log/packages/"$progName"-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
-    fi
+#    if [ "$local_version" == '' ]; then
+#        local_version=$(find /var/log/packages/"$progName"-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
+#    fi
 
     if [ "$version" == "$local_version" ]; then
         if [ "$FULL_INFO" == 1 ]; then
@@ -146,7 +146,7 @@ TLP(){
 }
 
 gitahead(){
-    progName="gitahead"
+    progName="GitAhead"
     link="https://github.com/gitahead/gitahead/releases/latest"
     command="grep '<title>Release v' | sed 's/.*Release v//; s/ .*//'"
 
@@ -154,7 +154,7 @@ gitahead(){
 }
 
 maestral(){
-    progName="maestral"
+    progName="Maestral"
     #link="https://github.com/samschott/maestral/releases/latest"
     #command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
@@ -165,7 +165,7 @@ maestral(){
 }
 
 mangohud(){
-    progName="mangohud"
+    progName="MangoHud"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
     command="grep '<title>Release' | sed 's/.*Version //; s/ .*//' | sed 's/-/./'"
 
@@ -173,7 +173,7 @@ mangohud(){
 }
 
 mkvtoolnix (){
-    progName="mkvtoolnix"
+    progName="MKVToolNix"
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix.* release' | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
@@ -181,7 +181,7 @@ mkvtoolnix (){
 }
 
 mozilla_firefox(){
-    progName="mozilla-firefox"
+    progName="Mozilla-Firefox"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' | sed 's/.*release-version\">//; s/<.*//'"
 
@@ -192,7 +192,7 @@ mozilla_firefox(){
 }
 
 opera(){
-    progName="opera"
+    progName="Opera"
     link="https://deb.opera.com/opera-stable/pool/non-free/o/opera-stable/"
     command="grep 'deb' | grep -o -P '(?<=>opera-stable_).*(?=_amd64.deb)'"
 
@@ -200,7 +200,7 @@ opera(){
 }
 
 opera_ffmpeg_codecs(){
-    progName="opera-ffmpeg-codecs"
+    progName="Opera-ffmpeg-codecs"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//' | cut -d ':' -f1"
 
@@ -208,7 +208,7 @@ opera_ffmpeg_codecs(){
 }
 
 smplayer(){
-    progName="smplayer"
+    progName="SMPlayer"
     link="https://www.smplayer.info/downloads"
     command="grep -o '\">smplayer.*tar.bz2' | cut -d '.' -f1-3 | cut -d '-' -f2"
 
@@ -216,7 +216,7 @@ smplayer(){
 }
 
 teamviewer(){
-    progName="teamviewer"
+    progName="TeamViewer"
     link="https://www.teamviewer.com/en/download/linux"
     command="grep 'Current version' | tr -d 'Ca-z :<\->/'"
 
@@ -224,7 +224,7 @@ teamviewer(){
 }
 
 ventoy(){
-    progName="ventoy"
+    progName="Ventoy"
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep '<title>Release Ventoy' | sed 's/.*Release Ventoy //; s/ .*//'"
 
@@ -232,7 +232,7 @@ ventoy(){
 }
 
 virtualbox(){
-    progName="virtualbox"
+    progName="VirtualBox"
     link="https://www.virtualbox.org/wiki/Downloads"
     command="grep 'VirtualBox.* platform packages' | cut -d '>' -f4 | cut -d ' ' -f2"
 
@@ -240,7 +240,7 @@ virtualbox(){
 }
 
 zotero(){
-    progName="zotero"
+    progName="Zotero"
     link="https://www.zotero.org/download"
     command="grep 'linux-x86_64' | sed 's/.*linux-x86_64//' | cut -d '\"' -f3"
 
@@ -276,7 +276,7 @@ AppImage(){
 
 ## Windows programs
 hwmonitor(){
-    progName="hwmonitor"
+    progName="HWMonitor"
     link="https://www.cpuid.com/softwares/hwmonitor.html"
     command="grep -o 'href.*hwmonitor_.*.exe' | head -n1 | grep -o '[0-9].[0-9][0-9]'"
 
@@ -284,7 +284,7 @@ hwmonitor(){
 }
 
 nettraffic(){
-    progName="nettraffic"
+    progName="NetTraffic"
     link="https://www.venea.net/web/downloads"
     command="grep -o '>Version: [0-9].*<' | head -n1 | tr -d 'a-zA-Z <>:'"
 
@@ -292,7 +292,7 @@ nettraffic(){
 }
 
 notepad_plus_plus(){
-    progName="notepad-plus-plus"
+    progName="Notepad++"
     link="https://notepad-plus-plus.org/downloads"
     command="grep 'Current Version' | cut -d 'v' -f2 | cut -d '/' -f1"
 
@@ -300,7 +300,7 @@ notepad_plus_plus(){
 }
 
 revouninstaller(){
-    progName="revouninstaller"
+    progName="RevoUninstaller"
     link="https://www.revouninstaller.com/version-history/"
     command="grep -o -E '>version (.{4}|.{5}|.{6})<' | head -n 1 | tr -d 'a-zA-Z : <>'"
 
@@ -308,7 +308,7 @@ revouninstaller(){
 }
 
 sumatraPDFReader(){
-    progName="sumatraPDFReader"
+    progName="SumatraPDF"
     link="https://www.sumatrapdfreader.org/download-free-pdf-viewer"
     command="grep -o 'SumatraPDF-.*-64-install.exe\"' | cut -d '-' -f2"
 
@@ -316,7 +316,7 @@ sumatraPDFReader(){
 }
 
 WinRAR(){
-    progName="winrar"
+    progName="WinRAR"
     link="https://www.win-rar.com/start.html"
     command="grep -o '>WinRAR [0-9].*<' | tr -d 'a-zA-Z <>'"
 

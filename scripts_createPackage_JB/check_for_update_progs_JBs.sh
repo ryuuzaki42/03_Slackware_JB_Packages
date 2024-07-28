@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 17/07/2024
+# Last update: 28/07/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -55,9 +55,10 @@ echo_FULL_INFO(){
     ## GNU/Linux programs
 MasterPDFEditor_lv="5.9.61"
 TLP_lv="1.6.1"
-gitahead_lv="2.6.3"
+#gitahead_lv="2.6.3"
+gittyup_lv="1.4.0"
 mangohud_lv="0.7.2"
-mozilla_firefox_lv="128.0"
+mozilla_firefox_lv="128.0.3"
 smplayer_lv="24.5.0"
 teamviewer_lv="15.55.3"
 virtualbox_lv="7.0.20"
@@ -151,6 +152,14 @@ gitahead(){
     command="grep '<title>Release v' | sed 's/.*Release v//; s/ .*//'"
 
     checkVersion "$progName" "$link" "$command" "$gitahead_lv"
+}
+
+gittyup(){
+    progName="Gittyup"
+    link="https://github.com/Murmele/Gittyup/releases/latest"
+    command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
+
+    checkVersion "$progName" "$link" "$command" "$gittyup_lv"
 }
 
 maestral(){
@@ -259,7 +268,8 @@ GNULinuxPrograms(){
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
         TLP
-        gitahead # GitAhead is no longer under active development
+        #gitahead # GitAhead is no longer under active development
+        gittyup
         mangohud
     fi
 }

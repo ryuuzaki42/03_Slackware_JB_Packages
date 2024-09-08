@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 24/08/2024
+# Last update: 08/09/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -58,18 +58,18 @@ TLP_lv="1.6.1"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.7.2"
-mozilla_firefox_lv="129.0.2"
+mozilla_firefox_lv="130.0"
 smplayer_lv="24.5.0"
 teamviewer_lv="15.55.3"
 virtualbox_lv="7.0.20"
 
     ## AppImage
 maestral_lv="1.9.4"
-mkvtoolnix_lv="86.0"
+mkvtoolnix_lv="87.0"
 opera_lv="113.0.5230.32"
 opera_ffmpeg_codecs_lv="0.91.0"
 ventoy_lv="1.0.99"
-zotero_lv="7.0.2"
+zotero_lv="7.0.3"
 
     ## Windows programs
 WinRAR_lv="7.01"

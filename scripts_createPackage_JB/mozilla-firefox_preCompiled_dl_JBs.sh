@@ -22,7 +22,7 @@
 #
 # Script: Script to create a Slackware package from the mozilla-firefox stable pre-compiled
 #
-# Last update: 21/08/2024
+# Last update: 03/09/2024
 #
 set -e
 
@@ -34,15 +34,15 @@ else
     languageDl=$2
 
     case "$(uname -m)" in
-        "x86_64" ) archDL="Linux 64-bit in"
+        x86_64 ) archDL="linux64"
             archFinal="x86_64"
             ;;
-        "i?86" ) archDL="Linux in"
+        i?86 ) archDL="linux"
             archFinal="i586"
             ;;
     esac
 
-    progName="mozilla-firefox" # last tested: "129.0.2"
+    progName="mozilla-firefox" # last tested: "130.0"
     tag="1_JB"
     folderDest=$(pwd)
 
@@ -58,10 +58,11 @@ else
 
     echo
     web_site=$(wget "https://www.mozilla.org/firefox/all/" -O -)
-    linkDl=$(echo "$web_site" | grep "$archDL" | grep "$languageDl" | head -n 1 | cut -d '"' -f2)
+    #linkDl=$(echo "$web_site" | grep "$archDL" | grep "$languageDl" | head -n 1 | cut -d '"' -f2)
     version=$(echo "$web_site" | grep "latest-firefox"  | sed 's/.*latest-firefox="//; s/" .*//')
 
-    linkDl=$(echo "$linkDl" | sed 's/amp;//g') # Remove "&amp" from URL link
+    #linkDl=$(echo "$linkDl" | sed 's/amp;//g') # Remove "&amp" from URL link
+    linkDl="https://download.mozilla.org/?product=firefox-latest-ssl&os=$archDL&lang=$languageDl"
 
     echo -e "Link to download: $linkDl"
 

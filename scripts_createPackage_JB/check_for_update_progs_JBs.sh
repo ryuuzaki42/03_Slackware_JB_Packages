@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 08/09/2024
+# Last update: 13/09/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -60,8 +60,8 @@ gittyup_lv="1.4.0"
 mangohud_lv="0.7.2"
 mozilla_firefox_lv="130.0"
 smplayer_lv="24.5.0"
-teamviewer_lv="15.55.3"
-virtualbox_lv="7.0.20"
+teamviewer_lv="15.57.3"
+virtualbox_lv="7.1.0"
 
     ## AppImage
 maestral_lv="1.9.4"
@@ -69,7 +69,7 @@ mkvtoolnix_lv="87.0"
 opera_lv="113.0.5230.32"
 opera_ffmpeg_codecs_lv="0.91.0"
 ventoy_lv="1.0.99"
-zotero_lv="7.0.3"
+zotero_lv="7.0.5"
 
     ## Windows programs
 WinRAR_lv="7.01"
@@ -91,7 +91,7 @@ compareVersion(){
 
     if [ "$version" == "$local_version" ]; then
         if [ "$FULL_INFO" == 1 ]; then
-            echo -e "$BLUE   Online version ($GREEN$version$BLUE) is ${GREEN}equal$BLUE to Local version$NC"
+            echo -e "$BLUE  Online version ($GREEN$version$BLUE) is ${GREEN}equal$BLUE to Local version$NC"
         else
             echo -en "$GREEN $version$NC"
         fi
@@ -243,7 +243,7 @@ ventoy(){
 virtualbox(){
     progName="VirtualBox"
     link="https://www.virtualbox.org/wiki/Downloads"
-    command="grep 'VirtualBox.* platform packages' | cut -d '>' -f4 | cut -d ' ' -f2"
+    command="grep 'VirtualBox.* platform packages' | cut -d ' ' -f2"
 
     checkVersion "$progName" "$link" "$command" "$virtualbox_lv"
 }

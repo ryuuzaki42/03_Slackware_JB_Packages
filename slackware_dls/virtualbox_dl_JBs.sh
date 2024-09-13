@@ -21,7 +21,7 @@
 #
 # Descrição: Script to download the last version VirtualBox
 #
-# Last update: 17/07/2024
+# Last update: 13/09/2024
 #
 case "$(uname -m)" in
     i?86) archDL="x86" ;;
@@ -29,12 +29,12 @@ case "$(uname -m)" in
     *) archDL=$(uname -m) ;;
 esac
 
-progName="virtualbox" # last tested: "7.0.20"
+progName="virtualbox" # last tested: "7.1.0"
 
 linkGetVersion="https://www.virtualbox.org/wiki/Downloads"
 wget "$linkGetVersion" -O "${progName}_latest"
 
-version=$(grep "VirtualBox.* platform packages" ${progName}_latest | cut -d '>' -f4 | cut -d ' ' -f2)
+version=$(grep "VirtualBox.* platform packages" ${progName}_latest | cut -d ' ' -f2)
 rm "${progName}_latest"
 
 downloadedVersion=$(find VirtualBox-* | head -n 1 | cut -d '-' -f2)
@@ -56,7 +56,7 @@ mirrorDl="http://download.virtualbox.org/virtualbox/$version"
 wget "$mirrorDl/MD5SUMS" -O MD5SUMS
 
 runFileMd5=$(grep "VirtualBox-$version.*-Linux_$archDL.run" < MD5SUMS)
-extpackFileMd5=$(grep "Oracle_VM_VirtualBox_Extension_Pack-$version.*vbox-extpack" < MD5SUMS | head -n 1)
+extpackFileMd5=$(grep "Oracle_VirtualBox_Extension_Pack-.*vbox-extpack" < MD5SUMS | head -n 1)
 
 runFile=$(echo "$runFileMd5" | cut -d '*' -f2)
 extpackFile=$(echo "$extpackFileMd5" | cut -d '*' -f2)

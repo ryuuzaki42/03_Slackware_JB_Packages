@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 13/09/2024
+# Last update: 01/10/2024
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -58,25 +58,25 @@ TLP_lv="1.6.1"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.7.2"
-mozilla_firefox_lv="130.0"
+mozilla_firefox_lv="131.0"
 smplayer_lv="24.5.0"
-teamviewer_lv="15.57.3"
-virtualbox_lv="7.1.0"
+teamviewer_lv="15.58.4"
+virtualbox_lv="7.1.2"
 
     ## AppImage
 maestral_lv="1.9.4"
 mkvtoolnix_lv="87.0"
-opera_lv="113.0.5230.32"
-opera_ffmpeg_codecs_lv="0.91.0"
+opera_lv="114.0.5282.21"
+opera_ffmpeg_codecs_lv="0.92.0"
 ventoy_lv="1.0.99"
 zotero_lv="7.0.5"
 
     ## Windows programs
 WinRAR_lv="7.01"
-hwmonitor_lv="1.54"
+hwmonitor_lv="1.55"
 nettraffic_lv="1.71.0"
-notepad_plus_plus_lv="8.6.9"
-revouninstaller_lv="2.4.5"
+notepad_plus_plus_lv="8.7"
+revouninstaller_lv="2.5.0"
 sumatraPDFReader_lv="3.5.2"
 
 # Usual functions
@@ -141,7 +141,7 @@ MasterPDFEditor(){
 TLP(){
     progName="TLP"
     link="https://github.com/linrunner/TLP/releases/latest"
-    command="grep '<title>Release ' | sed 's/.*Release TLP //; s/ .*//'"
+    command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
 
     checkVersion "$progName" "$link" "$command" "$TLP_lv"
 }
@@ -243,7 +243,7 @@ ventoy(){
 virtualbox(){
     progName="VirtualBox"
     link="https://www.virtualbox.org/wiki/Downloads"
-    command="grep 'VirtualBox.* platform packages' | cut -d ' ' -f2"
+    command="grep 'VirtualBox.* platform packages' | sed 's/ .*VirtualBox //; s/ .*//'"
 
     checkVersion "$progName" "$link" "$command" "$virtualbox_lv"
 }

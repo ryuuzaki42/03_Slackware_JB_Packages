@@ -21,7 +21,7 @@
 #
 # Descrição: Script to download the last version VirtualBox
 #
-# Last update: 13/09/2024
+# Last update: 27/09/2024
 #
 case "$(uname -m)" in
     i?86) archDL="x86" ;;
@@ -29,12 +29,12 @@ case "$(uname -m)" in
     *) archDL=$(uname -m) ;;
 esac
 
-progName="virtualbox" # last tested: "7.1.0"
+progName="virtualbox" # last tested: "7.1.2"
 
 linkGetVersion="https://www.virtualbox.org/wiki/Downloads"
 wget "$linkGetVersion" -O "${progName}_latest"
 
-version=$(grep "VirtualBox.* platform packages" ${progName}_latest | cut -d ' ' -f2)
+version=$(grep "VirtualBox.* platform packages" ${progName}_latest | sed 's/.*VirtualBox //; s/ .*//')
 rm "${progName}_latest"
 
 downloadedVersion=$(find VirtualBox-* | head -n 1 | cut -d '-' -f2)

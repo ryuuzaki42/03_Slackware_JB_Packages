@@ -28,27 +28,6 @@
 # Tip: Pass "all" as parameter to call programs updates
 # Tip: Use FULL_INFO=1 ./check_for_update_progs_JBs.sh to show all info about the programs
 #
-FULL_INFO=${FULL_INFO-0} # 1 to show all info or 0 to more clean output
-
-useColor(){ # Color
-    #BLACK='\e[1;30m'
-    RED='\e[1;31m'
-    GREEN='\e[1;32m'
-    NC='\033[0m' # reset/no color
-    BLUE='\e[1;34m'
-    #PINK='\e[1;35m'
-    CYAN='\e[1;36m'
-    #WHITE='\e[1;37m'
-}
-useColor
-
-s1=$1 # To check if is win or all
-
-echo_FULL_INFO(){
-    if [ "$FULL_INFO" == 1 ]; then
-        echo -e "$1"
-    fi
-}
 
 ## _lv => _local_version - last tested
 
@@ -78,6 +57,27 @@ nettraffic_lv="1.71.0"
 notepad_plus_plus_lv="8.7.2"
 revouninstaller_lv="2.5.0"
 sumatraPDFReader_lv="3.5.2"
+
+useColor(){ # Color
+    #BLACK='\e[1;30m'
+    RED='\e[1;31m'
+    GREEN='\e[1;32m'
+    NC='\033[0m' # reset/no color
+    BLUE='\e[1;34m'
+    #PINK='\e[1;35m'
+    CYAN='\e[1;36m'
+    #WHITE='\e[1;37m'
+}
+useColor
+
+FULL_INFO=${FULL_INFO-0} # 1 to show all info or 0 to more clean output
+s1=$1 # To check if is win or all
+
+echo_FULL_INFO(){
+    if [ "$FULL_INFO" == 1 ]; then
+        echo -e "$1"
+    fi
+}
 
 # Usual functions
 compareVersion(){

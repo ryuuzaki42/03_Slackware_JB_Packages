@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 27/11/2024
+# Last update: 01/01/2025
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -37,25 +37,25 @@ TLP_lv="1.7.0"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.7.2"
-mozilla_firefox_lv="133.0"
+mozilla_firefox_lv="133.0.3"
 smplayer_lv="24.5.0"
-teamviewer_lv="15.60.3"
+teamviewer_lv="15.61.3"
 virtualbox_lv="7.1.4"
 
     ## AppImage
 maestral_lv="1.9.4"
-mkvtoolnix_lv="88.0"
-opera_lv="114.0.5282.185"
+mkvtoolnix_lv="89.0"
+opera_lv="115.0.5322.119"
 opera_ffmpeg_codecs_lv="0.93.0"
 ventoy_lv="1.0.99"
-zotero_lv="7.0.10"
+zotero_lv="7.0.11"
 
     ## Windows
 WinRAR_lv="7.01"
 hwmonitor_lv="1.55"
 nettraffic_lv="1.71.0"
-notepad_plus_plus_lv="8.7.2"
-revouninstaller_lv="2.5.0"
+notepad_plus_plus_lv="8.7.5"
+revouninstaller_lv="2.5.7"
 sumatraPDFReader_lv="3.5.2"
 
 useColor(){ # Color
@@ -164,11 +164,11 @@ gittyup(){
 
 maestral(){
     progName="Maestral"
-    #link="https://github.com/samschott/maestral/releases/latest"
-    #command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
+    link="https://github.com/samschott/maestral/releases/latest"
+    command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
 
-    link="https://pypi.org/project/maestral"
-    command="grep 'release__card' | grep -v 'dev' | head -n 1 | sed 's/.*maestral\///; s/\/\">//'"
+    #link="https://pypi.org/project/maestral"
+    #command="grep 'release__card' | grep -v 'dev' | head -n 1 | sed 's/.*maestral\///; s/\/\">//'"
 
     checkVersion "$progName" "$link" "$command" "$maestral_lv"
 }

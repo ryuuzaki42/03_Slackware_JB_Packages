@@ -21,19 +21,19 @@
 #
 # Descrição: Script to download the last version of Slackware Live, made by AlienBob
 #
-# Last update: 28/11/2023
+# Last update: 14/02/2025
 #
-# My dls:
-#     Live    - LEAN 64 bits - ./slackware_live_dl_JBs.sh 1 . 1 7 y
+# My downloads:
+#     Live    - LEAN 64 bits - ./slackware_live_dl_JBs.sh 1 . 1 4 y
 #     Stable  - only one option - ./slackware_live_dl_JBs.sh 1 . 2 1 y
 #     Current - only one option - ./slackware_live_dl_JBs.sh 1 . 3 1 y
 #
 echo -e "\nScript to download the last version of Slackware Live (made by Alien Bob)\n"
 
 # Last tested:
-    # 1 slackware-live/           - version 1.8.0
-    # 2 slackware64-15.0-live/    - day 2023-11-26
-    # 3 slackware64-current-live/ - day 2023-11-28
+    # 1 slackware-live/           - version 1.8.2
+    # 2 slackware64-15.0-live/    - day 2025-02-09
+    # 3 slackware64-current-live/ - day 2025-02-09
 
 help() {
     echo -e "$(basename "$0") \$mirror_choose \$pathDl \$versionDownload \$downloadIsoNumbers \$continueOrNot
@@ -229,7 +229,7 @@ else # Current
 fi
 
 if [ "$versionLocal" == "$versionRepo" ]; then
-    echo -e "\n# No new version found #\n"
+    echo -e "\n# No new version found - Local version is equal to repository version (\"$versionLocal\") #\n"
     echo "Version online (repo) is equal to version downloaded: \"$versionLocal\""
 
     echo -n "Want continue and maybe download more one ISO? (y)es - (n)o (hit enter to no): "

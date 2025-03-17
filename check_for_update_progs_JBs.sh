@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 14/02/2025
+# Last update: 17/03/2025
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -33,28 +33,28 @@
 
     ## GNU/Linux
 MasterPDFEditor_lv="5.9.61"
-TLP_lv="1.7.0"
+TLP_lv="1.8.0"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
-mangohud_lv="0.7.2"
-mozilla_firefox_lv="135.0"
+mangohud_lv="0.8.1"
+mozilla_firefox_lv="136.0.1"
 smplayer_lv="24.5.0"
-teamviewer_lv="15.61.3"
+teamviewer_lv="15.62.4"
 virtualbox_lv="7.1.6"
 
     ## AppImage
 maestral_lv="1.9.4"
-mkvtoolnix_lv="90.0"
+mkvtoolnix_lv="91.0"
 opera_lv="117.0.5408.32"
 opera_ffmpeg_codecs_lv="0.95.0"
-ventoy_lv="1.1.02"
-zotero_lv="7.0.11"
+ventoy_lv="1.1.05"
+zotero_lv="7.0.15"
 
     ## Windows
-WinRAR_lv="7.01"
+WinRAR_lv="7.10"
 hwmonitor_lv="1.56"
 nettraffic_lv="1.71.0"
-notepad_plus_plus_lv="8.7.7"
+notepad_plus_plus_lv="8.7.8"
 revouninstaller_lv="2.5.7"
 sumatraPDFReader_lv="3.5.2"
 
@@ -140,9 +140,11 @@ MasterPDFEditor(){
 
 TLP(){
     progName="TLP"
-    link="https://github.com/linrunner/TLP/releases/latest"
-    command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
+    #link="https://github.com/linrunner/TLP/releases/latest"
+    #command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
 
+    link="https://github.com/linrunner/TLP/releases"
+    command="grep '/linrunner/TLP/tree/' | grep -v 'beta' | head -n 1 | cut -d '\"' -f2 | cut -d '/' -f5"
     checkVersion "$progName" "$link" "$command" "$TLP_lv"
 }
 

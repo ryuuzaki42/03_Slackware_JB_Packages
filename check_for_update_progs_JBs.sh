@@ -51,6 +51,7 @@ ventoy_lv="1.1.05"
 zotero_lv="7.0.15"
 keepassxc_lv="2.7.10"
 teams_for_linux_lv="2.0.8"
+qbittorrent_lv="5.0.4"
 
     ## Windows
 WinRAR_lv="7.11"
@@ -209,6 +210,14 @@ mkvtoolnix (){
     checkVersion "$progName" "$link" "$command" "$mkvtoolnix_lv"
 }
 
+qbittorrent (){
+    progName="qBittorrent"
+    link="https://www.qbittorrent.org/download"
+    command="grep 'Latest: v' | sed 's/.*Latest: v//g;s/<.*//g'"
+
+    checkVersion "$progName" "$link" "$command" "$qbittorrent_lv"
+}
+
 mozilla_firefox(){
     progName="Mozilla-Firefox"
     #link="https://www.mozilla.org/firefox/notes/"
@@ -304,6 +313,7 @@ AppImage(){
     zotero
     keepassxc
     teams_for_linux
+    qbittorrent
 }
 
 ## Windows programs

@@ -49,6 +49,7 @@ opera_lv="117.0.5408.197"
 opera_ffmpeg_codecs_lv="0.98.0"
 ventoy_lv="1.1.05"
 zotero_lv="7.0.15"
+keepassxc_lv="2.7.10"
 
     ## Windows
 WinRAR_lv="7.11"
@@ -175,6 +176,14 @@ maestral(){
     checkVersion "$progName" "$link" "$command" "$maestral_lv"
 }
 
+keepassxc(){
+    progName="KeePassXC"
+    link="https://github.com/keepassxreboot/keepassxc/releases/latest"
+    command="grep 'Release ' | head -n1 | sed 's/.*Release //; s/ .*//'"
+
+    checkVersion "$progName" "$link" "$command" "$keepassxc_lv"
+}
+
 mangohud(){
     progName="MangoHud"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
@@ -284,6 +293,7 @@ AppImage(){
     opera_ffmpeg_codecs
     ventoy
     zotero
+    keepassxc
 }
 
 ## Windows programs

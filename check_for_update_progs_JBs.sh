@@ -50,6 +50,7 @@ opera_ffmpeg_codecs_lv="0.98.0"
 ventoy_lv="1.1.05"
 zotero_lv="7.0.15"
 keepassxc_lv="2.7.10"
+teams_for_linux_lv="2.0.8"
 
     ## Windows
 WinRAR_lv="7.11"
@@ -184,6 +185,14 @@ keepassxc(){
     checkVersion "$progName" "$link" "$command" "$keepassxc_lv"
 }
 
+teams_for_linux(){
+    progName="teams-for-linux"
+    link="https://github.com/IsmaelMartinez/teams-for-linux/releases/latest"
+    command="grep 'Release ' | head -n1 | sed 's/.*Release //; s/ .*//'"
+
+    checkVersion "$progName" "$link" "$command" "$teams_for_linux_lv"
+}
+
 mangohud(){
     progName="MangoHud"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
@@ -294,6 +303,7 @@ AppImage(){
     ventoy
     zotero
     keepassxc
+    teams_for_linux
 }
 
 ## Windows programs

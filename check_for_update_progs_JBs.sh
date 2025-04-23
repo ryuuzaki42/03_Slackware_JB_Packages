@@ -135,7 +135,7 @@ checkVersion(){
 ## GNU/Linux programs
 MasterPDFEditor(){
     progName="MasterPDFEditor"
-    link="https://code-industry.net/downloads"
+    link="https://code-industry.net/downloads/"
     command="grep -o 'Version .* now available for Linux' | cut -d ' ' -f2"
 
     checkVersion "$progName" "$link" "$command" "$MasterPDFEditor_lv"
@@ -247,7 +247,7 @@ opera_ffmpeg_codecs(){
 
 smplayer(){
     progName="SMPlayer"
-    link="https://www.smplayer.info/downloads"
+    link="https://www.smplayer.info/downloads/"
     command="grep -o '\">smplayer.*tar.bz2' | cut -d '.' -f1-3 | cut -d '-' -f2"
 
     checkVersion "$progName" "$link" "$command" "$smplayer_lv"
@@ -279,7 +279,7 @@ virtualbox(){
 
 zotero(){
     progName="Zotero"
-    link="https://www.zotero.org/download"
+    link="https://www.zotero.org/download/"
     command="grep -o 'linux-x86_64.*' | cut -d '\"' -f3"
 
     checkVersion "$progName" "$link" "$command" "$zotero_lv"
@@ -335,7 +335,7 @@ nettraffic(){
 
 notepad_plus_plus(){
     progName="Notepad++"
-    link="https://notepad-plus-plus.org/downloads"
+    link="https://notepad-plus-plus.org/downloads/"
     command="grep 'Current Version' | cut -d 'v' -f2 | cut -d '/' -f1"
 
     checkVersion "$progName" "$link" "$command" "$notepad_plus_plus_lv"

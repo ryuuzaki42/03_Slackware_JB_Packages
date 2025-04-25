@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 14/04/2025
+# Last update: 25/04/2025
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -37,25 +37,25 @@ TLP_lv="1.8.0"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.1"
-mozilla_firefox_lv="137.0.1"
+mozilla_firefox_lv="137.0.2"
 smplayer_lv="24.5.0"
 teamviewer_lv="15.64.3"
-virtualbox_lv="7.1.6"
+virtualbox_lv="7.1.8"
 
     ## AppImage
 maestral_lv="1.9.4"
 mkvtoolnix_lv="91.0"
-opera_lv="117.0.5408.197"
-opera_ffmpeg_codecs_lv="0.98.0"
+opera_lv="118.0.5461.60"
+opera_ffmpeg_codecs_lv="0.99.0"
 ventoy_lv="1.1.05"
 zotero_lv="7.0.15"
 keepassxc_lv="2.7.10"
-teams_for_linux_lv="2.0.8"
-qbittorrent_lv="5.0.4"
+teams_for_linux_lv="2.0.10"
+qbittorrent_lv="5.0.5"
 
     ## Windows
 WinRAR_lv="7.11"
-hwmonitor_lv="1.56"
+hwmonitor_lv="1.57"
 nettraffic_lv="1.71.0"
 notepad_plus_plus_lv="8.7.9"
 revouninstaller_lv="2.5.8"
@@ -188,8 +188,8 @@ keepassxc(){
 
 teams_for_linux(){
     progName="teams-for-linux"
-    link="https://github.com/IsmaelMartinez/teams-for-linux/releases/latest"
-    command="grep 'Release ' | head -n1 | sed 's/.*Release //; s/ .*//'"
+    link="https://github.com/IsmaelMartinez/teams-for-linux/releases"
+    command="grep 'tree/v' | head -n1 | sed 's/.*tree\/v//; s/\".*//'"
 
     checkVersion "$progName" "$link" "$command" "$teams_for_linux_lv"
 }
@@ -255,7 +255,7 @@ smplayer(){
 
 teamviewer(){
     progName="TeamViewer"
-    link="https://www.teamviewer.com/en/download/linux"
+    link="https://www.teamviewer.com/en/download/portal/linux/"
     command="grep 'Current version' | tr -d 'Ca-z :<\->/'"
 
     checkVersion "$progName" "$link" "$command" "$teamviewer_lv"

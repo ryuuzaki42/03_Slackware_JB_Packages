@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 25/04/2025
+# Last update: 05/05/2025
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -37,27 +37,27 @@ TLP_lv="1.8.0"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.1"
-mozilla_firefox_lv="137.0.2"
+mozilla_firefox_lv="138.0.1"
 smplayer_lv="24.5.0"
 teamviewer_lv="15.64.3"
 virtualbox_lv="7.1.8"
 
     ## AppImage
 maestral_lv="1.9.4"
-mkvtoolnix_lv="91.0"
+mkvtoolnix_lv="92.0"
 opera_lv="118.0.5461.60"
 opera_ffmpeg_codecs_lv="0.99.0"
 ventoy_lv="1.1.05"
 zotero_lv="7.0.15"
 keepassxc_lv="2.7.10"
-teams_for_linux_lv="2.0.10"
-qbittorrent_lv="5.0.5"
+teams_for_linux_lv="2.0.11"
+qbittorrent_lv="5.1.0"
 
     ## Windows
 WinRAR_lv="7.11"
 hwmonitor_lv="1.57"
 nettraffic_lv="1.71.0"
-notepad_plus_plus_lv="8.7.9"
+notepad_plus_plus_lv="8.8.1"
 revouninstaller_lv="2.5.8"
 sumatraPDFReader_lv="3.5.2"
 
@@ -279,8 +279,8 @@ virtualbox(){
 
 zotero(){
     progName="Zotero"
-    link="https://www.zotero.org/download/"
-    command="grep -o 'linux-x86_64.*' | cut -d '\"' -f3"
+    link="https://github.com/zotero/zotero/tags"
+    command="grep 'zotero/releases/tag' | head -n 1 | sed 's/.*tag\///; s/\".*//'"
 
     checkVersion "$progName" "$link" "$command" "$zotero_lv"
 }

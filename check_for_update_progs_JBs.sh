@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 10/06/2025
+# Last update: 22/06/2025
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -44,13 +44,13 @@ virtualbox_lv="7.1.10"
 
     ## AppImage
 maestral_lv="1.9.4"
-mkvtoolnix_lv="92.0"
+mkvtoolnix_lv="93.0"
 opera_lv="119.0.5497.70"
 opera_ffmpeg_codecs_lv="0.100.1"
 ventoy_lv="1.1.05"
-zotero_lv="7.0.15"
+zotero_lv="7.0.16"
 keepassxc_lv="2.7.10"
-teams_for_linux_lv="2.0.14"
+teams_for_linux_lv="2.0.18"
 qbittorrent_lv="5.1.0"
 
     ## Windows
@@ -58,7 +58,7 @@ WinRAR_lv="7.11"
 hwmonitor_lv="1.58"
 nettraffic_lv="1.71.0"
 notepad_plus_plus_lv="8.8.1"
-revouninstaller_lv="2.5.8"
+revouninstaller_lv="2.6.0"
 sumatraPDFReader_lv="3.5.2"
 
 useColor(){ # Color
@@ -279,8 +279,11 @@ virtualbox(){
 
 zotero(){
     progName="Zotero"
-    link="https://github.com/zotero/zotero/tags"
-    command="grep 'zotero/releases/tag' | head -n 1 | sed 's/.*tag\///; s/\".*//'"
+    #link="https://github.com/zotero/zotero/tags"
+    #command="grep 'zotero/releases/tag' | head -n 1 | sed 's/.*tag\///; s/\".*//'"
+
+    link="https://www.zotero.org/support/changelog"
+    command="grep 'Changes in [0-9]' | head -n 1 | sed 's/.*in //g;  s/ .*//'"
 
     checkVersion "$progName" "$link" "$command" "$zotero_lv"
 }

@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 22/06/2025
+# Last update: 22/07/2025
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -37,27 +37,28 @@ TLP_lv="1.8.0"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.1"
-mozilla_firefox_lv="139.0.4"
+mozilla_firefox_lv="141.0"
+rustdesk_lv="1.4.0"
 smplayer_lv="25.6.0"
-teamviewer_lv="15.66.5"
-virtualbox_lv="7.1.10"
+#teamviewer_lv="15.66.5"
+virtualbox_lv="7.1.12"
 
     ## AppImage
+keepassxc_lv="2.7.10"
 maestral_lv="1.9.4"
 mkvtoolnix_lv="93.0"
-opera_lv="119.0.5497.70"
+opera_lv="120.0.5543.93"
 opera_ffmpeg_codecs_lv="0.100.1"
+qbittorrent_lv="5.1.2"
+teams_for_linux_lv="2.1.0"
 ventoy_lv="1.1.05"
-zotero_lv="7.0.16"
-keepassxc_lv="2.7.10"
-teams_for_linux_lv="2.0.18"
-qbittorrent_lv="5.1.0"
+zotero_lv="7.0.21"
 
     ## Windows
-WinRAR_lv="7.11"
+WinRAR_lv="7.12"
 hwmonitor_lv="1.58"
-nettraffic_lv="1.71.0"
-notepad_plus_plus_lv="8.8.1"
+#nettraffic_lv="1.71.0" # Disabled - low updates
+notepad_plus_plus_lv="8.8.3"
 revouninstaller_lv="2.6.0"
 sumatraPDFReader_lv="3.5.2"
 
@@ -261,6 +262,14 @@ teamviewer(){
     checkVersion "$progName" "$link" "$command" "$teamviewer_lv"
 }
 
+rustdesk(){
+    progName="Rustdesk"
+    link="https://github.com/rustdesk/rustdesk/releases/latest"
+    command="grep '<title>Release' | sed 's/.*Release //; s/ .*//'"
+
+    checkVersion "$progName" "$link" "$command" "$rustdesk_lv"
+}
+
 ventoy(){
     progName="Ventoy"
     link="https://github.com/ventoy/Ventoy/releases/latest"
@@ -283,7 +292,7 @@ zotero(){
     #command="grep 'zotero/releases/tag' | head -n 1 | sed 's/.*tag\///; s/\".*//'"
 
     link="https://www.zotero.org/support/changelog"
-    command="grep 'Changes in [0-9]' | head -n 1 | sed 's/.*in //g;  s/ .*//'"
+    command="grep 'Changes in [0-9]' | grep -v '17' | head -n 1 | sed 's/.*in //g;  s/ .*//'"
 
     checkVersion "$progName" "$link" "$command" "$zotero_lv"
 }
@@ -294,7 +303,8 @@ GNULinuxPrograms(){
     MasterPDFEditor
     mozilla_firefox
     smplayer
-    teamviewer
+    #teamviewer # Changed to rustdesk
+    rustdesk
     virtualbox
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
@@ -377,7 +387,7 @@ windowsPrograms(){
     WinRAR
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
-        nettraffic
+        #nettraffic
         sumatraPDFReader
     fi
 }

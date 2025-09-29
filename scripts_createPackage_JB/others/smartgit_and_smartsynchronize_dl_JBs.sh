@@ -23,7 +23,7 @@
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/
 #
-# Last update: 23/05/2025
+# Last update: 29/09/2025
 #
 set -e
 echo -e "\n# Create a txz from smartsynchronize and/or smartgit from \"program\"-version.tar.gz #\n"
@@ -38,9 +38,9 @@ else
     fi
 
     if [ "$progBuild" == '1' ]; then
-        progName="smartgit" # last tested: "24.1.3"
+        progName="smartgit" # last tested: "24.1.5"
     elif [ "$progBuild" == '2' ]; then
-        progName="smartsynchronize" # last tested: "4.6.2"
+        progName="smartsynchronize" # last tested: "4.6.3"
     else
         echo -e "\nError: The chosen program ($progBuild) is unknown\n"
         exit 1
@@ -51,6 +51,11 @@ else
     wget --no-check-certificate "$linkGetVersion" -O "${progName}-latest.txt"
 
     version=$(grep -o "Version .*" ${progName}-latest.txt | head -n 1 | cut -d ' ' -f2)
+
+    if [ "$progBuild" == '1' ]; then
+        version=$(echo "$version" | cut -d "<" -f1) # Remove "</h2></div></div><div" from smartgit version
+    fi
+
     versionDL=${version//./_}
     rm "${progName}-latest.txt"
 
@@ -80,7 +85,13 @@ else
     fi
     echo -e "\nWill build $progName, please wait\n"
 
-    linkDl="https://www.syntevo.com/downloads/$progName"
+    #linkDl="https://www.syntevo.com/downloads/$progName"
+    if [ "$progBuild" == '1' ]; then
+        linkDl="https://download.smartgit.dev/smartgit"
+    elif [ "$progBuild" == '2' ]; then
+        linkDl="https://downloads.syntevo.com/downloads/smartsynchronize"
+    fi
+
     folderDest=$(pwd)
     TAG="1_JB"
     ARCH=noarch

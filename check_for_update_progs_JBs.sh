@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 24/08/2025
+# Last update: 29/09/2025
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -37,26 +37,26 @@ TLP_lv="1.8.0"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.1"
-mozilla_firefox_lv="142.0"
-rustdesk_lv="1.4.1"
+mozilla_firefox_lv="143.0.1"
+#rustdesk_lv="1.4.2"
 smplayer_lv="25.6.0"
 #teamviewer_lv="15.66.5"
-virtualbox_lv="7.2.0"
+virtualbox_lv="7.2.2"
 
     ## AppImage
 keepassxc_lv="2.7.10"
 maestral_lv="1.9.4"
-mkvtoolnix_lv="94.0"
-opera_lv="120.0.5543.161"
-opera_ffmpeg_codecs_lv="0.100.1"
+mkvtoolnix_lv="95.0"
+opera_lv="122.0.5643.71"
+opera_ffmpeg_codecs_lv="0.103.0" # 0.103.1 need GLIBC >= 2.34
 qbittorrent_lv="5.1.2"
-teams_for_linux_lv="2.3.0"
+teams_for_linux_lv="2.5.9"
 ventoy_lv="1.1.07"
-zotero_lv="7.0.24"
+zotero_lv="7.0.26"  # .25 e .26 only to Mac only
 
     ## Windows
 WinRAR_lv="7.13"
-hwmonitor_lv="1.58"
+hwmonitor_lv="1.59"
 #nettraffic_lv="1.71.0" # Disabled - low updates
 notepad_plus_plus_lv="8.8.5"
 revouninstaller_lv="2.6.0"
@@ -304,7 +304,7 @@ GNULinuxPrograms(){
     mozilla_firefox
     smplayer
     #teamviewer # Changed to rustdesk
-    rustdesk
+    #rustdesk # # Changed to anydesk
     virtualbox
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates

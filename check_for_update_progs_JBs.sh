@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 29/09/2025
+# Last update: 29/10/2025
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -37,29 +37,29 @@ TLP_lv="1.8.0"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.1"
-mozilla_firefox_lv="143.0.1"
+mozilla_firefox_lv="144.0.2"
 #rustdesk_lv="1.4.2"
 smplayer_lv="25.6.0"
 #teamviewer_lv="15.66.5"
-virtualbox_lv="7.2.2"
+virtualbox_lv="7.2.4"
 
     ## AppImage
 keepassxc_lv="2.7.10"
-maestral_lv="1.9.4"
+maestral_lv="1.9.5"
 mkvtoolnix_lv="95.0"
-opera_lv="122.0.5643.71"
-opera_ffmpeg_codecs_lv="0.103.0" # 0.103.1 need GLIBC >= 2.34
+opera_lv="123.0.5669.23"
+opera_ffmpeg_codecs_lv="0.105.0" # "0.103.0" # 0.103.1 to 0.105.0 need GLIBC >= 2.34
 qbittorrent_lv="5.1.2"
-teams_for_linux_lv="2.5.9"
+teams_for_linux_lv="2.6.6"
 ventoy_lv="1.1.07"
-zotero_lv="7.0.26"  # .25 e .26 only to Mac only
+zotero_lv="7.0.29" # 7.0.28 and 7.0.29 for Mac only
 
     ## Windows
 WinRAR_lv="7.13"
-hwmonitor_lv="1.59"
+hwmonitor_lv="1.60"
 #nettraffic_lv="1.71.0" # Disabled - low updates
-notepad_plus_plus_lv="8.8.5"
-revouninstaller_lv="2.6.0"
+notepad_plus_plus_lv="8.8.7"
+revouninstaller_lv="2.6.2"
 sumatraPDFReader_lv="3.5.2"
 
 useColor(){ # Color

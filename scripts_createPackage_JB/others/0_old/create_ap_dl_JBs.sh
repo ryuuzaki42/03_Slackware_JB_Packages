@@ -35,10 +35,10 @@ else
     ARCH="noarch"
     TAG="1_JB"
 
-    linkGetLastRealease="https://github.com/oblique/create_ap/releases"
+    linkGetLastRelease="https://github.com/oblique/create_ap/releases"
     linkGetLastCommit="https://github.com/oblique/create_ap/commits/master"
 
-    wget --compress=none "$linkGetLastRealease" -O "${progName}_latest"
+    wget --compress=none "$linkGetLastRelease" -O "${progName}_latest"
     versionNumber=$(grep "/oblique/create_ap/tree/" "${progName}_latest" | head -n 1 | cut -d 'v' -f2 | cut -d '"' -f1)
     rm "${progName}_latest"
 

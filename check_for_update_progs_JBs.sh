@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 23/11/2025
+# Last update: 18/12/2025
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -33,34 +33,34 @@
 
     ## GNU/Linux
 MasterPDFEditor_lv="5.9.61"
-TLP_lv="1.8.0"
+TLP_lv="1.9.0"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
-mangohud_lv="0.8.1"
-mozilla_firefox_lv="145.0.1"
+mangohud_lv="0.8.2"
+mozilla_firefox_lv="146.0.1"
 #rustdesk_lv="1.4.2"
 smplayer_lv="25.6.0"
 #teamviewer_lv="15.66.5"
 virtualbox_lv="7.2.4"
 
     ## AppImage
-keepassxc_lv="2.7.10"
+keepassxc_lv="2.7.11"
 maestral_lv="1.9.5"
 mkvtoolnix_lv="96.0"
-opera_lv="123.0.5669.47"
-opera_ffmpeg_codecs_lv="0.105.0" # "0.103.0" # 0.103.1 to 0.105.0 need GLIBC >= 2.34
+opera_lv="125.0.5729.49"
+opera_ffmpeg_codecs_lv="0.106.0" # "0.103.0" # 0.103.1 to 0.106.0 need GLIBC >= 2.34
 qbittorrent_lv="5.1.4"
-teams_for_linux_lv="2.6.15"
-ventoy_lv="1.1.07"
-vivaldi_lv="7.7.3851.52"
+teams_for_linux_lv="2.6.19"
+ventoy_lv="1.1.09"
+vivaldi_lv="7.7.3851.66"
 zotero_lv="7.0.30"
 
     ## Windows
 WinRAR_lv="7.13"
 hwmonitor_lv="1.60"
 #nettraffic_lv="1.71.0" # Disabled - low updates
-notepad_plus_plus_lv="8.8.8"
-revouninstaller_lv="2.6.2"
+notepad_plus_plus_lv="8.8.9"
+revouninstaller_lv="2.6.5"
 sumatraPDFReader_lv="3.5.2"
 
 useColor(){ # Color
@@ -242,7 +242,7 @@ opera(){
 vivaldi(){
     progName="vivaldi"
     link="https://repo.vivaldi.com/snapshot/deb/pool/main/"
-    command="grep -o -P '(?<=>vivaldi-stable_).*(?=-1_amd64.deb)'"
+    command="grep -o -P '(?<=>vivaldi-stable_).*(?=-1_amd64.deb)' | tail -n 1"
 
     checkVersion "$progName" "$link" "$command" "$vivaldi_lv"
 }

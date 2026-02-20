@@ -52,7 +52,7 @@ opera_lv="127.0.5778.76"
 qbittorrent_lv="5.1.4"
 teams_for_linux_lv="2.7.7"
 ventoy_lv="1.1.10"
-vivaldi_lv="7.8.3925.73"
+#vivaldi_lv="7.8.3925.73"
 zotero_lv="8.0.3"
 
     ## Windows
@@ -312,8 +312,8 @@ GNULinuxPrograms(){
     MasterPDFEditor
     mozilla_firefox
     smplayer
-    #teamviewer # Changed to rustdesk
-    #rustdesk # # Changed to anydesk
+    #teamviewer # Changed to RustDesk
+    #rustdesk # # Changed to AnyDesk
     virtualbox
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
@@ -330,9 +330,9 @@ AppImage(){
     maestral
     mkvtoolnix
     opera
-    #opera_ffmpeg_codecs
+    #opera_ffmpeg_codecs # New version need GLIBC >= 2.34
     ventoy
-    vivaldi
+    #vivaldi # Changed to LibreWolf
     zotero
     keepassxc
     teams_for_linux

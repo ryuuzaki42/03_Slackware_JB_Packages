@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 20/02/2026
+# Last update: 24/03/2026
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -37,31 +37,31 @@ TLP_lv="1.9.1"
 #gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.2"
-mozilla_firefox_lv="147.0.4"
+mozilla_firefox_lv="149.0"
 #rustdesk_lv="1.4.2"
 smplayer_lv="25.6.0"
 #teamviewer_lv="15.66.5"
 virtualbox_lv="7.2.6"
 
     ## AppImage
-keepassxc_lv="2.7.11"
+keepassxc_lv="2.7.12"
 maestral_lv="1.9.5"
 mkvtoolnix_lv="97.0"
-opera_lv="127.0.5778.76"
+opera_lv="129.0.5823.15"
 #opera_ffmpeg_codecs_lv="0.103.0" # Above 0.103.0 need GLIBC >= 2.34
 qbittorrent_lv="5.1.4"
-teams_for_linux_lv="2.7.7"
+teams_for_linux_lv="2.7.12"
 ventoy_lv="1.1.10"
 #vivaldi_lv="7.8.3925.73"
-zotero_lv="8.0.3"
+zotero_lv="8.0.4"
 
     ## Windows
 WinRAR_lv="7.20"
 hwmonitor_lv="1.62"
 #nettraffic_lv="1.71.0" # Disabled - low updates
-notepad_plus_plus_lv="8.9.2"
-revouninstaller_lv="2.6.5"
-sumatraPDFReader_lv="3.5.2"
+notepad_plus_plus_lv="8.9.3"
+revouninstaller_lv="2.6.8"
+sumatraPDFReader_lv="3.6"
 
 useColor(){ # Color
     #BLACK='\e[1;30m'

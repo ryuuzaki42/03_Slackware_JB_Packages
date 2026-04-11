@@ -39,7 +39,6 @@ mangohud_lv="0.8.2"
 mozilla_firefox_lv="149.0"
 #rustdesk_lv="1.4.2"
 smplayer_lv="25.6.0"
-#teamviewer_lv="15.66.5"
 virtualbox_lv="7.2.6"
 
     ## AppImage
@@ -254,14 +253,6 @@ smplayer(){
     checkVersion "$progName" "$link" "$command" "$smplayer_lv"
 }
 
-teamviewer(){
-    progName="TeamViewer"
-    link="https://www.teamviewer.com/en/download/portal/linux/"
-    command="grep 'Current version' | tr -d 'Ca-z :<\->/'"
-
-    checkVersion "$progName" "$link" "$command" "$teamviewer_lv"
-}
-
 rustdesk(){
     progName="Rustdesk"
     link="https://github.com/rustdesk/rustdesk/releases/latest"
@@ -303,13 +294,11 @@ GNULinuxPrograms(){
     MasterPDFEditor
     mozilla_firefox
     smplayer
-    #teamviewer # Changed to RustDesk
     #rustdesk # # Changed to AnyDesk
     virtualbox
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
         TLP
-        #gitahead # GitAhead is no longer under active development
         gittyup
         mangohud
     fi

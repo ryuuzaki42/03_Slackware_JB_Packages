@@ -56,7 +56,6 @@ zotero_lv="8.0.4"
     ## Windows
 WinRAR_lv="7.20"
 hwmonitor_lv="1.62"
-#nettraffic_lv="1.71.0" # Disabled - low updates
 notepad_plus_plus_lv="8.9.3"
 revouninstaller_lv="2.6.8"
 sumatraPDFReader_lv="3.6"
@@ -328,14 +327,6 @@ hwmonitor(){
     checkVersion "$progName" "$link" "$command" "$hwmonitor_lv"
 }
 
-nettraffic(){
-    progName="NetTraffic"
-    link="https://www.venea.net/web/downloads"
-    command="grep -o '>Version: [0-9].*<' | head -n1 | tr -d 'a-zA-Z <>:'"
-
-    checkVersion "$progName" "$link" "$command" "$nettraffic_lv"
-}
-
 notepad_plus_plus(){
     progName="Notepad++"
     link="https://notepad-plus-plus.org/downloads/"
@@ -377,7 +368,6 @@ windowsPrograms(){
     WinRAR
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
-        #nettraffic
         sumatraPDFReader
     fi
 }

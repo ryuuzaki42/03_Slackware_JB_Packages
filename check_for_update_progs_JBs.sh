@@ -61,14 +61,11 @@ revouninstaller_lv="2.6.8"
 sumatraPDFReader_lv="3.6"
 
 useColor(){ # Color
-    #BLACK='\e[1;30m'
     RED='\e[1;31m'
     GREEN='\e[1;32m'
     NC='\033[0m' # reset/no color
     BLUE='\e[1;34m'
-    #PINK='\e[1;35m'
     CYAN='\e[1;36m'
-    #WHITE='\e[1;37m'
 }
 useColor
 

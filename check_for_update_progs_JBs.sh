@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 24/03/2026
+# Last update: 11/04/2026
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -34,7 +34,6 @@
     ## GNU/Linux
 MasterPDFEditor_lv="5.9.61"
 TLP_lv="1.9.1"
-#gitahead_lv="2.6.3"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.2"
 mozilla_firefox_lv="149.0"
@@ -151,14 +150,6 @@ TLP(){
     link="https://github.com/linrunner/TLP/releases"
     command="grep '/linrunner/TLP/tree/' | grep -v 'beta' | head -n 1 | cut -d '\"' -f2 | cut -d '/' -f5"
     checkVersion "$progName" "$link" "$command" "$TLP_lv"
-}
-
-gitahead(){
-    progName="GitAhead"
-    link="https://github.com/gitahead/gitahead/releases/latest"
-    command="grep '<title>Release v' | sed 's/.*Release v//; s/ .*//'"
-
-    checkVersion "$progName" "$link" "$command" "$gitahead_lv"
 }
 
 gittyup(){

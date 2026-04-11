@@ -50,7 +50,6 @@ opera_lv="129.0.5823.15"
 qbittorrent_lv="5.1.4"
 teams_for_linux_lv="2.7.12"
 ventoy_lv="1.1.10"
-#vivaldi_lv="7.8.3925.73"
 zotero_lv="8.0.4"
 
     ## Windows
@@ -225,14 +224,6 @@ opera(){
     checkVersion "$progName" "$link" "$command" "$opera_lv"
 }
 
-vivaldi(){
-    progName="vivaldi"
-    link="https://repo.vivaldi.com/snapshot/deb/pool/main/"
-    command="grep -o -P '(?<=>vivaldi-stable_).*(?=-1_amd64.deb)' | tail -n 1"
-
-    checkVersion "$progName" "$link" "$command" "$vivaldi_lv"
-}
-
 opera_ffmpeg_codecs(){
     progName="Opera-ffmpeg-codecs"
     link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
@@ -308,7 +299,6 @@ AppImage(){
     opera
     #opera_ffmpeg_codecs # New version need GLIBC >= 2.34
     ventoy
-    #vivaldi # Changed to LibreWolf
     zotero
     keepassxc
     teams_for_linux

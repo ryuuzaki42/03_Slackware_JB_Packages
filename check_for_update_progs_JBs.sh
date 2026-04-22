@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 11/04/2026
+# Last update: 22/04/2026
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -33,31 +33,31 @@
 
     ## GNU/Linux
 MasterPDFEditor_lv="5.9.61"
-TLP_lv="1.9.1"
+TLP_lv="1.10.0"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.2"
-mozilla_firefox_lv="149.0"
+mozilla_firefox_lv="150.0"
 #rustdesk_lv="1.4.2"
 smplayer_lv="25.6.0"
-virtualbox_lv="7.2.6"
+virtualbox_lv="7.2.8"
 
     ## AppImage
 keepassxc_lv="2.7.12"
 maestral_lv="1.9.5"
-mkvtoolnix_lv="97.0"
-opera_lv="129.0.5823.15"
+mkvtoolnix_lv="98.0"
+opera_lv="130.0.5847.12"
 #opera_ffmpeg_codecs_lv="0.103.0" # Above 0.103.0 need GLIBC >= 2.34
 qbittorrent_lv="5.1.4"
-teams_for_linux_lv="2.7.12"
-ventoy_lv="1.1.10"
-zotero_lv="8.0.4"
+teams_for_linux_lv="2.8.0"
+ventoy_lv="1.1.11"
+zotero_lv="9.0.1"
 
     ## Windows
 WinRAR_lv="7.20"
-hwmonitor_lv="1.62"
+hwmonitor_lv="1.63"
 notepad_plus_plus_lv="8.9.3"
 revouninstaller_lv="2.6.8"
-sumatraPDFReader_lv="3.6"
+sumatraPDFReader_lv="3.6.1"
 
 useColor(){ # Color
     RED='\e[1;31m'
@@ -211,7 +211,7 @@ mozilla_firefox(){
     #command="grep 'release-version' | sed 's/.*release-version\">//; s/<.*//'"
 
     link="https://www.mozilla.org/firefox/all/"
-    command="grep 'latest-firefox' | sed 's/.*latest-firefox=\"//; s/\" .*//'"
+    command="grep 'latest-firefox' | sed 's/.*latest-firefox=\"//; s/\".*//'"
 
     checkVersion "$progName" "$link" "$command" "$mozilla_firefox_lv"
 }
@@ -325,7 +325,7 @@ notepad_plus_plus(){
 revouninstaller(){
     progName="RevoUninstaller"
     link="https://www.revouninstaller.com/version-history/"
-    command="grep -o -E '>version (.{4}|.{5}|.{6})<' | head -n 1 | tr -d 'a-zA-Z : <>'"
+    command="grep -o -E '> Version (.{4}|.{5}|.{6}) <' | head -n 1 | tr -d 'a-zA-Z : <>'"
 
     checkVersion "$progName" "$link" "$command" "$revouninstaller_lv"
 }

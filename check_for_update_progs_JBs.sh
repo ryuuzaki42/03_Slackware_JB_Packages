@@ -275,7 +275,7 @@ GNULinuxPrograms(){
     virtualbox
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
-        TLP
+        tlp
         gittyup
         mangohud
     fi

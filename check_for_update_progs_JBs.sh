@@ -32,8 +32,8 @@
 ## _lv => _local_version - last tested
 
     ## GNU/Linux
-MasterPDFEditor_lv="5.9.61"
 TLP_lv="1.10.0"
+masterpdfeditor_lv="5.9.61"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.2"
 mozilla_firefox_lv="150.0"
@@ -127,8 +127,6 @@ checkVersion(){
 }
 
 ## GNU/Linux programs
-MasterPDFEditor(){
-    progName="MasterPDFEditor"
     link="https://code-industry.net/downloads/"
     command="grep -o 'Version .* now available for Linux' | cut -d ' ' -f2"
 
@@ -269,7 +267,7 @@ zotero(){
 GNULinuxPrograms(){
     echo -e "\n$RED# GNU/Linux$NC"
 
-    MasterPDFEditor
+    masterpdfeditor
     mozilla_firefox
     smplayer
     virtualbox

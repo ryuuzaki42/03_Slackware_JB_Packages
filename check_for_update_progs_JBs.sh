@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 22/04/2026
+# Last update: 24/04/2026
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -37,7 +37,6 @@ TLP_lv="1.10.0"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.2"
 mozilla_firefox_lv="150.0"
-#rustdesk_lv="1.4.2"
 smplayer_lv="25.6.0"
 virtualbox_lv="7.2.8"
 
@@ -240,14 +239,6 @@ smplayer(){
     checkVersion "$progName" "$link" "$command" "$smplayer_lv"
 }
 
-rustdesk(){
-    progName="Rustdesk"
-    link="https://github.com/rustdesk/rustdesk/releases/latest"
-    command="grep '<title>Release' | sed 's/.*Release //; s/ .*//'"
-
-    checkVersion "$progName" "$link" "$command" "$rustdesk_lv"
-}
-
 ventoy(){
     progName="Ventoy"
     link="https://github.com/ventoy/Ventoy/releases/latest"
@@ -281,7 +272,6 @@ GNULinuxPrograms(){
     MasterPDFEditor
     mozilla_firefox
     smplayer
-    #rustdesk # # Changed to AnyDesk
     virtualbox
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates

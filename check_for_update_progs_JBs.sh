@@ -32,7 +32,7 @@
 ## _lv => _local_version - last tested
 
     ## GNU/Linux
-TLP_lv="1.10.0"
+tlp_lv="1.10.0"
 masterpdfeditor_lv="5.9.61"
 gittyup_lv="1.4.0"
 mangohud_lv="0.8.2"
@@ -127,14 +127,14 @@ checkVersion(){
 }
 
 ## GNU/Linux programs
+masterpdfeditor(){
+    progName="MasterPDFEditor"
     link="https://code-industry.net/downloads/"
     command="grep -o 'Version .* now available for Linux' | cut -d ' ' -f2"
 
-    checkVersion "$progName" "$link" "$command" "$MasterPDFEditor_lv"
+    checkVersion "$progName" "$link" "$command" "$masterpdfeditor_lv"
 }
 
-masterpdfeditor(){
-    progName="MasterPDFEditor"
 tlp(){
     progName="TLP"
     #link="https://github.com/linrunner/TLP/releases/latest"

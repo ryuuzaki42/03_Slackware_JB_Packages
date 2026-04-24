@@ -133,14 +133,16 @@ checkVersion(){
     checkVersion "$progName" "$link" "$command" "$MasterPDFEditor_lv"
 }
 
-TLP(){
+masterpdfeditor(){
+    progName="MasterPDFEditor"
+tlp(){
     progName="TLP"
     #link="https://github.com/linrunner/TLP/releases/latest"
     #command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
 
     link="https://github.com/linrunner/TLP/releases"
     command="grep '/linrunner/TLP/tree/' | grep -v 'beta' | head -n 1 | cut -d '\"' -f2 | cut -d '/' -f5"
-    checkVersion "$progName" "$link" "$command" "$TLP_lv"
+    checkVersion "$progName" "$link" "$command" "$tlp_lv"
 }
 
 gittyup(){

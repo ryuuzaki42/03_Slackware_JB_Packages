@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 24/04/2026
+# Last update: 04/05/2026
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -32,11 +32,11 @@
 ## _lv => _local_version - last tested
 
     ## GNU/Linux
-tlp_lv="1.10.0"
+tlp_lv="1.10.1"
 masterpdfeditor_lv="5.9.61"
 gittyup_lv="1.4.0"
-mangohud_lv="0.8.2"
-mozilla_firefox_lv="150.0"
+mangohud_lv="0.8.3"
+mozilla_firefox_lv="150.0.1"
 smplayer_lv="25.6.0"
 virtualbox_lv="7.2.8"
 
@@ -44,17 +44,17 @@ virtualbox_lv="7.2.8"
 keepassxc_lv="2.7.12"
 maestral_lv="1.9.5"
 mkvtoolnix_lv="98.0"
-opera_lv="130.0.5847.12"
+opera_lv="131.0.5877.5"
 #opera_ffmpeg_codecs_lv="0.103.0" # Above 0.103.0 need GLIBC >= 2.34
-qbittorrent_lv="5.1.4"
-teams_for_linux_lv="2.8.0"
-ventoy_lv="1.1.11"
-zotero_lv="9.0.1"
+qbittorrent_lv="5.2.0"
+teams_for_linux_lv="2.8.1"
+ventoy_lv="1.1.12"
+zotero_lv="9.0.2"
 
     ## Windows
-WinRAR_lv="7.20"
+WinRAR_lv="7.22"
 hwmonitor_lv="1.63"
-notepad_plus_plus_lv="8.9.3"
+notepad_plus_plus_lv="8.9.4"
 revouninstaller_lv="2.6.8"
 sumatraPDFReader_lv="3.6.1"
 
@@ -183,7 +183,7 @@ teams_for_linux(){
 mangohud(){
     progName="MangoHud"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
-    command="grep '<title>Release' | sed 's/.*Version //; s/ .*//' | sed 's/-/./'"
+    command="grep '<title>Release' | sed 's/.*v//; s/ .*//' | sed 's/-/./'"
 
     checkVersion "$progName" "$link" "$command" "$mangohud_lv"
 }

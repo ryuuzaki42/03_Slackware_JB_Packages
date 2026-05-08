@@ -29,9 +29,9 @@
 # Tip: Use FULL_INFO=1 ./check_for_update_progs_JBs.sh to show all info about the programs
 #
 
-## _lv => _local_version - last tested
+# _lv => _local_version - last tested
 
-    ## GNU/Linux
+    # GNU/Linux
 tlp_lv="1.10.1"
 masterpdfeditor_lv="5.9.61"
 gittyup_lv="1.4.0"
@@ -40,7 +40,7 @@ mozilla_firefox_lv="150.0.1"
 smplayer_lv="25.6.0"
 virtualbox_lv="7.2.8"
 
-    ## AppImage
+    # AppImage
 keepassxc_lv="2.7.12"
 maestral_lv="1.9.5"
 mkvtoolnix_lv="98.0"
@@ -51,7 +51,7 @@ teams_for_linux_lv="2.8.1"
 ventoy_lv="1.1.12"
 zotero_lv="9.0.2"
 
-    ## Windows
+    # Windows
 WinRAR_lv="7.22"
 hwmonitor_lv="1.63"
 notepad_plus_plus_lv="8.9.4"
@@ -126,7 +126,7 @@ checkVersion(){
     compareVersion "$version" "$local_version" "$link"
 }
 
-## GNU/Linux programs
+# GNU/Linux programs
 masterpdfeditor(){
     progName="MasterPDFEditor"
     link="https://code-industry.net/downloads/"
@@ -295,7 +295,7 @@ AppImage(){
     qbittorrent
 }
 
-## Windows programs
+# Windows programs
 hwmonitor(){
     progName="HWMonitor"
     link="https://www.cpuid.com/softwares/hwmonitor.html"

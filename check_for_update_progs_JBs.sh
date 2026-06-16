@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 29/05/2026
+# Last update: 16/06/2026
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -33,28 +33,28 @@
 
     # GNU/Linux
 tlp_lv="1.10.1"
-masterpdfeditor_lv="5.9.61"
-gittyup_lv="1.4.0"
+masterpdfeditor_lv="5.9.98"
+#gittyup_lv="1.4.0" # Few updates
 mangohud_lv="0.8.4"
-mozilla_firefox_lv="151.0.2"
+mozilla_firefox_lv="152.0"
 smplayer_lv="25.6.0"
-virtualbox_lv="7.2.8"
+virtualbox_lv="7.2.10"
 
     # AppImage
 keepassxc_lv="2.7.12"
 maestral_lv="1.9.5"
 mkvtoolnix_lv="99.0"
-opera_lv="132.0.5905.7"
+opera_lv="132.0.5905.73"
 #opera_ffmpeg_codecs_lv="0.103.0" # Above 0.103.0 need GLIBC >= 2.34
 qbittorrent_lv="5.2.1"
 teams_for_linux_lv="2.11.1"
 ventoy_lv="1.1.12"
-zotero_lv="9.0.4"
+zotero_lv="9.0.5" #Windows only
 
     # Windows
 WinRAR_lv="7.22"
-hwmonitor_lv="1.63"
-notepad_plus_plus_lv="8.9.6.1"
+hwmonitor_lv="1.64"
+notepad_plus_plus_lv="8.9.6.4"
 revouninstaller_lv="2.7.0"
 sumatraPDFReader_lv="3.6.1"
 
@@ -276,7 +276,7 @@ GNULinuxPrograms(){
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
         tlp
-        gittyup
+        #gittyup
         mangohud
     fi
 }

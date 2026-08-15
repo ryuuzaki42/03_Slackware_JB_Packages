@@ -22,7 +22,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 16/07/2026
+# Last update: 15/08/2026
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -33,27 +33,27 @@
 
     # GNU/Linux
 tlp_lv="1.10.2"
-masterpdfeditor_lv="5.9.98"
+masterpdfeditor_lv="5.9.99"
 #gittyup_lv="1.4.0" # Few updates
 mangohud_lv="0.8.4"
-mozilla_firefox_lv="152.0.6"
+mozilla_firefox_lv="153.0.4"
 smplayer_lv="25.6.0"
-virtualbox_lv="7.2.12"
+virtualbox_lv="7.2.14"
 
     # AppImage
 keepassxc_lv="2.7.12"
 maestral_lv="1.9.5"
 mkvtoolnix_lv="100.0"
-opera_lv="133.0.5932.10"
-#opera_ffmpeg_codecs_lv="0.103.0" # Above 0.103.0 need GLIBC >= 2.34
+opera_lv="134.0.5954.56"
+opera_ffmpeg_codecs_lv="0.114.2"
 qbittorrent_lv="5.2.3"
-teams_for_linux_lv="2.13.0"
-ventoy_lv="1.1.16"
+teams_for_linux_lv="2.15.0"
+ventoy_lv="1.1.17"
 zotero_lv="9.0.6"
 
     # Windows
 WinRAR_lv="7.23"
-hwmonitor_lv="1.65"
+hwmonitor_lv="1.67"
 notepad_plus_plus_lv="8.9.7"
 revouninstaller_lv="2.7.0"
 sumatraPDFReader_lv="3.6.1"
@@ -225,8 +225,11 @@ opera(){
 
 opera_ffmpeg_codecs(){
     progName="Opera-ffmpeg-codecs"
-    link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
-    command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//' | cut -d ':' -f1"
+    #link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
+    #command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//' | cut -d ':' -f1"
+
+    link="https://github.com/Ld-Hagen/nwjs-ffmpeg-prebuilt/releases/latest" # Mirror that works with GLIBC < 2.34
+    command="grep '<title>Release '| sed 's/.*Release nwjs-ffmpeg-//; s/ .*//' | cut -d ':' -f1"
 
     checkVersion "$progName" "$link" "$command" "$opera_ffmpeg_codecs_lv"
 }
@@ -287,7 +290,7 @@ AppImage(){
     maestral
     mkvtoolnix
     opera
-    #opera_ffmpeg_codecs # New version need GLIBC >= 2.34
+    opera_ffmpeg_codecs
     ventoy
     zotero
     keepassxc

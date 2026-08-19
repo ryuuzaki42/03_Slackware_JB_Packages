@@ -21,7 +21,7 @@
 #
 # Descrição: Script to download the last version VirtualBox
 #
-# Last update: 21/07/2026
+# Last update: 18/08/2026
 #
 case "$(uname -m)" in
     i?86) archDL="x86" ;;
@@ -29,7 +29,7 @@ case "$(uname -m)" in
     *) archDL=$(uname -m) ;;
 esac
 
-progName="virtualbox" # last tested: "7.2.14"
+progName="virtualbox" # last tested: "7.2.16"
 
 linkGetVersion="https://www.virtualbox.org/wiki/Downloads"
 wget "$linkGetVersion" -O "${progName}_latest"
@@ -69,12 +69,12 @@ wget -c "$mirrorDl/$runFile"
 wget -c "$mirrorDl/$extpackFile"
 #wget -c "$mirrorDl/UserManual.pdf"
 
-echo -e "\nCheck md5sum files downloaded\n"
+echo -e "\nCheck md5sum files"
 tmpFile=$(mktemp)
 echo "$runFileMd5" > "$tmpFile"
 echo "$extpackFileMd5" >> "$tmpFile"
-
 md5sum -c "$tmpFile"
 rm "$tmpFile"
 
-chmod +x "VirtualBox-$version-*-Linux_$archDL.run"
+chmod +x VirtualBox-"$version"-*-Linux_"$archDL".run
+echo

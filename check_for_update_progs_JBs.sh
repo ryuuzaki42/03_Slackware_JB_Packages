@@ -32,13 +32,13 @@
 # _lv => _local_version - last tested
 
     # GNU/Linux
-tlp_lv="1.10.2"
-firefox_lv="155.0.1"
-masterpdfeditor_lv="5.9.99"
 #gittyup_lv="1.4.0" # Few updates
+firefox_lv="155.0.1"
 mangohud_lv="0.8.4"
+masterpdfeditor_lv="5.9.99"
 smplayer_lv="26.8.29"
 virtualbox_lv="7.2.16"
+tlp_lv="1.10.2"
 
     # AppImage
 keepassxc_lv="2.7.12"
@@ -52,7 +52,7 @@ ventoy_lv="1.1.17"
 zotero_lv="10.0.1"
 
     # Windows
-WinRAR_lv="7.23"
+winrar_lv="7.23"
 hwmonitor_lv="1.67"
 notepad_plus_plus_lv="8.9.8"
 revouninstaller_lv="2.7.0"
@@ -338,7 +338,7 @@ winrar(){
     link="https://www.win-rar.com/latestnews.html"
     command="grep -o '>WinRAR [0-9].* Final' | head -n 1 | tr -d 'a-zA-Z <>'"
 
-    checkVersion "$progName" "$link" "$command" "$WinRAR_lv"
+    checkVersion "$progName" "$link" "$command" "$winrar_lv"
 }
 
 windowsPrograms(){

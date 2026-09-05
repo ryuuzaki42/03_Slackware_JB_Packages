@@ -33,10 +33,10 @@
 
     # GNU/Linux
 tlp_lv="1.10.2"
+firefox_lv="155.0.1"
 masterpdfeditor_lv="5.9.99"
 #gittyup_lv="1.4.0" # Few updates
 mangohud_lv="0.8.4"
-mozilla_firefox_lv="154.0.1"
 smplayer_lv="25.6.0"
 virtualbox_lv="7.2.16"
 
@@ -204,15 +204,15 @@ qbittorrent (){
     checkVersion "$progName" "$link" "$command" "$qbittorrent_lv"
 }
 
-mozilla_firefox(){
-    progName="Mozilla-Firefox"
+firefox(){
+    progName="Firefox"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' | sed 's/.*release-version\">//; s/<.*//'"
 
     link="https://www.mozilla.org/firefox/all/"
     command="grep 'latest-firefox' | sed 's/.*latest-firefox=\"//; s/\".*//'"
 
-    checkVersion "$progName" "$link" "$command" "$mozilla_firefox_lv"
+    checkVersion "$progName" "$link" "$command" "$firefox_lv"
 }
 
 opera(){
@@ -273,7 +273,7 @@ GNULinuxPrograms(){
     echo -e "\n$RED# GNU/Linux$NC"
 
     masterpdfeditor
-    mozilla_firefox
+    firefox
     smplayer
     virtualbox
 
@@ -331,7 +331,7 @@ sumatraPDFReader(){
     checkVersion "$progName" "$link" "$command" "$sumatraPDFReader_lv"
 }
 
-WinRAR(){
+winrar(){
     progName="WinRAR"
     link="https://www.win-rar.com/start.html"
     command="grep -o '>WinRAR [0-9].*<' | tr -d 'a-zA-Z <>'"
@@ -345,7 +345,7 @@ windowsPrograms(){
     hwmonitor
     notepad_plus_plus
     revouninstaller
-    WinRAR
+    winrar
 
     if [ "$1" == "all" ]; then # if "all" call programs with fewer updates
         sumatraPDFReader

@@ -171,7 +171,7 @@ keepassxc(){
 }
 
 teams_for_linux(){
-    progName="teams-for-linux"
+    progName="Teams-for-Linux"
     link="https://github.com/IsmaelMartinez/teams-for-linux/releases"
     command="grep 'tree/v' | head -n1 | sed 's/.*tree\/v//; s/\".*//'"
 

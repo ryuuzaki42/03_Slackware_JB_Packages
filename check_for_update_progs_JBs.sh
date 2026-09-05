@@ -139,8 +139,6 @@ masterpdfeditor(){
 
 tlp(){
     progName="TLP"
-    #link="https://github.com/linrunner/TLP/releases/latest"
-    #command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
 
     link="https://github.com/linrunner/TLP/releases"
     command="grep '/linrunner/TLP/tree/' | grep -v 'beta' | head -n 1 | cut -d '\"' -f2 | cut -d '/' -f5"

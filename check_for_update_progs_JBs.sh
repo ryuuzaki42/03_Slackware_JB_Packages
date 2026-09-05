@@ -42,7 +42,7 @@ tlp_lv="1.10.2"
 
     # AppImage
 keepassxc_lv="2.7.12"
-maestral_lv="1.9.5"
+maestral_lv="1.9.6"
 mkvtoolnix_lv="101.0"
 opera_lv="135.0.5973.41"
 opera_ffmpeg_codecs_lv="0.115.0"
@@ -157,11 +157,9 @@ gittyup(){
 
 maestral(){
     progName="Maestral"
-    link="https://github.com/samschott/maestral/releases/latest"
-    command="grep 'Release v' | head -n1 | sed 's/.*Release v//; s/ .*//'"
+    link="https://github.com/samschott/maestral/tags"
+    command="grep 'tags/v' | grep -v 'dev' | head -n 1 | sed 's/.*v//; s/.zip.*//'"
 
-    #link="https://pypi.org/project/maestral"
-    #command="grep 'release__card' | grep -v 'dev' | head -n 1 | sed 's/.*maestral\///; s/\/\">//'"
 
     checkVersion "$progName" "$link" "$command" "$maestral_lv"
 }

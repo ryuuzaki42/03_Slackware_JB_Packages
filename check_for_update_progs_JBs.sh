@@ -58,6 +58,8 @@ notepad_plus_plus_lv="8.9.8"
 revouninstaller_lv="2.7.0"
 sumatraPDFReader_lv="3.6.1"
 
+# --------------------------------------------------------------------------- #
+
 useColor(){ # Color
     RED='\e[1;31m'
     GREEN='\e[1;32m'
@@ -333,8 +335,8 @@ sumatraPDFReader(){
 
 winrar(){
     progName="WinRAR"
-    link="https://www.win-rar.com/start.html"
-    command="grep -o '>WinRAR [0-9].*<' | tr -d 'a-zA-Z <>'"
+    link="https://www.win-rar.com/latestnews.html"
+    command="grep -o '>WinRAR [0-9].* Final' | head -n 1 | tr -d 'a-zA-Z <>'"
 
     checkVersion "$progName" "$link" "$command" "$WinRAR_lv"
 }

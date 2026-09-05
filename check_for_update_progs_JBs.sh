@@ -85,7 +85,7 @@ compareVersion(){
     link=$3
 
 #    if [ "$local_version" == '' ]; then # To search for local version in Slackware
-#        local_version=$(find /var/log/packages/"$progName"-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
+#        local_version=$(find /var/log/packages/"$prog_name"-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
 #    fi
 
     if [ "$version" == "$local_version" ]; then
@@ -105,12 +105,12 @@ compareVersion(){
 }
 
 checkVersion(){
-    progName=$1
+    prog_name=$1
     link=$2
     command=$3
     local_version=$4
 
-    echo -en "\n$BLUE$progName"
+    echo -en "\n$BLUE$prog_name"
 
 #     if [ "$link" == '' ]; then
 #         echo -e "\n${RED}Error: The link: \"$link\" is not valid!$NC"

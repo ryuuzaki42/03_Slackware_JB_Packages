@@ -126,141 +126,123 @@ checkVersion(){
 
 # GNU/Linux programs
 masterpdfeditor(){
-    progName="MasterPDFEditor"
     link="https://code-industry.net/downloads/"
     command="grep -o 'Version .* now available for Linux' | cut -d ' ' -f2"
 
-    checkVersion "$progName" "$link" "$command" "$masterpdfeditor_lv"
+    checkVersion "MasterPDFEditor" "$link" "$command" "$masterpdfeditor_lv"
 }
 
 tlp(){
-    progName="TLP"
-
     link="https://github.com/linrunner/TLP/releases"
     command="grep '/linrunner/TLP/tree/' | grep -v 'beta' | head -n 1 | cut -d '\"' -f2 | cut -d '/' -f5"
-    checkVersion "$progName" "$link" "$command" "$tlp_lv"
+    checkVersion "TLP" "$link" "$command" "$tlp_lv"
 }
 
 gittyup(){
-    progName="Gittyup"
     link="https://github.com/Murmele/Gittyup/releases/latest"
     command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//'"
 
-    checkVersion "$progName" "$link" "$command" "$gittyup_lv"
+    checkVersion "Gittyup" "$link" "$command" "$gittyup_lv"
 }
 
 maestral(){
-    progName="Maestral"
     link="https://github.com/samschott/maestral/tags"
     command="grep 'tags/v' | grep -v 'dev' | head -n 1 | sed 's/.*v//; s/.zip.*//'"
 
-
-    checkVersion "$progName" "$link" "$command" "$maestral_lv"
+    checkVersion "Maestral" "$link" "$command" "$maestral_lv"
 }
 
 keepassxc(){
-    progName="KeePassXC"
     link="https://github.com/keepassxreboot/keepassxc/releases/latest"
     command="grep 'Release ' | head -n1 | sed 's/.*Release //; s/ .*//'"
 
-    checkVersion "$progName" "$link" "$command" "$keepassxc_lv"
+    checkVersion "KeePassXC" "$link" "$command" "$keepassxc_lv"
 }
 
 teams_for_linux(){
-    progName="Teams-for-Linux"
     link="https://github.com/IsmaelMartinez/teams-for-linux/releases"
     command="grep 'tree/v' | head -n1 | sed 's/.*tree\/v//; s/\".*//'"
 
-    checkVersion "$progName" "$link" "$command" "$teams_for_linux_lv"
+    checkVersion "Teams-for-Linux" "$link" "$command" "$teams_for_linux_lv"
 }
 
 mangohud(){
-    progName="MangoHud"
     link="https://github.com/flightlessmango/MangoHud/releases/latest"
     command="grep '<title>Release' | sed 's/.*v//; s/ .*//' | sed 's/-/./'"
 
-    checkVersion "$progName" "$link" "$command" "$mangohud_lv"
+    checkVersion "MangoHud" "$link" "$command" "$mangohud_lv"
 }
 
 mkvtoolnix (){
-    progName="MKVToolNix"
     link="https://mkvtoolnix.download/source.html"
     command="grep 'sources/mkvtoolnix.* release' | sed 's/.*mkvtoolnix-//g;s/.tar.*//g'"
 
-    checkVersion "$progName" "$link" "$command" "$mkvtoolnix_lv"
+    checkVersion "MKVToolNix" "$link" "$command" "$mkvtoolnix_lv"
 }
 
 qbittorrent (){
-    progName="qBittorrent"
     link="https://www.qbittorrent.org/download"
     command="grep 'Latest: v' | sed 's/.*Latest: v//g;s/<.*//g'"
 
-    checkVersion "$progName" "$link" "$command" "$qbittorrent_lv"
+    checkVersion "qBittorrent" "$link" "$command" "$qbittorrent_lv"
 }
 
 firefox(){
-    progName="Firefox"
     #link="https://www.mozilla.org/firefox/notes/"
     #command="grep 'release-version' | sed 's/.*release-version\">//; s/<.*//'"
 
     link="https://www.mozilla.org/firefox/all/"
     command="grep 'latest-firefox' | sed 's/.*latest-firefox=\"//; s/\".*//'"
 
-    checkVersion "$progName" "$link" "$command" "$firefox_lv"
+    checkVersion "Firefox" "$link" "$command" "$firefox_lv"
 }
 
 opera(){
-    progName="Opera"
     link="https://deb.opera.com/opera-stable/pool/non-free/o/opera-stable/"
     command="grep -o -P '(?<=>opera-stable_).*(?=_amd64.deb)'"
 
-    checkVersion "$progName" "$link" "$command" "$opera_lv"
+    checkVersion "Opera" "$link" "$command" "$opera_lv"
 }
 
 opera_ffmpeg_codecs(){
-    progName="Opera-ffmpeg-codecs"
     #link="https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/latest"
     #command="grep '<title>Release ' | sed 's/.*Release //; s/ .*//' | cut -d ':' -f1"
 
     link="https://github.com/Ld-Hagen/nwjs-ffmpeg-prebuilt/releases/latest" # Mirror that works with GLIBC < 2.34
     command="grep '<title>Release '| sed 's/.*Release nwjs-ffmpeg-//; s/ .*//' | cut -d ':' -f1"
 
-    checkVersion "$progName" "$link" "$command" "$opera_ffmpeg_codecs_lv"
+    checkVersion "Opera-ffmpeg-codecs" "$link" "$command" "$opera_ffmpeg_codecs_lv"
 }
 
 smplayer(){
-    progName="SMPlayer"
     link="https://www.smplayer.info/downloads/"
     command="grep -o '\">smplayer.*tar.bz2' | cut -d '.' -f1-3 | cut -d '-' -f2"
 
-    checkVersion "$progName" "$link" "$command" "$smplayer_lv"
+    checkVersion "SMPlayer" "$link" "$command" "$smplayer_lv"
 }
 
 ventoy(){
-    progName="Ventoy"
     link="https://github.com/ventoy/Ventoy/releases/latest"
     command="grep '<title>Release Ventoy' | sed 's/.*Release Ventoy //; s/ .*//'"
 
-    checkVersion "$progName" "$link" "$command" "$ventoy_lv"
+    checkVersion "Ventoy" "$link" "$command" "$ventoy_lv"
 }
 
 virtualbox(){
-    progName="VirtualBox"
     link="https://www.virtualbox.org/wiki/Downloads"
     command="grep 'VirtualBox.* platform packages' | sed 's/ .*VirtualBox //; s/ .*//'"
 
-    checkVersion "$progName" "$link" "$command" "$virtualbox_lv"
+    checkVersion "VirtualBox" "$link" "$command" "$virtualbox_lv"
 }
 
 zotero(){
-    progName="Zotero"
     #link="https://github.com/zotero/zotero/tags"
     #command="grep 'zotero/releases/tag' | head -n 1 | sed 's/.*tag\///; s/\".*//'"
 
     link="https://www.zotero.org/support/changelog"
     command="grep 'Changes in [0-9]' | head -n 1 | sed 's/.*in //g; s/ .*//'"
 
-    checkVersion "$progName" "$link" "$command" "$zotero_lv"
+    checkVersion "Zotero" "$link" "$command" "$zotero_lv"
 }
 
 GNU_Linux_Programs(){
@@ -294,43 +276,38 @@ AppImage(){
 
 # Windows programs
 hwmonitor(){
-    progName="HWMonitor"
     link="https://www.cpuid.com/softwares/hwmonitor.html"
     command="grep -o 'href.*hwmonitor_.*.exe' | head -n1 | grep -o '[0-9].[0-9][0-9]'"
 
-    checkVersion "$progName" "$link" "$command" "$hwmonitor_lv"
+    checkVersion "HWMonitor" "$link" "$command" "$hwmonitor_lv"
 }
 
 notepad_plus_plus(){
-    progName="Notepad++"
     link="https://notepad-plus-plus.org/downloads/"
     command="grep 'Current Version' | cut -d 'v' -f2 | cut -d '/' -f1"
 
-    checkVersion "$progName" "$link" "$command" "$notepad_plus_plus_lv"
+    checkVersion "Notepad++" "$link" "$command" "$notepad_plus_plus_lv"
 }
 
 revouninstaller(){
-    progName="RevoUninstaller"
     link="https://www.revouninstaller.com/version-history/"
     command="grep -o -E '> Version (.{4}|.{5}|.{6}) <' | head -n 1 | tr -d 'a-zA-Z : <>'"
 
-    checkVersion "$progName" "$link" "$command" "$revouninstaller_lv"
+    checkVersion "RevoUninstaller" "$link" "$command" "$revouninstaller_lv"
 }
 
 sumatraPDFReader(){
-    progName="SumatraPDF"
     link="https://www.sumatrapdfreader.org/download-free-pdf-viewer"
     command="grep -o 'SumatraPDF-.*-64-install.exe\"' | cut -d '-' -f2"
 
-    checkVersion "$progName" "$link" "$command" "$sumatraPDFReader_lv"
+    checkVersion "SumatraPDF" "$link" "$command" "$sumatraPDFReader_lv"
 }
 
 winrar(){
-    progName="WinRAR"
     link="https://www.win-rar.com/latestnews.html"
     command="grep -o '>WinRAR [0-9].* Final' | head -n 1 | tr -d 'a-zA-Z <>'"
 
-    checkVersion "$progName" "$link" "$command" "$winrar_lv"
+    checkVersion "WinRAR" "$link" "$command" "$winrar_lv"
 }
 
 windows_Programs(){
@@ -357,12 +334,10 @@ fi
 
 # Default function
 default(){
-    progName="" # last tested: ""
     link=""
     command=""
 
-#   local_version=""
-    checkVersion "$progName" "$link" "$command" "$local_version"
+    checkVersion "Prog_Name" "$link" "$command" "$prog_name_lv" # lv - local version
 }
 
 echo -e "\n"

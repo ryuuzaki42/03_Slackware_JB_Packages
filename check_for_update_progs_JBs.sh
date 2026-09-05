@@ -84,7 +84,7 @@ compareVersion(){
     local_version=$2
     link=$3
 
-#    if [ "$local_version" == '' ]; then
+#    if [ "$local_version" == '' ]; then # To search for local version in Slackware
 #        local_version=$(find /var/log/packages/"$progName"-[0-9]* 2> /dev/null | rev | cut -d '-' -f3 | rev)
 #    fi
 

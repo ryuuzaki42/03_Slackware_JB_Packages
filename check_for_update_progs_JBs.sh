@@ -271,7 +271,7 @@ zotero(){
     checkVersion "$progName" "$link" "$command" "$zotero_lv"
 }
 
-GNULinuxPrograms(){
+GNU_Linux_Programs(){
     echo -e "\n$RED# GNU/Linux$NC"
 
     masterpdfeditor
@@ -341,7 +341,7 @@ winrar(){
     checkVersion "$progName" "$link" "$command" "$winrar_lv"
 }
 
-windowsPrograms(){
+windows_Programs(){
     echo -e "\n\n$RED# Windows$NC"
 
     hwmonitor
@@ -355,12 +355,12 @@ windowsPrograms(){
 }
 
 # Call to check version
-GNULinuxPrograms "$s1"
+GNU_Linux_Programs "$s1"
 
 AppImage
 
 if [ "$s1" == "win" ] || [ "$s1" == "all" ]; then # if "win" or "all" call the windowsPrograms
-    windowsPrograms "$s1"
+    windows_Programs "$s1"
 fi
 
 # Default function

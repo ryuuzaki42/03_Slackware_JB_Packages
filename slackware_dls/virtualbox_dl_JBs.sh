@@ -15,7 +15,7 @@
 # COMERCIABILIDADE ou ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO.
 # Consulte a Licença Pública Geral do GNU para mais detalhes.
 #
-# Descrição: Script to download the last version VirtualBox
+# Description: Script to download the latest version of VirtualBox
 #
 # Last update: 15/09/2026
 #

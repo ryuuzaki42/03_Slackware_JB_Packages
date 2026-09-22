@@ -15,7 +15,7 @@
 # COMERCIABILIDADE ou ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO.
 # Consulte a Licença Pública Geral do GNU para mais detalhes.
 #
-# Descrição: Script to download the last version of Slackware Live, made by AlienBob
+# Description: Script to download the latest version of Slackware Live, made by AlienBob
 #
 # Last update: 14/02/2025
 #

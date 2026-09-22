@@ -12,8 +12,8 @@
 #
 # Este programa é distribuído na esperança de que seja útil,
 # mas SEM NENHUMA GARANTIA; nem mesmo a garantia implícita de
-# COMERCIABILIDADE ou ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO. Consulte a
-# Licença Pública Geral do GNU para mais detalhes.
+# COMERCIABILIDADE ou ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO.
+# Consulte a Licença Pública Geral do GNU para mais detalhes.
 #
 # Script: Create a txz from smartsynchronize and/or smartgit from "program"-version.tar.gz
 # Based in: https://slackbuilds.org/repository/14.2/development/smartgit/

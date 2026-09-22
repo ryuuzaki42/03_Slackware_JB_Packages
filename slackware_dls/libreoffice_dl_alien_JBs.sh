@@ -15,7 +15,7 @@
 # COMERCIABILIDADE ou ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO.
 # Consulte a Licença Pública Geral do GNU para mais detalhes.
 #
-# Description: Script to download the latest version of LibreOffice, made by AlienBob
+# Script: Script to download the latest version of LibreOffice, made by AlienBob
 #
 # Last update: 28/08/2026
 #

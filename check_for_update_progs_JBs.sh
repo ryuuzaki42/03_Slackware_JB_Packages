@@ -17,7 +17,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 18/09/2026
+# Last update: 30/09/2026
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -28,28 +28,28 @@
 
     # GNU/Linux
 #gittyup_lv="1.4.0" # Few updates
-firefox_lv="156.0"
+firefox_lv="157.0"
 mangohud_lv="0.8.4"
 masterpdfeditor_lv="5.9.99"
 smplayer_lv="26.8.29"
-virtualbox_lv="7.2.18"
+virtualbox_lv="7.2.20"
 tlp_lv="1.10.2"
 
     # AppImage
 keepassxc_lv="2.7.12"
 maestral_lv="1.9.6"
 mkvtoolnix_lv="102.0"
-opera_lv="136.0.6008.22"
-opera_ffmpeg_codecs_lv="0.116.0"
-qbittorrent_lv="5.2.3"
-teams_for_linux_lv="2.22.0"
+opera_lv="136.0.6008.80"
+opera_ffmpeg_codecs_lv="0.117.0"
+qbittorrent_lv="5.2.4"
+teams_for_linux_lv="2.23.0"
 ventoy_lv="1.1.17"
-zotero_lv="10.0.3"
+zotero_lv="10.0.4" # 10.0.4 - Mac only
 
     # Windows
 winrar_lv="7.23"
 hwmonitor_lv="1.68"
-notepad_plus_plus_lv="8.9.8"
+notepad_plus_plus_lv="8.9.8.1"
 revouninstaller_lv="2.7.0"
 sumatraPDFReader_lv="3.6.1"
 

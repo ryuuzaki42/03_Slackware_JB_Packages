@@ -17,7 +17,7 @@
 #
 # Script: Script to check if some programs has one update
 #
-# Last update: 19/10/2026
+# Last update: 28/10/2026
 #
 # Tip: Pass "win" as parameter to call the windowsPrograms
 # Tip: Pass "all" as parameter to call programs updates
@@ -28,21 +28,21 @@
 
     # GNU/Linux
 #gittyup_lv="1.4.0" # Few updates
-firefox_lv="158.0"
+firefox_lv="159.0"
 mangohud_lv="0.8.4"
 masterpdfeditor_lv="5.9.99"
 smplayer_lv="26.8.29"
-virtualbox_lv="7.2.20"
+virtualbox_lv="7.2.22"
 tlp_lv="1.10.2"
 
     # AppImage
-keepassxc_lv="2.7.12"
+keepassxc_lv="2.8.0"
 maestral_lv="1.9.6"
 mkvtoolnix_lv="103.0"
-opera_lv="137.0.6036.57"
-opera_ffmpeg_codecs_lv="0.118.0"
+opera_lv="139.0.6053.15"
+opera_ffmpeg_codecs_lv="0.119.2"
 qbittorrent_lv="5.2.4"
-teams_for_linux_lv="2.27.0"
+teams_for_linux_lv="2.28.0"
 ventoy_lv="1.1.18"
 zotero_lv="10.0.6"
 
@@ -128,8 +128,8 @@ masterpdfeditor(){
 }
 
 tlp(){
-    link="https://github.com/linrunner/TLP/releases"
-    command="grep '/linrunner/TLP/tree/' | grep -v 'beta' | head -n 1 | cut -d '\"' -f2 | cut -d '/' -f5"
+    link="https://github.com/linrunner/TLP/releases/latest"
+    command="grep '/linrunner/TLP/tree/' | cut -d '\"' -f2 | cut -d '/' -f5"
     checkVersion "TLP" "$link" "$command" "$tlp_lv"
 }
 
